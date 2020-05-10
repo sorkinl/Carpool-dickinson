@@ -1,12 +1,11 @@
 .message{
-    text-align: right;
+    height:9vh;
 }
 .message p{
     margin-right: 10px;
     padding: 7px 15px;
     border-radius: 15px;
     display:inline-block;
-    text-align: right;
     background-color: cadetblue;
 }
 .textfield{

@@ -14,7 +14,7 @@ const ChatWindow = ({ chatID }) => {
   // which doesn't work in react
   //After set message to empty
   const sendMessage = () => {
-    if(message != ""){
+    if(message !== ""){
     setArray(arrayOfMessages.concat(message))
     }
     setMessage("")
@@ -37,7 +37,7 @@ const handleKeyDownEvent = (event) => {
       <Grid
       container
       direction="column"
-      allignItems="flex-end"
+      alignItems="flex-end"
       justify="flex-start">
           {arrayOfMessages.map(message => ( // map() accepts a function as a parameter and executes that function for each element in the array
               <div className="message"><p>{message}</p></div>
