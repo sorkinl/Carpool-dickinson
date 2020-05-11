@@ -1,6 +1,6 @@
 import React from 'react';
 import EachResult from '../EachResult/EachResult';
-import './SearchResults.css';
+import './SearchResult.css';
 
 function SearchResult() {
   
