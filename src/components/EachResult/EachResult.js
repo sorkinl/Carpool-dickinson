@@ -1,4 +1,5 @@
 import React from 'react';
+import './EachResult.css';
 
 function EachResult() {
   return (
