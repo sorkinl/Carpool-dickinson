@@ -3,6 +3,8 @@ import './App.css';
 import SearchResult from './components/SearchResults/SearchResult'
 import ChatWindow from './components/Chat/ChatWindow';
 // import {Profile, Button, EditPage} from './components/Account/Profile';
+import MainChat from './components/Chat/MainChat';
+
 
 
 //temp function to load search Results
@@ -19,7 +21,7 @@ const [showResults, setShowResults] = React.useState(false)
 
   return (
     <div className="App">
-     {showResults?<SearchResult/>:<ChatWindow/>}
+     {showResults?<SearchResult/>:<MainChat/>}
       {/* button to load search results*/}
       <button onClick={
         () => setShowResults(true) }>
