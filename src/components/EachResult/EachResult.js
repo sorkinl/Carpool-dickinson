@@ -8,5 +8,4 @@ function EachResult() {
     </div>
   );
 }
-
 export default EachResult;

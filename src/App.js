@@ -2,10 +2,11 @@ import React from 'react';
 import './App.css';
 import SearchResult from './components/SearchResults/SearchResult'
 import ChatWindow from './components/Chat/ChatWindow';
-
+import {Profile, Button, EditPage} from './component/Account/Profile';
 
 
 //temp function to load search Results
+
 // test pull
 // test pull 2
 // test pull 3
@@ -20,7 +21,7 @@ const [showResults, setShowResults] = React.useState(false)
     <div className="App">
      {showResults?<SearchResult/>:<ChatWindow/>}
       {/* button to load search results*/}
-      <button onClick={ 
+      <button onClick={
         () => setShowResults(true) }>
         search results button
       </button>
