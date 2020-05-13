@@ -1,8 +1,6 @@
-import React from 'react';
+// import React from 'react';
 
-class Account extends React.Component {
-
-
+// class Account extends React.Component {
 
 
 
@@ -13,10 +11,12 @@ class Account extends React.Component {
 
 
 
-    render(){
-      return (
 
-      )
-    }
 
-}
+//     render(){
+//       return (
+
+//       )
+//     }
+
+// }
