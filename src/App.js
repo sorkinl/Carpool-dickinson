@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import SearchResult from './components/SearchResults/SearchResult'
 import ChatWindow from './components/Chat/ChatWindow';
-import {Profile, Button, EditPage} from './component/Account/Profile';
+//import { Profile, EditPage, Button } from './components/Account/Profile';
 
 
 //temp function to load search Results
@@ -25,7 +25,7 @@ const [showResults, setShowResults] = React.useState(false)
         () => setShowResults(true) }>
         search results button
       </button>
-
+      
     </div>
   );
 }
