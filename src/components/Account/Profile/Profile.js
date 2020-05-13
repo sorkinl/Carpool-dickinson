@@ -19,7 +19,7 @@ class Profile extends React.Component {
   }
 
   handleClick() {
-    this.setState({ isClicked: true });
+    this.setState({ isClicked: !this.state.isClicked });
   }
 
   changeName(newName) {
