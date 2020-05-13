@@ -3,7 +3,7 @@ import './Profile.css';
 import { Button } from './Button';
 import { EditPage } from './EditPage';
 
-export class Profile extends React.Component {
+class Profile extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -13,43 +13,45 @@ export class Profile extends React.Component {
       location: 'My Location'
     };
     this.handleClick = this.handleClick.bind(this);
+    this.changeName = this.changeName.bind(this);
+    this.changeEmail = this.changeEmail.bind(this);
+    this.changeLocation = this.changeLocation.bind(this);
   }
 
   handleClick() {
     this.setState({ isClicked: true });
   }
-  // handleSave() {
-  //   this
-  // }
 
   changeName(newName) {
     this.setState({name: newName});
   }
 
   changeEmail(newEmail) {
-    this.setState({name: newEmail});
+    this.setState({email: newEmail});
   }
 
   changeLocation(newLocation) {
-    this.setState({name: newLocation});
+    this.setState({location: newLocation});
   }
 
   render(){
     return (
       <div className='Profile'>
-          <div className='image-container'>
-            <img src=''/>
+          <div className='Avatar'>
+            <img src='https://i0.wp.com/wuhu.guru/wp-content/uploads/2019/07/profile-anonymous.jpg?fit=500%2C500&ssl=1' alt='' width='100' height='100'/>
           </div>
-          <h1>{this.state.name}</h1>
+
           <div className='Personal-info'>
-            <p>{this.state.email}</p>
-            <p>{{this.state.location}}</p>
+            <h1>{this.state.name}</h1>
+            <p>&#128231; {this.state.email}</p>
+            <p> &#128205; {this.state.location}</p>
           </div>
           <Button status={this.state.isClicked} onClick={this.handleClick} />
-          <EditPage status={this.state.isClicked onChange={() => {this.changeName;
-                                                                  this.changeEmail;
-                                                                  this.changeLocation}}/>
+          <EditPage status={this.state.isClicked} nameChange={this.changeName} eChange={this.changeEmail} loChange={this.changeLocation}/>
+
       </div>
     )
   }
 }
+
+export default Profile;
