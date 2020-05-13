@@ -21,18 +21,18 @@ const useStyles = makeStyles((theme) => ({
   },
   result:{
     height:500,
-    width: 1000,
+    width: "55%",
     
     padding: 0,
     margin:'auto',
    // margin:theme.spacing(0)
   },
   map:{
-   
+    width:"42%"
   },
   mapImg:{
     height:490,
-    width:"100%"
+    
   },
   text:{
     textAlign:"left",
