@@ -1,14 +1,82 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import EachResult from '../EachResult/EachResult';
-import './SearchResults.css';
+import { Paper } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid"
+import Typography from '@material-ui/core/Typography';
+
+import tempMap from "../../static/img/tempMap.png";
+
+import './SearchResult.css';
+
+const useStyles = makeStyles((theme) => ({
+  // root: {
+  //   flexGrow: 1,
+  // },
+  paper: {
+    height: 500,
+    width: "100%",
+    margin:"auto"
+  },
+  result:{
+    height:500,
+    width: 1000,
+    
+    padding: 0,
+    margin:'auto',
+   // margin:theme.spacing(0)
+  },
+  map:{
+   
+  },
+  mapImg:{
+    height:490,
+    width:"100%"
+  },
+  text:{
+    textAlign:"left",
+  }
+}));
 
 function SearchResult() {
+
+  const classes = useStyles();
   
   return (
-    <div id = "searchResults">
-      Search
-      <EachResult/>
-    </div>
+    
+    <Paper className = {classes.paper}>
+      {/* Search Form */}
+      <Grid container spacing = {2}>
+       
+        {/* Text Space */}
+
+        <Grid item className = {classes.result}>
+          <Grid item className = {classes.text}>
+
+            <Typography variant="body2" color="textSecondary">
+                  3 results
+                </Typography>
+            <Typography variant="h3">
+              Trip to...
+            </Typography>
+          </Grid>
+         
+          <EachResult/>
+
+        </Grid>
+
+        {/* Map */}
+        <Grid item sm container className = {classes.map}> 
+            <img className = {classes.mapImg} alt = "temp map" src = {tempMap} />
+        </Grid>
+     
+   
+
+      </Grid>
+     
+
+    </Paper>
+    
   );
 }
 

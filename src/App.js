@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
 import SearchResult from './components/SearchResults/SearchResult'
-import { render } from '@testing-library/react';
 import ChatWindow from './components/Chat/ChatWindow';
 
 
-//temp function to load search Results
 
+//temp function to load search Results
+// test pull
+// test pull 2
+// test pull 3
 
 function App() {
 
