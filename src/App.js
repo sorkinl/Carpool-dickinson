@@ -4,6 +4,7 @@ import SearchResult from './components/SearchResults/SearchResult'
 import { render } from '@testing-library/react';
 import ChatWindow from './components/Chat/ChatWindow';
 import Profile from './components/Account/Profile/Profile.js';
+import TripList from './components/Account/Trips/TripList.js';
 
 
 
@@ -27,6 +28,7 @@ const [showResults, setShowResults] = React.useState(false)
         search results button
       </button>
       <Profile/>
+      <TripList/>
     </div>
 
   );
