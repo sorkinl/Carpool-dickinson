@@ -10,14 +10,14 @@ export class Trip extends React.Component {
         <div className="image-container">
           <img src={trip.image} alt='' width="150" height="150"/>
         </div>
-        <h3>Date: {trip.date}</h3><br/>
+        <h3>Date: {trip.date}</h3>
         <div className="Trip-information">
-            <p>Departure: {trip.from}</p><br/>
-            <p>Destination: {trip.to}</p><br/>
+            <p>Departure: {trip.from}</p>
+            <p>Destination: {trip.to}</p>
             <p>Cost: {trip.cost}</p>
 
           <div className="Trip-rating">
-            <h3>Posted by: {trip.driver}</h3>
+            <p>Posted by: <strong>{trip.driver}</strong></p>
             <p>{trip.rating} stars</p>
           </div>
         </div>

@@ -4,11 +4,11 @@ import {Trip} from './Trip';
 
 const trip = {
   image: "https://cdn.aarp.net/content/dam/aarp/travel/tips/2020/05/1140-person-driving.jpg",
-  date: "03/28/2020",
+  date: "mm/dd/yyyy",
   cost: "$3.05",
   from: "Carlisle",
   to: "New York",
-  driver: "Josh The Driver",
+  driver: "Ponyo The Driver",
   rating: 4.5
 };
 
@@ -26,7 +26,7 @@ class TripList extends React.Component {
     }
     this.futureTripClick=this.handleClick.bind(this,'fuTrip');
     this.pastTripClick=this.handleClick.bind(this,'pastTrip');
-    this.handleClick = this.handleClick.bind(this);
+    //this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(keyName){
@@ -36,22 +36,23 @@ class TripList extends React.Component {
   render(){
     console.log(this.state.fuTrip);
     console.log(this.handleClick);
+    console.log(this.lists.fuTripList);
     return (
       <div className="TripList">
         <h1>My Trips</h1>
         <div>
 
-            <button onClick={this.handleClick}>View upcoming trips</button>
+            <button onClick={this.futureTripClick}>View upcoming trips</button>
             <div className="Future-trip-list">
                 { this.state.fuTrip == true &&
-                    this.props.fuTripList.map(trip => {return (<Trip trip={trip}/>);})
+                    this.lists.fuTripList.map(trip => {return (<Trip trip={trip}/>);})
                 }
             </div>
 
-            <button onClick={this.handleClick}>View past trips</button>
+            <button onClick={this.pastTripClick}>View past trips</button>
             <div className="Past-trip-list">
                 {this.state.pastTrip == true &&
-                    this.props.pastTripList.map(trip => {return (<Trip trip={trip}/>);})
+                    this.lists.pastTripList.map(trip => {return (<Trip trip={trip}/>);})
                 }
             </div>
 
