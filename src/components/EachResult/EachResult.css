@@ -5,8 +5,8 @@
     border-color: blue;
     border-style: solid;
     border-width: 1px;
-    width:50%;
-    height:100px;
+    /* width:50%; */
+    /* height:; */
 }
 
 .eachResultQueryResult{
@@ -51,3 +51,4 @@
    bottom :0;
    right:0;
 }
+
