@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import SearchResult from './components/SearchResults/SearchResult'
 import ChatWindow from './components/Chat/ChatWindow';
+import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
+import SearchForm from './components/SearchForm/Searchform';
 //import { Profile, EditPage, Button } from './components/Account/Profile';
 
 
@@ -25,7 +27,15 @@ const [showResults, setShowResults] = React.useState(false)
         () => setShowResults(true) }>
         search results button
       </button>
-      
+      <Router>
+        <Link to="/search">
+          <button>Find a ride</button>
+        </Link>
+        <hr />
+        <main>
+          <Route path="/search" component={SearchForm} />
+        </main>
+      </Router>
     </div>
   );
 }
