@@ -1,12 +1,18 @@
 .eachResult{
     display:flex;
-    flex-direction: column;
+    flex-direction :row;
     position:relative;
     border-color: blue;
     border-style: solid;
     border-width: 1px;
-    width:50%;
-    height:100px;
+    /* width:50%; */
+    /* height:; */
+}
+
+.eachResultQueryResult{
+    display:flex;
+    flex-direction: column;
+  
 }
 .top{
     /* height:20px; */
@@ -45,3 +51,4 @@
    bottom :0;
    right:0;
 }
+
