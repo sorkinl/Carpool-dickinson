@@ -33,16 +33,19 @@ const handleKeyDownEvent = (event) => {
     });
   }; */
   return (
-    <Paper>
+    <>
+    <Paper className="main">
       <Grid
       container
       direction="column"
       alignItems="flex-end"
       justify="flex-start">
           {arrayOfMessages.map(message => ( // map() accepts a function as a parameter and executes that function for each element in the array
-              <div className="message"><p>{message}</p></div>
+              <div className="message" key={Math.random() * 100000}><p>{message}</p></div>
           ))}
+          
       </Grid>
+      </Paper>
       <div className="to-send">
       <TextField onKeyPress={handleKeyDownEvent} label="Message" 
           value={message}
@@ -60,7 +63,7 @@ const handleKeyDownEvent = (event) => {
         endIcon={<Icon>send</Icon>}
         >Send</Button>
       </div>
-      </Paper>
+      </>
   );
 };
 

@@ -3,8 +3,12 @@ import './App.css';
 import SearchResult from './components/SearchResults/SearchResult'
 import { render } from '@testing-library/react';
 import ChatWindow from './components/Chat/ChatWindow';
+
 import Profile from './components/Account/Profile/Profile.js';
 import TripList from './components/Account/Trips/TripList.js';
+
+import MainChat from './components/Chat/MainChat';
+
 
 
 
@@ -21,7 +25,7 @@ const [showResults, setShowResults] = React.useState(false)
 
   return (
     <div className="App">
-     {showResults?<SearchResult/>:<ChatWindow/>}
+     {showResults?<SearchResult/>:<MainChat/>}
       {/* button to load search results*/}
       <button onClick={
         () => setShowResults(true) }>
