@@ -1,14 +1,18 @@
 import React from 'react';
 import './App.css';
 import SearchResult from './components/SearchResults/SearchResult'
+import { render } from '@testing-library/react';
 import ChatWindow from './components/Chat/ChatWindow';
-// import {Profile, Button, EditPage} from './components/Account/Profile';
+
+import Profile from './components/Account/Profile/Profile.js';
+import TripList from './components/Account/Trips/TripList.js';
+
 import MainChat from './components/Chat/MainChat';
 
 
 
-//temp function to load search Results
 
+//temp function to load search Results
 // test pull
 // test pull 2
 // test pull 3
@@ -27,8 +31,10 @@ const [showResults, setShowResults] = React.useState(false)
         () => setShowResults(true) }>
         search results button
       </button>
-
+      <Profile/>
+      <TripList/>
     </div>
+
   );
 }
 
