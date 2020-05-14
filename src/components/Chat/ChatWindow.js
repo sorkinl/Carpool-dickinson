@@ -4,9 +4,11 @@ import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import { Paper } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField"
+import {Stack, Node} from '../../Utils/Stack';
 import "./ChatWindow.css"
 
 const ChatWindow = ({ chatID }) => {
+  const messageStack = new Stack();
     // state for the message and arrayOfMessages which later we will get from the database
   const [message, setMessage] = React.useState("");
   const [arrayOfMessages, setArray] = React.useState(["Hey"]);

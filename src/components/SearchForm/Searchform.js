@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { render } from '@testing-library/react';
 import Searchbar from './Searchbar';
+import {BrowserRouter as Router, Link, useRouteMatch, useParams, Switch, Route} from 'react-router-dom';
+import SearchResult from '../SearchResults/SearchResult';
 
 class SearchForm extends Component {
+    
     state = {
         information: [
             {
@@ -21,13 +24,22 @@ class SearchForm extends Component {
         // }) 
         console.log(data);
     }
+    
     render() {
+        let match = useRouteMatch();
         return (
             <div>
                 Welcome
+                <Link to={`${match.url}/results`}>
                 <Searchbar 
                     onCreate={this.handleCreate}
                 />
+                </Link>
+                <Switch>
+                    <Route path={`${match.path}/results`}>
+                        <SearchResult/>
+                    </Route>
+                </Switch>
             </div>
         )
     }

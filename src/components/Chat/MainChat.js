@@ -11,6 +11,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import PersonInChat from './PersonInChat';
+import {Stack, Node} from '../../Utils/Stack';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     drawer: {
       width: drawerWidth,
       flexShrink: 0,
+      zIndex:2
     },
     drawerPaper: {
       width: drawerWidth,
@@ -35,17 +37,13 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
     },
   }));
+
+
 const MainChat = () => {
   const classes = useStyles();
+  const messageStack = new Stack();
     return (<div className={classes.root}>
         <CssBaseline>
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            <Typography variant="h6" noWrap>
-              Chat
-            </Typography>
-          </Toolbar>
-        </AppBar>
         <Drawer
           className={classes.drawer}
           variant="permanent"

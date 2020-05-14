@@ -3,15 +3,15 @@ import './App.css';
 import SearchResult from './components/SearchResults/SearchResult'
 import { render } from '@testing-library/react';
 import ChatWindow from './components/Chat/ChatWindow';
-
-import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
+import NavBar from './components/NavBar/NavBar';
+import { Switch, Link, Route, BrowserRouter as Router } from 'react-router-dom';
 import SearchForm from './components/SearchForm/Searchform';
 //import { Profile, EditPage, Button } from './components/Account/Profile';
 
 import Profile from './components/Account/Profile/Profile.js';
 import TripList from './components/Account/Trips/TripList.js';
 import MainChat from './components/Chat/MainChat';
-
+import SearchButton from './components/SearchForm/SearchButton';
 
 
 
@@ -28,24 +28,25 @@ const [showResults, setShowResults] = React.useState(false)
 
   return (
     <div className="App">
-     {showResults?<SearchResult/>:<MainChat/>}
-      {/* button to load search results*/}
-      <button onClick={
-        () => setShowResults(true) }>
-        search results button
-      </button>
-
+      
       <Router>
-        <Link to="/search">
-          <button>Find a ride</button>
-        </Link>
+        <div>
+      <NavBar/>
+      <div className="underNav"></div>
+        
+        
         <hr />
         <main>
-          <Route path="/search" component={SearchForm} />
+          
         </main>
+        <Switch>
+          <Route path="/" exact component={SearchButton}/>
+          <Route path="/search" component={SearchForm} />
+          <Route path="/profile" component={Profile}/>
+          <Route path="/chat" component={MainChat}/>
+        </Switch>
+          </div>
       </Router>
-      <Profile/>
-      <TripList/>
     </div>
 
   );
