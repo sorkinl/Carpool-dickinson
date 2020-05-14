@@ -4,9 +4,9 @@ import Searchbar from './Searchbar';
 import {BrowserRouter as Router, Link, useRouteMatch, useParams, Switch, Route} from 'react-router-dom';
 import SearchResult from '../SearchResults/SearchResult';
 
-class SearchForm extends Component {
+const SearchForm = () =>{
     
-    state = {
+    const [state, setState] = React.useState({
         information: [
             {
                 id: 0,
@@ -16,23 +16,21 @@ class SearchForm extends Component {
             }
         ],
         keyword: ''
-    }
-    handleCreate = (data) => {
-        const { information } = this.state;
+    });
+    const handleCreate = (data) => {
+        const { information } = state;
         // this.setState({
         //     information: information.concat({ id: this.id++, ...data })
         // }) 
         console.log(data);
     }
-    
-    render() {
         let match = useRouteMatch();
         return (
             <div>
                 Welcome
                 <Link to={`${match.url}/results`}>
                 <Searchbar 
-                    onCreate={this.handleCreate}
+                    onCreate={handleCreate}
                 />
                 </Link>
                 <Switch>
@@ -43,6 +41,6 @@ class SearchForm extends Component {
             </div>
         )
     }
-}
+
 
 export default SearchForm;

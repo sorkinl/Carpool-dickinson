@@ -32,8 +32,6 @@ const [showResults, setShowResults] = React.useState(false)
       <Router>
         <div>
       <NavBar/>
-      <div className="underNav"></div>
-        
         
         <hr />
         <main>

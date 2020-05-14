@@ -16,25 +16,20 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      display: 'flex',
-    },
-    appBar: {
-      zIndex: theme.zIndex.drawer + 1,
+      display: "flex",
+      
     },
     drawer: {
-      width: drawerWidth,
+      width: "22%",
       flexShrink: 0,
-      zIndex:2
+      
     },
     drawerPaper: {
-      width: drawerWidth,
-    },
-    drawerContainer:{
-        overflow: "auto",
+      width: "22%",
+      zIndex:1
     },
     content: {
-        marginTop: "65px",
-      flexGrow: 1,
+      width: "75%"
     },
   }));
 
