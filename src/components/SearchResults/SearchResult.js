@@ -65,7 +65,22 @@ function SearchResult() {
             </Typography>
           </Grid>
          
-          <EachResult/>
+          <EachResult
+              name = {"ABCD Lee"}
+              occupation = {"Dickinson College"}
+              comment = {"Leaving between 2pm-4pm"}
+              starting = {"Dickinson College"}
+              destination = {"Harrisburg"}
+              rating = {4}
+              />
+
+          <EachResult
+              name = {"AAAAAAAAa QPWOEI"}
+              occupation = {"Penn State"}
+              starting = {"Dickinson College"}
+              destination = {"Boston"}
+              rating = {4}
+              />
 
         </Grid>
 
