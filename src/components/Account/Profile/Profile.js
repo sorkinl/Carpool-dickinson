@@ -1,9 +1,9 @@
 import React from 'react';
 import './Profile.css';
 import { Button } from './Button';
-import { EditPage } from './EditPage';
+import { EditField } from './EditField';
 
-export class Profile extends React.Component {
+class Profile extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -13,43 +13,35 @@ export class Profile extends React.Component {
       location: 'My Location'
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
-
+  
   handleClick() {
-    this.setState({ isClicked: true });
-  }
-  // handleSave() {
-  //   this
-  // }
-
-  changeName(newName) {
-    this.setState({name: newName});
+    this.setState({ isClicked: !this.state.isClicked });
   }
 
-  changeEmail(newEmail) {
-    this.setState({name: newEmail});
-  }
-
-  changeLocation(newLocation) {
-    this.setState({name: newLocation});
+  handleChange(keyName, newInfo){
+    this.setState({ [keyName]: newInfo });
   }
 
   render(){
     return (
       <div className='Profile'>
-          <div className='image-container'>
-            <img src=''/>
+          <h1>Profile</h1>
+          <div className='Avatar'>
+            <img src='https://i0.wp.com/wuhu.guru/wp-content/uploads/2019/07/profile-anonymous.jpg?fit=500%2C500&ssl=1' alt='' width='100' height='100'/>
           </div>
-          <h1>{this.state.name}</h1>
+
           <div className='Personal-info'>
-            <p>{this.state.email}</p>
-            <p>{{this.state.location}}</p>
+            <h2>{this.state.name}</h2>
+            <p>&#128231; {this.state.email}</p>
+            <p> &#128205; {this.state.location}</p>
           </div>
           <Button status={this.state.isClicked} onClick={this.handleClick} />
-          <EditPage status={this.state.isClicked onChange={() => {this.changeName;
-                                                                  this.changeEmail;
-                                                                  this.changeLocation}}/>
+          <EditField status={this.state.isClicked} change={this.handleChange} {...this.state}/>
       </div>
     )
   }
 }
+
+export default Profile;
