@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import './EachResult.css';
 
-import { Avatar, Divider} from "@material-ui/core";
+import { Avatar, Box} from "@material-ui/core";
 import Rating from '@material-ui/lab/Rating';
 import {List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 
@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
   list:{
     width: '400px',
     padding:0,
-    left:15
+    left:15,
+    top:3
   },
   ListItem:{
     width:"100%",
@@ -39,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
   avatarSize: {
     width: theme.spacing(14),
     height: theme.spacing(14),
+    borderRadius:10
   }
 }));
 

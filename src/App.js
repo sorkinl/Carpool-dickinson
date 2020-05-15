@@ -1,9 +1,7 @@
 import React from 'react';
 import './App.css';
-import SearchResult from './components/SearchResults/SearchResult'
-import { render } from '@testing-library/react';
-import ChatWindow from './components/Chat/ChatWindow';
 import NavBar from './components/NavBar/NavBar';
+import Footer from './components/Footer/Footer'
 import { Switch, Link, Route, BrowserRouter as Router } from 'react-router-dom';
 import SearchForm from './components/SearchForm/Searchform';
 
@@ -45,6 +43,8 @@ const [showResults, setShowResults] = React.useState(false)
         </Switch>
           </div>
       </Router>
+
+      <Footer />
     </div>
 
   );
