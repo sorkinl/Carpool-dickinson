@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import EachResult from '../EachResult/EachResult';
-import { Paper, Box } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid"
 import Typography from '@material-ui/core/Typography';
 

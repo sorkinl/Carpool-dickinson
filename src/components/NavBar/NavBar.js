@@ -77,9 +77,12 @@ export default function MenuAppBar() {
             <MenuIcon />
           </IconButton>
 
+ 
 
           <Button  component={Link} className={classes.title} to="/">Carpool</Button>
          
+
+          
           <Button component={Link} to="/logInForm" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Log in</Button>
           <Button  edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Sign up</Button>
 
