@@ -12,6 +12,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Button from '@material-ui/core/Button'
 import {
     BrowserRouter as Router,
     Switch as RouterSwitch,
@@ -75,10 +76,16 @@ export default function MenuAppBar() {
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
+
  
 
           <Button  component={Link} className={classes.title} to="/">Carpool</Button>
          
+
+          
+          <Button component={Link} to="/logInForm" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Log in</Button>
+          <Button  edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Sign up</Button>
+
           {auth && (
             <div>
               <IconButton
@@ -90,6 +97,8 @@ export default function MenuAppBar() {
               >
                 <AccountCircle />
               </IconButton>
+              
+              
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -108,6 +117,7 @@ export default function MenuAppBar() {
 
                 <MenuItem component={Link} to="/account">Account</MenuItem>
                 <MenuItem component={Link} to="/chat">Chat</MenuItem>
+                
               </Menu>
             </div>
           )}
