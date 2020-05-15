@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Switch from '@material-ui/core/Switch';
+import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -15,6 +16,7 @@ import {
     BrowserRouter as Router,
     Switch as RouterSwitch,
     Route,
+    Redirect,
     Link
   } from "react-router-dom";
 import Account from '../Account/Account';
@@ -29,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: 'white'
   },
   appBar:{
       zIndex: 3,
@@ -53,6 +56,12 @@ export default function MenuAppBar() {
     setAnchorEl(null);
   };
 
+  const logOff = () => {
+   
+    return <Redirect to='/' />
+    
+  }
+
   return (
     <div className={classes.root}>
       <FormGroup>
@@ -66,9 +75,10 @@ export default function MenuAppBar() {
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Carpool
-          </Typography>
+ 
+
+          <Button  component={Link} className={classes.title} to="/">Carpool</Button>
+         
           {auth && (
             <div>
               <IconButton
@@ -101,6 +111,9 @@ export default function MenuAppBar() {
               </Menu>
             </div>
           )}
+
+          {!auth && logOff()}
+
         </Toolbar>
       </AppBar>
     </div>

@@ -72,14 +72,16 @@ function SearchResult() {
               starting = {"Dickinson College"}
               destination = {"Harrisburg"}
               rating = {4}
+              nickname = "Alex"
               />
 
           <EachResult
-              name = {"AAAAAAAAa QPWOEI"}
+              name = {"Johnski QPWOEI"}
               occupation = {"Penn State"}
               starting = {"Dickinson College"}
               destination = {"Boston"}
               rating = {4}
+              nickname="John"
               />
 
         </Grid>
