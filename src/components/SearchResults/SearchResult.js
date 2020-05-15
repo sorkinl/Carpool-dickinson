@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   result:{
     height:500,
     width: "55%",
-    
+
     padding: 0,
     margin:'auto',
    // margin:theme.spacing(0)
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
   mapImg:{
     height:490,
-    
+
   },
   text:{
     textAlign:"left",
@@ -42,16 +42,16 @@ const useStyles = makeStyles((theme) => ({
 function SearchResult() {
 
   const classes = useStyles();
-  
+
   return (
-    
+
     <Box m ={5} pt = {0}>
 
-   
+
     <Paper className = {classes.paper}>
       {/* Search Form */}
       <Grid container spacing = {2}>
-       
+
         {/* Text Space */}
 
         <Grid item className = {classes.result}>
@@ -64,7 +64,7 @@ function SearchResult() {
               Trip to...
             </Typography>
           </Grid>
-         
+
           <EachResult
               name = {"ABCD Lee"}
               occupation = {"Dickinson College"}
@@ -85,18 +85,18 @@ function SearchResult() {
         </Grid>
 
         {/* Map */}
-        <Grid item sm container className = {classes.map}> 
+        <Grid item sm container className = {classes.map}>
             <img className = {classes.mapImg} alt = "temp map" src = {tempMap} />
         </Grid>
-     
-   
+
+
 
       </Grid>
-     
+
 
     </Paper>
     </Box>
-    
+
   );
 }
 
