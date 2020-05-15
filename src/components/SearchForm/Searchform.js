@@ -29,9 +29,7 @@ const SearchForm = () =>{
             <div>
                 Welcome
                 <Link to={`${match.url}/results`}>
-                <Searchbar 
-                    onCreate={handleCreate}
-                />
+                <Searchbar />
                 </Link>
                 <Switch>
                     <Route path={`${match.path}/results`}>
