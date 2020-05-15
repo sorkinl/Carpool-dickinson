@@ -1,6 +1,6 @@
 import React from 'react';
 import './TripList.css';
-import {Trip} from './Trip';
+import Trip from './Trip';
 
 const trip = {
   image: "https://cdn.aarp.net/content/dam/aarp/travel/tips/2020/05/1140-person-driving.jpg",
@@ -8,14 +8,16 @@ const trip = {
   cost: "$3.05",
   from: "Carlisle",
   to: "New York",
-  driver: "Ponyo The Driver",
+  first: "Miyamoto",
+  last: "Smith",
+  school: "Dickinson College",
   rating: 4.5
 };
 
-const futureTripList = [trip, trip];
+const futureTripList = [trip, trip, trip];
 const pastTripList = [trip, trip, trip];
 
-class TripList extends React.Component {
+export default class TripList extends React.Component {
 
   constructor(props){
     super(props);
@@ -30,7 +32,7 @@ class TripList extends React.Component {
   }
 
   handleClick(keyName){
-    this.setState({ [keyName]: true});//!this.state.keyname
+    this.setState({ [keyName]: !this.state.keyName});//!this.state.keyname
   }
 
   render(){
@@ -61,6 +63,3 @@ class TripList extends React.Component {
     );
    }
  }
-
-
-export default TripList;

@@ -17,7 +17,7 @@ import {
     Route,
     Link
   } from "react-router-dom";
-import Profile from '../Account/Profile/Profile';
+import Account from '../Account/Account';
 import MainChat from '../Chat/MainChat'
 
 const useStyles = makeStyles((theme) => ({
@@ -95,8 +95,8 @@ export default function MenuAppBar() {
                 open={open}
                 onClose={handleClose}
               >
-                  
-                <MenuItem component={Link} to="/profile">Profile</MenuItem>
+
+                <MenuItem component={Link} to="/account">Account</MenuItem>
                 <MenuItem component={Link} to="/chat">Chat</MenuItem>
               </Menu>
             </div>
