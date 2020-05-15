@@ -10,6 +10,7 @@ import SearchForm from './components/SearchForm/Searchform';
 import Account from './components/Account/Account';
 import MainChat from './components/Chat/MainChat';
 import SearchButton from './components/SearchForm/SearchButton';
+import LogInForm from './components/LogInForm/LogIn';
 
 
 
@@ -40,6 +41,7 @@ const [showResults, setShowResults] = React.useState(false)
           <Route path="/search" component={SearchForm} />
           <Route path="/account" component={Account}/>
           <Route path="/chat" component={MainChat}/>
+          <Route path="/logInForm" component={LogInForm}/>
         </Switch>
           </div>
       </Router>
