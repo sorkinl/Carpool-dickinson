@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import EachResult from '../EachResult/EachResult';
-import { Paper, Box } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid"
 import Typography from '@material-ui/core/Typography';
 
@@ -15,27 +15,28 @@ const useStyles = makeStyles((theme) => ({
   //   flexGrow: 1,
   // },
   paper: {
-    height: 500,
-    width: "100%",
-    margin:"auto"
+   paddingLeft:50,
+   
+
+   
   },
   result:{
-    height:500,
-    width: "55%",
+    // height:500,
+    // width: "55%",
+  
 
-    padding: 0,
-    margin:'auto',
+    // padding: 0,
+    // margin:'auto',
    // margin:theme.spacing(0)
-  },
-  map:{
-    width:"42%"
-  },
-  mapImg:{
-    height:490,
-
   },
   text:{
     textAlign:"left",
+    marginTop:"3em",
+    marginBottom:"1em"
+  },
+  imgDiv:{
+    height:"100vh",
+    width: "35%",
   }
 }));
 
@@ -45,18 +46,17 @@ function SearchResult() {
 
   return (
 
-    <Box m ={5} pt = {0}>
 
-
-    <Paper className = {classes.paper}>
+    <Paper classes = {{root:classes.paper}}>
       {/* Search Form */}
-      <Grid container spacing = {2}>
+      <Grid container >
+        <div id = "searchResultRoot">
 
         {/* Text Space */}
-
+        
         <Grid item className = {classes.result}>
-          <Grid item className = {classes.text}>
 
+          <Grid item classes = {{root:classes.text}}>
             <Typography variant="body2" color="textSecondary">
                   3 results
                 </Typography>
@@ -82,22 +82,32 @@ function SearchResult() {
               destination = {"Boston"}
               rating = {4}
               nickname="John"
-              />
+              />  
+           <EachResult/>
+           <EachResult/>
+           <EachResult/>
+           <EachResult/>
+           <EachResult/>
+              
 
         </Grid>
 
         {/* Map */}
-        <Grid item sm container className = {classes.map}>
-            <img className = {classes.mapImg} alt = "temp map" src = {tempMap} />
-        </Grid>
 
+        <div id = "mapDiv">
+          <img id = "map" alt = "temp map" src = {tempMap} />
+        </div>
+        
+        
 
+        </div>
 
+     
       </Grid>
 
 
     </Paper>
-    </Box>
+    
 
   );
 }
