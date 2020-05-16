@@ -1,47 +1,69 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Profile.css';
-import { Button } from './Button';
+
+import avatar from "../../../static/img/avatar.png"
 import { EditField } from './EditField';
+import { blue } from '@material-ui/core/colors';
+import {makeStyles, Button, Avatar, Card, CardHeader, CardMedia, CardContent, CardActions, Typography, Box, Grid} from '@material-ui/core';
 
-class Profile extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      isClicked: false,
-      name: 'My Name',
-      email: 'My Email',
-      location: 'My Location'
-    };
-    this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-  
-  handleClick() {
-    this.setState({ isClicked: !this.state.isClicked });
-  }
+const useStyles = makeStyles((theme)=>({
+  root: {
+    maxWidth: '100%',
+    padding: theme.spacing(3),
+  },
+  avatarSize: {
+    width: theme.spacing(19),
+    height: theme.spacing(19),
+    padding: theme.spacing(2),
+  },
+  title: {
+    fontSize: theme.typography.pxToRem(30),
+    flexBasis: '19%',
+    flexShrink: 0,
+    color: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',//theme.palette.inherit,
+  },
+  subHeader: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: '19%',
+    flexShrink: 0,
+},
+}));
+export default function Profile(props){
+    const [isClicked, setClick] = useState(false);
+    const [firstName, setFirst] = useState('Naruto');
+    const [lastName, setLast] = useState('Le');
+    const [email, setEmail] = useState('naruto@gmail.com');
+    const [location, setLocation] = useState('Carlisle, PA');
 
-  handleChange(keyName, newInfo){
-    this.setState({ [keyName]: newInfo });
-  }
+    const classes = useStyles();
 
-  render(){
-    return (
-      <div className='Profile'>
-          <h1>Profile</h1>
-          <div className='Avatar'>
-            <img src='https://i0.wp.com/wuhu.guru/wp-content/uploads/2019/07/profile-anonymous.jpg?fit=500%2C500&ssl=1' alt='' width='100' height='100'/>
-          </div>
+      return(
 
-          <div className='Personal-info'>
-            <h2>{this.state.name}</h2>
-            <p>&#128231; {this.state.email}</p>
-            <p> &#128205; {this.state.location}</p>
-          </div>
-          <Button status={this.state.isClicked} onClick={this.handleClick} />
-          <EditField status={this.state.isClicked} change={this.handleChange} {...this.state}/>
-      </div>
-    )
-  }
+        <div className={classes.root}>
+          <Grid item>
+              <Card className={classes.root}>
+                <CardHeader
+                    title={
+                      <Typography className={classes.title} variant="h5">{firstName} {lastName}</Typography>
+                    }
+                    align='left'
+                    subheader={
+                      <>{location}<br/>{email}</>
+                    }
+                    avatar={
+                      <Avatar src={avatar} aria-label="name" className={classes.avatarSize}>K</Avatar>
+                    }
+                />
+                <CardActions>
+                  <Button  color="primary" >
+                      Edit profile
+                  </Button>
+                </CardActions>
+              </Card>
+          </Grid>
+
+          <Grid item xs>
+          </Grid>
+        </div>
+      );
 }
-
-export default Profile;
