@@ -3,6 +3,23 @@ import './Profile.css';
 import { Button } from './Button';
 import { EditField } from './EditField';
 
+<<<<<<< HEAD
+const useStyles = makeStyles((theme)=>({
+  root: {
+    maxWidth: '100%',
+    padding: theme.spacing(1),
+  },
+  avatarSize: {
+    width: theme.spacing(20),
+    height: theme.spacing(20),
+    padding: theme.spacing(2),
+  },
+  title: {
+    fontSize: theme.typography.pxToRem(30),
+    flexBasis: '19%',
+    flexShrink: 0,
+    color: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',//theme.palette.inherit,
+=======
 class Profile extends React.Component {
   constructor(props){
     super(props);
@@ -19,6 +36,7 @@ class Profile extends React.Component {
   handleClick() {
     this.setState({ isClicked: !this.state.isClicked });
   }
+>>>>>>> 3bb66f353b76de73718ff3cd6af67c78faab8c68
 
   handleChange(keyName, newInfo){
     this.setState({ [keyName]: newInfo });
