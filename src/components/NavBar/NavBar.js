@@ -32,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    color: 'white'
+    color: 'white',
+    textDecoration: "none"
   },
   appBar:{
       zIndex: 3,
@@ -79,7 +80,7 @@ export default function MenuAppBar() {
 
  
 
-          <Button  component={Link} className={classes.title} to="/">Carpool</Button>
+          <Link className={classes.title} to="/">Carpool</Link>
          
 
           
@@ -115,8 +116,8 @@ export default function MenuAppBar() {
                 onClose={handleClose}
               >
 
-                <MenuItem component={Link} to="/account">Account</MenuItem>
-                <MenuItem component={Link} to="/chat">Chat</MenuItem>
+                <MenuItem onClick={handleClose} component={Link} to="/account">Account</MenuItem>
+                <MenuItem onClick={handleClose} component={Link} to="/chat">Chat</MenuItem>
                 
               </Menu>
             </div>
