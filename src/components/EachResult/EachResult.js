@@ -38,7 +38,6 @@ function EachResult(props) {
 
   return (
 
-
       <div className="eachResult">
 
         <Avatar src = {avatar} alt = "temp" className = {classes.avatarSize}  />
@@ -68,7 +67,7 @@ function EachResult(props) {
           </ListItem>
 
           <ListItem classes = {{root:classes.ListItem}} >
-            <Rating name="rating-for-fun" value={props.rating} precision={0.5} readOnly />
+            <Rating name="half-rating-read" defaultValue={props.rating} precision={0.5} readOnly />
           </ListItem>
         </List>
 

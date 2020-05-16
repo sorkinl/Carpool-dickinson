@@ -1,13 +1,17 @@
 .Future-trip-list {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-flow: row wrap;
   margin: 0.1rem 20%;
+  padding-top: 10px;
+  flex: none | [ 0 3 || auto ];
 }
 
 .Past-trip-list {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-flow: row wrap;
   margin: 0.1rem 20%;
+  padding-top: 10px;
+  flex: none | [ 0 3 || auto ];
 }
