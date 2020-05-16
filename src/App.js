@@ -1,15 +1,14 @@
 import React from 'react';
 import './App.css';
-import SearchResult from './components/SearchResults/SearchResult'
-import { render } from '@testing-library/react';
-import ChatWindow from './components/Chat/ChatWindow';
 import NavBar from './components/NavBar/NavBar';
+import Footer from './components/Footer/Footer'
 import { Switch, Link, Route, BrowserRouter as Router } from 'react-router-dom';
 import SearchForm from './components/SearchForm/Searchform';
 
 import Account from './components/Account/Account';
 import MainChat from './components/Chat/MainChat';
 import SearchButton from './components/SearchForm/SearchButton';
+import LogInForm from './components/LogInForm/LogIn';
 
 
 
@@ -40,9 +39,12 @@ const [showResults, setShowResults] = React.useState(false)
           <Route path="/search" component={SearchForm} />
           <Route path="/account" component={Account}/>
           <Route path="/chat" component={MainChat}/>
+          <Route path="/logInForm" component={LogInForm}/>
         </Switch>
           </div>
       </Router>
+
+      <Footer />
     </div>
 
   );
