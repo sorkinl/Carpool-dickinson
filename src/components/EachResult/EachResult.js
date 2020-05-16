@@ -54,41 +54,54 @@ function EachResult(props) {
   // }
 
   return (
+      <div>
 
+        
 
-      <div className="eachResult">
+        <div className="eachResult">
+    
+          {/* avatar and nickname */}
+          <div className = "avatarAndNickname">
+            <Avatar src = {avatar} variant = "square" alt = "temp" className = {classes.avatarSize}  />
+            
+            <span className= "nickname">{props.nickname}</span>
+          </div>
 
-        <Avatar src = {avatar} alt = "temp" className = {classes.avatarSize}  />
+      
+          <List className = {classes.list}>
 
-        <List className = {classes.root}>
+            {/* name */}
+            <ListItem button classes = {{root:classes.ListItem}} >
+              <ListItemIcon classes = {{root:classes.ListItemIcon}}>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText classes = {{root:classes.ListItemText}} primary= {props.name} secondary={props.occupation}/>
+            </ListItem>
 
-          {/* name */}
-          <ListItem button classes = {{root:classes.ListItem}} >
-            <ListItemIcon classes = {{root:classes.ListItemIcon}}>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText primary= {props.name} secondary={props.occupation}/>
-          </ListItem>
+            <ListItem button classes = {{root:classes.ListItem}} >
+              <ListItemIcon classes = {{root:classes.ListItemIcon}}>
+                <LocationOnIcon />
+              </ListItemIcon>
+              <ListItemText primary={props.starting} secondary={props.comment}/>
+            </ListItem>
 
-          <ListItem button classes = {{root:classes.ListItem}} >
-            <ListItemIcon classes = {{root:classes.ListItemIcon}}>
-              <LocationOnIcon />
-            </ListItemIcon>
-            <ListItemText primary={props.starting} secondary={props.comment}/>
-          </ListItem>
+            <ListItem button classes = {{root:classes.ListItem}} >
+              <ListItemIcon classes = {{root:classes.ListItemIcon}}>
+                <LocationCityIcon/>
+              </ListItemIcon>
+              <ListItemText primary="Harrisburg" />
+            </ListItem>
 
-          <ListItem button classes = {{root:classes.ListItem}} >
-            <ListItemIcon classes = {{root:classes.ListItemIcon}}>
-              <LocationCityIcon/>
-            </ListItemIcon>
-            <ListItemText primary="Harrisburg" />
-          </ListItem>
-
-          <ListItem classes = {{root:classes.ListItem}} >
-            <Rating name="half-rating-read" defaultValue={props.rating} precision={0.5} readOnly />
-          </ListItem>
-        </List>
-
+            <ListItem classes = {{root:classes.ListItem}} >
+              <Rating name="rating-for-fun" value={props.rating} precision={0.5} readOnly />
+            </ListItem>
+          
+          </List>
+        
+          
+        
+        </div>
+        <hr />
       </div>
 
 
