@@ -7,7 +7,7 @@ import {makeStyles, Button, Avatar, Card, CardHeader, CardMedia, CardContent, Ca
 
 const useStyles = makeStyles((theme)=>({
   root: {
-    maxWidth: 500,
+    maxWidth: '100%',
     padding: theme.spacing(1),
   },
   avatarSize: {
