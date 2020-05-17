@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import './TripList.css';
 import Trip from './Trip';
-import {makeStyles, Paper, Typography, Box, Grid, ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary} from '@material-ui/core';
+import { pink } from '@material-ui/core/colors';
+import {makeStyles, CssBaseline, Paper, Typography, Box, Grid, ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary} from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
   },
   heading: {
-   fontSize: theme.typography.pxToRem(15),
-   flexBasis: '19%',
-   flexShrink: 0,
-   color: theme.palette.inherit,
-   align: 'left',
- },
+     fontSize: theme.typography.pxToRem(15),
+     flexBasis: '19%',
+     flexShrink: 0,
+     color: theme.palette.inherit,
+     align: 'left',
+  },
+  expandedPanel: {
+    backgroundColor: pink[50],
+  },
  }));
 
  export default function TripList(props) {
@@ -34,14 +39,15 @@ const useStyles = makeStyles((theme) => ({
       rating: 4.5
     };
 
-    const futureTripList = [trip, trip, trip, trip, trip];
+    const futureTripList = [];
     const pastTripList = [trip, trip, trip, trip, trip];
-
+    console.log(futureTripList.length);
     return(
+    <CssBaseline>
       <Box m ={3} pt = {0} className="TripList">
             <Typography variant="h5" color="inherited" gutterBottom align='left'>My Trips</Typography>
             <div className={classes.root}>
-            <ExpansionPanel  onChange={()=> {setFuTrip(!fuTrip)}}>
+            <ExpansionPanel  onChange={()=> {setFuTrip(!fuTrip)}} classes={{ expanded: classes.expandedPanel }}>
                 <ExpansionPanelSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1bh-content"
@@ -50,14 +56,20 @@ const useStyles = makeStyles((theme) => ({
                     <Typography className={classes.heading}>View upcoming trips</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                    <Grid container spacing={3} className="Future-trip-list">
-                        { fuTrip == true &&
-                            futureTripList.map(trip => {return (<Trip trip={trip}/>);})
-                        }
-                    </Grid>
+                    { fuTrip == true && ( futureTripList.length > 0 ?
+                         <Grid container spacing={3} className="Future-trip-list">
+                             {
+                                 futureTripList.map(trip => {return (<Trip trip={trip}/>);})
+                             }
+                         </Grid>
+                         :
+                         <Typography variant='overline' color='textSecondary'>YOU CURRENTLY HAVE NO TRIPS</Typography>
+
+                    )}
+
                 </ExpansionPanelDetails>
             </ExpansionPanel>
-            <ExpansionPanel onChange={()=> {setPastTrip(!pastTrip)}}>
+            <ExpansionPanel onChange={()=> {setPastTrip(!pastTrip)}} classes={{ expanded: classes.expandedPanel }}>
                 <ExpansionPanelSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel2bh-content"
@@ -66,14 +78,20 @@ const useStyles = makeStyles((theme) => ({
                     <Typography className={classes.heading}>View past trips</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                    <Grid container spacing={3} className="Past-trip-list">
-                        { pastTrip == true &&
-                            pastTripList.map(trip => {return (<Trip trip={trip}/>);})
-                        }
-                    </Grid>
+                  { pastTrip == true && ( pastTripList.length > 0 ?
+                     <Grid container spacing={3} className="Past-trip-list">
+                         {
+                             pastTripList.map(trip => {return (<Trip trip={trip}/>);})
+                         }
+                     </Grid>
+                     :
+                     <Typography variant='overline' color='textSecondary'>YOU CURRENTLY HAVE NO TRIPS</Typography>
+                   )}
+
                 </ExpansionPanelDetails>
             </ExpansionPanel>
           </div>
         </Box>
+      </CssBaseline>
       );
   }

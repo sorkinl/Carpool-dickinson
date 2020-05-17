@@ -18,6 +18,7 @@ const useStyles = makeStyles({
   avatar: {
     backgroundColor: red[500],
   },
+
 });
 
 export default function Trip(props) {
@@ -58,7 +59,7 @@ export default function Trip(props) {
                 </Typography>
               </CardContent>
               <CardActions>
-                  <Button size="small" color="primary" >
+                  <Button size="small" color="primary"  disable>
                     Modify trip
                   </Button>
                   <Button size="small" color="primary" >
