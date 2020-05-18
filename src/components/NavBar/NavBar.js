@@ -84,8 +84,8 @@ export default function MenuAppBar() {
          
 
           
-          <Button component={Link} to="/logInForm" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Log in</Button>
-          <Button  edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Sign up</Button>
+          <Button component={Link} to="/logIn" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Log in</Button>
+          <Button component={Link} to="/signUp" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Sign up</Button>
 
           {auth && (
             <div>
