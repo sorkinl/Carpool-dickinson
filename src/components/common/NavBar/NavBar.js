@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -20,8 +19,12 @@ import {
     Redirect,
     Link
   } from "react-router-dom";
-import Account from '../Account/Account';
-import MainChat from '../Chat/MainChat'
+// import Account from '../Account/Account';
+// import MainChat from '../Chat/MainChat'
+
+import { useDispatch, useSelector } from "react-redux";
+import actions from './duck/actions'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,13 +45,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MenuAppBar() {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
+  // const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
+
+  // const handleChange = (event) => {
+  //   setAuth(event.target.checked);
+  // };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -57,6 +61,13 @@ export default function MenuAppBar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  //states 
+  const auth = useSelector(state => state.auth);
+  // console.log(auth.getState())
+  const dispatch = useDispatch()
+
+
 
   const logOff = () => {
    
@@ -68,7 +79,20 @@ export default function MenuAppBar() {
     <div className={classes.root}>
       <FormGroup>
         <FormControlLabel
-          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
+          control={<Switch checked={auth} onChange={()=>{
+
+            if(auth){
+              console.log("true")
+              dispatch(actions.logoff())
+            }else{
+              console.log("here")
+              // dispatch(actions.login)
+              dispatch(actions.login())
+            }
+            
+          }
+
+          } aria-label="login switch" />}
           label={auth ? 'Logout' : 'Login'}
         />
       </FormGroup>
@@ -128,5 +152,7 @@ export default function MenuAppBar() {
         </Toolbar>
       </AppBar>
     </div>
+    
+    
   );
 }

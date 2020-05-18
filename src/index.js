@@ -3,16 +3,37 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 
+import { Provider } from 'react-redux';
+// redux-logger is a middleware that lets you log every state change
+import logger from 'redux-logger';
+// redux-thunk is a middleware that lets you dispatch async actions
+import thunk from 'redux-thunk';
+import {
+  createStore,
+  applyMiddleware
+} from 'redux';
+import rootReducer from './reducers';
+// import rootReducer from'./components/common/NavBar/duck/reducers'
+// import registerServiceWorker from './registerServiceWorker';
 
+const middleware = applyMiddleware(thunk, logger);
+const store = createStore(rootReducer, middleware);
+// const store = createStore(rootReducer);
+// console.log(store.getState())
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store = {store}>
+
+ 
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+
+  </Provider>,
   document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+
+// registerServiceWorker();
 serviceWorker.unregister();
