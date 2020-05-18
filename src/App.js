@@ -6,7 +6,7 @@ import { Switch, Link, Route, BrowserRouter as Router } from 'react-router-dom';
 import SearchForm from './components/SearchForm/Searchform';
 
 import Account from './components/Account/Account';
-import MainChat from './components/Chat/MainChat';
+import MainChat from './components/Chat/MainChat/MainChat';
 import SearchButton from './components/SearchForm/SearchButton';
 import LogInForm from './components/LogInForm/LogIn';
 
