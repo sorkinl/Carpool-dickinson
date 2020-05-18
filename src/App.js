@@ -8,7 +8,8 @@ import SearchForm from './components/SearchForm/Searchform';
 import Account from './components/Account/Account';
 import MainChat from './components/Chat/MainChat';
 import SearchButton from './components/SearchForm/SearchButton';
-import LogInForm from './components/LogInForm/LogIn';
+import LogIn from './components/LogInForm/LogIn';
+import SignUp from './components/LogInForm/SignUp';
 
 
 
@@ -39,7 +40,9 @@ const [showResults, setShowResults] = React.useState(false)
           <Route path="/search" component={SearchForm} />
           <Route path="/account" component={Account}/>
           <Route path="/chat" component={MainChat}/>
-          <Route path="/logInForm" component={LogInForm}/>
+          <Route path="/logIn" component={LogIn}/>
+          <Route path="/signUp" component={SignUp}/>
+
         </Switch>
           </div>
       </Router>
