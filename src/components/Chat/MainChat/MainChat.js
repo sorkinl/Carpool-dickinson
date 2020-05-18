@@ -1,37 +1,16 @@
 import React from 'react';
 import Drawer from '@material-ui/core/Drawer'
-import ChatWindow from './ChatWindow';
-import { makeStyles} from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
+import ChatWindow from '../ChatWindow/ChatWindow';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import PersonInChat from './PersonInChat';
-import {Stack, Node} from '../../Utils/Stack';
-const drawerWidth = 240;
+import PersonInChat from '../PersonInChat/PersonInChat';
+import {Stack, Node} from '../../../Utils/Stack';
+import {useStyles} from './mainChatStyles';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      display: "flex",
-      
-    },
-    drawer: {
-      width: "22%",
-      flexShrink: 0,
-      
-    },
-    drawerPaper: {
-      width: "22%",
-      zIndex:1
-    },
-    content: {
-      width: "75%"
-    },
-  }));
 
 
 const MainChat = () => {

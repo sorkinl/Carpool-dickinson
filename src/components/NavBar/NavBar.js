@@ -21,7 +21,7 @@ import {
     Link
   } from "react-router-dom";
 import Account from '../Account/Account';
-import MainChat from '../Chat/MainChat'
+import MainChat from '../Chat/MainChat/MainChat'
 
 const useStyles = makeStyles((theme) => ({
   root: {

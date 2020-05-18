@@ -4,7 +4,7 @@ import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import { Paper } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField"
-import {Stack, Node} from '../../Utils/Stack';
+import {Stack, Node} from '../../../Utils/Stack';
 import "./ChatWindow.css"
 
 const ChatWindow = ({ chatID }) => {
