@@ -1,10 +1,23 @@
-import React, {useState} from 'react';
+import React, {useState, useReducer} from 'react';
 import './Profile.css';
 
 import avatar from "../../../static/img/avatar.png"
-import { EditField } from './EditField';
-import { blue } from '@material-ui/core/colors';
-import {makeStyles, Button, Avatar, Card, CardHeader, CardMedia, CardContent, CardActions, Typography, Box, Grid} from '@material-ui/core';
+import EditField from './EditField.js';
+import { withStyles } from '@material-ui/core/styles';
+import {makeStyles, CssBaseline, Button, Avatar, Card, CardHeader, CardMedia, CardContent, CardActions, Typography, Box, Grid} from '@material-ui/core';
+
+const StyledButton = withStyles({
+  root: {
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FFB6C1 90%)',
+    borderRadius: 3,
+    border: 0,
+    color: 'white',
+    height: 48,
+    padding: '0 50px',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  },
+
+})(Button);
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -20,20 +33,32 @@ const useStyles = makeStyles((theme)=>({
     fontSize: theme.typography.pxToRem(30),
     flexBasis: '19%',
     flexShrink: 0,
-    color: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',//theme.palette.inherit,
+    color: theme.palette.inherit,
   },
   subHeader: {
     fontSize: theme.typography.pxToRem(15),
     flexBasis: '19%',
     flexShrink: 0,
-},
+  },
 }));
 export default function Profile(props){
     const [isClicked, setClick] = useState(false);
+
     const [firstName, setFirst] = useState('Naruto');
     const [lastName, setLast] = useState('Le');
     const [email, setEmail] = useState('naruto@gmail.com');
     const [location, setLocation] = useState('Carlisle, PA');
+
+    const [inputValues, setInputValues] = useReducer(
+      (state, newState) => ({ ...state, ...newState }),
+      {firstName: '', lastName: '', email: '', location: ''}
+    );
+
+    const handleOnChange = event => {
+      const { name, value } = event.target;
+      setInputValues({ [name]: value });
+    };
+
 
     const classes = useStyles();
 
@@ -55,15 +80,17 @@ export default function Profile(props){
                     }
                 />
                 <CardActions>
-                  <Button  color="primary" >
-                      Edit profile
-                  </Button>
+                  <StyledButton>
+                        Edit profile
+                  </StyledButton>
                 </CardActions>
               </Card>
           </Grid>
 
-          <Grid item xs>
-          </Grid>
+
+            <EditField/>
+
         </div>
+
       );
 }
