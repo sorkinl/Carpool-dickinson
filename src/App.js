@@ -21,9 +21,6 @@ import SignUp from './components/LogInForm/SignUp';
 
 function App() {
 
-const [showResults, setShowResults] = React.useState(false)
-
-
   return (
     <div className="App">
 
