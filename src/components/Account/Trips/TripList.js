@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
     const futureTripList = [];
     const pastTripList = [trip, trip, trip, trip, trip];
-    console.log(futureTripList.length);
+
     return(
     <CssBaseline>
       <Box m ={3} pt = {0} className="TripList">

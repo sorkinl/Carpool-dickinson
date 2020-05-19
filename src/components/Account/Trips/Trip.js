@@ -59,10 +59,10 @@ export default function Trip(props) {
                 </Typography>
               </CardContent>
               <CardActions>
-                  <Button size="small" color="primary"  disable>
+                  <Button size="small" color="primary">
                     Modify trip
                   </Button>
-                  <Button size="small" color="primary" >
+                  <Button size="small" color="primary">
                     Contact driver
                   </Button>
               </CardActions>
