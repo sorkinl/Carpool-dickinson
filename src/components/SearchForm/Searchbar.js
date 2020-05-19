@@ -1,69 +1,119 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
 
-// Here SearchBar would get its props. {onCreate} is same as taking only one value from the props.
-//Can also be done with const Searchbar = (props) => , but then it would be props.onCreate later on 
+import Link from '@material-ui/core/Link';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+
+const useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
+
 const Searchbar = ({onCreate}) => {
-    // Your state
-    const [state, setState] = React.useState({
-        pickup: '',
-        destination: '',
+    const classes = useStyles();
+    const [state, setState] = Reac.useState({
+        pickup:'',
+        destination:'',
         startDate: new Date()
     })
-    // This is where the problem was. When managing state object {}, you need to a spread operator "..."
-    // to define the state that you don't want to change. If you don't do it, some state will be undefined
-    /* const handleChange = (e) => {
-        setState({
-            [e.target.name]: e.target.value
-        });
-    } */
+
+
+
     const handleChange = (e) => {
-        setState({...state,
+        setState({
+            ...state,
             [e.target.name]: e.target.value
         });
     }
-    //notice the spread operator "..." here as well.
+
     const handleDateChange = date => {
         setState({...state,
             startDate: date
-          });
-    }
-    //prop onCreate is called and passes in the state object.
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onCreate(state);
-        setState({
-            pickup:'',
-            destination:'',
-            startDate: new Date()
         });
     }
 
-        return(
-            <form >
-                <input
-                    placeholder="pickup"
-                    value={state.pickup}
-                    onChange={handleChange}
-                    name="pickup"
-                />
-                <input
-                    placeholder="destination"
-                    value={state.destination}
-                    onChange={handleChange} 
-                    name="destination"
-                />
-                <DatePicker
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onCreate(State);
+        setState({
+            pikcup:'',
+            destination:'',
+            startDate: new Date()
+        })
+    }
+    return(
+        <form className={classes.form} noValidate>
+            <FormControl className={classes.FormControl} variant="outlined">
+                <InputLabel ref={labelRef} htmlFor="component-outlined">
+                    pickup
+                </InputLabel>
+            <OutlinedInput
+                type='text'
+                value={state.pickup}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="pickup"
+                onChange={handleChange}
+                name="pickup"
+                autoFocus
+            />
+            </FormControl>
+            <FormControl className={classes.FormControl} variant="outlined">
+            <InputLabel ref={labelRef} htmlFor="component-outlined">
+                    destination
+                </InputLabel>
+            <OutlinedInput
+                type='text'
+                value={state.destination}
+                margin="normal"
+                required
+                fullWidth
+                id="destination"
+                onChange={handleChange}
+                name="destination"
+                autoFocus
+            />
+            </FormControl>
+            <DatePicker
+                    placeholderText="choose date and time"
                     selected={state.startDate}
                     onChange={handleDateChange}
                     showTimeSelect
                     dateFormat="Pp"
-                />
-                <button type="button" onClick={handleSubmit}>Search</button>
-            </form>
-        );
-    }
-
-
-export default Searchbar;
+            />
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                onClick={handleSubmit}
+                className={classes.submit}
+            >
+                submit
+            </Button>
+        </form>
+    )
+};
