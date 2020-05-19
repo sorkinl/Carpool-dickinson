@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
-
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -32,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Searchbar = ({onCreate}) => {
     const classes = useStyles();
-    const [state, setState] = Reac.useState({
+    const [state, setState] = useState({
         pickup:'',
         destination:'',
         startDate: new Date()
@@ -55,9 +54,9 @@ const Searchbar = ({onCreate}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onCreate(State);
+        onCreate(state);
         setState({
-            pikcup:'',
+            pickup:'',
             destination:'',
             startDate: new Date()
         })
@@ -65,7 +64,7 @@ const Searchbar = ({onCreate}) => {
     return(
         <form className={classes.form} noValidate>
             <FormControl className={classes.FormControl} variant="outlined">
-                <InputLabel ref={labelRef} htmlFor="component-outlined">
+                <InputLabel htmlFor="component-outlined">
                     pickup
                 </InputLabel>
             <OutlinedInput
@@ -78,11 +77,10 @@ const Searchbar = ({onCreate}) => {
                 id="pickup"
                 onChange={handleChange}
                 name="pickup"
-                autoFocus
             />
             </FormControl>
             <FormControl className={classes.FormControl} variant="outlined">
-            <InputLabel ref={labelRef} htmlFor="component-outlined">
+            <InputLabel htmlFor="component-outlined">
                     destination
                 </InputLabel>
             <OutlinedInput
@@ -94,7 +92,6 @@ const Searchbar = ({onCreate}) => {
                 id="destination"
                 onChange={handleChange}
                 name="destination"
-                autoFocus
             />
             </FormControl>
             <DatePicker
@@ -116,4 +113,6 @@ const Searchbar = ({onCreate}) => {
             </Button>
         </form>
     )
-};
+}
+
+export default Searchbar;
