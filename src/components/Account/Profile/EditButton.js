@@ -17,8 +17,9 @@ const StyledButton = withStyles({
 
 })(Button);
 
+//Profile's edit button
 export default function EditButton(props){
-
+  //Change button's text based on button's state
   return(
     <StyledButton onClick={props.onClick} startIcon={<EditIcon />}>
       { props.status === true? 'Hide profile' : 'Edit profile'}

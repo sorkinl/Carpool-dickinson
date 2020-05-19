@@ -20,14 +20,16 @@ const useStyles = makeStyles({
   },
 
 });
-
+//Create a Trip component
 export default function Trip(props) {
+    //Passing the props "trip" of Trip component in TripList to a variable
     const trip = props.trip;
     const classes = useStyles();
 
     return (
       <Grid item xs={4} className="Trip">
         <Card className={classes.root} gutterBottom>
+            {/* Display the driver's name and location */}
             <CardHeader
                 avatar={
                   <Avatar aria-label="name" className={classes.avatar}>M</Avatar>
@@ -35,29 +37,36 @@ export default function Trip(props) {
                 title={trip.first + " " + trip.last} align='left'
                 subheader={trip.school}
             />
+            {/* Picture (can be removed) */}
             <CardMedia
                 className={classes.media}
                 image={trip.image}
                 title="Car"
             />
+            {/* Display a trip's bsic info */}
             <CardContent>
+              {/* Date */}
               <Typography variant="body1" color="primary" align='left'>
-                <EventIcon color="primary"/> {trip.date}
+                    <EventIcon color="primary"/> {trip.date}
               </Typography>
+              {/* Starting point */}
               <Typography variant="body1" color="textPrimary" align='left'>
-                <LocationOnIcon color="action"/> {trip.from}
+                    <LocationOnIcon color="action"/> {trip.from}
               </Typography>
+              {/* Destination */}
               <Typography variant="body1" color="textPrimary" align='left'>
-                <LocationCityIcon color="action"/> {trip.to}
+                    <LocationCityIcon color="action"/> {trip.to}
               </Typography>
+              {/* Cost */}
               <Typography variant="body1" color="inherit" align='left' gutterBottom>
-                <AttachMoneyIcon color="action"/> {trip.cost}
+                    <AttachMoneyIcon color="action"/> {trip.cost}
               </Typography>
-
+              {/* Rating */}
               <Typography variant="body1" color="inherit" align='left'>
-              <Rating name="rating-for-fun" value={trip.rating} precision={0.5} readOnly />
-                </Typography>
+                  <Rating name="rating-for-fun" value={trip.rating} precision={0.5} readOnly />
+              </Typography>
               </CardContent>
+              {/* Buttons */}
               <CardActions>
                   <Button size="small" color="primary">
                     Modify trip
