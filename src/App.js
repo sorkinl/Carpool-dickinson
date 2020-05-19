@@ -1,15 +1,17 @@
 import React from 'react';
 import './App.css';
-import NavBar from './components/NavBar/NavBar';
-import Footer from './components/Footer/Footer'
-import { Switch, Link, Route, BrowserRouter as Router } from 'react-router-dom';
-import SearchForm from './components/SearchForm/Searchform';
+import SearchResult from './components/SearchResults/SearchResult'
+import { render } from '@testing-library/react';
+import ChatWindow from './components/Chat/ChatWindow';
 
-import Account from './components/Account/Account';
-import MainChat from './components/Chat/MainChat/MainChat';
-import SearchButton from './components/SearchForm/SearchButton';
-import LogIn from './components/LogInForm/LogIn';
-import SignUp from './components/LogInForm/SignUp';
+import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
+import SearchForm from './components/SearchForm/Searchform';
+//import { Profile, EditPage, Button } from './components/Account/Profile';
+
+import Profile from './components/Account/Profile/Profile.js';
+import TripList from './components/Account/Trips/TripList.js';
+import MainChat from './components/Chat/MainChat';
+
 
 
 
@@ -26,28 +28,24 @@ const [showResults, setShowResults] = React.useState(false)
 
   return (
     <div className="App">
+     {showResults?<SearchResult/>:<MainChat/>}
+      {/* button to load search results*/}
+      <button onClick={
+        () => setShowResults(true) }>
+        search results button
+      </button>
 
       <Router>
-        <div>
-      <NavBar/>
-
+        <Link to="/search">
+          <button>Find a ride</button>
+        </Link>
         <hr />
         <main>
-
-        </main>
-        <Switch>
-          <Route path="/" exact component={SearchButton}/>
           <Route path="/search" component={SearchForm} />
-          <Route path="/account" component={Account}/>
-          <Route path="/chat" component={MainChat}/>
-          <Route path="/logIn" component={LogIn}/>
-          <Route path="/signUp" component={SignUp}/>
-
-        </Switch>
-          </div>
+        </main>
       </Router>
-
-      <Footer />
+      <Profile/>
+      <TripList/>
     </div>
 
   );
