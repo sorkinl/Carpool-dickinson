@@ -35,33 +35,37 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export default function Searchbar() {
+const Searchbar = ({onCreate}) => {
     const classes = useStyles();
-    const [selectedDate, handleDateChange] = useState(new Date());
-    const [pickupval, setPickup] = useState('');
-    const [destinationval, setDestination] = useState('');
+    const [state, setState] = Reac.useState({
+        pickup:'',
+        destination:'',
+        startDate: new Date()
+    })
 
-    const labelRef = React.useRef(null);
 
-    // function handleChange (e) {
-    //     const value = e.target.value;
-    //     setState({
-    //         ...state,
-    //         [e.target.name]: value
-    //     });
-    // }
-    // const handleChange = (e) => {
-    //     setState({
-    //         ...state,
-    //         [e.target.name]: e.target.value
-    //     });
-    // }
-    const handlePickupChange = e => {
-        setPickup(e.target.value);
+
+    const handleChange = (e) => {
+        setState({
+            ...state,
+            [e.target.name]: e.target.value
+        });
     }
 
-    const handleDestinationChange = e => {
-        setDestination(e.target.value);
+    const handleDateChange = date => {
+        setState({...state,
+            startDate: date
+        });
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onCreate(State);
+        setState({
+            pikcup:'',
+            destination:'',
+            startDate: new Date()
+        })
     }
     return(
         <form className={classes.form} noValidate>
@@ -71,13 +75,13 @@ export default function Searchbar() {
                 </InputLabel>
             <OutlinedInput
                 type='text'
-                value={pickupval}
+                value={state.pickup}
                 variant="outlined"
                 margin="normal"
                 required
                 fullWidth
                 id="pickup"
-                onChange={handlePickupChange}
+                onChange={handleChange}
                 name="pickup"
                 autoFocus
             />
@@ -88,22 +92,21 @@ export default function Searchbar() {
                 </InputLabel>
             <OutlinedInput
                 type='text'
-                value={destinationval}
+                value={state.destination}
                 margin="normal"
                 required
                 fullWidth
                 id="destination"
-                onChange={handleDestinationChange}
+                onChange={handleChange}
                 name="destination"
                 autoFocus
             />
             </FormControl>
             <DatePicker
                     placeholderText="choose date and time"
-                    selected={selectedDate}
+                    selected={state.startDate}
                     onChange={handleDateChange}
                     showTimeSelect
-                    drop
                     dateFormat="Pp"
             />
             <Button
@@ -111,6 +114,7 @@ export default function Searchbar() {
                 fullWidth
                 variant="contained"
                 color="primary"
+                onClick={handleSubmit}
                 className={classes.submit}
             >
                 submit

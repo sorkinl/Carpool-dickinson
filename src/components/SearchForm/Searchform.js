@@ -5,23 +5,7 @@ import {BrowserRouter as Router, Link, useRouteMatch, useParams, Switch, Route} 
 import SearchResult from '../SearchResults/SearchResult';
 
 const SearchForm = () =>{
-    
-    const [state, setState] = React.useState({
-        information: [
-            {
-                id: 0,
-                pickup: '',
-                destination: '',
-                startDate: new Date(),
-            }
-        ],
-        keyword: ''
-    });
-    const handleCreate = (data) => {
-        const { information } = state;
-        // this.setState({
-        //     information: information.concat({ id: this.id++, ...data })
-        // }) 
+    const handleCreate = data => {
         console.log(data);
     }
         let match = useRouteMatch();
@@ -29,7 +13,7 @@ const SearchForm = () =>{
             <div>
                 Welcome
                 <Link to={`${match.url}/results`}>
-                <Searchbar />
+                <Searchbar onCreate={handleCreate} />
                 </Link>
                 <Switch>
                     <Route path={`${match.path}/results`}>
