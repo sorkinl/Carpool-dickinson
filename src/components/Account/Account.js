@@ -9,8 +9,8 @@ export default class Account extends React.Component {
       return (
         <CssBaseline>
         <div>
-          <Grid container spacing={2}>
-            <Grid item xs={4}>
+          <Grid container spacing={1}>
+            <Grid item xs={4.5}>
               <Profile/>
             </Grid>
             <Grid item xs>
