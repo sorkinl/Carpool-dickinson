@@ -2,60 +2,68 @@ import React, { Component } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-class Searchbar extends Component {
-    state = {
+// Here SearchBar would get its props. {onCreate} is same as taking only one value from the props.
+//Can also be done with const Searchbar = (props) => , but then it would be props.onCreate later on 
+const Searchbar = ({onCreate}) => {
+    // Your state
+    const [state, setState] = React.useState({
         pickup: '',
         destination: '',
         startDate: new Date()
-    }
-
-    handleChange = (e) => {
-        this.setState({
+    })
+    // This is where the problem was. When managing state object {}, you need to a spread operator "..."
+    // to define the state that you don't want to change. If you don't do it, some state will be undefined
+    /* const handleChange = (e) => {
+        setState({
+            [e.target.name]: e.target.value
+        });
+    } */
+    const handleChange = (e) => {
+        setState({...state,
             [e.target.name]: e.target.value
         });
     }
-
-    handleDateChange = date => {
-        this.setState({
+    //notice the spread operator "..." here as well.
+    const handleDateChange = date => {
+        setState({...state,
             startDate: date
           });
     }
-
-    handleSubmit = (e) => {
+    //prop onCreate is called and passes in the state object.
+    const handleSubmit = (e) => {
         e.preventDefault();
-        this.props.onCreate(this.state);
-        this.setState({
+        onCreate(state);
+        setState({
             pickup:'',
             destination:'',
             startDate: new Date()
         });
     }
 
-    render(){
         return(
-            <form onSubmit={this.handleSubmit}>
+            <form >
                 <input
                     placeholder="pickup"
-                    value={this.state.pickup}
-                    onChange={this.handleChange}
+                    value={state.pickup}
+                    onChange={handleChange}
                     name="pickup"
                 />
                 <input
                     placeholder="destination"
-                    value={this.state.destination}
-                    onChange={this.handleChange} 
+                    value={state.destination}
+                    onChange={handleChange} 
                     name="destination"
                 />
                 <DatePicker
-                    selected={this.state.startDate}
-                    onChange={this.handleDateChange}
+                    selected={state.startDate}
+                    onChange={handleDateChange}
                     showTimeSelect
                     dateFormat="Pp"
                 />
-                <button type="submit">Search</button>
+                <button type="button" onClick={handleSubmit}>Search</button>
             </form>
         );
     }
-}
+
 
 export default Searchbar;

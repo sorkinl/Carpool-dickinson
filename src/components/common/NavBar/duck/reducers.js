@@ -1,7 +1,8 @@
 import types from './types';
 
 const INITIAL_STATE = {
-  auth: false
+  auth: false,
+  accountIcon: false
 }
 const navBarReducer = (state=INITIAL_STATE, action) => {
 
@@ -18,6 +19,21 @@ const navBarReducer = (state=INITIAL_STATE, action) => {
         ...state,
         auth: false
         }
+    }
+    
+    case types.ON: {
+      return {
+        ...state,
+        accountIcon: true
+        }
+    }
+
+    case types.OFF: {
+      return {
+        ...state,
+        aaccountIconuth: false
+        }
+    
         
 }
     default: 

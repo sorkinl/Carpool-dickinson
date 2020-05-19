@@ -23,10 +23,13 @@ const useStyles = makeStyles((theme) => ({
  }));
 
  export default function TripList(props) {
+    //Initialize the states of fuTrip (future trip) and pastTrip (Default value = false).
     const [fuTrip, setFuTrip] = useState(false);
     const [pastTrip, setPastTrip] = useState(false);
 
     const classes = useStyles();
+
+    //An object storing Trip's info
     const trip = {
       image: "https://cdn.aarp.net/content/dam/aarp/travel/tips/2020/05/1140-person-driving.jpg",
       date: "mm/dd/yyyy",
@@ -38,15 +41,17 @@ const useStyles = makeStyles((theme) => ({
       school: "Dickinson College",
       rating: 4.5
     };
-
+    //List of future trips
     const futureTripList = [];
+    //List of past trips
     const pastTripList = [trip, trip, trip, trip, trip];
-    console.log(futureTripList.length);
+
     return(
     <CssBaseline>
       <Box m ={3} pt = {0} className="TripList">
             <Typography variant="h5" color="inherited" gutterBottom align='left'>My Trips</Typography>
             <div className={classes.root}>
+            {/* View future trip list panel. Change the state of fuTrip if this panel is clicked. */}
             <ExpansionPanel  onChange={()=> {setFuTrip(!fuTrip)}} classes={{ expanded: classes.expandedPanel }}>
                 <ExpansionPanelSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -55,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
                 >
                     <Typography className={classes.heading}>View upcoming trips</Typography>
                 </ExpansionPanelSummary>
+                {/* Display trips if there exists at least 1 trip, otherwise just text*/}
                 <ExpansionPanelDetails>
                     { fuTrip == true && ( futureTripList.length > 0 ?
                          <Grid container spacing={3} className="Future-trip-list">
@@ -69,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
 
                 </ExpansionPanelDetails>
             </ExpansionPanel>
+            {/* View past trip list panel. Change the state of pastTrip if this panel is clicked. */}
             <ExpansionPanel onChange={()=> {setPastTrip(!pastTrip)}} classes={{ expanded: classes.expandedPanel }}>
                 <ExpansionPanelSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -77,6 +84,7 @@ const useStyles = makeStyles((theme) => ({
                 >
                     <Typography className={classes.heading}>View past trips</Typography>
                 </ExpansionPanelSummary>
+                {/* Display trips if there exists at least 1 trip, otherwise just text*/}
                 <ExpansionPanelDetails>
                   { pastTrip == true && ( pastTripList.length > 0 ?
                      <Grid container spacing={3} className="Past-trip-list">
@@ -87,7 +95,6 @@ const useStyles = makeStyles((theme) => ({
                      :
                      <Typography variant='overline' color='textSecondary'>YOU CURRENTLY HAVE NO TRIPS</Typography>
                    )}
-
                 </ExpansionPanelDetails>
             </ExpansionPanel>
           </div>

@@ -19,12 +19,17 @@ import {
     Redirect,
     Link
   } from "react-router-dom";
+<<<<<<< HEAD:src/components/common/NavBar/NavBar.js
 // import Account from '../Account/Account';
 // import MainChat from '../Chat/MainChat'
 
 import { useDispatch, useSelector } from "react-redux";
 import actions from './duck/actions'
 
+=======
+import Account from '../Account/Account';
+import MainChat from '../Chat/MainChat/MainChat'
+>>>>>>> upstream/dev:src/components/NavBar/NavBar.js
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,7 +69,6 @@ export default function MenuAppBar() {
 
   //states 
   const auth = useSelector(state => state.auth);
-  const accountIcon = useSelector(state => state.accountIcon);
   // console.log(auth.getState())
   const dispatch = useDispatch()
 
