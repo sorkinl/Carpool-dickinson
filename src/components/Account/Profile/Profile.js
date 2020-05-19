@@ -1,4 +1,4 @@
-import React, {useState, useReducer} from 'react';
+import React, {useState} from 'react';
 import './Profile.css';
 
 import avatar from "../../../static/img/avatar.png"
@@ -29,56 +29,37 @@ const useStyles = makeStyles((theme)=>({
     flexBasis: '19%',
     flexShrink: 0,
   },
-  submit: {
-    margin: theme.spacing(3,3, 2),
-  },
 }));
+/* Display the profile basic info */
 export default function Profile(props){
     const [isClicked, setClick] = useState(false);
-    const [isUpdated, setUpdate] = useState(false);
 
-    const [input, setInput] = useReducer(
-      (state, newState) => ({ ...state, ...newState }),
-      {firstName: 'Naruto', lastName: 'Le', email: 'naruto@gmail.com', location: 'Carlisle, PA', phoneNum: '', }
-    );
-
-    const handleOnChange = event => {
-        const { name, value } = event.target;
-        setInput({ [name]: value });
-    };
     const classes = useStyles();
       return(
         <div className={classes.root}>
+          {/* Display user's Name, Email, and Location */}
           <Grid item>
               <Card className={classes.root}>
                 <CardHeader
                     title={
-                      <Typography className={classes.title} variant="h5">{input.firstName} {input.lastName}</Typography>
+                      <Typography className={classes.title} variant="h5">Naruto Le</Typography>
                     }
                     align='left'
                     subheader={
-                      <>{input.location}<br/>{input.email}</>
+                      <>Carlisle, PA<br/>naruto@gmail.com</>
                     }
                     avatar={
                       <Avatar src={avatar} aria-label="name" className={classes.avatarSize}>K</Avatar>
                     }
                 />
-                <CardActions disableSpacing>
+                {/*Display the EditField if EditButton is clicked*/}
+                <CardActions>
                   <EditButton onClick={()=>{setClick(!isClicked)}} status={isClicked}/>
                 </CardActions>
+                {/* Expand Profile card and display EditField component*/}
                 <Collapse in={isClicked} timeout="auto" unmountOnExit>
                   <CardContent>
-                      <EditField {...input} onEdit={handleOnChange} status={isUpdated}/>
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                        startIcon={<SystemUpdateAltIcon />}
-                        onClick={()=>{setUpdate(true)}}
-                      >
-                        Save Update
-                      </Button>
+                      <EditField />
                   </CardContent>
                 </Collapse>
               </Card>
