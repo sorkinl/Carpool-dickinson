@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { render } from '@testing-library/react';
 import Searchbar from './Searchbar';
-import {BrowserRouter as Router, Link, useRouteMatch, useParams, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Link, useRouteMatch, Switch, Route} from 'react-router-dom';
 import SearchResult from '../SearchResults/SearchResult';
 
 const SearchForm = () =>{
