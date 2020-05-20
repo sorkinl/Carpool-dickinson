@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import NavBar from './components/NavBar/NavBar';
+import NavBar from './components/common/NavBar/NavBar';
 import Footer from './components/Footer/Footer'
 import { Switch, Link, Route, BrowserRouter as Router } from 'react-router-dom';
 import SearchForm from './components/SearchForm/Searchform';
@@ -20,9 +20,6 @@ import SignUp from './components/LogInForm/SignUp';
 // test pull 4
 
 function App() {
-
-const [showResults, setShowResults] = React.useState(false)
-
 
   return (
     <div className="App">
