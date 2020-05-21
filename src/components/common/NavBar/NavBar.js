@@ -13,8 +13,7 @@ import AccountIcon from "./AccountIcon"
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 
 import {   Redirect,   Link } from "react-router-dom";
-
-  import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import actions from './duck/actions'
 
 
@@ -37,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MenuAppBar() {
   const classes = useStyles();
-  //states 
+  //redux hook 
   const auth = useSelector(state => state.auth);
   const dispatch = useDispatch()
 
@@ -73,6 +72,7 @@ export default function MenuAppBar() {
 
       <AppBar className={classes.appBar} position="fixed">
         <Toolbar>
+          
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <DriveEtaIcon />
           </IconButton>

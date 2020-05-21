@@ -5,29 +5,21 @@ import { Paper } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid"
 import Typography from '@material-ui/core/Typography';
 
-
 import tempMap from "../../static/img/tempMap.png";
 
 import './SearchResult.css';
 
+import Mapbox from '../../api/mapbox/mapbox'
+
+
 const useStyles = makeStyles((theme) => ({
-  // root: {
-  //   flexGrow: 1,
-  // },
+
   paper: {
    paddingLeft:50,
-   
 
-   
   },
   result:{
-    // height:500,
-    // width: "55%",
-  
-
-    // padding: 0,
-    // margin:'auto',
-   // margin:theme.spacing(0)
+    width:"50%"
   },
   text:{
     textAlign:"left",
@@ -40,64 +32,81 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
+
+
+
+
 function SearchResult() {
 
   const classes = useStyles();
 
-  return (
 
+  return (
 
     <Paper classes = {{root:classes.paper}}>
       {/* Search Form */}
       <Grid container >
         <div id = "searchResultRoot">
 
-        {/* Text Space */}
         
-        <Grid item className = {classes.result}>
+          
+          <Grid item className = {classes.result}>
+            {/* Text Space */}
+            <Grid item classes = {{root:classes.text}}>
+              <Typography variant="body2" color="textSecondary">
+                    3 results
+                  </Typography>
+              <Typography variant="h3">
+                Trip to...
+              </Typography>
+            </Grid>
 
-          <Grid item classes = {{root:classes.text}}>
-            <Typography variant="body2" color="textSecondary">
-                  3 results
-                </Typography>
-            <Typography variant="h3">
-              Trip to...
-            </Typography>
+            <EachResult
+                name = {"ABCD Lee"}
+                occupation = {"Dickinson College"}
+                comment = {"Leaving between 2pm-4pm"}
+                starting = {"Dickinson College"}
+                destination = {"Harrisburg"}
+                rating = {4}
+                nickname = "Alex"
+                />
+
+            <EachResult
+                name = {"Johnski QPWOEI"}
+                occupation = {"Penn State"}
+                starting = {"Dickinson College"}
+                destination = {"Boston"}
+                rating = {4}
+                nickname="John"
+                />  
+            <EachResult/>
+            <EachResult/>
+            <EachResult/>
+            <EachResult/>
+            <EachResult/>
+            <EachResult/>
+            <EachResult/>
+            <EachResult/>
+            <EachResult/>
+            <EachResult/>
+            <EachResult/>
+            <EachResult/>
+            <EachResult/>
+            <EachResult/>
+            <EachResult/>
+                
+                
+
           </Grid>
 
-          <EachResult
-              name = {"ABCD Lee"}
-              occupation = {"Dickinson College"}
-              comment = {"Leaving between 2pm-4pm"}
-              starting = {"Dickinson College"}
-              destination = {"Harrisburg"}
-              rating = {4}
-              nickname = "Alex"
-              />
-
-          <EachResult
-              name = {"Johnski QPWOEI"}
-              occupation = {"Penn State"}
-              starting = {"Dickinson College"}
-              destination = {"Boston"}
-              rating = {4}
-              nickname="John"
-              />  
-           <EachResult/>
-           <EachResult/>
-           <EachResult/>
-           <EachResult/>
-           <EachResult/>
-              
-
-        </Grid>
-
         {/* Map */}
-
-        <div id = "mapDiv">
-          <img id = "map" alt = "temp map" src = {tempMap} />
-        </div>
-        
+      <div id= "dasdas">
+          <div id = "mapDiv">
+            {/* <img id = "map" alt = "temp map" src = {tempMap} /> */}
+            <Mapbox/>
+          </div>
+      </div>
         
 
         </div>
