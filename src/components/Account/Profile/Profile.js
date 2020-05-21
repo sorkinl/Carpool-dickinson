@@ -1,23 +1,12 @@
-import React, {useState, useReducer} from 'react';
+import React, {useState} from 'react';
 import './Profile.css';
 
 import avatar from "../../../static/img/avatar.png"
+import EditButton from './EditButton.js';
 import EditField from './EditField.js';
 import { withStyles } from '@material-ui/core/styles';
-import {makeStyles, CssBaseline, Button, Avatar, Card, CardHeader, CardMedia, CardContent, CardActions, Typography, Box, Grid} from '@material-ui/core';
-
-const StyledButton = withStyles({
-  root: {
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FFB6C1 90%)',
-    borderRadius: 3,
-    border: 0,
-    color: 'white',
-    height: 48,
-    padding: '0 50px',
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-  },
-
-})(Button);
+import {makeStyles, CssBaseline, Button, Avatar, Card, CardHeader, CardMedia, CardContent, CardActions, Typography, Box, Grid, Collapse} from '@material-ui/core';
+import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -27,10 +16,10 @@ const useStyles = makeStyles((theme)=>({
   avatarSize: {
     width: theme.spacing(19),
     height: theme.spacing(19),
-    padding: theme.spacing(2),
+    padding: theme.spacing(0),
   },
   title: {
-    fontSize: theme.typography.pxToRem(30),
+    fontSize: theme.typography.pxToRem(29),
     flexBasis: '19%',
     flexShrink: 0,
     color: theme.palette.inherit,
@@ -41,56 +30,40 @@ const useStyles = makeStyles((theme)=>({
     flexShrink: 0,
   },
 }));
+/* Display the profile basic info */
 export default function Profile(props){
     const [isClicked, setClick] = useState(false);
 
-    const [firstName, setFirst] = useState('Naruto');
-    const [lastName, setLast] = useState('Le');
-    const [email, setEmail] = useState('naruto@gmail.com');
-    const [location, setLocation] = useState('Carlisle, PA');
-
-    const [inputValues, setInputValues] = useReducer(
-      (state, newState) => ({ ...state, ...newState }),
-      {firstName: '', lastName: '', email: '', location: ''}
-    );
-
-    const handleOnChange = event => {
-      const { name, value } = event.target;
-      setInputValues({ [name]: value });
-    };
-
-
     const classes = useStyles();
-
       return(
-
         <div className={classes.root}>
+          {/* Display user's Name, Email, and Location */}
           <Grid item>
               <Card className={classes.root}>
                 <CardHeader
                     title={
-                      <Typography className={classes.title} variant="h5">{firstName} {lastName}</Typography>
+                      <Typography className={classes.title} variant="h5">Naruto Le</Typography>
                     }
                     align='left'
                     subheader={
-                      <>{location}<br/>{email}</>
+                      <>Carlisle, PA<br/>naruto@gmail.com</>
                     }
                     avatar={
                       <Avatar src={avatar} aria-label="name" className={classes.avatarSize}>K</Avatar>
                     }
                 />
+                {/*Display the EditField if EditButton is clicked*/}
                 <CardActions>
-                  <StyledButton>
-                        Edit profile
-                  </StyledButton>
+                  <EditButton onClick={()=>{setClick(!isClicked)}} status={isClicked}/>
                 </CardActions>
+                {/* Expand Profile card and display EditField component*/}
+                <Collapse in={isClicked} timeout="auto" unmountOnExit>
+                  <CardContent>
+                      <EditField />
+                  </CardContent>
+                </Collapse>
               </Card>
           </Grid>
-
-
-            <EditField/>
-
         </div>
-
       );
 }
