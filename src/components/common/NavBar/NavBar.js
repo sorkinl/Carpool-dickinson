@@ -37,19 +37,19 @@ const useStyles = makeStyles((theme) => ({
 export default function MenuAppBar() {
   const classes = useStyles();
   //redux hook 
-  const auth = useSelector(state => state.auth);
-  const dispatch = useDispatch()
+  /* const auth = useSelector(state => state.auth);
+  const dispatch = useDispatch() */
 
 
 
-  const login =()=>{
+  /* const login =()=>{
     return  <AccountIcon />
   }
   const logOff = () => {
    
     return <Redirect to='/' />
     
-  }
+  } */
 
   return (
 
@@ -57,16 +57,16 @@ export default function MenuAppBar() {
       {/* controls login button */}
       <FormGroup>
         <FormControlLabel
-          control={<Switch checked={auth} onChange={()=>{
+          control={<Switch /* checked={auth} */ onChange={ ()=>{/* 
             if(auth){    
               dispatch(actions.logoff())
             }else{
               // dispatch(actions.login)
               dispatch(actions.login())
-            }       
-          }
+            }        */
+          } 
           } aria-label="login switch" />}
-          label={auth ? 'Logout' : 'Login'}
+          /* label={auth ? 'Logout' : 'Login'} */
         />
       </FormGroup>
 
@@ -83,9 +83,9 @@ export default function MenuAppBar() {
           <Button component={Link} to="/signUp" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Sign up</Button>
 
 
-          {auth && login()}
+          {/* auth && login() */}
          
-          {!auth && logOff()}
+          {/* !auth && logOff() */}
 
         </Toolbar>
       </AppBar>
