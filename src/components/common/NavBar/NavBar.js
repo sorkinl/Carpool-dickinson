@@ -9,12 +9,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import { connect } from 'react-redux';
 import AccountIcon from "./AccountIcon"
-import {toggleLogin} from '../../../js/actions/index';
+import {toggleLogin} from '../../../redux/actions/authActions';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 
 import {   Redirect,   Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import actions from './duck/actions'
 import { NavigateBeforeRounded } from '@material-ui/icons';
 
 
@@ -35,30 +34,31 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const mapStateToProps = state => {
+/* const mapStateToProps = state => {
   return {loggedIn: state.loggedIn}
 }
 const mapDispatchToProps = (dispatch) => {
   return {
     toggleLogin: () => dispatch(toggleLogin({word:"allowed"}))
   }
-}
- function NavBar({loggedIn, toggleLogin}) {
+} */
+
+ function NavBar() {
   const classes = useStyles();
   //redux hook 
-  /* const auth = useSelector(state => state.auth);
-  const dispatch = useDispatch() */
+   const loggedIn = useSelector(state => state.loggedIn);
+  const dispatch = useDispatch();
 
   
 
-  /* const login =()=>{
+   const login =()=>{
     return  <AccountIcon />
   }
   const logOff = () => {
    
     return <Redirect to='/' />
     
-  } */
+  } 
 
   return (
 
@@ -66,7 +66,7 @@ const mapDispatchToProps = (dispatch) => {
       {/* controls login button */}
       <FormGroup>
         <FormControlLabel
-          control={<Switch checked={loggedIn} onChange={toggleLogin/* 
+          control={<Switch checked={loggedIn} onChange={() => dispatch(toggleLogin({word:"allowed"}))/* 
             if(auth){    
               dispatch(actions.logoff())
             }else{
@@ -92,9 +92,9 @@ const mapDispatchToProps = (dispatch) => {
           <Button component={Link} to="/signUp" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Sign up</Button>
 
 
-          {/* auth && login() */}
+          { loggedIn && login() }
          
-          {/* !auth && logOff() */}
+          { !loggedIn && logOff() }
 
         </Toolbar>
       </AppBar>
@@ -104,4 +104,4 @@ const mapDispatchToProps = (dispatch) => {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default NavBar;

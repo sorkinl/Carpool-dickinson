@@ -1,4 +1,4 @@
-import { LOGIN } from "../constants/action-types";
+import { LOGIN } from "../constants/auth-types";
 
 const forbiddenWords = ["spam", "money"];
 
