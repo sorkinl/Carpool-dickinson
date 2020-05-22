@@ -7,14 +7,15 @@ import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
-
+import { connect } from 'react-redux';
 import AccountIcon from "./AccountIcon"
-
+import {toggleLogin} from '../../../js/actions/index';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 
 import {   Redirect,   Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import actions from './duck/actions'
+import { NavigateBeforeRounded } from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,13 +35,21 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function MenuAppBar() {
+const mapStateToProps = state => {
+  return {loggedIn: state.loggedIn}
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleLogin: () => dispatch(toggleLogin({word:"allowed"}))
+  }
+}
+ function NavBar({loggedIn, toggleLogin}) {
   const classes = useStyles();
   //redux hook 
   /* const auth = useSelector(state => state.auth);
   const dispatch = useDispatch() */
 
-
+  
 
   /* const login =()=>{
     return  <AccountIcon />
@@ -57,7 +66,7 @@ export default function MenuAppBar() {
       {/* controls login button */}
       <FormGroup>
         <FormControlLabel
-          control={<Switch /* checked={auth} */ onChange={ ()=>{/* 
+          control={<Switch checked={loggedIn} onChange={toggleLogin/* 
             if(auth){    
               dispatch(actions.logoff())
             }else{
@@ -65,8 +74,8 @@ export default function MenuAppBar() {
               dispatch(actions.login())
             }        */
           } 
-          } aria-label="login switch" />}
-          /* label={auth ? 'Logout' : 'Login'} */
+           aria-label="login switch" />}
+           label={loggedIn ? 'Logout' : 'Login'} 
         />
       </FormGroup>
 
@@ -94,3 +103,5 @@ export default function MenuAppBar() {
     
   );
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
