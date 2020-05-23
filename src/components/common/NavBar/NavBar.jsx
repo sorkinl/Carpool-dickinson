@@ -42,15 +42,17 @@ const mapDispatchToProps = (dispatch) => {
     toggleLogin: () => dispatch(toggleLogin({word:"allowed"}))
   }
 } */
-
- function NavBar() {
+// above code is redux with classes
+ const NavBar = () => {
   const classes = useStyles();
-  //redux hook 
+  //redux hook
+  // useSelector for taking the state out of the store.
    const loggedIn = useSelector(state => state.loggedIn);
+   // useDispatch enables us to use redux dispatch function
   const dispatch = useDispatch();
 
   
-
+  // functions to show or not show account icon
    const login =()=>{
     return  <AccountIcon />
   }
@@ -66,13 +68,7 @@ const mapDispatchToProps = (dispatch) => {
       {/* controls login button */}
       <FormGroup>
         <FormControlLabel
-          control={<Switch checked={loggedIn} onChange={() => dispatch(toggleLogin({word:"allowed"}))/* 
-            if(auth){    
-              dispatch(actions.logoff())
-            }else{
-              // dispatch(actions.login)
-              dispatch(actions.login())
-            }        */
+          control={<Switch checked={loggedIn} onChange={() => dispatch(toggleLogin({word:"allowed"}))
           } 
            aria-label="login switch" />}
            label={loggedIn ? 'Logout' : 'Login'} 

@@ -5,10 +5,11 @@ import {AccountCircle} from '@material-ui/icons/';
 import {  Link } from "react-router-dom";
 
 export default function AccountIcon() {
-
+  // set the position of the menu
     const [anchorEl, setAnchorEl] = React.useState(null);
+    //construct a boolean out of the above state. If value is Boolean() is equals to null, NaN or undefined, returns false.
     const open = Boolean(anchorEl);
-
+    //Two functions to handle menu. Set anchorEl to the position of the menu.
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
     };
