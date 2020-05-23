@@ -12,7 +12,7 @@ export default function Account(props) {
             <Grid container spacing={1}>
               <Grid item xs={4.5}>
                 <Profile/>
-              </Grid>
+              </Grid> 
               <Grid item xs>
                 <TripList />
               </Grid>

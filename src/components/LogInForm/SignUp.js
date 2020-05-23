@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  
+
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(3),
@@ -38,7 +38,7 @@ export default function SignUp() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-       
+
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
@@ -102,7 +102,7 @@ export default function SignUp() {
                 autoComplete="current-password"
               />
             </Grid>
-            
+
           </Grid>
           <Button
             type="submit"
