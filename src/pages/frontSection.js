@@ -1,22 +1,11 @@
-import React, { useState } from 'react';
-import { Button, GridList, Card, CardMedia, CardContent, CardActions, CardActionArea, Typography, Box, Grid, Collapse} from '@material-ui/core';
+import React from 'react';
+import { Button, Card, CardMedia, CardContent, CardActions, Typography} from '@material-ui/core';
 import fpone from "../static/img/frontpage1.jpg"
 import fptwo from "../static/img/frontpage2.jpg"
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
-const tileData = [
-    {
-        img: fpone,
-        title: 'fp1',
-        cols: 1,
-    },
-    {
-        img: fptwo,
-        title: 'fp2',
-        cols: 1,
-    }
-]
+
 
  const useStyles = makeStyles((theme) => ({
     find: {
@@ -47,6 +36,7 @@ export default function FrontSection(props){
     const classes = useStyles();
     return(
         <Card className={classes.rootone}>
+            {/*first section with text, 'Find a ride' button and the image */}
             <CardContent classNAme={classes.find}>
                 <Typography variant='h4' component='text1'>
                         Are you looking for a ride to your destination?
@@ -62,6 +52,7 @@ export default function FrontSection(props){
                         Find a ride
                  </Button>
                 </CardActions>
+                {/*second section with text, 'About' button and the image */}
             </CardContent>
             <CardMedia
                 className={classes.findimg}
@@ -92,50 +83,4 @@ export default function FrontSection(props){
         </Card>
 
     );
-  /*  return(
-        <GridList cellHeight={800} cols={1} alignItems='center' className='sectionholder'>
-            <CardContent className={classes.find}>
-                    <Typography variant='h4' component='text1'>
-                        Are you looking for a ride to your destination?
-                    </Typography>
-                    <Grid className={classes.ride}>
-                        <Button 
-                            component={Link} 
-                            to='/search' 
-                            color='primary' 
-                            variant='outlined'
-                            className={classes.findbtn}
-                            >
-                                Find a ride
-                        </Button>
-                    </Grid>
-                    <CardMedia
-                        className={classes.findimg}
-                        image={fpone}
-                        title="first img"
-                    />
-            </CardContent>
-            <CardContent className={classes.intro}>
-                    <Typography variant='h4' component='text1'>
-                        ...About...
-                    </Typography>
-                    <Grid className={classes.about}>
-                        <Button 
-                            component={Link} 
-                            to='/search' 
-                            color='primary' 
-                            variant='outlined'
-                            className={classes.aboutbtn}
-                            >
-                                About
-                        </Button>
-                    </Grid>
-                    <CardMedia
-                        className={classes.aboutimg}
-                        image={fptwo}
-                        title="second img"
-                    />
-            </CardContent>
-        </GridList>
-    )*/
 }
