@@ -7,15 +7,14 @@ import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
-
+import { connect } from 'react-redux';
 import AccountIcon from "./AccountIcon"
-
+import {toggleLogin} from '../../../redux/actions/authActions';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 
 import {   Redirect,   Link } from "react-router-dom";
-
-  import { useDispatch, useSelector } from "react-redux";
-import actions from './duck/actions'
+import { useDispatch, useSelector } from "react-redux";
+import { NavigateBeforeRounded } from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,22 +34,31 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function MenuAppBar() {
+/* const mapStateToProps = state => {
+  return {loggedIn: state.loggedIn}
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleLogin: () => dispatch(toggleLogin({word:"allowed"}))
+  }
+} */
+
+ function NavBar() {
   const classes = useStyles();
-  //states 
-  const auth = useSelector(state => state.auth);
-  const dispatch = useDispatch()
+  //redux hook 
+   const loggedIn = useSelector(state => state.loggedIn);
+  const dispatch = useDispatch();
 
+  
 
-
-  const login =()=>{
+   const login =()=>{
     return  <AccountIcon />
   }
   const logOff = () => {
    
     return <Redirect to='/' />
     
-  }
+  } 
 
   return (
 
@@ -58,21 +66,22 @@ export default function MenuAppBar() {
       {/* controls login button */}
       <FormGroup>
         <FormControlLabel
-          control={<Switch checked={auth} onChange={()=>{
+          control={<Switch checked={loggedIn} onChange={() => dispatch(toggleLogin({word:"allowed"}))/* 
             if(auth){    
               dispatch(actions.logoff())
             }else{
               // dispatch(actions.login)
               dispatch(actions.login())
-            }       
-          }
-          } aria-label="login switch" />}
-          label={auth ? 'Logout' : 'Login'}
+            }        */
+          } 
+           aria-label="login switch" />}
+           label={loggedIn ? 'Logout' : 'Login'} 
         />
       </FormGroup>
 
       <AppBar className={classes.appBar} position="fixed">
         <Toolbar>
+          
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <DriveEtaIcon />
           </IconButton>
@@ -83,9 +92,9 @@ export default function MenuAppBar() {
           <Button component={Link} to="/signUp" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Sign up</Button>
 
 
-          {auth && login()}
+          { loggedIn && login() }
          
-          {!auth && logOff()}
+          { !loggedIn && logOff() }
 
         </Toolbar>
       </AppBar>
@@ -94,3 +103,5 @@ export default function MenuAppBar() {
     
   );
 }
+
+export default NavBar;
