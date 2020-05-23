@@ -7,7 +7,7 @@ import SearchForm from './components/SearchForm/Searchform';
 
 import Account from './components/Account/Account';
 import MainChat from './components/Chat/MainChat/MainChat';
-import SearchButton from './components/SearchForm/SearchButton';
+import FrontPage from './pages/frontpage';
 import LogIn from './components/LogInForm/LogIn';
 import SignUp from './components/LogInForm/SignUp';
 
@@ -33,7 +33,7 @@ function App() {
 
         </main>
         <Switch>
-          <Route path="/" exact component={SearchButton}/>
+          <Route path="/" exact component={FrontPage}/>
           <Route path="/search" component={SearchForm} />
           <Route path="/account" component={Account}/>
           <Route path="/chat" component={MainChat}/>
