@@ -14,7 +14,9 @@ import {useStyles} from './mainChatStyles';
 
 
 const MainChat = () => {
+  //exporting styles from outside file
   const classes = useStyles();
+  // attempt to implement a stack data structure for messages
   const messageStack = new Stack();
     return (<div className={classes.root}>
         <CssBaseline>
@@ -28,7 +30,7 @@ const MainChat = () => {
             <Toolbar/>
           <div className={classes.drawerContainer}>
           <List>
-            {['Jerry', 'Monkey', 'Vladimir', 'Covid'].map((text) => (
+            {['Jerry', 'Monkey', 'Vladimir', 'Covid'].map((text) => ( //for each element in array make a component such as ->
               <ListItem button key={text}>
                 <ListItemIcon><PersonInChat/></ListItemIcon>
                 <ListItemText primary={text} />

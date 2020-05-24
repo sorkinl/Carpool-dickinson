@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import './Profile.css';
 
 import avatar from "../../../static/img/avatar.png"
-import EditButton from './EditButton.js';
-import EditField from './EditField.js';
+import EditButton from './EditButton';
+import EditField from './EditField';
 import { withStyles } from '@material-ui/core/styles';
 import {makeStyles, CssBaseline, Button, Avatar, Card, CardHeader, CardMedia, CardContent, CardActions, Typography, Box, Grid, Collapse} from '@material-ui/core';
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
