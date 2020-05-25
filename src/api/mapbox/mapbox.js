@@ -13,7 +13,9 @@ const styles = {
   const MapboxGLMap = () => {
     const [map, setMap] = useState(null);
     const mapContainer = useRef(null);
-  
+    
+    // useEffect is a react function similar componentDidMount and componentDidUpdate
+    // function is "ran" after rendered
     useEffect(() => {
       mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
       const initializeMap = ({ setMap, mapContainer }) => {

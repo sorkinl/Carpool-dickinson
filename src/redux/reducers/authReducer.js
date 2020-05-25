@@ -6,7 +6,8 @@ const initialState = {
     word: ''
   };
   
-  function rootReducer(state = initialState, action) {
+  function authReducer(state = initialState, action) {
+   console.log(action.type)
     if (action.type === LOGIN) {
       return {
           ...state,
@@ -17,4 +18,4 @@ const initialState = {
     return state;
   }
   
-  export default rootReducer;
+  export default authReducer;
