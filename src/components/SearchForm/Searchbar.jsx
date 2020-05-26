@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
-import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -29,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+
 const Searchbar = ({onCreate}) => {
     const classes = useStyles();
     const [state, setState] = useState({
@@ -38,29 +38,33 @@ const Searchbar = ({onCreate}) => {
     })
 
 
+//change the state when the search input is typed
+const handleChange = (e) => {
+    setState({
+        ...state,
+        [e.target.name]: e.target.value
+    });
+}
 
-    const handleChange = (e) => {
-        setState({
-            ...state,
-            [e.target.name]: e.target.value
-        });
-    }
+//change the state when the date input is typed
+const handleDateChange = date => {
+    setState({...state,
+        startDate: date
+    });
+}
 
-    const handleDateChange = date => {
-        setState({...state,
-            startDate: date
-        });
-    }
+//handles submit feature when the event is called.
+//after the submission, the state is reset
+const handleSubmit = (e) => {
+    e.preventDefault();
+    onCreate(state);
+    setState({
+        pickup:'',
+        destination:'',
+        startDate: new Date()
+    })
+}
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onCreate(state);
-        setState({
-            pickup:'',
-            destination:'',
-            startDate: new Date()
-        })
-    }
     return(
         <form className={classes.form} noValidate>
             <FormControl className={classes.FormControl} variant="outlined">
