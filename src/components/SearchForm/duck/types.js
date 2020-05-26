@@ -1,9 +1,0 @@
-const PICKUP = 'PICKUP'
-const DESTINATION = 'DESTINATION'
-const STARTDATE = 'STARTDATE'
-
-export default {
-    PICKUP,
-    DESTINATION,
-    STARTDATE
-};
