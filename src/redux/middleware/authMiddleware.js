@@ -2,7 +2,7 @@ import { LOGIN } from "../constants/auth-types";
 
 const forbiddenWords = ["spam", "money"];
 
-export function forbiddenWordsMiddleware({ dispatch }) {
+export function authMiddleware({ dispatch }) {
   return function(next) {
     return function(action) {
       // do your stuff
