@@ -11,7 +11,7 @@ import Container from '@material-ui/core/Container';
 
 
 import { useDispatch, useSelector } from 'react-redux';
-import {register} from '../../redux/actions/userActions';
+import {register} from '../../redux/actions/authActions';
 
 const useStyles = makeStyles((theme) => ({
   paper: {

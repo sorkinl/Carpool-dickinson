@@ -48,9 +48,7 @@ const mapDispatchToProps = (dispatch) => {
   // useSelector for taking the state out of the store.
    const loggedIn = useSelector(state => state.loggedIn);
    // useDispatch enables us to use redux dispatch function
-  const dispatch = useDispatch();
-
-  
+  const dispatch = useDispatch();  
   // functions to show or not show account icon
    const login =()=>{
     return  <AccountIcon />

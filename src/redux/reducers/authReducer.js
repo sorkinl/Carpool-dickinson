@@ -1,4 +1,4 @@
-import { LOGIN } from "../constants/auth-types";
+import { LOGIN, REGISTER } from "../constants/auth-types";
 
 
 const initialState = {
@@ -8,14 +8,18 @@ const initialState = {
   
   function authReducer(state = initialState, action) {
    console.log(action.type)
-    if (action.type === LOGIN) {
-      return {
+    switch(action.type){
+      case LOGIN:
+        return {
           ...state,
           loggedIn: !state.loggedIn,
           word: action.payload.word
         }
+      case REGISTER:
+        return state
+      default:
+        return state
     }
-    return state;
   }
   
   export default authReducer;
