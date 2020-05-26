@@ -6,6 +6,8 @@ import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch, useSelector } from 'react-redux';
+import actions from './duck/actions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,13 +33,15 @@ const useStyles = makeStyles((theme) => ({
 
 const Searchbar = ({onCreate}) => {
     const classes = useStyles();
-    const [state, setState] = useState({
+    /*const [state, setState] = useState({
         pickup:'',
         destination:'',
         startDate: new Date()
-    })
+    })*/
 
 
+
+/*
 //change the state when the search input is typed
 const handleChange = (e) => {
     setState({
@@ -52,18 +56,24 @@ const handleDateChange = date => {
         startDate: date
     });
 }
-
+*/
 //handles submit feature when the event is called.
 //after the submission, the state is reset
 const handleSubmit = (e) => {
     e.preventDefault();
-    onCreate(state);
-    setState({
-        pickup:'',
-        destination:'',
-        startDate: new Date()
-    })
+    // onCreate(state);
+    // setState({
+    //     pickup:'',
+    //     destination:'',
+    //     startDate: new Date()
+    // })
 }
+
+    const pickupState = useSelector(state => state.pickup)
+    const destinationState = useSelector(state => state.destination)
+    const dateState = useSelector(state => state.startDate)
+
+    const dispatch = useDispatch()
 
     return(
         <form className={classes.form} noValidate>
@@ -73,13 +83,13 @@ const handleSubmit = (e) => {
                 </InputLabel>
             <OutlinedInput
                 type='text'
-                value={state.pickup}
+                value={pickupState}
                 variant="outlined"
                 margin="normal"
                 required
                 fullWidth
                 id="pickup"
-                onChange={handleChange}
+                onChange={dispatch(actions.pickup())}
                 name="pickup"
             />
             </FormControl>
@@ -89,19 +99,19 @@ const handleSubmit = (e) => {
                 </InputLabel>
             <OutlinedInput
                 type='text'
-                value={state.destination}
+                value={destinationState}
                 margin="normal"
                 required
                 fullWidth
                 id="destination"
-                onChange={handleChange}
+                onChange={dispatch(actions.destination())}
                 name="destination"
             />
             </FormControl>
             <DatePicker
                     placeholderText="choose date and time"
-                    selected={state.startDate}
-                    onChange={handleDateChange}
+                    selected={dateState}
+                    onChange={dispatch(actions.startdate())}
                     showTimeSelect
                     dateFormat="Pp"
             />
