@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Searchbar from './Searchbar';
-import {BrowserRouter as Router, Link, useRouteMatch, Switch, Route} from 'react-router-dom';
+import { Link, useRouteMatch, Switch, Route} from 'react-router-dom';
 import SearchResult from '../SearchResults/SearchResult';
 
 const SearchForm = () =>{
+    //handleCreate will be passed down to child as a prop
     const handleCreate = data => {
         console.log(data);
     }
