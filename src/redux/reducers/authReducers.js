@@ -1,12 +1,12 @@
 import { LOGIN } from "../constants/auth-types";
 
-
-const initialState = {
+const authInitState = {
     loggedIn: false,
-    word: ''
+    word: '',
   };
-  
-  function rootReducer(state = initialState, action) {
+
+
+function authReducer(state = authInitState, action) {
     if (action.type === LOGIN) {
       return {
           ...state,
@@ -15,6 +15,7 @@ const initialState = {
         }
     }
     return state;
-  }
-  
-  export default rootReducer;
+}
+
+
+export default authReducer;

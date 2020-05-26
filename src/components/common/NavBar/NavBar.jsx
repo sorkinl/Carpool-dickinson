@@ -47,20 +47,20 @@ const mapDispatchToProps = (dispatch) => {
   const classes = useStyles();
   //redux hook
   // useSelector for taking the state out of the store.
-   const loggedIn = useSelector(state => state.loggedIn);
+  const loggedIn = useSelector(state => state.loggedIn);
    // useDispatch enables us to use redux dispatch function
   const dispatch = useDispatch();
 
-  
+
   // functions to show or not show account icon
    const login =()=>{
     return  <AccountIcon />
   }
   const logOff = () => {
-   
+
     return <Redirect to='/' />
-    
-  } 
+
+  }
 
   return (
 
@@ -69,34 +69,34 @@ const mapDispatchToProps = (dispatch) => {
       <FormGroup>
         <FormControlLabel
           control={<Switch checked={loggedIn} onChange={() => dispatch(toggleLogin({word:"allowed"}))
-          } 
+          }
            aria-label="login switch" />}
-           label={loggedIn ? 'Logout' : 'Login'} 
+           label={loggedIn ? 'Logout' : 'Login'}
         />
       </FormGroup>
 
       <AppBar className={classes.appBar} position="fixed">
         <Toolbar>
-          
+
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <DriveEtaIcon />
           </IconButton>
 
           <Link className={classes.title} to="/">Carpool</Link>
-             
+
           <Button component={Link} to="/logIn" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Log in</Button>
           <Button component={Link} to="/signUp" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Sign up</Button>
 
 
           { loggedIn && login() }
-         
+
           { !loggedIn && logOff() }
 
         </Toolbar>
       </AppBar>
     </div>
-    
-    
+
+
   );
 }
 
