@@ -3,7 +3,6 @@ import './EditField.css';
 import {makeStyles, Container, TextField, Button, Grid, CssBaseline, MenuItem} from '@material-ui/core';
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 import { useSelector, useDispatch } from 'react-redux';
-import { saveUpdate } from '../../../redux/actions/profileActions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -52,12 +51,12 @@ function EditField(props){
 
 
   //-------- EXPERIMENTING REDUX START-------------------------------//
-  const dispatch = useDispatch();
+ /*  const dispatch = useDispatch();
   const handleSubmit = (e) => {
       e.preventDefault();
       dispatch(saveUpdate({input}));
 
-  }
+  } */
   //-------- EXPERIMENTING REDUX END -------------------------------//
 
 
