@@ -23,28 +23,29 @@ function App() {
 
   return (
     <div className="App">
+    <div className="content-wrapper">
+        <Router>
+          <div>
+        <NavBar/>
+  
+          <hr />
+          <main>
 
-      <Router>
-        <div>
-      <NavBar/>
+          </main>
+          <Switch>
+            <Route path="/" exact component={SearchButton}/>
+            <Route path="/search" component={SearchForm} />
+            <Route path="/account" component={Account}/>
+            <Route path="/chat" component={MainChat}/>
+            <Route path="/logIn" component={LogIn}/>
+            <Route path="/signUp" component={SignUp}/>
+          
+          </Switch>
+            </div>
+        </Router>
+      </div>
 
-        <hr />
-        <main>
-
-        </main>
-        <Switch>
-          <Route path="/" exact component={SearchButton}/>
-          <Route path="/search" component={SearchForm} />
-          <Route path="/account" component={Account}/>
-          <Route path="/chat" component={MainChat}/>
-          <Route path="/logIn" component={LogIn}/>
-          <Route path="/signUp" component={SignUp}/>
-
-        </Switch>
-          </div>
-      </Router>
-
-      <Footer />
+      <Footer/>
     </div>
 
   );
