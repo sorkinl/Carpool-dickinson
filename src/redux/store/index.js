@@ -1,11 +1,12 @@
 import { createStore, applyMiddleware } from "redux";
-import authReducer from "../reducers/authReducers";
-import { forbiddenWordsMiddleware } from "../middleware";
+import rootReducer from "../reducers/rootReducer";
+// import { userMiddleware } from "../middleware/usersMiddleware";
+import { authMiddleware } from "../middleware/authMiddleware";
 
 
 const store = createStore(
-    authReducer,
-    applyMiddleware(forbiddenWordsMiddleware)
-);
+    rootReducer,
+    applyMiddleware(authMiddleware)
+    );
 
 export default store;
