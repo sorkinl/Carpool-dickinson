@@ -57,7 +57,7 @@ const handleDateChange = date => {
 //after the submission, the state is reset
 const handleSubmit = (e) => {
     e.preventDefault();
-    onCreate(state);
+    onCreate({...state, startDate: state.startDate.toISOString()});
     setState({
         pickup:'',
         destination:'',
