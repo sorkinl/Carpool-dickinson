@@ -7,8 +7,9 @@ import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
-import AccountIcon from "./AccountIcon";
-import {toggleLogin} from '../../redux/actions/authActions';
+import { connect } from 'react-redux';
+import AccountIcon from "./AccountIcon"
+import {toggleLogin} from '../../../redux/actions/authActions';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 
 import {   Redirect,   Link } from "react-router-dom";
@@ -49,6 +50,8 @@ const mapDispatchToProps = (dispatch) => {
   const loggedIn = useSelector(state => state.loggedIn);
    // useDispatch enables us to use redux dispatch function
   const dispatch = useDispatch();
+
+
   // functions to show or not show account icon
    const login =()=>{
     return  <AccountIcon />
@@ -83,6 +86,7 @@ const mapDispatchToProps = (dispatch) => {
 
           <Button component={Link} to="/logIn" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Log in</Button>
           <Button component={Link} to="/signUp" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Sign up</Button>
+
 
           { loggedIn && login() }
 

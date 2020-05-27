@@ -1,18 +1,18 @@
 import { LOGIN, FOUND_BAD_WORD, REGISTER } from "../constants/auth-types";
 
 export const toggleLogin = (payload) => {
-  
+
     return { type: LOGIN, payload }
 };
 
 export const register = (payload) => {
     //TODO implement SIGN UP functionality
-    
+
 };
 
 export const signIn = (payload) => {
     //TODO implement signIn
-    
+
 };
 
 export const registerSuccess = (response) =>{
@@ -27,5 +27,3 @@ export const signInSuccess = (response) =>{
 export const signInFail = (response) =>{
     //TODO call if the above sign in failed
 }
-
-

@@ -1,11 +1,10 @@
 import { LOGIN, REGISTER } from "../constants/auth-types";
 
-
 const initialState = {
     loggedIn: false,
-    word: ''
+    word: '',
   };
-  
+
   function authReducer(state = initialState, action) {
    console.log(action.type)
     switch(action.type){
@@ -21,5 +20,5 @@ const initialState = {
         return state
     }
   }
-  
+
   export default authReducer;
