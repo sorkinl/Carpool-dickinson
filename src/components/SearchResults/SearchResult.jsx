@@ -49,7 +49,6 @@ function SearchResult() {
     dispatch(getTrips())
     
   },[]);
-  console.log(trips);
   return (
 
     <Paper classes = {{root:classes.paper}}>

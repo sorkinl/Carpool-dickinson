@@ -8,10 +8,8 @@ export function authMiddleware({ dispatch }) {
   return function(next) {
     return function(action) {
 
-        console.log(userJSON)
       // do your stuff
       if (action.type === REGISTER) {
-        console.log(action.payload.user.email)
         if(Object.keys(userJSON).some(email => 
 console.log(email)
             // email === action.payload.user.email
