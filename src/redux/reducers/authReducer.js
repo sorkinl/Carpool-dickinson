@@ -6,7 +6,6 @@ const initialState = {
   };
 
   function authReducer(state = initialState, action) {
-   console.log(action.type)
     switch(action.type){
       case LOGIN:
         return {
