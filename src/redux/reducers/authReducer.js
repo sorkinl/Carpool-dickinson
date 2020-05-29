@@ -17,7 +17,7 @@ const initialState = {
         console.log(action.payload);
         return {
           ...state,
-          loggedIn: !state.loggedIn,
+          loggedIn: true,
         }
       case REGISTER:
         return state
