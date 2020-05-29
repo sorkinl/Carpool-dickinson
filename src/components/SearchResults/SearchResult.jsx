@@ -8,8 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import tempMap from "../../static/img/tempMap.png";
 
 import './SearchResult.css';
-
+import {useDispatch, useSelector} from 'react-redux'
 import Mapbox from '../../api/mapbox/mapbox'
+import { getTrips } from '../../redux/actions/tripsActions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,8 +41,14 @@ const useStyles = makeStyles((theme) => ({
 function SearchResult() {
 
   const classes = useStyles();
-
-
+  const trips = useSelector(state => state.tripsReducer.trips);
+  
+   // useDispatch enables us to use redux dispatch function
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(getTrips())
+    
+  },[]);
   return (
 
     <Paper classes = {{root:classes.paper}}>
