@@ -8,8 +8,6 @@ export  function getTrips () {
         const getTrips =  await db.collection("testCollection").get();
         dispatch({type: GET_TRIPS, payload: getTrips.docs.map(doc => doc.data())})
     }
-    
-    
 }
 
 export const createTrip = (payload) =>{

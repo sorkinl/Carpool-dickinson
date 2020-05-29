@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,8 +11,9 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-//import Copyright from './components/Copyright';
+import { useDispatch } from 'react-redux';
 
+import {signIn} from '../../redux/actions/authActions';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,6 +38,26 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
 
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+});
+
+  const dispatch = useDispatch();
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setUser( user => ({
+      ...user,
+      [name]: value
+    }));
+  }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      dispatch(signIn({email: user.email, password: user.password}));
+    }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -56,6 +77,7 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={handleChange}
           />
           <TextField
             variant="outlined"
@@ -67,17 +89,19 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleChange}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
           <Button
-            type="submit"
+            type="button"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSubmit}
           >
             Sign In
           </Button>
