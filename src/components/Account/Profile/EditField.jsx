@@ -42,22 +42,17 @@ const locations = [
 // An edit profile component
 function EditField(props){
   const classes = useStyles();
-  const[isUpdated, setUpdate]= useState(false);
-
+  
   //Set multiple states of the profile object. Individual states can be called using input.stateName
-  const [input, setInput] = useState(
-    {firstName: 'Naruto', lastName: 'Le', email: 'naruto@gmail.com', location: 'Carlisle, PA', phoneNum: ''}
-  );
+  const [input, setInput] = useState({
+    firstName: 'Naruto',
+    lastName: 'Le',
+    email: 'naruto@gmail.com',
+    location: 'Carlisle, PA',
+    phoneNum: ''
+  });
 
-
-  //-------- EXPERIMENTING REDUX START-------------------------------//
- /*  const dispatch = useDispatch();
-  const handleSubmit = (e) => {
-      e.preventDefault();
-
-  } */
-  //-------- EXPERIMENTING REDUX END -------------------------------//
-
+  const dispatch = useDispatch();
 
   /* Change states using the extracted input values from TextField
         name = the attribute name of inputProps inside each TextField
@@ -65,8 +60,23 @@ function EditField(props){
   */
   const handleEdit = event => {
       const { name, value } = event.target;
-      setInput({ [name]: value });
+      setInput( input => ({
+        ...input
+        [name]: value
+      }));
   };
+
+  const handleUpdate = (event) => {
+    event.preventDefault();
+    // ----- to be added later ----//
+    //dispatch(editProfile({
+    //  firstName: input.firstName,
+    //  lastName: input.lastName,
+    //  email: input.email,
+    //  location: input.location,
+    //  phoneNum: input.phoneNum
+    //}));
+  }
 
   return(
   <Container component="main" maxWidth="sm">
@@ -212,7 +222,7 @@ function EditField(props){
             color="primary"
             className={classes.submit}
             startIcon={<SystemUpdateAltIcon />}
-            onClick={()=>{setUpdate(true)}}
+            onClick={handleUpdate}
           >
             Save Update
           </Button>
