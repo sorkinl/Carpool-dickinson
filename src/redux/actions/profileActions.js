@@ -1,3 +1,5 @@
+import firebase from '../../firebase/firebaseConfig';
+
 export const getProfileData = (payload) =>{
     //TODO retrieve profile data from database
 }
@@ -10,6 +12,21 @@ export const deleteProfile = (payload) =>{
     //TODO remove record in case account is deleted
 }
 
-export const createProfile = (payload) =>{
+export const createProfile = (user) =>{
     //create profile when the user is registered
+
+    return async (dispatch) => {
+      const firestore = firebase.firestore();
+      try{
+            const response = await firestore.collection('users').add({
+            ...user,
+            location: 'Carlisle, PA',
+            phoneNum: 9172923223
+          })
+          dispatch({type: 'CREATE_PROFILE', user});
+      }
+      catch(error) {
+        console.log('create profile error', error);
+      }
+    }
 }

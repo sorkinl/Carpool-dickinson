@@ -13,7 +13,8 @@ import Container from '@material-ui/core/Container';
 import { useDispatch, useSelector } from 'react-redux';
 import {register} from '../../redux/actions/authActions';
 
-//import * as firebase from "firebase/app";
+import {createProfile} from '../../redux/actions/profileActions';
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,13 +36,36 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
    const classes = useStyles();
 
-
+   /////// Katie's temporary code to test createProfile. Add changes if you need //////
+   const [user, setUser] = useState({
+     firstName: '',
+     lastName: '',
+     email: '',
+     password1: '',
+     password2:''
+   });
 
   // const registering = useSelector(state => state.registering);
   const dispatch = useDispatch();
 
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setUser( user => ({
+      ...user,
+      [name]: value
+    }));
+  }
 
-
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(createProfile({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      password1: user.password1,
+      password2: user.password2
+    }));
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -64,6 +88,7 @@ export default function SignUp() {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                onChange={handleChange}
 
               />
             </Grid>
@@ -76,7 +101,7 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
-
+                onChange={handleChange}
 
               />
             </Grid>
@@ -89,7 +114,7 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-
+                onChange={handleChange}
 
               />
             </Grid>
@@ -103,7 +128,7 @@ export default function SignUp() {
                 type="password"
                 id="password1"
                 // autoComplete="current-password"
-
+                onChange={handleChange}
                 // value={user.password}
               />
             </Grid>
@@ -117,7 +142,7 @@ export default function SignUp() {
                 type="password"
                 id="password2"
                 // autoComplete="current-password"
-
+                onChange={handleChange}
               />
             </Grid>
 
@@ -128,6 +153,7 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onChange={handleSubmit}
           >
             Sign Up
           </Button>

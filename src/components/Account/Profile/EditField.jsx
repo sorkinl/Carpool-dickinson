@@ -58,11 +58,12 @@ function EditField(props){
         name = the attribute name of inputProps inside each TextField
         value = the input value of the TextField whose inputProps's attribute name matches name
   */
-  const handleEdit = event => {
-      setInput( input => ({
-        ...input,
-        [event.target.name]: event.target.value
-      }));
+  const handleEdit = e => {
+    const { name, value } = e.target;
+    setInput( user => ({
+      ...user,
+      [name]: value
+    }));
   };
 
   const handleUpdate = (event) => {
