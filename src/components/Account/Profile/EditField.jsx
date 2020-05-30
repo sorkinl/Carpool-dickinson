@@ -42,7 +42,7 @@ const locations = [
 // An edit profile component
 function EditField(props){
   const classes = useStyles();
-  
+
   //Set multiple states of the profile object. Individual states can be called using input.stateName
   const [input, setInput] = useState({
     firstName: 'Naruto',
@@ -59,10 +59,9 @@ function EditField(props){
         value = the input value of the TextField whose inputProps's attribute name matches name
   */
   const handleEdit = event => {
-      const { name, value } = event.target;
       setInput( input => ({
         ...input
-        [name]: value
+        [event.target.name]: event.target.value
       }));
   };
 
