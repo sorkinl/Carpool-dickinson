@@ -11,6 +11,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+//import * as firebase from "firebase/app";
 //import Copyright from './components/Copyright';
 
 
@@ -36,6 +37,24 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
+
+
+  // Sign in with email and pass.
+        // [START authwithemail]
+  // firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+  //         // Handle Errors here.
+  //         const errorCode = error.code;
+  //         const errorMessage = error.message;
+  //         // [START_EXCLUDE]
+  //         if (errorCode === 'auth/wrong-password') {
+  //           alert('Wrong password.');
+  //         } else {
+  //           alert(errorMessage);
+  //         }
+  //         console.log(error);
+  //         document.getElementById('quickstart-sign-in').disabled = false;
+  //         // [END_EXCLUDE]
+  // });
 
   return (
     <Container component="main" maxWidth="xs">

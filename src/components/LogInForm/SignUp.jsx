@@ -13,6 +13,8 @@ import Container from '@material-ui/core/Container';
 import { useDispatch, useSelector } from 'react-redux';
 import {register} from '../../redux/actions/authActions';
 
+//import * as firebase from "firebase/app";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -33,15 +35,28 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
    const classes = useStyles();
 
-   
+
 
   // const registering = useSelector(state => state.registering);
   const dispatch = useDispatch();
 
   //handles change for each label in the form
   //updates user State appropriately
-  
-  
+  // firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+  // // Handle Errors here.
+  //   const errorCode = error.code;
+  //   const errorMessage = error.message;
+  //   // [START_EXCLUDE]
+  //   if (errorCode == 'auth/weak-password') {
+  //     alert('The password is too weak.');
+  //   } else {
+  //     alert(errorMessage);
+  //   }
+  //   console.log(error);
+  // // [END_EXCLUDE]
+  // });
+
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -64,7 +79,7 @@ export default function SignUp() {
                 id="firstName"
                 label="First Name"
                 autoFocus
-            
+
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -76,8 +91,8 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
-                
-               
+
+
               />
             </Grid>
             <Grid item xs={12}>
@@ -89,8 +104,8 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                
-              
+
+
               />
             </Grid>
             <Grid item xs={12}>
@@ -103,7 +118,7 @@ export default function SignUp() {
                 type="password"
                 id="password1"
                 // autoComplete="current-password"
-                
+
                 // value={user.password}
               />
             </Grid>
@@ -117,7 +132,7 @@ export default function SignUp() {
                 type="password"
                 id="password2"
                 // autoComplete="current-password"
-                
+
               />
             </Grid>
 

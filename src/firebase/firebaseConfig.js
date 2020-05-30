@@ -20,6 +20,17 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
 
+// firebase.auth().signInWithCustomToken(token).catch(function(error) {
+//   // Handle Errors here.
+//   var errorCode = error.code;
+//   var errorMessage = error.message;
+//   // ...
+// })
+
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
+
+
 export default firebase;

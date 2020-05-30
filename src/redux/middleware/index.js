@@ -6,7 +6,6 @@ export function forbiddenWordsMiddleware({ dispatch }) {
   return function(next) {
     return function(action) {
       // do your stuff
-  
 
       if (action.type === LOGIN) {
         console.log(action.payload.word);
