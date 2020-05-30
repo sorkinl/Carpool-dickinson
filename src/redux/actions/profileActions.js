@@ -12,21 +12,21 @@ export const deleteProfile = (payload) =>{
     //TODO remove record in case account is deleted
 }
 
-export const createProfile = (user) =>{
+export const createProfile = (payload) =>{
     //create profile when the user is registered
 
     return async (dispatch) => {
       const firestore = firebase.firestore();
       try{
             const response = await firestore.collection('users').add({
-            ...user,
-            location: 'Carlisle, PA',
-            phoneNum: 9172923223
+            ...payload,
+            // location: 'Carlisle, PA',
+            // phoneNum: 9172923223
           })
-          dispatch({type: 'CREATE_PROFILE', user});
+          dispatch({type: 'CREATE_PROFILE', payload: response});
       }
       catch(error) {
-        console.log('create profile error', error);
+        console.log('create profile error');
       }
     }
 }
