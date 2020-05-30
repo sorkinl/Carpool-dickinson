@@ -60,7 +60,7 @@ function EditField(props){
   */
   const handleEdit = event => {
       setInput( input => ({
-        ...input
+        ...input,
         [event.target.name]: event.target.value
       }));
   };

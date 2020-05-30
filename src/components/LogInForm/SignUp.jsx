@@ -40,21 +40,6 @@ export default function SignUp() {
   // const registering = useSelector(state => state.registering);
   const dispatch = useDispatch();
 
-  // handles change for each label in the form
-  // updates user State appropriately
-  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-  // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // [START_EXCLUDE]
-    if (errorCode == 'auth/weak-password') {
-      alert('The password is too weak.');
-    } else {
-      alert(errorMessage);
-    }
-    console.log(error);
-  // [END_EXCLUDE]
-  });
 
 
 
