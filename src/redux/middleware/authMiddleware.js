@@ -11,9 +11,8 @@ export function authMiddleware({ dispatch }) {
       // do your stuff
       if (action.type === REGISTER) {
         if(Object.keys(userJSON).some(email => 
-console.log(email)
+              console.log(email)
             // email === action.payload.user.email
-            
             )){
 
             console.log("contains")
