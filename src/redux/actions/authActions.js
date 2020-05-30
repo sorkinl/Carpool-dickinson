@@ -1,12 +1,22 @@
-import { LOGIN, FOUND_BAD_WORD, REGISTER } from "../constants/auth-types";
+import { LOGIN, REGISTER,REGISTER_SUCCESS } from "../constants/auth-types";
+import firebase from '../../firebase/firebaseConfig';
 
 export const toggleLogin = (payload) => {
-
     return { type: LOGIN, payload }
 };
 
 export const register = (payload) => {
-    //TODO implement SIGN UP functionality
+ 
+    console.log(payload)
+      return async (dispatch) => {
+        try{
+            const response =  await firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password);
+            dispatch({type: REGISTER_SUCCESS, payload: response});
+        }
+        catch (err){
+            console.log('dispatch error', err);
+        }
+    }
 
 };
 

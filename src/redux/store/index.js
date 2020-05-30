@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 const store = createStore(
     rootReducer,
     applyMiddleware(authMiddleware, thunk)
+  
     );
 
 export default store;
