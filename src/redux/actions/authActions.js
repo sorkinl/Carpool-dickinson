@@ -1,4 +1,4 @@
-import { LOGIN, LOGIN_SUCCESS, FOUND_BAD_WORD, REGISTER } from "../constants/auth-types";
+import { LOGIN, LOGIN_SUCCESS, FOUND_BAD_WORD, REGISTER, LOCAL_LOGIN } from "../constants/auth-types";
 import firebase from '../../firebase/firebaseConfig';
 
 export const toggleLogin = (payload) => {
@@ -9,7 +9,19 @@ export const toggleLogin = (payload) => {
 /**
  * Ask reducer file. Success and Fail should be defined as type also.
  */
-export const register = (payload) => {
+export const tryLocalSignIn = () => {
+    return (dispatch) => {
+        firebase.auth().onAuthStateChanged((user) => {
+            if(user){
+                dispatch({type: LOCAL_LOGIN,payload: user})
+            } else {
+                console.log('no user');
+            }
+        })
+        
+    }
+}
+ export const register = (payload) => {
     //TODO implement SIGN UP functionality
 
 };
