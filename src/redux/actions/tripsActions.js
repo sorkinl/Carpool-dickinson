@@ -6,11 +6,8 @@ export  function getTrips () {
     return async (dispatch, getState) => {
         const db = firebase.firestore();
         const getTrips =  await db.collection("testCollection").get();
-        console.log(getTrips.docs.map(doc => doc.data()))
         dispatch({type: GET_TRIPS, payload: getTrips.docs.map(doc => doc.data())})
     }
-    
-    
 }
 
 export const createTrip = (payload) =>{
