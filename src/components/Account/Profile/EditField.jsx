@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './EditField.css';
 import {makeStyles, Container, TextField, Button, Grid, CssBaseline, MenuItem} from '@material-ui/core';
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -47,6 +48,18 @@ function EditField(props){
   const [input, setInput] = useState(
     {firstName: 'Naruto', lastName: 'Le', email: 'naruto@gmail.com', location: 'Carlisle, PA', phoneNum: ''}
   );
+
+
+  //-------- EXPERIMENTING REDUX START-------------------------------//
+ /*  const dispatch = useDispatch();
+  const handleSubmit = (e) => {
+      e.preventDefault();
+      dispatch(saveUpdate({input}));
+
+  } */
+  //-------- EXPERIMENTING REDUX END -------------------------------//
+
+
   /* Change states using the extracted input values from TextField
         name = the attribute name of inputProps inside each TextField
         value = the input value of the TextField whose inputProps's attribute name matches name

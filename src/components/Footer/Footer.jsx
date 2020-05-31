@@ -1,6 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import "./Footer.css"
+import LogIn from '../LogInForm/LogIn';
+import SignUp from '../LogInForm/SignUp';
+import { Switch, Link, Route, BrowserRouter as Router } from 'react-router-dom';
 
 import { AppBar,Toolbar } from '@material-ui/core';
 
@@ -22,10 +25,9 @@ const Footer = () => {
             <div className="footer-col">
               <h4> Site Map </h4>
               <ul className="footer-list">
+                <Router>
                 <li><a href="../App.js"> Home </a></li>
-                /* Not sure of how to link Log In and Sign Up */
-                <li> Log In </li>
-                <li> Sign Up </li>
+                </Router>
               </ul>
             </div>
           </div>
@@ -58,7 +60,7 @@ export default Footer;
           <Toolbar>
               dasdas
           </Toolbar>
-        
+
       </AppBar> }
     </div>
   );
