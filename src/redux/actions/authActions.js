@@ -1,4 +1,4 @@
-import { LOGIN, LOGIN_SUCCESS, REGISTER, REGISTER_SUCCESS } from "../constants/auth-types";
+import { LOGIN, LOGIN_SUCCESS, REGISTER, REGISTER_SUCCESS, SAVE_USER_INFO } from "../constants/auth-types";
 import firebase from '../../firebase/firebaseConfig';
 
 export const toggleLogin = (payload) => {
@@ -6,15 +6,21 @@ export const toggleLogin = (payload) => {
 };
 
 /**
- * Ask reducer file. Success and Fail should be defined as type also.
+ * Registers the user into the Authentification database. If it's sucessful, dispatches saveUserInfo.
  */
 export const register = (payload) => {
- 
-    console.log(payload)
+
+     const firestore=firebase.firestore();
       return async (dispatch) => {
         try{
-            const response =  await firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password);
-            dispatch({type: REGISTER_SUCCESS, payload: response});
+            const response1 =  await firebase.auth().createUserWithEmailAndPassword(payload.user.email, payload.user.password);
+            console.log(response1)
+            console.log()
+            const response2 = await firestore.collection("users").doc(response1.user.uid).set({
+                firstName:payload.user.firstName,
+                lastName:payload.user.lastName
+            })
+            dispatch({type:REGISTER_SUCCESS, payload:response2})
         }
         catch (err){
             console.log('dispatch error', err);
