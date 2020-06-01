@@ -15,16 +15,29 @@ export const register = (payload) => {
 };
 
 export const signIn = (payload) => {
-    //TODO implement signIn
-    return async (dispatch) => {
-        try{
-            const response =  await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password);
-            dispatch({type: LOGIN_SUCCESS, payload: response});
-        }
-        catch (err){
+    console.log(payload);
+    return function(dispatch) {
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(() => {
+            return firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+            .then((response) => {
+                dispatch({type: LOGIN_SUCCESS, payload: response});
+            })
+        })
+        .catch((err) => {
             console.log('dispatch error', err);
-        }
+        })
     }
+    //TODO implement signIn
+    // return async (dispatch) => {
+    //     try{
+    //         const response =  await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password);
+    //         dispatch({type: LOGIN_SUCCESS, payload: response});
+    //     }
+    //     catch (err){
+    //         console.log('dispatch error', err);
+    //     }
+    // }
 };
 
 export const registerSuccess = (response) =>{
