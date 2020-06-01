@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-
 import { useDispatch, useSelector } from 'react-redux';
 import {register} from '../../redux/actions/authActions';
 
@@ -20,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
-
+  
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(3),
@@ -33,26 +32,42 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
    const classes = useStyles();
 
-   
+   const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password1: '',
+    password2: ''
+});
 
   // const registering = useSelector(state => state.registering);
   const dispatch = useDispatch();
 
   //handles change for each label in the form
   //updates user State appropriately
-  
-  
+  function handleChange(e) {
+    const { name, value } = e.target;
+
+    setUser(user => ({ ...user, [name]: value }));
+}
+  function handleSubmit(e){''
+      e.preventDefault();
+      
+      console.log(user)
+      // dispatch actions
+      dispatch(register({email: user.email, password: user.password1}))
+  }
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-
+       
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
         {/* main form */}
-        <form className={classes.form}>
+        <form className={classes.form} onSubmit ={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -64,6 +79,7 @@ export default function SignUp() {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                onChange= {handleChange}
             
               />
             </Grid>
@@ -76,7 +92,7 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
-                
+                onChange= {handleChange}
                
               />
             </Grid>
@@ -89,7 +105,7 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                
+                onChange= {handleChange}
               
               />
             </Grid>
@@ -103,7 +119,7 @@ export default function SignUp() {
                 type="password"
                 id="password1"
                 // autoComplete="current-password"
-                
+                onChange= {handleChange}
                 // value={user.password}
               />
             </Grid>
@@ -117,10 +133,10 @@ export default function SignUp() {
                 type="password"
                 id="password2"
                 // autoComplete="current-password"
-                
+                onChange= {handleChange}
               />
             </Grid>
-
+            
           </Grid>
           <Button
             type="submit"
