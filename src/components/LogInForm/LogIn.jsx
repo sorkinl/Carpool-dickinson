@@ -14,6 +14,7 @@ import Container from '@material-ui/core/Container';
 import { useDispatch } from 'react-redux';
 
 import {signIn} from '../../redux/actions/authActions';
+import firebase from '../../firebase/firebaseConfig';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,6 +35,25 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
+
+
+// firebase.auth().onAuthStateChanged(user => {
+//   if(user){
+//     console.log('user logged in', user)
+//   } else {
+//     console.log('user logged out')
+//   }
+// });
+
+// firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(function(user){
+//   console.log('hello', user)
+//   return firebase.auth().signInWithEmailAndPassword(user.email, user.password);
+// })
+// .catch(function(error){
+//   var errorCode = error.code;
+//   var errorMessage = error.message;
+// });
+
 
 export default function SignIn() {
   const classes = useStyles();

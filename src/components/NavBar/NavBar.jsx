@@ -44,6 +44,8 @@ const mapDispatchToProps = (dispatch) => {
     toggleLogin: () => dispatch(toggleLogin({word:"allowed"}))
   }
 } */
+
+
 // above code is redux with classes
  const NavBar = () => {
   const classes = useStyles();
@@ -53,13 +55,19 @@ const mapDispatchToProps = (dispatch) => {
    // useDispatch enables us to use redux dispatch function
   const dispatch = useDispatch();
 
-  //console.log(firebase.auth().currentUser);
-  const links = firebase.auth().currentUser ?  <AccountIcon /> : <Redirect to='/' />
+  //show account icon if there exists current user
+  //const links = firebase.auth().currentUser ? <AccountIcon /> : <Redirect to='/' />
+  firebase.auth().onAuthStateChanged(user => {
+    if(user){
+      login();
+    }
+  });
 
-  // functions to show or not show account icon
-  //  const login =()=>{
-  //   return  <AccountIcon />
-  // }
+
+  //functions to show or not show account icon
+   const login =()=>{
+    return  <AccountIcon />
+  }
   // const logOff = () => {
 
   //   return <Redirect to='/' />
@@ -91,8 +99,7 @@ const mapDispatchToProps = (dispatch) => {
           <Button component={Link} to="/logIn" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Log in</Button>
           <Button component={Link} to="/signUp" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Sign up</Button>
 
-          { links }
-
+          
         </Toolbar>
       </AppBar>
     </div>

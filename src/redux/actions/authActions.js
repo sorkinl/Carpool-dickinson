@@ -17,7 +17,6 @@ export const register = (payload) => {
 export const signIn = (payload) => {
     //TODO implement signIn
     return async (dispatch) => {
-        const db = firebase.firestore();
         try{
             const response =  await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password);
             dispatch({type: LOGIN_SUCCESS, payload: response});

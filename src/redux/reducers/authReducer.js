@@ -14,7 +14,7 @@ const initialState = {
           word: action.payload.word
         }
       case LOGIN_SUCCESS:
-        console.log(action.payload);
+        //console.log(action.payload);
         return {
           ...state,
           loggedIn: true,
