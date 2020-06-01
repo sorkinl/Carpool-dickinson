@@ -10,9 +10,6 @@ import MainChat from './components/Chat/MainChat/MainChat';
 import FrontPage from './pages/frontpage';
 import LogIn from './components/LogInForm/LogIn';
 import SignUp from './components/LogInForm/SignUp';
-import {useDispatch} from 'react-redux';
-import {tryLocalSignIn} from './redux/actions/authActions'
-
 
 //temp function to load search Results
 // test pull
@@ -21,11 +18,8 @@ import {tryLocalSignIn} from './redux/actions/authActions'
 // test pull 4
 
 function App() {
-const dispatch = useDispatch();
 
-useEffect(() => {
-  dispatch(tryLocalSignIn())
-}, [])
+
   return (
     <div className="App">
 
