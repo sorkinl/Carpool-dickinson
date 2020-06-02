@@ -15,6 +15,7 @@ export const register = (payload) => {
 };
 
 export const verifyUser = () => {
+   return (dispatch) => {
     firebase.auth().onAuthStateChanged(user => {
         if(user){
           return {type: LOGIN_SUCCESS};
@@ -22,6 +23,7 @@ export const verifyUser = () => {
             return {type: REGISTER};
         }
       });
+   }
 }
 
 
