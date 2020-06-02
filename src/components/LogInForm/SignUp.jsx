@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import { useDispatch, useSelector } from 'react-redux';
-import {register} from '../../redux/actions/authActions';
+import {sendEmail} from '../../redux/actions/authActions';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -57,7 +57,7 @@ export default function SignUp() {
         console.log("password doesn't match!")
       }else{
         // dispatch actions
-        dispatch(register({user}))
+        dispatch(sendEmail({user}))
       }
       
   }
