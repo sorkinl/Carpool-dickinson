@@ -37,14 +37,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-// firebase.auth().onAuthStateChanged(user => {
-//   if(user){
-//     console.log('user logged in', user)
-//   } else {
-//     console.log('user logged out')
-//   }
-// });
-
 // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(function(user){
 //   console.log('hello', user)
 //   return firebase.auth().signInWithEmailAndPassword(user.email, user.password);

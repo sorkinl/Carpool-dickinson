@@ -14,30 +14,41 @@ export const register = (payload) => {
 
 };
 
+export const verifyUser = () => {
+    firebase.auth().onAuthStateChanged(user => {
+        if(user){
+          return {type: LOGIN_SUCCESS};
+        } else {
+            return {type: REGISTER};
+        }
+      });
+}
+
+
 export const signIn = (payload) => {
     console.log(payload);
-    return function(dispatch) {
-        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-        .then(() => {
-            return firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
-            .then((response) => {
-                dispatch({type: LOGIN_SUCCESS, payload: response});
-            })
-        })
-        .catch((err) => {
-            console.log('dispatch error', err);
-        })
-    }
-    //TODO implement signIn
-    // return async (dispatch) => {
-    //     try{
-    //         const response =  await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password);
-    //         dispatch({type: LOGIN_SUCCESS, payload: response});
-    //     }
-    //     catch (err){
+    // return function(dispatch) {
+    //     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+    //     .then(() => {
+    //         return firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+    //         .then((response) => {
+    //             dispatch({type: LOGIN_SUCCESS, payload: response});
+    //         })
+    //     })
+    //     .catch((err) => {
     //         console.log('dispatch error', err);
-    //     }
+    //     })
     // }
+    //TODO implement signIn
+    return async (dispatch) => {
+        try{
+            const response =  await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password);
+            dispatch({type: LOGIN_SUCCESS, payload: response});
+        }
+        catch (err){
+            console.log('dispatch error', err);
+        }
+    }
 };
 
 export const registerSuccess = (response) =>{

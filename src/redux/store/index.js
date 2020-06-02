@@ -5,10 +5,15 @@ import thunk from 'redux-thunk';
 import { logger } from 'redux-logger';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
+import { useDispatch } from "react-redux";
+import { verifyUser } from '../actions/authActions';
+
 
 const store = createStore(
     rootReducer,
     composeWithDevTools(applyMiddleware(authMiddleware, thunk, logger))
     );
+
+store.dispatch(verifyUser());
 
 export default store;
