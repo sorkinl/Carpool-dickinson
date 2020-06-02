@@ -1,4 +1,4 @@
-import { LOGIN, LOGIN_SUCCESS, FOUND_BAD_WORD, REGISTER, LOCAL_LOGIN } from "../constants/auth-types";
+import { LOGIN, LOGIN_SUCCESS, FOUND_BAD_WORD, REGISTER, LOCAL_LOGIN, NO_LOCAL_LOGIN } from "../constants/auth-types";
 import firebase from '../../firebase/firebaseConfig';
 
 export const toggleLogin = (payload) => {
@@ -15,7 +15,7 @@ export const tryLocalSignIn = () => {
             if(user){
                 dispatch({type: LOCAL_LOGIN,payload: user})
             } else {
-                console.log('no user');
+                dispatch({type: NO_LOCAL_LOGIN});
             }
         })
         

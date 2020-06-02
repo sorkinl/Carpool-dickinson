@@ -1,4 +1,4 @@
-import { LOGIN, REGISTER, LOGIN_SUCCESS, LOCAL_LOGIN } from "../constants/auth-types";
+import { LOGIN, REGISTER, LOGIN_SUCCESS, LOCAL_LOGIN, NO_LOCAL_LOGIN } from "../constants/auth-types";
 
 const initialState = {
     loggedIn: false,
@@ -27,6 +27,12 @@ const initialState = {
           ...state,
           loggedIn: true,
           user: action.payload
+        }
+      case NO_LOCAL_LOGIN:
+        return {
+          ...state,
+          loggedIn: false,
+          user: null
         }
       default:
         return state
