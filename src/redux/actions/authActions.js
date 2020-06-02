@@ -18,9 +18,9 @@ export const verifyUser = () => {
    return (dispatch) => {
     firebase.auth().onAuthStateChanged(user => {
         if(user){
-          return {type: LOGIN_SUCCESS};
+          dispatch({type: LOGIN_SUCCESS});
         } else {
-            return {type: REGISTER};
+            dispatch({type: REGISTER});
         }
       });
    }
