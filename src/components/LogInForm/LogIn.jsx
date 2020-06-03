@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useDispatch } from 'react-redux';
 
+
 import {signIn} from '../../redux/actions/authActions';
 
 const useStyles = makeStyles((theme) => ({
@@ -105,6 +106,7 @@ export default function SignIn() {
           >
             Sign In
           </Button>
+          <p className='error' style={{ color: 'red' }}></p>
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">

@@ -18,13 +18,15 @@ export const signIn = (payload) => {
     //TODO implement signIn
     return async (dispatch) => {
         const db = firebase.firestore();
-        try{
-            const response =  await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password);
-            dispatch({type: LOGIN_SUCCESS, payload: response});
-        }
-        catch (err){
+        // New code for log in fail form
+        const response =  await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password).catch(err => {
+            // Print error to Login.jsx
+            document.querySelector(".error").innerHTML = err.message;
+            // From previous version of this code
             console.log('dispatch error', err);
-        }
+        });
+        // document.querySelector(".error").innerHTML = '';
+        dispatch({type: LOGIN_SUCCESS, payload: response});
     }
 };
 
