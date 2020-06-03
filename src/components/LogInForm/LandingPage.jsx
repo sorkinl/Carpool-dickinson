@@ -1,7 +1,8 @@
 import React from 'react'
 
 import { useDispatch } from 'react-redux';
-import {emailVerification} from '../../redux/actions/authActions';
+/* 
+import {emailVerification} from '../../redux/actions/authActions'; */
 
 export default function LandingPage() {
 
@@ -15,7 +16,7 @@ export default function LandingPage() {
     //     console.log("password doesn't match!")
     //   }else{
     //     // dispatch actions
-        dispatch(emailVerification())
+       /*  dispatch(emailVerification()) */
     //   }
       
   }

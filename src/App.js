@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import Footer from './components/Footer/Footer'
@@ -10,8 +10,8 @@ import MainChat from './components/Chat/MainChat/MainChat';
 import FrontPage from './pages/frontpage';
 import LogIn from './components/LogInForm/LogIn';
 import SignUp from './components/LogInForm/SignUp';
-import LandingPage from "./components/LogInForm/LandingPage"
 
+import LandingPage from "./components/LogInForm/LandingPage"
 
 //temp function to load search Results
 // test pull
@@ -20,6 +20,7 @@ import LandingPage from "./components/LogInForm/LandingPage"
 // test pull 4
 
 function App() {
+
 
   return (
     <div className="App">

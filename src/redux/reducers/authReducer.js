@@ -1,4 +1,6 @@
-import { LOGIN, SEND_EMAIL, LOGIN_SUCCESS } from "../constants/auth-types";
+
+import { LOGIN, REGISTER,SEND_EMAIL, LOGIN_SUCCESS, LOCAL_LOGIN, NO_LOCAL_LOGIN, REGISTER_SUCCESS } from "../constants/auth-types";
+
 
 const initialState = {
     loggedIn: false,
@@ -20,11 +22,18 @@ const initialState = {
           ...state,
           loggedIn: true,
         }
+      case REGISTER:
+        return state
       case SEND_EMAIL:
          console.log("Register Reducer")
         return {
           ...state,
        
+        }
+      case REGISTER_SUCCESS:
+        return {
+          ...state,
+          loggedIn: true
         }
       default:
         return state
