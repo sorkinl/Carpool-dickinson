@@ -33,11 +33,7 @@ export default function SignUp() {
   const classes = useStyles();
 
   const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
     email: "",
-    password: "",
-    password2: "",
   });
 
   // const registering = useSelector(state => state.registering);
@@ -51,15 +47,14 @@ export default function SignUp() {
     setUser((user) => ({ ...user, [name]: value }));
   }
   function handleSubmit(e) {
-    "";
     e.preventDefault();
 
     if (user.password !== user.password2) {
       console.log("password doesn't match!");
     } else {
       // dispatch actions
-      dispatch(register(user));
-      /* dispatch(sendEmail({user})) */
+      //dispatch(register(user));
+       dispatch(sendEmail({user})) 
     }
   }
 
@@ -73,31 +68,7 @@ export default function SignUp() {
         {/* main form */}
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-                onChange={handleChange}
-              />
-            </Grid>
+
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -110,32 +81,7 @@ export default function SignUp() {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                // autoComplete="current-password"
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password2"
-                label="Confirm-password"
-                type="password"
-                id="password2"
-                // autoComplete="current-password"
-                onChange={handleChange}
-              />
-            </Grid>
+           
           </Grid>
           <Button
             type="submit"
