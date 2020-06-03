@@ -10,7 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useDispatch } from 'react-redux';
 
-import {emailVerification} from '../../redux/actions/authActions';
+/* import {emailVerification} from '../../redux/actions/authActions'; */
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -49,7 +49,7 @@ export default function LandingPage() {
     //     console.log("password doesn't match!")
     //   }else{
     //     // dispatch actions
-        dispatch(emailVerification(user))
+        /* dispatch(emailVerification(user)) */
     //   }
       
   }

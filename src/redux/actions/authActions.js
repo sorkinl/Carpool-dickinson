@@ -8,26 +8,57 @@ import {
 } from "../constants/auth-types";
 import firebase from "../../firebase/firebaseConfig";
 
+var actionCodeSettings = {
+  // URL you want to redirect back to. The domain (www.example.com) for this
+  // URL must be whitelisted in the Firebase Console.
+  url: "http://localhost:3000/",
+
+  // This must be true.
+  handleCodeInApp: true,
+
+  //below for mobile config
+
+  // iOS: {
+  //   bundleId: 'com.example.ios'
+  // },
+  // android: {
+  //   packageName: 'com.example.android',
+  //   installApp: true,
+  //   minimumVersion: '12'
+  // },
+  // dynamicLinkDomain: "carpool-d.firebaseapp.com"
+};
 export const toggleLogin = (payload) => {
   return { type: LOGIN, payload };
 };
 
+/**
+ * Registers the user, sends verification email and makes a database for the user profile in firestore.
+ * Catches any error that happens within the block of awaits. If no errors dispatches an action 
+ * of REGISTER_SUCCESS with payload of user, without password
+ * @param {*} payload - User that is passed from SignUp component
+ */
 export const register = (payload) => {
   //TODO implement SIGN UP functionality
   const firestore = firebase.firestore();
+  const profile = {
+    firstName: payload.firstName,
+    lastName: payload.lastName,
+    email: payload.email,
+  };
   return async (dispatch) => {
     try {
       const createUser = await firebase
         .auth()
         .createUserWithEmailAndPassword(payload.email, payload.password);
-      const userDocument = await firestore
-        .collection("users")
-        .doc(createUser.user.uid)
-        .set({
-          firstName: payload.firstName,
-          lastName: payload.lastName,
-        });
-      dispatch({ type: REGISTER_SUCCESS, payload: userDocument });
+
+      await firebase
+        .auth()
+        .currentUser.sendEmailVerification(actionCodeSettings);
+      await firestore.collection("users").doc(createUser.user.uid).set({
+        profile,
+      });
+      dispatch({ type: REGISTER_SUCCESS, payload: profile });
     } catch (err) {
       console.log("dispatch error", err);
     }
@@ -64,27 +95,8 @@ export const signInFail = (response) => {
 
 //from firebase docs
 //provides Firebase with instructions on how to construct email link
-var actionCodeSettings = {
-    // URL you want to redirect back to. The domain (www.example.com) for this
-    // URL must be whitelisted in the Firebase Console.
-    url: 'http://localhost:3000/landingPage',
-   
-    // This must be true.
-    handleCodeInApp: true,
-    
-    //below for mobile config
 
-    // iOS: {
-    //   bundleId: 'com.example.ios'
-    // },
-    // android: {
-    //   packageName: 'com.example.android',
-    //   installApp: true,
-    //   minimumVersion: '12'
-    // },
-    // dynamicLinkDomain: "carpool-d.firebaseapp.com"
-  };
-export const sendEmail = (payload) => {
+/* export const sendEmail = (payload) => {
 
       return async (dispatch) => {
         try{
@@ -100,14 +112,14 @@ export const sendEmail = (payload) => {
     }
 
 
-};
+}; */
 
 /**
  * Verifies email after directed to the landingPage. Creates user in authentification
  * and in user database
  * @param {*} payload
  */
-export const emailVerification = (payload)=>{
+/* export const emailVerification = (payload)=>{
     
     const firestore=firebase.firestore();
     return async(dispatch)=>{
@@ -134,3 +146,4 @@ export const emailVerification = (payload)=>{
         }
     }
 }
+ */
