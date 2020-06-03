@@ -84,9 +84,9 @@ const mapDispatchToProps = (dispatch) => {
           <Button component={Link} to="/logIn" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Log in</Button>
           <Button component={Link} to="/signUp" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Sign up</Button>
 
-          { loggedIn && login() }
+          { loggedIn && login }
 
-          { !loggedIn && logOff() }
+          { !loggedIn && logOff }
 
         </Toolbar>
       </AppBar>

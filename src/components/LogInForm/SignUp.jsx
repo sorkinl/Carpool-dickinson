@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import { useDispatch, useSelector } from 'react-redux';
-import {register} from '../../redux/actions/authActions';
+import {sendEmail} from '../../redux/actions/authActions';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,7 +36,7 @@ export default function SignUp() {
     firstName: '',
     lastName: '',
     email: '',
-    password1: '',
+    password: '',
     password2: ''
 });
 
@@ -53,9 +53,13 @@ export default function SignUp() {
   function handleSubmit(e){''
       e.preventDefault();
       
-      console.log(user)
-      // dispatch actions
-      dispatch(register({email: user.email, password: user.password1}))
+      if(user.password !== user.password2){
+        console.log("password doesn't match!")
+      }else{
+        // dispatch actions
+        dispatch(sendEmail({user}))
+      }
+      
   }
 
   return (
@@ -114,13 +118,13 @@ export default function SignUp() {
                 variant="outlined"
                 required
                 fullWidth
-                name="password1"
+                name="password"
                 label="Password"
                 type="password"
-                id="password1"
+                id="password"
                 // autoComplete="current-password"
                 onChange= {handleChange}
-                // value={user.password}
+               
               />
             </Grid>
             <Grid item xs={12}>
