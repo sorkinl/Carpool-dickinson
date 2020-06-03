@@ -1,4 +1,4 @@
-import { LOGIN, LOGIN_SUCCESS, FOUND_BAD_WORD, REGISTER } from "../constants/auth-types";
+import { LOGIN, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGOUT_ERROR, FOUND_BAD_WORD, REGISTER } from "../constants/auth-types";
 import firebase from '../../firebase/firebaseConfig';
 
 export const toggleLogin = (payload) => {
@@ -27,6 +27,31 @@ export const signIn = (payload) => {
         }
     }
 };
+
+export const logOut = (payload) => {
+
+    return async (dispatch) => {
+        try{
+            const response =  await firebase.auth().signOut();
+            dispatch({type: LOGOUT_SUCCESS});
+        }
+        catch (err){
+            console.log('dispatch error', err);
+        }
+    }
+};
+/*export const logOut = () => dispatch => {
+    dispatch();
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        dispatch({type: LOGOUT_SUCCESS});
+      })
+      .catch(error => {
+        console.log('dispatch error', err);
+      });
+  };*/
 
 export const registerSuccess = (response) =>{
     //TODO call if the above register was successful

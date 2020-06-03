@@ -1,4 +1,4 @@
-import { LOGIN, REGISTER, LOGIN_SUCCESS } from "../constants/auth-types";
+import { LOGIN, REGISTER, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGOUT_ERROR } from "../constants/auth-types";
 
 const initialState = {
     loggedIn: false,
@@ -19,6 +19,11 @@ const initialState = {
           ...state,
           loggedIn: true,
         }
+        case LOGOUT_SUCCESS:
+          return{
+            ...state,
+            loggedIn: false,
+          }
       case REGISTER:
         return state
       default:
