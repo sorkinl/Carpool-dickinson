@@ -7,8 +7,8 @@ const admin = require('firebase-admin');
 //  response.send("Hello from Firebase!");
 // });
 
-exports.createProfileCollection = functions.auth.user().onCreate(async (user) => {
-    await admin.firestore().collection('users').add({
+exports.createProfileCollection = functions.auth.user().onCreate((user) => {
+    return admin.firestore().collection('users').doc(user.uid).set({
         firstName: user.firstName,
         lastName: user.lastName
     })
