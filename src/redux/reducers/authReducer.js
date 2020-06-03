@@ -1,9 +1,11 @@
-import { LOGIN, REGISTER, LOGIN_SUCCESS, LOCAL_LOGIN, NO_LOCAL_LOGIN } from "../constants/auth-types";
+
+import { LOGIN, REGISTER,SEND_EMAIL, LOGIN_SUCCESS, LOCAL_LOGIN, NO_LOCAL_LOGIN, REGISTER_SUCCESS } from "../constants/auth-types";
+
 
 const initialState = {
     loggedIn: false,
     word: '',
-    user: null
+    user:''
   };
 
   function authReducer(state = initialState, action) {
@@ -22,23 +24,20 @@ const initialState = {
         }
       case REGISTER:
         return state
-      case LOCAL_LOGIN:
+      case SEND_EMAIL:
+         console.log("Register Reducer")
         return {
           ...state,
-          loggedIn: true,
-          user: action.payload
+       
         }
-      case NO_LOCAL_LOGIN:
+      case REGISTER_SUCCESS:
         return {
           ...state,
-          loggedIn: false,
-          user: null
+          loggedIn: true
         }
       default:
         return state
     }
   }
-
-
 
   export default authReducer;

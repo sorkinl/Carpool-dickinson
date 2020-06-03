@@ -11,6 +11,8 @@ import FrontPage from './pages/frontpage';
 import LogIn from './components/LogInForm/LogIn';
 import SignUp from './components/LogInForm/SignUp';
 
+import LandingPage from "./components/LogInForm/LandingPage"
+
 //temp function to load search Results
 // test pull
 // test pull 2
@@ -38,7 +40,7 @@ function App() {
           <Route path="/chat" component={MainChat}/>
           <Route path="/logIn" component={LogIn}/>
           <Route path="/signUp" component={SignUp}/>
-
+          <Route path = "/landingPage" component = {LandingPage}/>
         </Switch>
           </div>
       </Router>

@@ -4,12 +4,10 @@ import { authMiddleware } from "../middleware/authMiddleware";
 import thunk from 'redux-thunk';
 import { logger } from 'redux-logger';
 import {composeWithDevTools} from 'redux-devtools-extension';
-import {tryLocalSignIn} from '../actions/authActions'
 
 const store = createStore(
     rootReducer,
     composeWithDevTools(applyMiddleware(authMiddleware, thunk, logger))
     );
 
-store.dispatch(tryLocalSignIn());
 export default store;
