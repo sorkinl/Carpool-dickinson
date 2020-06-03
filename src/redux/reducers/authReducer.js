@@ -1,8 +1,9 @@
-import { LOGIN, REGISTER, LOGIN_SUCCESS } from "../constants/auth-types";
+import { LOGIN, REGISTER, LOGIN_SUCCESS, LOGIN_FAILURE } from "../constants/auth-types";
 
 const initialState = {
     loggedIn: false,
     word: '',
+    errorMessage: null,
   };
 
   function authReducer(state = initialState, action) {
@@ -18,6 +19,13 @@ const initialState = {
         return {
           ...state,
           loggedIn: !state.loggedIn,
+          errorMessage: null,
+        }
+      case LOGIN_FAILURE:
+        console.log("LogIn Failure");
+        return {
+          ...state,
+          errorMessage: action.error.message,
         }
       case REGISTER:
         return state

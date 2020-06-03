@@ -131,7 +131,6 @@ export default function SignUp() {
           >
             Sign Up
           </Button>
-          <p className='error' style={{ color: 'red' }}></p>
           <Grid container justify="flex-end">
             <Grid item>
               <Link href="#" variant="body2">
