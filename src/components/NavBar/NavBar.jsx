@@ -56,35 +56,6 @@ const NavBar = () => {
   //show account icon if there exists current user
   //const links = firebase.auth().currentUser ? <AccountIcon /> : <Redirect to='/' />
 
-  //functions to show or not show account icon
-  const menuButtons = loggedIn ? (
-    <AccountIcon />
-  ) : (
-    <>
-      <Button
-        component={Link}
-        to="/logIn"
-        edge="start"
-        className={classes.menuButton}
-        color="inherit"
-        aria-label="menu"
-        variant="outlined"
-      >
-        Log in
-      </Button>
-      <Button
-        component={Link}
-        to="/signUp"
-        edge="start"
-        className={classes.menuButton}
-        color="inherit"
-        aria-label="menu"
-        variant="outlined"
-      >
-        Sign up
-      </Button>
-    </>
-  );
 
   return (
     <div className={classes.root}>
@@ -119,8 +90,6 @@ const NavBar = () => {
           { loggedIn? <AccountIcon/>:<><Button component={Link} to="/logIn" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Log in</Button>
           <Button component={Link} to="/signUp" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Sign up</Button></> }
 
-
-          {menuButtons}
         </Toolbar>
       </AppBar>
     </div>

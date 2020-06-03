@@ -4,7 +4,8 @@ import {
   SEND_EMAIL,
   REGISTER_SUCCESS,
   LOCAL_LOGIN,
-  NO_LOCAL_LOGIN
+  NO_LOCAL_LOGIN,
+  REGISTER
 } from "../constants/auth-types";
 import firebase from "../../firebase/firebaseConfig";
 
