@@ -113,9 +113,12 @@ const NavBar = () => {
             <DriveEtaIcon />
           </IconButton>
 
-          <Link className={classes.title} to="/">
-            Carpool
-          </Link>
+          <Link className={classes.title} to="/">Carpool</Link>
+
+
+          { loggedIn? <AccountIcon/>:<><Button component={Link} to="/logIn" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Log in</Button>
+          <Button component={Link} to="/signUp" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Sign up</Button></> }
+
 
           {menuButtons}
         </Toolbar>
