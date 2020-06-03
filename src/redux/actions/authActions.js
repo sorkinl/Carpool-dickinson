@@ -28,7 +28,7 @@ export const verifyUser = () => {
 
 
 export const signIn = (payload) => {
-    console.log(payload);
+    // console.log(payload);
     // return function(dispatch) {
     //     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
     //     .then(() => {
