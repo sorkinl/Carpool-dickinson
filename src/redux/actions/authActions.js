@@ -4,9 +4,12 @@ import {
   SEND_EMAIL,
   REGISTER_SUCCESS,
   LOCAL_LOGIN,
-  NO_LOCAL_LOGIN
+  NO_LOCAL_LOGIN,
+  LOGOUT_SUCCESS,
+  LOGOUT_ERROR
 } from "../constants/auth-types";
 import firebase from "../../firebase/firebaseConfig";
+
 
 //from firebase docs
 //provides Firebase with instructions on how to construct email link
@@ -122,15 +125,42 @@ export const signIn = (payload) => {
   };
 };
 
-export const registerSuccess = (response) => {
-  //TODO call if the above register was successful
+
+export const logOut = (payload) => {
+
+    return async (dispatch) => {
+        try{
+            const response =  await firebase.auth().signOut();
+            dispatch({type: LOGOUT_SUCCESS});
+        }
+        catch (err){
+            console.log('dispatch error', err);
+        }
+    }
 };
-export const registerFail = (response) => {
-  //TODO call if the above register was failed
-};
-export const signInSuccess = (response) => {
-  //TODO call if the above sign in was successful
-};
-export const signInFail = (response) => {
-  //TODO call if the above sign in failed
-};
+/*export const logOut = () => dispatch => {
+    dispatch();
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        dispatch({type: LOGOUT_SUCCESS});
+      })
+      .catch(error => {
+        console.log('dispatch error', err);
+      });
+  };*/
+
+export const registerSuccess = (response) =>{
+    //TODO call if the above register was successful
+}
+export const registerFail = (response) =>{
+    //TODO call if the above register was failed
+}
+export const signInSuccess = (response) =>{
+    //TODO call if the above sign in was successful
+}
+export const signInFail = (response) =>{
+    //TODO call if the above sign in failed
+}
+
