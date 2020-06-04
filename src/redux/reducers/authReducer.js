@@ -25,7 +25,7 @@ const initialState = {
         console.log("LogIn Failure");
         return {
           ...state,
-          errorMessage: action.error.message,
+          errorMessage: action.payload.message,
         }
       case REGISTER:
         return state

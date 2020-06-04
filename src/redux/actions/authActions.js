@@ -24,7 +24,7 @@ export const signIn = (payload) => {
         .signInWithEmailAndPassword(payload.email, payload.password);
       dispatch({ type: LOGIN_SUCCESS, payload: response });
     } catch (err) {
-      dispatch({ type: LOGIN_FAILURE, error: err});
+      dispatch({ type: LOGIN_FAILURE, payload: err});
       console.log("dispatch error", err);
     }
   };
