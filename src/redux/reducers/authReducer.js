@@ -1,10 +1,11 @@
-import { LOGIN, REGISTER,SEND_EMAIL, LOGIN_SUCCESS, LOCAL_LOGIN, NO_LOCAL_LOGIN, REGISTER_SUCCESS, VERIFY_FAILS,LOGOUT_SUCCESS, LOGOUT_ERROR } from "../constants/auth-types";
 
+import { LOGIN, REGISTER,SEND_EMAIL, LOGIN_SUCCESS, LOCAL_LOGIN, NO_LOCAL_LOGIN, REGISTER_SUCCESS, VERIFY_FAILS,LOGOUT_SUCCESS, LOGOUT_ERROR, LOGIN_FAILURE } from "../constants/auth-types";
 
 
 const initialState = {
     loggedIn: false,
     word: '',
+    errorMessage: null,
     user:''
   };
 
@@ -19,13 +20,15 @@ const initialState = {
       case LOGIN_SUCCESS:
         return {
           ...state,
-          loggedIn: true,
+          loggedIn: true
         }
-        case LOGOUT_SUCCESS:
-          return{
-            ...state,
-            loggedIn: false,
-          }
+      case LOGIN_FAILURE:
+        console.log("LogIn Failure");
+        return {
+          ...state,
+          errorMessage: action.payload.message,
+          loggedIn: false,
+        }
       case REGISTER:
         return state
       case SEND_EMAIL:

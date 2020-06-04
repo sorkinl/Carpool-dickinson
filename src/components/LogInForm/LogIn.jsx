@@ -11,7 +11,8 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 import {signIn} from '../../redux/actions/authActions';
 import firebase from '../../firebase/firebaseConfig';
@@ -39,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  const errorMessage = useSelector(state => state.authReducer.errorMessage);
 
   const [user, setUser] = useState({
     email: '',
@@ -107,6 +109,9 @@ export default function SignIn() {
           >
             Sign In
           </Button>
+          <div className="red-text">
+            { errorMessage ? <p style={{ color: 'red' }}>{errorMessage}</p> : null}
+          </div>
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">

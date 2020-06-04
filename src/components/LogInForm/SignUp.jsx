@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
 
+
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -40,11 +41,13 @@ export default function SignUp() {
     password2: "",
   });
 
+
   // const registering = useSelector(state => state.registering);
   const dispatch = useDispatch();
 
   //handles change for each label in the form
   //updates user State appropriately
+
   function handleChange(e) {
     const { name, value } = e.target;
 
@@ -62,6 +65,7 @@ export default function SignUp() {
       /* dispatch(sendEmail({user})) */
     }
   }
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -107,6 +111,7 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+
                 onChange={handleChange}
               />
             </Grid>
@@ -121,6 +126,7 @@ export default function SignUp() {
                 id="password"
                 // autoComplete="current-password"
                 onChange={handleChange}
+
               />
             </Grid>
             <Grid item xs={12}>
@@ -132,8 +138,8 @@ export default function SignUp() {
                 label="Confirm-password"
                 type="password"
                 id="password2"
-                // autoComplete="current-password"
                 onChange={handleChange}
+
               />
             </Grid>
           </Grid>

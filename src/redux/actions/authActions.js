@@ -1,3 +1,4 @@
+
 import {
   LOGIN,
   LOGIN_SUCCESS,
@@ -7,9 +8,11 @@ import {
   NO_LOCAL_LOGIN,
   VERIFY_FAILS,
   LOGOUT_SUCCESS,
-  LOGOUT_ERROR
+  LOGOUT_ERROR,
+  LOGIN_FAILURE
 } from "../constants/auth-types";
 import firebase from "../../firebase/firebaseConfig";
+
 
 var actionCodeSettings = {
   // URL you want to redirect back to. The domain (www.example.com) for this
@@ -94,10 +97,11 @@ export const signIn = (payload) => {
         .signInWithEmailAndPassword(payload.email, payload.password);
       dispatch({ type: LOGIN_SUCCESS, payload: response });
     } catch (err) {
+      dispatch({ type: LOGIN_FAILURE, payload: err});
       console.log("dispatch error", err);
+      }
     }
-  };
-};
+  }
 export const logOut = (payload) => {
 
     return async (dispatch) => {
@@ -108,8 +112,10 @@ export const logOut = (payload) => {
         catch (err){
             console.log('dispatch error', err);
         }
+
     }
-};
+  };
+
 
 
 export const registerSuccess = (response) => {
