@@ -5,6 +5,7 @@ import {
   REGISTER_SUCCESS,
   LOCAL_LOGIN,
   NO_LOCAL_LOGIN,
+  VERIFY_FAILS,
   LOGOUT_SUCCESS,
   LOGOUT_ERROR
 } from "../constants/auth-types";
@@ -35,12 +36,27 @@ export const toggleLogin = (payload) => {
   return { type: LOGIN, payload };
 };
 
+
+export const verifyUser = () => {
+    return (dispatch) => {
+     firebase.auth().onAuthStateChanged(user => {
+         if(user){
+           dispatch({type: LOGIN_SUCCESS});
+         } else {
+             dispatch({type: VERIFY_FAILS});
+         }
+       });
+    }
+ }
+
+
 /**
  * Registers the user, sends verification email and makes a database for the user profile in firestore.
  * Catches any error that happens within the block of awaits. If no errors dispatches an action 
  * of REGISTER_SUCCESS with payload of user, without password
  * @param {*} payload - User that is passed from SignUp component
  */
+
 export const register = (payload) => {
   //TODO implement SIGN UP functionality
   const firestore = firebase.firestore();
