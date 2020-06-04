@@ -15,6 +15,9 @@ import {   Redirect,   Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { NavigateBeforeRounded } from '@material-ui/icons';
 
+import firebase from '../../firebase/firebaseConfig';
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,15 +52,19 @@ const mapDispatchToProps = (dispatch) => {
   const loggedIn = useSelector(state => state.authReducer.loggedIn);
    // useDispatch enables us to use redux dispatch function
   const dispatch = useDispatch();
+
+  //console.log(firebase.auth().currentUser);
+  const links = firebase.auth().currentUser ?  <AccountIcon /> : <Redirect to='/' />
+
   // functions to show or not show account icon
-   const login =()=>{
-    return  <AccountIcon />
-  }
-  const logOff = () => {
+  //  const login =()=>{
+  //   return  <AccountIcon />
+  // }
+  // const logOff = () => {
 
-    return <Redirect to='/' />
+  //   return <Redirect to='/' />
 
-  }
+  //}
 
   return (
 
@@ -81,12 +88,10 @@ const mapDispatchToProps = (dispatch) => {
 
           <Link className={classes.title} to="/">Carpool</Link>
 
-          <Button component={Link} to="/logIn" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Log in</Button>
-          <Button component={Link} to="/signUp" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Sign up</Button>
 
-          { loggedIn && login() }
+          { loggedIn? <AccountIcon/>:<><Button component={Link} to="/logIn" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Log in</Button>
+          <Button component={Link} to="/signUp" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Sign up</Button></> }
 
-          { !loggedIn && logOff() }
 
         </Toolbar>
       </AppBar>
