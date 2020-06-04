@@ -1,5 +1,5 @@
 
-import { LOGIN, REGISTER,SEND_EMAIL, LOGIN_SUCCESS, LOCAL_LOGIN, NO_LOCAL_LOGIN, REGISTER_SUCCESS } from "../constants/auth-types";
+import { LOGIN, REGISTER,SEND_EMAIL, LOGIN_SUCCESS, LOCAL_LOGIN, NO_LOCAL_LOGIN, REGISTER_SUCCESS, VERIFY_FAILS } from "../constants/auth-types";
 
 
 const initialState = {
@@ -17,7 +17,6 @@ const initialState = {
           word: action.payload.word
         }
       case LOGIN_SUCCESS:
-        //console.log(action.payload);
         return {
           ...state,
           loggedIn: true,
@@ -34,6 +33,12 @@ const initialState = {
         return {
           ...state,
           loggedIn: true
+        }
+      case VERIFY_FAILS:
+        console.log('Session is out and the user is logged out')
+        return {
+          ...state,
+          loggedIn: false
         }
       default:
         return state

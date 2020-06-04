@@ -37,16 +37,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(function(user){
-  console.log('hello', user)
-  return firebase.auth().signInWithEmailAndPassword(user.email, user.password);
-})
-.catch(function(error){
-  var errorCode = error.code;
-  var errorMessage = error.message;
-});
-
-
 export default function SignIn() {
   const classes = useStyles();
 

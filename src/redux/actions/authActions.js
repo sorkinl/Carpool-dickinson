@@ -5,7 +5,7 @@ import {
   REGISTER_SUCCESS,
   LOCAL_LOGIN,
   NO_LOCAL_LOGIN,
-  REGISTER
+  VERIFY_FAILS,
 } from "../constants/auth-types";
 import firebase from "../../firebase/firebaseConfig";
 
@@ -42,7 +42,7 @@ export const verifyUser = () => {
          if(user){
            dispatch({type: LOGIN_SUCCESS});
          } else {
-             dispatch({type: REGISTER});
+             dispatch({type: VERIFY_FAILS});
          }
        });
     }
