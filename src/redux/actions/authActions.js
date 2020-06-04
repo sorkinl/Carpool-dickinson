@@ -5,6 +5,8 @@ import {
   REGISTER_SUCCESS,
   LOCAL_LOGIN,
   NO_LOCAL_LOGIN,
+  LOGOUT_SUCCESS,
+  LOGOUT_ERROR
 } from "../constants/auth-types";
 import firebase from "../../firebase/firebaseConfig";
 
@@ -13,8 +15,9 @@ var actionCodeSettings = {
   // URL must be whitelisted in the Firebase Console.
   url: "http://localhost:3000/",
 
-  // This must be true.
-  handleCodeInApp: true,
+   
+    // This must be true.
+    handleCodeInApp: true,
 
   //below for mobile config
 
@@ -79,6 +82,19 @@ export const signIn = (payload) => {
     }
   };
 };
+export const logOut = (payload) => {
+
+    return async (dispatch) => {
+        try{
+            const response =  await firebase.auth().signOut();
+            dispatch({type: LOGOUT_SUCCESS});
+        }
+        catch (err){
+            console.log('dispatch error', err);
+        }
+    }
+};
+
 
 export const registerSuccess = (response) => {
   //TODO call if the above register was successful
@@ -145,5 +161,9 @@ export const signInFail = (response) => {
 
         }
     }
-}
- */
+} */
+
+
+
+
+
