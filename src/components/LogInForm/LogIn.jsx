@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 import {signIn} from '../../redux/actions/authActions';
+import firebase from '../../firebase/firebaseConfig';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
+
 
 export default function SignIn() {
   const classes = useStyles();
