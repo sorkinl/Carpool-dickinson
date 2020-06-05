@@ -1,0 +1,58 @@
+[debug] [2020-06-02T00:14:07.058Z] ----------------------------------------------------------------------
+[debug] [2020-06-02T00:14:07.060Z] Command:       /usr/local/Cellar/node/14.3.0_1/bin/node /usr/local/bin/firebase init functions
+[debug] [2020-06-02T00:14:07.061Z] CLI Version:   8.4.1
+[debug] [2020-06-02T00:14:07.061Z] Platform:      darwin
+[debug] [2020-06-02T00:14:07.061Z] Node Version:  v14.3.0
+[debug] [2020-06-02T00:14:07.062Z] Time:          Mon Jun 01 2020 20:14:07 GMT-0400 (Eastern Daylight Time)
+[debug] [2020-06-02T00:14:07.062Z] ----------------------------------------------------------------------
+[debug] [2020-06-02T00:14:07.062Z] 
+[debug] [2020-06-02T00:14:07.068Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-06-02T00:14:07.068Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/kimboosung/Documents/Programming/College_workspace/carpool/Carpool-dickinson/src/firebase
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2020-06-02T00:14:25.384Z] TypeError: Cannot read property 'setRawMode' of null
+    at ReadStream.setRawMode (tty.js:75:28)
+    at Interface._setRawMode (readline.js:298:16)
+    at Interface.close (readline.js:421:10)
+    at ReadStream.ontermend (readline.js:209:10)
+    at ReadStream.emit (events.js:327:22)
+    at ReadStream.EventEmitter.emit (domain.js:485:12)
+    at endReadableNT (_stream_readable.js:1224:12)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2020-06-02T00:14:25.388Z] Error: write EIO
+    at afterWriteDispatched (internal/stream_base_commons.js:154:25)
+    at writeGeneric (internal/stream_base_commons.js:145:3)
+    at WriteStream.Socket._writeGeneric (net.js:782:11)
+    at WriteStream.Socket._write (net.js:794:8)
+    at writeOrBuffer (_stream_writable.js:352:12)
+    at WriteStream.Writable.write (_stream_writable.js:303:10)
+    at Console.log (/usr/local/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/usr/local/lib/node_modules/firebase-tools/node_modules/winston-transport/index.js:102:17)
+    at doWrite (/usr/local/lib/node_modules/firebase-tools/node_modules/readable-stream/lib/_stream_writable.js:428:64)
+    at writeOrBuffer (/usr/local/lib/node_modules/firebase-tools/node_modules/readable-stream/lib/_stream_writable.js:417:5)
+    at Console.Writable.write (/usr/local/lib/node_modules/firebase-tools/node_modules/readable-stream/lib/_stream_writable.js:334:11)
+    at DerivedLogger.ondata (/usr/local/lib/node_modules/firebase-tools/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js:681:20)
+    at DerivedLogger.emit (events.js:327:22)
+    at DerivedLogger.EventEmitter.emit (domain.js:485:12)
+    at addChunk (/usr/local/lib/node_modules/firebase-tools/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js:298:12)
+    at readableAddChunk (/usr/local/lib/node_modules/firebase-tools/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js:280:11)
+[error] 
+[error] Error: An unexpected error has occurred.

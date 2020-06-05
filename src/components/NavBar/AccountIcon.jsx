@@ -3,6 +3,9 @@ import {IconButton, Menu, MenuItem} from '@material-ui/core/';
 import {AccountCircle} from '@material-ui/icons/';
 
 import {  Link } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+
+import {logOut} from '../../redux/actions/authActions';
 
 export default function AccountIcon() {
   // set the position of the menu
@@ -17,6 +20,13 @@ export default function AccountIcon() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    
+    const dispatch = useDispatch();
+
+    function handleLogOut(e) {
+      e.preventDefault();
+      dispatch(logOut());
+    }
 
     return (
     <div>
@@ -49,6 +59,7 @@ export default function AccountIcon() {
 
           <MenuItem onClick={handleClose} component={Link} to="/account">Account</MenuItem>
           <MenuItem onClick={handleClose} component={Link} to="/chat">Chat</MenuItem>
+          <MenuItem onClick={handleLogOut} component={Link} to="/">Log Out</MenuItem>
           
         </Menu>
       </div>
