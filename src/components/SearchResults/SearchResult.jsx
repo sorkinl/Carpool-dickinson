@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid"
 import Typography from '@material-ui/core/Typography';
 
 import tempMap from "../../static/img/tempMap.png";
-
+import {HereMap} from '../HereMap/HereMap'
 import './SearchResult.css';
 import {useDispatch, useSelector} from 'react-redux'
 import Mapbox from '../../api/mapbox/mapbox'
@@ -111,7 +111,7 @@ function SearchResult() {
       <div id= "dasdas">
           <div id = "mapDiv">
             {/* <img id = "map" alt = "temp map" src = {tempMap} /> */}
-            <Mapbox/>
+              <HereMap />
           </div>
       </div>
         
