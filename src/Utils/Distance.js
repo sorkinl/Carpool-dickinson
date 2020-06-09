@@ -9,13 +9,13 @@ export const getMaxAndMinLat = (radiusInKm, latitude ) => {
     return {maxLat, minLat}
 }
 
-export const getMaxAndMinLong = (radiusInKm, lognitude, latitude) => {
+export const getMaxAndMinLong = (radiusInKm, longitude, latitude) => {
     var kmInLongitudeDegree = 111.320 * Math.cos(latitude/ 180.0 * Math.PI)
 
     var deltaLong = radiusInKm / kmInLongitudeDegree;
 
-    var minLong = lognitude - deltaLong;
-    var maxLong = lognitude - deltaLong;
+    var minLong = longitude - deltaLong;
+    var maxLong = longitude + deltaLong;
 
     return {minLong, maxLong}
 }

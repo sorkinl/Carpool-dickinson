@@ -5,9 +5,9 @@ import axios from "axios";
 const firestore = firebase.firestore();
 export function getTrips() {
   //TODO retrieve trips from the database
+  var trips = firestore.collection("trips")
   return async (dispatch, getState) => {
-        const db = firebase.firestore();
-        const getTrips =  await db.collection("trips").get();
+        const getTrips =  await trips.where('destination.longitude', "<=", 14).get();
         dispatch({type: GET_TRIPS, payload: getTrips.docs.map(doc => doc.data())})
     }
 }

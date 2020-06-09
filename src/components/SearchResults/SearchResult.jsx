@@ -47,9 +47,7 @@ function SearchResult() {
    // useDispatch enables us to use redux dispatch function
   const dispatch = useDispatch();
   React.useEffect(() => {
-    /* dispatch(getTrips())
-     */
-    
+    dispatch(getTrips()) 
   },[]);
   return (
 
