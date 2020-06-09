@@ -11,6 +11,7 @@ import './SearchResult.css';
 import {useDispatch, useSelector} from 'react-redux'
 import Mapbox from '../../api/mapbox/mapbox'
 import { getTrips } from '../../redux/actions/tripsActions';
+import { getMaxAndMinLat } from '../../Utils/Distance';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,8 +47,7 @@ function SearchResult() {
    // useDispatch enables us to use redux dispatch function
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch(getTrips())
-    
+    dispatch(getTrips()) 
   },[]);
   return (
 
