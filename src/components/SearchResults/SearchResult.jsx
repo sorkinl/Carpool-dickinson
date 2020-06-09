@@ -49,6 +49,15 @@ function SearchResult() {
   React.useEffect(() => {
     dispatch(getTrips()) 
   },[]);
+
+  const tripList = trips.map((trip) => 
+    <EachResult
+                
+                comment = {"Leaving between 2pm-4pm"}
+                starting = {trip.origin_title}
+                destination = {trip.destination_title}
+                />
+  )
   return (
 
     <Paper classes = {{root:classes.paper}}>
@@ -69,7 +78,7 @@ function SearchResult() {
               </Typography>
             </Grid>
 
-            <EachResult
+            {/* <EachResult
                 name = {"ABCD Lee"}
                 occupation = {"Dickinson College"}
                 comment = {"Leaving between 2pm-4pm"}
@@ -77,31 +86,9 @@ function SearchResult() {
                 destination = {"Harrisburg"}
                 rating = {4}
                 nickname = "Alex"
-                />
+                /> */}
 
-            <EachResult
-                name = {"Johnski QPWOEI"}
-                occupation = {"Penn State"}
-                starting = {"Dickinson College"}
-                destination = {"Boston"}
-                rating = {4}
-                nickname="John"
-                />  
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
+            {tripList}
                 
                 
 
