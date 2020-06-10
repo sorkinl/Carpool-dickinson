@@ -3,11 +3,18 @@ import { GET_TRIPS, MAKE_TRIP } from "../constants/trip-types";
 import axios from "axios";
 
 const firestore = firebase.firestore();
-export function getTrips() {
-  //TODO retrieve trips from the database
+
+
+export function getTrips(payload) {
+
+  console.log("render")
+
   var trips = firestore.collection("trips")
   return async (dispatch, getState) => {
-        const getTrips =  await trips.where('destination.longitude', "<=", 14).get();
+        console.log( payload)
+        const getTrips =  await trips.where('pickupTitle', "==", payload.pickupTitle)
+          .get()
+          .catch((e)=>{console.log(e)});
         dispatch({type: GET_TRIPS, payload: getTrips.docs.map(doc => doc.data())})
     }
 }
@@ -29,6 +36,7 @@ export const createTrip = (payload) => {
       departTime: new firebase.firestore.Timestamp.now()
     });
     dispatch({type: MAKE_TRIP, payload: data})
+    
   };
 };
 
