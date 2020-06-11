@@ -1,5 +1,5 @@
 import firebase from "../../firebase/firebaseConfig";
-import { GET_TRIPS, MAKE_TRIP } from "../constants/trip-types";
+import { GET_TRIPS, MAKE_TRIP} from "../constants/trip-types";
 import axios from "axios";
 
 const firestore = firebase.firestore();
@@ -11,6 +11,7 @@ export function getTrips() {
         dispatch({type: GET_TRIPS, payload: getTrips.docs.map(doc => doc.data())})
     }
 }
+
 
 export const createTrip = (payload) => {
   //TODO put trip into the database

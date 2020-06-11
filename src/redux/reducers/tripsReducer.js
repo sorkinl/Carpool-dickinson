@@ -1,5 +1,5 @@
 import { LOGIN, REGISTER } from "../constants/auth-types";
-import { GET_TRIPS, MAKE_TRIP } from "../constants/trip-types";
+import { GET_TRIPS, MAKE_TRIP, GET_TRIPS_USER } from "../constants/trip-types";
 
 const initialState = {
     trips:[]

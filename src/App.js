@@ -10,8 +10,9 @@ import MainChat from './components/Chat/MainChat/MainChat';
 import FrontPage from './pages/frontpage';
 import LogIn from './components/LogInForm/LogIn';
 import SignUp from './components/LogInForm/SignUp';
-
+import Loading from './components/Loading'
 import LandingPage from "./components/LogInForm/LandingPage"
+import { useSelector } from 'react-redux';
 
 //temp function to load search Results
 // test pull
@@ -21,9 +22,9 @@ import LandingPage from "./components/LogInForm/LandingPage"
 
 function App() {
 
-
+  
   return (
-    <div className="App">
+   <div className="App">
 
       <Router>
         <div>
@@ -47,7 +48,7 @@ function App() {
 
       <Footer />
     </div>
-
+    
   );
 }
 

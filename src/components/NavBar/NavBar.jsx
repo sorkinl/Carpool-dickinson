@@ -49,9 +49,13 @@ const NavBar = () => {
   const classes = useStyles();
   //redux hook
   // useSelector for taking the state out of the store.
-  const loggedIn = useSelector((state) => state.authReducer.loggedIn);
+  //const loggedIn = useSelector((state) => state.authReducer.loggedIn);
+  const auth = useSelector((state) => state.firebase.auth);
   // useDispatch enables us to use redux dispatch function
   const dispatch = useDispatch();
+
+  const links = auth.uid? (<AccountIcon/>):(<><Button component={Link} to="/logIn" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Log in</Button>
+  <Button component={Link} to="/signUp" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Sign up</Button></>)
 
   //show account icon if there exists current user
   //const links = firebase.auth().currentUser ? <AccountIcon /> : <Redirect to='/' />
@@ -64,12 +68,12 @@ const NavBar = () => {
         <FormControlLabel
           control={
             <Switch
-              checked={loggedIn}
+              checked={!!auth.uid}
               onChange={() => dispatch(toggleLogin({ word: "allowed" }))}
               aria-label="login switch"
             />
           }
-          label={loggedIn ? "Logout" : "Login"}
+          label={auth.uid ? "Logout" : "Login"}
         />
       </FormGroup>
 
@@ -87,8 +91,7 @@ const NavBar = () => {
           <Link className={classes.title} to="/">Carpool</Link>
 
 
-          { loggedIn? <AccountIcon/>:<><Button component={Link} to="/logIn" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Log in</Button>
-          <Button component={Link} to="/signUp" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Sign up</Button></> }
+          { links }
 
         </Toolbar>
       </AppBar>

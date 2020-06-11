@@ -4,6 +4,8 @@ import Trip from './Trip';
 import { pink } from '@material-ui/core/colors';
 import {makeStyles, CssBaseline, Paper, Typography, Box, Grid, ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary} from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { useSelector, useDispatch } from 'react-redux';
+import { getTripsByUser } from '../../../redux/actions/profileActions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +30,8 @@ const useStyles = makeStyles((theme) => ({
     const [pastTrip, setPastTrip] = useState(false);
 
     const classes = useStyles();
-
+    const trips = useSelector(state => state.profileReducer.userTrips)
+    const dispatch = useDispatch();
     //An object storing Trip's info
     const trip = {
       image: "https://cdn.aarp.net/content/dam/aarp/travel/tips/2020/05/1140-person-driving.jpg",
@@ -38,13 +41,17 @@ const useStyles = makeStyles((theme) => ({
       to: "New York",
       first: "Miyamoto",
       last: "Smith",
-      school: "Dickinson College",
-      rating: 4.5
+      school: "Dickinson College"
     };
+
+    React.useEffect(()=> {
+      dispatch(getTripsByUser());
+    }, [])
     //List of future trips
     const futureTripList = [];
     //List of past trips
     const pastTripList = [trip, trip, trip, trip, trip];
+
 
     return(
     <CssBaseline>
@@ -62,10 +69,12 @@ const useStyles = makeStyles((theme) => ({
                 </ExpansionPanelSummary>
                 {/* Display trips if there exists at least 1 trip, otherwise just text*/}
                 <ExpansionPanelDetails>
-                    { fuTrip == true && ( futureTripList.length > 0 ?
+                    { fuTrip == true && ( trips.length > 0 ?
                          <Grid container spacing={3} className="Future-trip-list">
                              {
-                                 futureTripList.map(trip => {return (<Trip trip={trip}/>);})
+                                 trips.map(trip => {return (<Trip trip={{
+                                 from: trip.origin_title,
+                                 to: trip.destination_title,}}/>);})
                              }
                          </Grid>
                          :
