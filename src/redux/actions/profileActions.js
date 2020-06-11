@@ -1,5 +1,13 @@
+import firebase from "../../firebase/firebaseConfig";
+import { GET_DATA } from "../constants/profile-types";
 export const getProfileData = (payload) =>{
-    //TODO retrieve profile data from database
+    return async (dispatch) => {
+        const firestore = firebase.firestore();
+    const user = firebase.auth().currentUser;
+    const profileData = await firestore.collection("users").doc(user.uid).get();  
+    dispatch({type: GET_DATA, payload: profileData.data()})
+    } 
+
 }
 
 export const updateProfile = (payload) =>{

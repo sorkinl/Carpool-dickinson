@@ -12,6 +12,8 @@ import {
   LOGIN_FAILURE
 } from "../constants/auth-types";
 import firebase from "../../firebase/firebaseConfig";
+import { GET_DATA } from "../constants/profile-types";
+import { getProfileData } from "./profileActions";
 
 
 var actionCodeSettings = {
@@ -45,6 +47,7 @@ export const verifyUser = () => {
      firebase.auth().onAuthStateChanged(user => {
          if(user){
            dispatch({type: LOGIN_SUCCESS});
+           dispatch(getProfileData())
          } else {
              dispatch({type: VERIFY_FAILS});
          }

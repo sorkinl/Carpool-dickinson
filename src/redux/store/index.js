@@ -7,6 +7,7 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 
 import { useDispatch } from "react-redux";
 import { verifyUser } from '../actions/authActions';
+import { getProfileData } from "../actions/profileActions";
 
 
 const store = createStore(
@@ -15,5 +16,6 @@ const store = createStore(
     );
 
 store.dispatch(verifyUser());
+
 
 export default store;

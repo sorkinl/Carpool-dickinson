@@ -11,6 +11,7 @@ import './SearchResult.css';
 import {useDispatch, useSelector} from 'react-redux'
 import Mapbox from '../../api/mapbox/mapbox'
 import { getTrips } from '../../redux/actions/tripsActions';
+import { getMaxAndMinLat } from '../../Utils/Distance';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,9 +47,17 @@ function SearchResult() {
    // useDispatch enables us to use redux dispatch function
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch(getTrips())
-    
+    dispatch(getTrips()) 
   },[]);
+
+  const tripList = trips.map((trip) => 
+    <EachResult
+                
+                comment = {"Leaving between 2pm-4pm"}
+                starting = {trip.origin_title}
+                destination = {trip.destination_title}
+                />
+  )
   return (
 
     <Paper classes = {{root:classes.paper}}>
@@ -69,7 +78,7 @@ function SearchResult() {
               </Typography>
             </Grid>
 
-            <EachResult
+            {/* <EachResult
                 name = {"ABCD Lee"}
                 occupation = {"Dickinson College"}
                 comment = {"Leaving between 2pm-4pm"}
@@ -77,31 +86,9 @@ function SearchResult() {
                 destination = {"Harrisburg"}
                 rating = {4}
                 nickname = "Alex"
-                />
+                /> */}
 
-            <EachResult
-                name = {"Johnski QPWOEI"}
-                occupation = {"Penn State"}
-                starting = {"Dickinson College"}
-                destination = {"Boston"}
-                rating = {4}
-                nickname="John"
-                />  
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
-            <EachResult/>
+            {tripList}
                 
                 
 
