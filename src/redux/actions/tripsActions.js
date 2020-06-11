@@ -1,5 +1,5 @@
 import firebase from "../../firebase/firebaseConfig";
-import { GET_TRIPS, MAKE_TRIP } from "../constants/trip-types";
+import { GET_TRIPS, POST_TRIP } from "../constants/trip-types";
 import axios from "axios";
 
 const firestore = firebase.firestore();
@@ -16,7 +16,7 @@ export const createTrip = (payload) => {
   //TODO put trip into the database
 
   return async (dispatch) => {
-    
+
     const search = encodeURIComponent(payload.pickup)
     const response = await axios.get(
       `https://geocode.search.hereapi.com/v1/geocode?q=${search}&apiKey=${process.env.REACT_APP_HERE_KEY}`
@@ -28,7 +28,7 @@ export const createTrip = (payload) => {
       destination: new firebase.firestore.GeoPoint(response.data.items[0].position.lat, response.data.items[0].position.lng),
       departTime: new firebase.firestore.Timestamp.now()
     });
-    dispatch({type: MAKE_TRIP, payload: data})
+    dispatch({type: POST_TRIP, payload: data})
   };
 };
 
