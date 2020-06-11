@@ -9,6 +9,8 @@ import EventIcon from '@material-ui/icons/Event';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import {IconButton, Menu, MenuItem} from '@material-ui/core/';
+import {  Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   media: {
@@ -25,6 +27,15 @@ export default function Trip(props) {
     //Passing the props "trip" of Trip component in TripList to a variable
     const trip = props.trip;
     const classes = useStyles();
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+
+    const handleMenu = (event) => {
+      setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+};
 
     return (
       <Grid item xs={4} className="Trip">
@@ -68,12 +79,31 @@ export default function Trip(props) {
               </CardContent>
               {/* Buttons */}
               <CardActions>
-                  <Button size="small" color="primary">
+                  <Button  onClick={handleMenu} size="small" color="primary">
                     Modify trip
                   </Button>
                   <Button size="small" color="primary">
                     Contact driver
                   </Button>
+                  <Menu
+                  id="menu-appbar"
+                 anchorEl={anchorEl}
+                 anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+               }}
+               open={open}
+               onClose={handleClose}
+              >
+
+              <MenuItem onClick={handleClose} >Delete this trip</MenuItem>
+            
+             </Menu>
               </CardActions>
           </Card>
       </Grid>
