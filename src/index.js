@@ -15,7 +15,7 @@ const rrfConfig = {
   userProfile: 'users',
   useFirestoreForProfile: true
 }
-
+firebase.firestore()
 const rrfProps = {
   firebase,
   config: rrfConfig,
