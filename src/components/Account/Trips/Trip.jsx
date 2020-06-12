@@ -68,7 +68,7 @@ export default function Trip(props) {
               </CardContent>
               {/* Buttons */}
               <CardActions>
-                  <Button size="small" color="primary">
+                  <Button onClick={} size="small" color="primary">
                     Modify trip
                   </Button>
                   <Button size="small" color="primary">

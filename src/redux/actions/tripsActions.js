@@ -1,5 +1,5 @@
 import firebase from "../../firebase/firebaseConfig";
-import { GET_TRIPS, MAKE_TRIP } from "../constants/trip-types";
+import { GET_TRIPS, MAKE_TRIP, EDIT_TRIP } from "../constants/trip-types";
 import axios from "axios";
 
 const firestore = firebase.firestore();
@@ -10,7 +10,7 @@ export function getTrips() {
         const getTrips =  await trips.where('destination.longitude', "<=", 14).get();
         dispatch({type: GET_TRIPS, payload: getTrips.docs.map(doc => doc.data())})
     }
-}
+};
 
 export const createTrip = (payload) => {
   //TODO put trip into the database
@@ -32,10 +32,39 @@ export const createTrip = (payload) => {
   };
 };
 
+//payload.uid
+//https://stackoverflow.com/questions/49682327/how-to-update-a-single-firebase-firestore-document
 export const editTrip = (payload) => {
   //TODO edit trip in the database based on id
-};
+  const trips = firestore.collection("trips")
+  return async (dispatch) => {
+
+    const getTrips = await trips.doc(tripId).get()
+    .then(snapshot => {
+      const docs = snapshot.docs;
+      docs.forEach(doc => {
+        //console.log(doc.id);
+        trips.doc(doc.id).update({payload});
+      })
+
+    // const trip = trips.doc(tripId).get();
+    // const getTrips = await trips.where('uid', "==", user.uid).get()
+    // .then(snapshot => {
+    //   //console.log(getTrips.docs.map(doc => doc.data()));
+    //   const docs = snapshot.docs;
+    //   user = {
+    //     ...docs,
+    //     uid: payload.uid,
+    //     destTitle: payload.destTitle,
+    //     destination: payload.destination,
+    //     departTime: payload.departTime,
+    //   };
+    });
+    dispatch({type: EDIT_TRIP, payload: getTrips})
+  };
+}
 
 export const deleteTrip = (payload) => {
   //TODO delete trip from the database
 };
+
