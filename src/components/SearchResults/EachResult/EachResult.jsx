@@ -7,7 +7,7 @@ import Rating from '@material-ui/lab/Rating';
 import {List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 
 
-import avatar from "../../static/img/avatar.png"
+import avatar from "../../../static/img/avatar.png"
 import PersonIcon from '@material-ui/icons/Person';
 
 

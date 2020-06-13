@@ -1,5 +1,5 @@
 import { LOGIN, REGISTER } from "../constants/auth-types";
-import { GET_TRIPS, MAKE_TRIP, DELETE_TRIP } from "../constants/trip-types";
+import { GET_TRIPS, MAKE_TRIP, GET_TRIPS_USER, DELETE_TRIP } from "../constants/trip-types";
 
 const initialState = {
     trips:[]
@@ -17,7 +17,7 @@ const initialState = {
       case DELETE_TRIP:
         return {
           trips: [
-            ...state. trips.filter(trip => trip !== action.payload)
+            ...state.trips.filter(trip => trip !== action.payload)
           ]
         }
 

@@ -12,6 +12,7 @@ export function getTrips() {
     }
 }
 
+
 export const createTrip = (payload) => {
   //TODO put trip into the database
 
@@ -36,12 +37,12 @@ export const editTrip = (payload) => {
   //TODO edit trip in the database based on id
 };
 
-export const deleteTrip = (trip) => {
+export const deleteTrip = (tripId) => {
   var trips = firestore.collection("trips")
   return async (dispatch) => {
     try{
- const deleteTrip = trips.doc("OdmzUZ5JMuGntSbevVbH").delete();
- dispatch({type: DELETE_TRIP, payload: trip})
+ const deleteTrip = trips.doc(tripId).delete();
+ //dispatch({type: DELETE_TRIP, payload: trip})
     }
 catch (err) {
   console.error("Error removing document: ", err);

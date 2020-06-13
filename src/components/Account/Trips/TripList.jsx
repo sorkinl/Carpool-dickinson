@@ -4,6 +4,9 @@ import Trip from './Trip';
 import { pink } from '@material-ui/core/colors';
 import {makeStyles, CssBaseline, Paper, Typography, Box, Grid, ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary} from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { useSelector, useDispatch } from 'react-redux';
+import { getTripsByUser } from '../../../redux/actions/profileActions';
+import { useFirestoreConnect } from 'react-redux-firebase';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,9 +29,15 @@ const useStyles = makeStyles((theme) => ({
     //Initialize the states of fuTrip (future trip) and pastTrip (Default value = false).
     const [fuTrip, setFuTrip] = useState(false);
     const [pastTrip, setPastTrip] = useState(false);
-
+    const currentUser = useSelector(state => state.firebase.auth.uid)
+    useFirestoreConnect([{
+      collection: 'trips',
+      where: ['uid', '==', currentUser],
+      storeAs: 'userTrips'
+    }])
     const classes = useStyles();
-
+    const userTrips = useSelector(state => state.firestore.ordered.userTrips)
+    const dispatch = useDispatch();
     //An object storing Trip's info
     const trip = {
       image: "https://cdn.aarp.net/content/dam/aarp/travel/tips/2020/05/1140-person-driving.jpg",
@@ -38,13 +47,17 @@ const useStyles = makeStyles((theme) => ({
       to: "New York",
       first: "Miyamoto",
       last: "Smith",
-      school: "Dickinson College",
-      rating: 4.5
+      school: "Dickinson College"
     };
+
+    React.useEffect(()=> {
+      dispatch(getTripsByUser());
+    }, [])
     //List of future trips
     const futureTripList = [];
     //List of past trips
     const pastTripList = [trip, trip, trip, trip, trip];
+
 
     return(
     <CssBaseline>
@@ -62,10 +75,13 @@ const useStyles = makeStyles((theme) => ({
                 </ExpansionPanelSummary>
                 {/* Display trips if there exists at least 1 trip, otherwise just text*/}
                 <ExpansionPanelDetails>
-                    { fuTrip == true && ( futureTripList.length > 0 ?
+                    { fuTrip == true && ( userTrips.length > 0 ?
                          <Grid container spacing={3} className="Future-trip-list">
                              {
-                                 futureTripList.map(trip => {return (<Trip trip={trip}/>);})
+                                 userTrips.map(trip => {return (<Trip trip={{
+                                 from: trip.origin_title,
+                                 to: trip.destination_title,
+                                 id: trip.id}}/>);})
                              }
                          </Grid>
                          :
