@@ -74,7 +74,8 @@ const useStyles = makeStyles((theme) => ({
                              {
                                  trips.map(trip => {return (<Trip trip={{
                                  from: trip.origin_title,
-                                 to: trip.destination_title,}}/>);})
+                                 to: trip.destination_title,
+                                  }}/>);})
                              }
                          </Grid>
                          :
