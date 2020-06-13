@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './EditField.css';
-import {makeStyles, Container, TextField, Button, Grid, CssBaseline, MenuItem} from '@material-ui/core';
+import {makeStyles, Container, TextField, Button, Grid, CssBaseline, MenuItem, Divider} from '@material-ui/core';
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -72,8 +72,9 @@ function EditField(props){
   return(
   <Container component="main" maxWidth="sm">
     <CssBaseline>
+        <Divider />
     <div className={classes.paper}>
-      <form className={classes.form} noValidate autoComplete="off">
+      <form className={classes.form} autoComplete="off">
         {/* A grid container storing each grid item as a textbox */}
         <Grid container spacing={3}>
             {/* Change profile photo button */}

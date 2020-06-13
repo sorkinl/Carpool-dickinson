@@ -1,0 +1,10 @@
+#main {
+    background-color: #ff9933;
+}
+.line{
+    width: 790px;
+    height: 47px;
+    border-bottom: 1px solid lightgrey;
+    position: absolute;
+    margin-top: 9px;
+}

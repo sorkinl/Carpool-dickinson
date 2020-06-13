@@ -10,8 +10,8 @@ import MainChat from './components/Chat/MainChat/MainChat';
 import FrontPage from './pages/frontpage';
 import LogIn from './components/LogInForm/LogIn';
 import SignUp from './components/LogInForm/SignUp';
-
 import LandingPage from "./components/LogInForm/LandingPage"
+import PostRideField from "./pages/PostRideField";
 
 //temp function to load search Results
 // test pull
@@ -41,6 +41,7 @@ function App() {
           <Route path="/logIn" component={LogIn}/>
           <Route path="/signUp" component={SignUp}/>
           <Route path = "/landingPage" component = {LandingPage}/>
+          <Route path = "/postRide" component = {PostRideField}/>
         </Switch>
           </div>
       </Router>
