@@ -72,6 +72,7 @@ export const register = (payload) => {
     firstName: payload.firstName,
     lastName: payload.lastName,
     email: payload.email,
+    status: 1
   };
   return async (dispatch) => {
     try {
@@ -91,6 +92,8 @@ export const register = (payload) => {
     }
   };
 };
+
+
 
 export const signIn = (payload) => {
   //TODO implement signIn

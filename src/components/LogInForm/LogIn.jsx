@@ -12,8 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useDispatch, useSelector } from 'react-redux';
-
-
+import {Redirect} from 'react-router-dom'
+import {isLoaded, isEmpty} from 'react-redux-firebase'
 import {signIn} from '../../redux/actions/authActions';
 import firebase from '../../firebase/firebaseConfig';
 
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
   const errorMessage = useSelector(state => state.authReducer.errorMessage);
-
+  const userReady = useSelector(state => state.firebase.auth)
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -63,10 +63,10 @@ export default function SignIn() {
     }
 
   return (
+    isLoaded(userReady) && !isEmpty(userReady)?(<Redirect to="/" />):(
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
@@ -128,6 +128,6 @@ export default function SignIn() {
       </div>
       <Box mt={8}>
       </Box>
-    </Container>
+    </Container>)
   );
 }
