@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 import firebase from './firebase/firebaseConfig';
 import {useSelector} from 'react-redux'
 import {createFirestoreInstance} from 'redux-firestore';
-import {ReactReduxFirebaseProvider} from 'react-redux-firebase'
+import {ReactReduxFirebaseProvider, isLoaded} from 'react-redux-firebase'
 import Loading from './components/Loading';
 const rrfConfig = {
   userProfile: 'users',
@@ -25,7 +25,8 @@ const rrfProps = {
 
 function AuthIsLoaded({children}){
   const auth = useSelector(state => state.firebase.auth)
-  if(!auth.isLoaded) return <Loading/>;
+  const user = useSelector(state => state.firebase.profile)
+  if(!isLoaded(auth) && !isLoaded(user) ) return <Loading/>;
   return children
 }
 ReactDOM.render(

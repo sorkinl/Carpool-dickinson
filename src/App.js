@@ -12,8 +12,8 @@ import LogIn from './components/LogInForm/LogIn';
 import SignUp from './components/LogInForm/SignUp';
 import Loading from './components/Loading'
 import LandingPage from "./components/LogInForm/LandingPage"
-import { useSelector } from 'react-redux';
-
+import ProfileCreate from './components/LogInForm/ProfileCreate';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 //temp function to load search Results
 // test pull
 // test pull 2
@@ -22,26 +22,23 @@ import { useSelector } from 'react-redux';
 
 function App() {
 
-  
   return (
    <div className="App">
-
       <Router>
         <div>
       <NavBar/>
-
         <hr />
         <main>
-
         </main>
         <Switch>
           <Route path="/" exact component={FrontPage}/>
           <Route path="/search" component={SearchForm} />
-          <Route path="/account" component={Account}/>
-          <Route path="/chat" component={MainChat}/>
+          <PrivateRoute path="/account" component={Account}/>
+          <PrivateRoute path="/chat" component={MainChat}/>
           <Route path="/logIn" component={LogIn}/>
           <Route path="/signUp" component={SignUp}/>
           <Route path = "/landingPage" component = {LandingPage}/>
+          <Route path="/registrationForm" component = {ProfileCreate}/>
         </Switch>
           </div>
       </Router>

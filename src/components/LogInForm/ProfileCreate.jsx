@@ -7,13 +7,20 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
 import Container from "@material-ui/core/Container";
-import {isLoaded, isEmpty} from 'react-redux-firebase'
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
 import { useDispatch, useSelector } from "react-redux";
 import { sendEmail, register } from "../../redux/actions/authActions";
-import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 200,
+  },
+
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
@@ -28,11 +35,13 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  label: {
+      backgroundColor: "white"
+     }
 }));
 
-export default function SignUp() {
+export default function ProfileCreate() {
   const classes = useStyles();
-
 
   const [user, setUser] = useState({
     firstName: "",
@@ -40,11 +49,10 @@ export default function SignUp() {
     email: "",
     password: "",
     password2: "",
+    gender: "",
   });
 
-
   // const registering = useSelector(state => state.registering);
-  const userReady = useSelector(state => state.firebase.auth)
   const dispatch = useDispatch();
 
   //handles change for each label in the form
@@ -54,6 +62,9 @@ export default function SignUp() {
     const { name, value } = e.target;
 
     setUser((user) => ({ ...user, [name]: value }));
+  }
+  function handleSelect(e) {
+    setUser((user) => ({...user, [e.target.name]: e.target.value}));
   }
   function handleSubmit(e) {
     "";
@@ -68,9 +79,8 @@ export default function SignUp() {
     }
   }
 
-
-  return (isLoaded(userReady) && !isEmpty(userReady)?<Redirect to="/registrationForm"/>:(
-    <Container component="main" maxWidth="xs">
+  return (
+    <Container component="main" maxWidth="md">
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
@@ -81,14 +91,13 @@ export default function SignUp() {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                autoComplete="fname"
-                name="firstName"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
+                id=""
+                label="School"
+                name="school"
+                autoComplete="lname"
                 onChange={handleChange}
               />
             </Grid>
@@ -97,52 +106,28 @@ export default function SignUp() {
                 variant="outlined"
                 required
                 fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
+                id=""
+                label="Major"
+                name="school"
                 autoComplete="lname"
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                // autoComplete="current-password"
-                onChange={handleChange}
-
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password2"
-                label="Confirm-password"
-                type="password"
-                id="password2"
-                onChange={handleChange}
-
-              />
+            <Grid item xs={12} sm={6}>
+              <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel className={classes.label} id="gender-label">Gender</InputLabel>
+                <Select
+                  labelId="gender-label"
+                  value={user.gender}
+                  id="gender"
+                  name="gender"
+                  placeholder="Gender"
+                  onChange={handleSelect}
+                >
+                  <MenuItem value={"Male"}>Male</MenuItem>
+                  <MenuItem value={"Female"}>Female</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
           </Grid>
           <Button
@@ -164,6 +149,6 @@ export default function SignUp() {
         </form>
       </div>
       <Box mt={5}></Box>
-    </Container>)
+    </Container>
   );
 }
