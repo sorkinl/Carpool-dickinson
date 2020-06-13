@@ -3,7 +3,7 @@ import './Trip.css';
 import { makeStyles } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
 import Rating from '@material-ui/lab/Rating';
-
+import { useDispatch } from 'react-redux';
 import {Grid, Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, Typography, Button} from '@material-ui/core';
 import EventIcon from '@material-ui/icons/Event';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -11,6 +11,7 @@ import LocationCityIcon from '@material-ui/icons/LocationCity';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import {IconButton, Menu, MenuItem} from '@material-ui/core/';
 import {  Link } from "react-router-dom";
+import {deleteTrip} from '../../../redux/actions/tripsActions';
 
 const useStyles = makeStyles({
   media: {
@@ -36,6 +37,13 @@ export default function Trip(props) {
   const handleClose = () => {
     setAnchorEl(null);
 };
+
+const dispatch = useDispatch();
+
+    function handleDelete(e) {
+      e.preventDefault();
+      dispatch(deleteTrip());
+    }
 
     return (
       <Grid item xs={4} className="Trip">
@@ -101,7 +109,7 @@ export default function Trip(props) {
                onClose={handleClose}
               >
 
-              <MenuItem onClick={handleClose} >Delete this trip</MenuItem>
+              <MenuItem onClick={handleDelete} >Delete this trip</MenuItem>
             
              </Menu>
               </CardActions>
