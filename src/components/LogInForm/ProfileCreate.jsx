@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -12,10 +12,8 @@ import Container from "@material-ui/core/Container";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-import { useDispatch, useSelector } from "react-redux";
-import { useFirestoreConnect, useFirestore } from "react-redux-firebase";
-import { sendEmail, register } from "../../redux/actions/authActions";
-import { Avatar } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { useFirestore } from "react-redux-firebase";
 import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     left: "50%",
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%", 
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -53,12 +51,8 @@ export default function ProfileCreate() {
     phone: "",
   });
   const currentUser = useSelector((state) => state.firebase.auth.uid);
-  const userProfile = useSelector((state) => state.firebase.profile)
+  const userProfile = useSelector((state) => state.firebase.profile);
   const firestore = useFirestore();
-  // const registering = useSelector(state => state.registering);
-
-  //handles change for each label in the form
-  //updates user State appropriately
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -81,18 +75,17 @@ export default function ProfileCreate() {
         },
         {
           ...user,
-          status: 2
+          status: 2,
         },
         { merge: true }
       );
-      // dispatch actions
-      // dispatch(register(user));
-      /* dispatch(sendEmail({user})) */
     }
   }
-  console.log("render")
+  console.log("render");
 
-  return (userProfile.status === 2?(<Redirect to="/"/>):(
+  return userProfile.status === 2 ? (
+    <Redirect to="/" />
+  ) : (
     <Container component="main" maxWidth="md">
       <CssBaseline />
       <div className={classes.paper}>
@@ -205,6 +198,6 @@ export default function ProfileCreate() {
         </form>
       </div>
       <Box mt={5}></Box>
-    </Container>)
+    </Container>
   );
 }

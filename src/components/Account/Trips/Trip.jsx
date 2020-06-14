@@ -1,9 +1,7 @@
 import React from "react";
-import "./Trip.css";
 import { makeStyles } from "@material-ui/core/styles";
 import { red } from "@material-ui/core/colors";
 import Rating from "@material-ui/lab/Rating";
-import { useDispatch } from "react-redux";
 import {
   Grid,
   Card,
@@ -19,9 +17,7 @@ import EventIcon from "@material-ui/icons/Event";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import LocationCityIcon from "@material-ui/icons/LocationCity";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-import { IconButton, Menu, MenuItem } from "@material-ui/core/";
-import { Link } from "react-router-dom";
-import { deleteTrip } from "../../../redux/actions/tripsActions";
+import { Menu, MenuItem } from "@material-ui/core/";
 import { useFirestore } from "react-redux-firebase";
 
 const useStyles = makeStyles({
@@ -33,15 +29,13 @@ const useStyles = makeStyles({
     backgroundColor: red[500],
   },
 });
-//Create a Trip component
 export default function Trip(props) {
-  const firestore = useFirestore();
-  //Passing the props "trip" of Trip component in TripList to a variable
   const trip = props.trip;
   const classes = useStyles();
+
+  //------------ Menu handlers ------------//
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -49,16 +43,15 @@ export default function Trip(props) {
     setAnchorEl(null);
   };
 
-  const dispatch = useDispatch();
-
+  const firestore = useFirestore(); //use firestore reducer from 'react-redux-firebase'
   function handleDelete(e) {
     e.preventDefault();
-    //dispatch(deleteTrip(props.trip.id));
     firestore.delete({
-      collection: 'trips',
-      doc: props.trip.id
-    })
+      collection: "trips", //function similar to the one in firebase, updates both firestore and local firestore reducer
+      doc: props.trip.id, //prop is passed from trip list
+    });
   }
+
   return (
     <Grid item xs={4} className="Trip">
       <Card className={classes.root} gutterBottom>
