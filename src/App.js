@@ -38,7 +38,7 @@ function App() {
           <Route path="/logIn" component={LogIn}/>
           <Route path="/signUp" component={SignUp}/>
           <Route path = "/landingPage" component = {LandingPage}/>
-          <Route path="/registrationForm" component = {ProfileCreate}/>
+          <PrivateRoute path="/registrationForm" component = {ProfileCreate}/>
         </Switch>
           </div>
       </Router>
