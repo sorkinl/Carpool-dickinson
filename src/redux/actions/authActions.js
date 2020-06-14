@@ -9,7 +9,8 @@ import {
   VERIFY_FAILS,
   LOGOUT_SUCCESS,
   LOGOUT_ERROR,
-  LOGIN_FAILURE
+  LOGIN_FAILURE,
+  STOP_LOADING
 } from "../constants/auth-types";
 import firebase from "../../firebase/firebaseConfig";
 import { GET_DATA } from "../constants/profile-types";
@@ -44,14 +45,15 @@ export const toggleLogin = (payload) => {
 
 export const verifyUser = () => {
     return (dispatch) => {
-     firebase.auth().onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged(user => {
          if(user){
-           dispatch({type: LOGIN_SUCCESS});
+           dispatch({type: LOGIN_SUCCESS, payload: user.uid});
            dispatch(getProfileData())
          } else {
              dispatch({type: VERIFY_FAILS});
          }
        });
+       
     }
  }
 
@@ -70,6 +72,7 @@ export const register = (payload) => {
     firstName: payload.firstName,
     lastName: payload.lastName,
     email: payload.email,
+    status: 1
   };
   return async (dispatch) => {
     try {
@@ -90,21 +93,25 @@ export const register = (payload) => {
   };
 };
 
+
+
 export const signIn = (payload) => {
   //TODO implement signIn
   return async (dispatch) => {
-    const db = firebase.firestore();
     try {
       const response = await firebase
         .auth()
         .signInWithEmailAndPassword(payload.email, payload.password);
-      dispatch({ type: LOGIN_SUCCESS, payload: response });
+      dispatch({ type: LOGIN_SUCCESS});
     } catch (err) {
       dispatch({ type: LOGIN_FAILURE, payload: err});
       console.log("dispatch error", err);
       }
     }
   }
+
+ 
+
 export const logOut = (payload) => {
 
     return async (dispatch) => {
