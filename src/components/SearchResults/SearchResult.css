@@ -1,16 +1,3 @@
-#map{
-   /* height:100%;
-   width:100%;
-   top: 0;
-   right:0;
-   position: -webkit-sticky; 
-   position:sticky;
-   float: right; */
-
-   /* position: absolute; */
-
-}
-
 #searchResultRoot{
     width:100vw;
     display:flex;
