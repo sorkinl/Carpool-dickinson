@@ -1,5 +1,5 @@
 import firebase from "../../firebase/firebaseConfig";
-import { GET_TRIPS, MAKE_TRIP } from "../constants/trip-types";
+import { GET_TRIPS, MAKE_TRIP, DELETE_TRIP } from "../constants/trip-types";
 import axios from "axios";
 
 const firestore = firebase.firestore();
@@ -37,12 +37,12 @@ export const editTrip = (payload) => {
   //TODO edit trip in the database based on id
 };
 
-export const deleteTrip = (trip) => {
+export const deleteTrip = (tripId) => {
   var trips = firestore.collection("trips")
   return async (dispatch) => {
     try{
- const deleteTrip = trips.doc("OdmzUZ5JMuGntSbevVbH").delete();
- dispatch({type: DELETE_TRIP, payload: trip})
+ const deleteTrip = trips.doc(tripId).delete();
+ //dispatch({type: DELETE_TRIP, payload: trip})
     }
 catch (err) {
   console.error("Error removing document: ", err);

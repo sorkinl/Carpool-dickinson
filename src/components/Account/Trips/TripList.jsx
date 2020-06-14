@@ -6,6 +6,7 @@ import {makeStyles, CssBaseline, Paper, Typography, Box, Grid, ExpansionPanel, E
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTripsByUser } from '../../../redux/actions/profileActions';
+import { useFirestoreConnect } from 'react-redux-firebase';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,9 +29,14 @@ const useStyles = makeStyles((theme) => ({
     //Initialize the states of fuTrip (future trip) and pastTrip (Default value = false).
     const [fuTrip, setFuTrip] = useState(false);
     const [pastTrip, setPastTrip] = useState(false);
-
+    const currentUser = useSelector(state => state.firebase.auth.uid)
+    useFirestoreConnect([{
+      collection: 'trips',
+      where: ['uid', '==', currentUser],
+      storeAs: 'userTrips'
+    }])
     const classes = useStyles();
-    const trips = useSelector(state => state.profileReducer.userTrips)
+    const userTrips = useSelector(state => state.firestore.ordered.userTrips)
     const dispatch = useDispatch();
     //An object storing Trip's info
     const trip = {
@@ -69,12 +75,13 @@ const useStyles = makeStyles((theme) => ({
                 </ExpansionPanelSummary>
                 {/* Display trips if there exists at least 1 trip, otherwise just text*/}
                 <ExpansionPanelDetails>
-                    { fuTrip == true && ( trips.length > 0 ?
+                    { fuTrip == true && ( userTrips.length > 0 ?
                          <Grid container spacing={3} className="Future-trip-list">
                              {
-                                 trips.map(trip => {return (<Trip trip={{
+                                 userTrips.map(trip => {return (<Trip trip={{
                                  from: trip.origin_title,
-                                 to: trip.destination_title,}}/>);})
+                                 to: trip.destination_title,
+                                 id: trip.id}}/>);})
                              }
                          </Grid>
                          :
