@@ -3,12 +3,13 @@ import './Trip.css';
 import { makeStyles } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
 import Rating from '@material-ui/lab/Rating';
-
+import { Link, useRouteMatch } from 'react-router-dom';
 import {Grid, Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, Typography, Button} from '@material-ui/core';
 import EventIcon from '@material-ui/icons/Event';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import EditForm from './editform';
 
 const useStyles = makeStyles({
   media: {
@@ -68,7 +69,7 @@ export default function Trip(props) {
               </CardContent>
               {/* Buttons */}
               <CardActions>
-                  <Button onClick={} size="small" color="primary">
+                  <Button component={Link} to='/edit' size="small" color="primary">
                     Modify trip
                   </Button>
                   <Button size="small" color="primary">

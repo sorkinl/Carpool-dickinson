@@ -1,6 +1,13 @@
-import React from 'react';
-import TextField from '@material-ui/core/TextField';
+import React, { useState } from 'react';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { makeStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import { useDispatch } from 'react-redux';
+import { editTrip } from '../../../redux/actions/tripsActions';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -11,18 +18,50 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function editform(props){
-    
+export default function EditForm(props){
+    const dispatch = useDispatch();
+    const [isUpdated, setUpdate] = useState(false);
     const [state, setState] = useState({
         pickup: props.pickup,
         destination: props.destination,
         startDate: props.startDate,
-    })
+    });
     const classes = useStyles();
+
+    const handleChange = (e) => {
+        setState({
+            ...state,
+            [e.target.name]: e.target.value
+        });
+    }
+
+    const handleDateChange = date => {
+        setState({...state,
+            startDate: date
+        });
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setUpdate(true);
+        console.log(state);
+        dispatch(editTrip({
+            //tripId: props.trip.id, 
+            pickupTitle: state.pickup, 
+           // destination:'', 
+            destTitle: state.destination, 
+            departTime: state.startDate,
+        }, props.match.params.id))
+        setState({
+            pickup:'',
+            destination:'',
+            startDate: new Date()
+        })
+    }
 
     return (
         <div className="container">
-            <form onSubmit={handleSubmit} className="submit-btn">
+            <form className="submit-btn">
                 <FormControl className={classes.FormControl} variant="outlined">
                     <InputLabel htmlFor="component-outlined">
                         pickup
@@ -61,6 +100,16 @@ export default function editform(props){
                     showTimeSelect
                     dateFormat="Pp"
                     />
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                    //onClick={()=>{setUpdate(true)}}
+                    onClick={handleSubmit}
+                >
+                    Edit
+                </Button>
             </form>
         </div>
 

@@ -34,37 +34,43 @@ export const createTrip = (payload) => {
 
 //payload.uid
 //https://stackoverflow.com/questions/49682327/how-to-update-a-single-firebase-firestore-document
-export const editTrip = (payload) => {
+export const editTrip = (payload, id) => {
   //TODO edit trip in the database based on id
-  const trips = firestore.collection("trips")
+  const trips = firestore.collection("trips");
   return async (dispatch) => {
-
-    const getTrips = await trips.doc(tripId).get()
-    .then(snapshot => {
-      const docs = snapshot.docs;
-      docs.forEach(doc => {
-        //console.log(doc.id);
-        trips.doc(doc.id).update({payload});
-      })
-
-    // const trip = trips.doc(tripId).get();
-    // const getTrips = await trips.where('uid', "==", user.uid).get()
-    // .then(snapshot => {
-    //   //console.log(getTrips.docs.map(doc => doc.data()));
-    //   const docs = snapshot.docs;
-    //   user = {
-    //     ...docs,
-    //     uid: payload.uid,
-    //     destTitle: payload.destTitle,
-    //     destination: payload.destination,
-    //     departTime: payload.departTime,
-    //   };
+    trips.doc(id).update({
+      ...payload
     });
-    dispatch({type: EDIT_TRIP, payload: getTrips})
+
+    //const data = trips.doc(tripId);
+    // const data = trips.doc('rcHJgOZl9jToAVUPLRzD');
+    // await data.update({
+    //   departTime: payload.departTime,
+    //   destTitle: payload.destTitle,
+    //   pickupTitle: payload.pickupTitle, 
+    //  // destination: payload.destination,
+
+    // })
+    // .then(doc => {
+    //   if(doc){
+    //     console.log(doc.data());
+    //   }
+    //   console.log(payload);
+    // });
+   // dispatch({type: EDIT_TRIP, payload: data});
   };
 }
 
-export const deleteTrip = (payload) => {
-  //TODO delete trip from the database
+export const deleteTrip = (tripId) => {
+  var trips = firestore.collection("trips")
+  return async (dispatch) => {
+    try{
+ const deleteTrip = trips.doc(tripId).delete();
+ //dispatch({type: DELETE_TRIP, payload: trip})
+    }
+catch (err) {
+  console.error("Error removing document: ", err);
+}
+  }  
 };
 

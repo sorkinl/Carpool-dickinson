@@ -12,6 +12,7 @@ import LogIn from './components/LogInForm/LogIn';
 import SignUp from './components/LogInForm/SignUp';
 
 import LandingPage from "./components/LogInForm/LandingPage"
+import EditForm from './components/Account/Trips/editform';
 
 //temp function to load search Results
 // test pull
@@ -41,6 +42,7 @@ function App() {
           <Route path="/logIn" component={LogIn}/>
           <Route path="/signUp" component={SignUp}/>
           <Route path = "/landingPage" component = {LandingPage}/>
+          <Route path="/edit" component={EditForm}/>
         </Switch>
           </div>
       </Router>
