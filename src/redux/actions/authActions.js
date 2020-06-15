@@ -55,7 +55,7 @@ export const register = (payload) => {
         .auth()
         .currentUser.sendEmailVerification(actionCodeSettings);
       await firestore.collection("users").doc(createUser.user.uid).set({
-        profile,
+        ...profile,
       });
       dispatch({ type: REGISTER_SUCCESS, payload: profile });
     } catch (err) {

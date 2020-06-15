@@ -13,6 +13,9 @@ import LandingPage from "./components/LogInForm/LandingPage";
 import ProfileCreate from "./components/LogInForm/ProfileCreate";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import EditForm from "./components/Account/Trips/editform";
+import EmailVerify from "./components/LogInForm/EmailVerify";
+
+
 
 function App() {
   return (
@@ -32,6 +35,8 @@ function App() {
             <Route path="/landingPage" component={LandingPage} />
             <Route path="/edit" component={EditForm} />
             <PrivateRoute path="/registrationForm" component={ProfileCreate} />
+            <Route path="/verifyEmail" component={EmailVerify}/>
+            <Route path="/registrationForm" component={ProfileCreate} />
           </Switch>
         </div>
       </Router>
