@@ -8,15 +8,10 @@ import Button from "@material-ui/core/Button";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import AccountIcon from "./AccountIcon";
-import SignIn from "../LogInForm/LogIn";
 import { toggleLogin } from "../../redux/actions/authActions";
 import DriveEtaIcon from "@material-ui/icons/DriveEta";
-
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { NavigateBeforeRounded } from "@material-ui/icons";
-
-import firebase from "../../firebase/firebaseConfig";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,28 +30,43 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-/* const mapStateToProps = state => {
-  return {loggedIn: state.loggedIn}
-}
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toggleLogin: () => dispatch(toggleLogin({word:"allowed"}))
-  }
-} */
 
-// above code is redux with classes
 const NavBar = () => {
   const classes = useStyles();
-  //redux hook
-  // useSelector for taking the state out of the store.
-  const loggedIn = useSelector((state) => state.authReducer.loggedIn);
-  // useDispatch enables us to use redux dispatch function
+  const auth = useSelector((state) => state.firebase.auth);
   const dispatch = useDispatch();
 
-  //show account icon if there exists current user
-  //const links = firebase.auth().currentUser ? <AccountIcon /> : <Redirect to='/' />
+  const links = auth.uid ? (
+    <AccountIcon />
+  ) : (
+    <>
+      <Button
+        component={Link}
+        to="/logIn"
+        edge="start"
+        className={classes.menuButton}
+        color="inherit"
+        aria-label="menu"
+        variant="outlined"
+      >
+        Log in
+      </Button>
+      <Button
+        component={Link}
+        to="/signUp"
+        edge="start"
+        className={classes.menuButton}
+        color="inherit"
+        aria-label="menu"
+        variant="outlined"
+      >
+        Sign up
+      </Button>
+    </>
+  );
 
 
+  
   return (
     <div className={classes.root}>
       {/* controls login button */}
@@ -64,15 +74,14 @@ const NavBar = () => {
         <FormControlLabel
           control={
             <Switch
-              checked={loggedIn}
+              checked={!!auth.uid}
               onChange={() => dispatch(toggleLogin({ word: "allowed" }))}
               aria-label="login switch"
             />
           }
-          label={loggedIn ? "Logout" : "Login"}
+          label={auth.uid ? "Logout" : "Login"}
         />
       </FormGroup>
-
       <AppBar className={classes.appBar} position="fixed">
         <Toolbar>
           <IconButton
@@ -83,13 +92,10 @@ const NavBar = () => {
           >
             <DriveEtaIcon />
           </IconButton>
-
-          <Link className={classes.title} to="/">Carpool</Link>
-
-
-          { loggedIn? <AccountIcon/>:<><Button component={Link} to="/logIn" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Log in</Button>
-          <Button component={Link} to="/signUp" edge="start" className={classes.menuButton} color="inherit" aria-label="menu" variant="outlined">Sign up</Button></> }
-
+          <Link className={classes.title} to="/">
+            Carpool
+          </Link>
+          {links}
         </Toolbar>
       </AppBar>
     </div>

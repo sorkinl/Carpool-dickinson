@@ -8,6 +8,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import { useDispatch } from 'react-redux';
 import { editTrip } from '../../../redux/actions/tripsActions';
 import { Button } from '@material-ui/core';
+import { useFirestore } from 'react-redux-firebase';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,11 +23,14 @@ export default function EditForm(props){
     const dispatch = useDispatch();
     const [isUpdated, setUpdate] = useState(false);
     const [state, setState] = useState({
-        pickup: props.pickup,
-        destination: props.destination,
+        pickup: props.from,
+        destination: props.to,
         startDate: props.startDate,
     });
+    
     const classes = useStyles();
+ 
+    const firestore = useFirestore();
 
     const handleChange = (e) => {
         setState({
@@ -44,19 +48,12 @@ export default function EditForm(props){
     const handleSubmit = (e) => {
         e.preventDefault();
         setUpdate(true);
-        console.log(state);
-        dispatch(editTrip({
-            //tripId: props.trip.id, 
-            pickupTitle: state.pickup, 
-           // destination:'', 
-            destTitle: state.destination, 
-            departTime: state.startDate,
-        }, props.match.params.id))
-        setState({
-            pickup:'',
-            destination:'',
-            startDate: new Date()
-        })
+        console.log(props.trip);
+        // setState({
+        //     pickup:props.trip.from,
+        //     destination:props.trip.to,
+        //     startDate: new Date()
+        // })
     }
 
     return (
