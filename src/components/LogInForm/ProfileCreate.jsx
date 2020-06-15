@@ -13,7 +13,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import { useSelector } from "react-redux";
-import { useFirestore } from "react-redux-firebase";
+import { useFirestore, isEmpty } from "react-redux-firebase";
 import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +50,7 @@ export default function ProfileCreate() {
     gender: "",
     phone: "",
   });
-  const currentUser = useSelector((state) => state.firebase.auth.uid);
+  const currentUser = useSelector((state) => state.firebase.auth);
   const userProfile = useSelector((state) => state.firebase.profile);
   const firestore = useFirestore();
 
@@ -71,7 +71,7 @@ export default function ProfileCreate() {
       firestore.set(
         {
           collection: "users",
-          doc: currentUser,
+          doc: currentUser.uid,
         },
         {
           ...user,
@@ -81,9 +81,8 @@ export default function ProfileCreate() {
       );
     }
   }
-  console.log("render");
 
-  return userProfile.status === 2 ? (
+  return userProfile.status === 2 || isEmpty(currentUser) ? (
     <Redirect to="/" />
   ) : (
     <Container component="main" maxWidth="md">

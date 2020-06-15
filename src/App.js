@@ -12,6 +12,9 @@ import SignUp from "./components/LogInForm/SignUp";
 import LandingPage from "./components/LogInForm/LandingPage";
 import ProfileCreate from "./components/LogInForm/ProfileCreate";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import EmailVerify from "./components/LogInForm/EmailVerify";
+
+
 
 function App() {
   return (
@@ -29,7 +32,8 @@ function App() {
             <Route path="/logIn" component={LogIn} />
             <Route path="/signUp" component={SignUp} />
             <Route path="/landingPage" component={LandingPage} />
-            <PrivateRoute path="/registrationForm" component={ProfileCreate} />
+            <Route path="/verifyEmail" component={EmailVerify}/>
+            <Route path="/registrationForm" component={ProfileCreate} />
           </Switch>
         </div>
       </Router>

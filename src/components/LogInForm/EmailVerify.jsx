@@ -1,7 +1,7 @@
 import React from 'react'
+import firebase from '../../firebase/firebaseConfig'
 
-
-const EmailVerified = () => {
+const EmailVerify = () => {
 
     const verifyEmail = () => {
         firebase.auth().currentUser.sendEmailVerification()
@@ -13,4 +13,4 @@ const EmailVerified = () => {
 }
 
 
-export default EmailVerified
+export default EmailVerify
