@@ -8,7 +8,7 @@ import {Grid, CssBaseline} from '@material-ui/core';
 export default function Account(props) {
     return(
         <CssBaseline>
-          <div>
+          <div className="account">
             <Grid container spacing={1}>
               <Grid item xs={4.5}>
                 <Profile/>

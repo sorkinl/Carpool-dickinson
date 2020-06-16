@@ -2,11 +2,14 @@ import React, {useState} from 'react';
 import './PostRideField.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from "@material-ui/core/Link";
-import {Paper, Container, Box, TextField, Grid, CssBaseline, Typography, Button, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel} from '@material-ui/core';
+import { Paper, Container, Box, TextField, Grid, CssBaseline, Typography, Button, Radio, RadioGroup, FormControlLabel, FormControl, IconButton} from '@material-ui/core';
 import {StepLabel, Step, Stepper } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
 import DateFnsUtils from '@date-io/date-fns';
 import {MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker} from '@material-ui/pickers';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import { useFirestoreConnect } from 'react-redux-firebase';
+import {BrowserRouter as Router} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,11 +34,25 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         width: "100%", // Fix IE 11 issue.
-        marginTop: theme.spacing(1.5),
+        marginTop: theme.spacing(1),
+        paddingLeft: theme.spacing(4)
+    },
+    caption: {
+        width: "100%", // Fix IE 11 issue.
+        paddingLeft: theme.spacing(4),
+    },
+    title2: {
+        width: "100%", // Fix IE 11 issue.
+        marginTop: theme.spacing(2),
         paddingLeft: theme.spacing(4)
     },
     submit: {
         margin: theme.spacing(3, 3, 2),
+    },
+    editButton: {
+        width: 130, // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+        marginLeft: theme.spacing(35)
     },
     textField: {
         marginLeft: theme.spacing(1),
@@ -47,37 +64,44 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(3),
         width: '30ch',
     },
+    profileField: {
+        marginLeft: theme.spacing(4),
+        marginRight: theme.spacing(1),
+        marginTop: theme.spacing(2),
+        width: '22ch',
+    }
 }));
 
 
 function getSteps() {
-    return ['YOUR RIDE DETAILS', 'CONTACT INFORMATION', 'CONFIRM RIDE'];
+    return ['CONTACT INFORMATION', 'YOUR RIDE DETAILS', 'CONFIRM RIDE'];
+}
+//Get current date
+var today = new Date();
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
+//Global trip variable for stepper
+let makeTrip = {
+    departure: "",
+    destination:"",
+    pickupDate: date,
+    pickupTime: "",
+    numSeat: ""
 }
 
-function AddressField() {
-
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    // var dateTime = date+' '+time;
+function RideField() {
 
     const classes = useStyles();
-
-    const [state, setState] = useState({
-        departure:"",
-        destination:"",
-        pickupDate: date,
-        pickupTime: "",
-        numSeat: ""
-    });
+    const [state, setState] = useState(makeTrip);
 
     function handleChange(e) {
-        const { name, value } = e.target;
-        setState((state) => ({ ...state, [name]: value }));
+        const {name, value} = e.target;
+        setState((state) => ({...state, [name]: value}));
+        makeTrip[name] = value;
     }
     return (
         <div >
-             <Container component="main" maxWidth="md">
+             <Container component="secondStep" maxWidth="md">
                 <CssBaseline/>
 
                  <Paper className={classes.paper} elevation={3}>
@@ -86,7 +110,7 @@ function AddressField() {
                         Offer a ride
                     </Typography>
 
-                    <div className="line"></div>
+                    <div className="line2"></div>
 
                     {/* main form */}
                     <form className={classes.form} /*onSubmit={}*/>
@@ -94,28 +118,30 @@ function AddressField() {
 
                             <Grid item xs={12} sm={6}>
                                 <TextField
-                                    variant='filled'
                                     className={classes.textField}
                                     autoComplete="depart"
                                     name="departure"
                                     required
+                                    size='small'
                                     fullWidth
                                     placeholder="From"
                                     label="Departure"
                                     autoFocus
+                                    value={state.departure}
                                     onChange={handleChange}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
-                                    variant='filled'
                                     className={classes.textField}
                                     required
+                                    size='small'
                                     fullWidth
                                     label="Destination"
                                     name="destination"
                                     autoComplete="dest"
                                     placeholder="To"
+                                    value={state.destination}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -155,6 +181,7 @@ function AddressField() {
                                     name="pickupTime"
                                     value={state.pickupTime}
                                     placeholder="eg: 8am/9:30am-2pm/Anytime"
+                                    value={state.pickupTime}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -166,7 +193,7 @@ function AddressField() {
                                 </Typography>
                                 <FormControl>
                                    {/*<FormLabel component="legend">Number of seats</FormLabel>*/}
-                                    <RadioGroup name="numSeat" value={state.numSeat} onChange={handleChange}>
+                                    <RadioGroup name="numSeat" value={state.numSeat} onChange={handleChange} value={state.numSeat}>
                                         <FormControlLabel value="seat1" control={<Radio />} label="1" />
                                         <FormControlLabel value="seat2" control={<Radio />} label="2" />
                                         <FormControlLabel value="seat3" control={<Radio />} label="3" />
@@ -187,12 +214,142 @@ function AddressField() {
     );
 }
 
+function ContactField() {
+    const classes = useStyles();
+    useFirestoreConnect([
+        { collection: 'users' }
+    ])
+
+    const [state, setState] = useState("");
+    const users = useSelector((state) => state.firestore.ordered.users);
+
+    function handleChange(e) {
+        const {name, value} = e.target;
+        setState((state) => ({...state, [name]: value}));
+        makeTrip[name] = value;
+    }
+    return (
+        <div >
+            <Container component="firstStep" maxWidth="sm">
+                <CssBaseline/>
+                <Paper className={classes.paper} elevation={3}>
+                    <Typography variant="h5" align='left' className={classes.title} >
+                        Your contact information
+                    </Typography>
+                    <div className="line1"></div>
+                    <form className={classes.form}>
+
+                        <Typography variant="body2" align='left' className={classes.caption} color='textSecondary'>
+                            <Box fontStyle="italic">
+                                *Please make sure the information below is correct before continuing, <br/>
+                                as it will be seen by your ride requesters.
+                            </Box>
+                        </Typography>
+                        {/*<IconButton color="primary" fontSize="small" >Edit info*/}
+                        {/*    <EditIcon fontSize="small"></EditIcon>*/}
+                        {/*</IconButton>*/}
+                        <Button href="../Account/Profile/Profile.jsx" size="small" color="primary"  variant="contained" endIcon={<EditIcon />} className={classes.editButton}>
+                            Edit profile
+                        </Button>
+
+                        {/*<div>*/}
+                        {/*    <Router>*/}
+                        {/*        <a >Edit profile </a><EditIcon />*/}
+                        {/*    </Router>*/}
+                        {/*</div>*/}
+
+                        <Typography variant="subtitle2" align='left' className={classes.title} >
+                            Profile information
+                        </Typography>
+
+                        <Grid container spacing={1}>
+                            <Grid item xs={12} sm={5}>
+                                <TextField
+                                    variant='filled'
+                                    disabled
+                                    size='small'
+                                    className={classes.profileField}
+                                    name="departure"
+                                    fullWidth
+                                    placeholder="From"
+                                    label="First name"
+                                    value={state.departure}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    variant='filled'
+                                    disabled
+                                    size='small'
+                                    className={classes.profileField}
+                                    fullWidth
+                                    label="Last name"
+                                    name="lastName"
+                                    placeholder="To"
+                                    value={state.destination}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                            <Grid item>
+                                <TextField
+                                    variant='filled'
+                                    disabled
+                                    size='small'
+                                    className={classes.profileField}
+                                    fullWidth
+                                    label="Class year"
+                                    name="classYear"
+                                    value={state.destination}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Typography variant="subtitle2" align='left' className={classes.title2} >
+                            Contact information
+                        </Typography>
+                        <Grid container spacing={1}>
+                            <Grid item xs={12} sm={5}>
+                                <TextField
+                                    variant='filled'
+                                    disabled
+                                    size='small'
+                                    className={classes.profileField}
+                                    label="Email"name="email"
+                                    fullWidth
+                                    value={state.departure}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    variant='filled'
+                                    disabled
+                                    size='small'
+                                    className={classes.profileField}
+                                    fullWidth
+                                    label="Phone number"
+                                    name="phoneNum"
+                                    value={state.destination}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                        </Grid>
+                    </form>
+                    <Box mt={3}></Box>
+                </Paper>
+
+            </Container>
+        </div>
+    );
+}
+
 export function getStepContent(step) {
     switch (step) {
         case 0:
-            return <AddressField></AddressField>;
+            return <ContactField></ContactField>;
         case 1:
-            return 'What is an ad group anyways?';
+            return <RideField></RideField>;
         case 2:
             return 'This is the bit I really care about!';
         default:
@@ -201,6 +358,7 @@ export function getStepContent(step) {
 }
 
 export default function PostRideField() {
+
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const [isHome, setHome] = React.useState(false);
@@ -216,6 +374,10 @@ export default function PostRideField() {
 
     const handleReset = () => {
         setActiveStep(0);
+    };
+    const handleSubmit = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        //dispatch
     };
 
     return (
@@ -259,9 +421,13 @@ export default function PostRideField() {
                             >
                                 Back
                             </Button>
-                            <Button variant="contained" color="primary" onClick={handleNext} className={classes.submit}>
-                                {activeStep === steps.length - 1 ? 'Confirm ride' : 'Next'}
+                            {activeStep === steps.length - 1 ? <Button variant="contained" color="primary" onClick={handleSubmit} className={classes.submit}>
+                                Confirm ride
                             </Button>
+                                :<Button variant="contained" color="primary" onClick={handleNext} className={classes.submit}>
+                                Next
+                            </Button>}
+
                         </div>
                     </div>
                 )}

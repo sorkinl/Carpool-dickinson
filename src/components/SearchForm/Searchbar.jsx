@@ -59,7 +59,7 @@ const handleDateChange = date => {
 //after the submission, the state is reset
 const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createTrip({pickup:'Invalidenstraße 117, 10115 Berlin, Deutschland'}))
+    // dispatch(createTrip({pickup:'Invalidenstraße 117, 10115 Berlin, Deutschland'}))
     onCreate({...state, startDate: state.startDate.toISOString()});
     setState({
         pickup:'',

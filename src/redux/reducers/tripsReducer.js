@@ -1,5 +1,5 @@
 import { LOGIN, REGISTER } from "../constants/auth-types";
-import { GET_TRIPS, POST_TRIP } from "../constants/trip-types";
+import { GET_TRIPS, MAKE_TRIP, GET_TRIPS_USER } from "../constants/trip-types";
 
 const initialState = {
     trips:[]
@@ -12,7 +12,7 @@ const initialState = {
           ...state,
           trips: action.payload
         }
-      case POST_TRIP:
+      case MAKE_TRIP:
         console.log(action.payload)
       default:
         return state

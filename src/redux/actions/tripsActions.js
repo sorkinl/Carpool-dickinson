@@ -1,5 +1,5 @@
 import firebase from "../../firebase/firebaseConfig";
-import { GET_TRIPS, POST_TRIP } from "../constants/trip-types";
+import { GET_TRIPS, MAKE_TRIP} from "../constants/trip-types";
 import axios from "axios";
 
 const firestore = firebase.firestore();
@@ -12,23 +12,27 @@ export function getTrips() {
     }
 }
 
+
 export const createTrip = (payload) => {
   //TODO put trip into the database
 
-  return async (dispatch) => {
-
-    const search = encodeURIComponent(payload.pickup)
-    const response = await axios.get(
-      `https://geocode.search.hereapi.com/v1/geocode?q=${search}&apiKey=${process.env.REACT_APP_HERE_KEY}`
-    );
-    console.log(response);
-    const data = await firestore.collection("trips").add({
-      uid: firebase.auth().currentUser.uid,
-      destTitle: response.data.items[0].title,
-      destination: new firebase.firestore.GeoPoint(response.data.items[0].position.lat, response.data.items[0].position.lng),
-      departTime: new firebase.firestore.Timestamp.now()
-    });
-    dispatch({type: POST_TRIP, payload: data})
+  return async (dispatch, {geFirebase, getFirestore}) => {
+    try {
+      const search = encodeURIComponent(payload.pickup)
+      const response = await axios.get(
+          `https://geocode.search.hereapi.com/v1/geocode?q=${search}&apiKey=${process.env.REACT_APP_HERE_KEY}`
+      );
+      console.log(response);
+      const data = await firestore.collection("trips").add({
+        uid: firebase.auth().currentUser.uid,
+        destTitle: response.data.items[0].title,
+        destination: new firebase.firestore.GeoPoint(response.data.items[0].position.lat, response.data.items[0].position.lng),
+        departTime: new firebase.firestore.Timestamp.now()
+      });
+      dispatch({type: MAKE_TRIP, payload: data})
+    } catch (err) {
+      console.log("MAKE_TRIP dispatch error", err);
+    }
   };
 };
 
