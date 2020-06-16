@@ -46,7 +46,7 @@ export default function EditForm(props){
 
     const firestore = useFirestore();
     var trip = firestore.collection("trips").doc('NZ07glQhOvTZ9tkn7XZI');
-
+    console.log(trip);
     const handleSubmit = (e) => {
         e.preventDefault();
         setUpdate(true);
