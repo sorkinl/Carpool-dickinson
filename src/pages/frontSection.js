@@ -5,7 +5,6 @@ import fptwo from "../static/img/frontpage2.jpg"
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
-
 const theme = createMuiTheme({
     typography: {
       fontFamily: [
@@ -22,6 +21,8 @@ const theme = createMuiTheme({
       ].join(','),
     },
   });
+
+
 
  const useStyles = makeStyles({
 
@@ -50,12 +51,77 @@ const theme = createMuiTheme({
         height: 200,
         margin: '30px'
     },
+    topImage: {
+        height: 500,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: '-16px',
+        
+    },
+    find: {
+        position: 'relative',
+    },
+    rideText: {
+        position: 'absolute',
+        width: '350px',
+        height: '200px',
+        top: '100px',
+        left: '10px',
+        color: '#EEE5D0',
+        fontFamily: 'Merriweather',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: '50px',
+        lineHeight: '48px',
+        textAllign: 'left',
+        allignSelf: 'stretch',
+    },
+    findButton: {
+        position: 'absolute',
+        width: '200px',
+        height: '53px',
+        left: '50px',
+        top: '240px',
+        fontFamily: 'Merriweather',
+        fontStyle: 'normal',
+        fontWeight: 'normal',
+        fontSize: '26px',
+        lineHeight: '33px',
+        display: 'flex',
+        alignItems: 'center',
+        textAlign: 'center',
+        background: '#EEE5D0',
+         "&:hover": { backgroundColor: '#E0D2B2'},
+        borderRadius: '10px',
+         
+
+    }
  });
 
 export default function FrontSection(props){
     const classes = useStyles();
     return(
-        <Card className={classes.rootone}>
+        <Card>
+            <CardContent className={classes.find}>
+            <CardMedia
+                className={classes.topImage}
+                image={fptwo}
+                title="first img"
+            />
+                <Typography className={classes.rideText}>
+                        Looking for a ride?
+                </Typography>
+                <Button 
+                    component={Link} 
+                    to='/search' 
+                    
+                    className={classes.findButton}
+                    >
+                        Find a ride
+                 </Button>
+
+            </CardContent>
             {/*first section with text, 'Find a ride' button and the image */}
             <CardContent className={classes.find}>
                 <CardActions className={classes.ride}>
@@ -69,6 +135,7 @@ export default function FrontSection(props){
                     to='/search' 
                     color='primary' 
                     variant='outlined'
+                    disableElevation
                     className={classes.findbtn}
                     >
                         Find a ride
