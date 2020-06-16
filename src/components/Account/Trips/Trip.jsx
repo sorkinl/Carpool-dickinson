@@ -20,7 +20,7 @@ import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import { Menu, MenuItem } from "@material-ui/core/";
 import { useFirestore } from "react-redux-firebase";
 import EditForm from "./editform";
-import { Link , useRouteMatch } from 'react-router-dom';
+import { Link , useRouteMatch, Route } from 'react-router-dom';
 
 const useStyles = makeStyles({
   media: {
@@ -43,6 +43,7 @@ export default function Trip(props) {
     console.log(props);
     console.log(props.trip.id);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -55,6 +56,8 @@ export default function Trip(props) {
       doc: props.trip.id, //prop is passed from trip list
     });
   }
+
+  
 
 
   return (
@@ -103,9 +106,11 @@ export default function Trip(props) {
         </CardContent>
         {/* Buttons */}
         <CardActions>
-          <Button component={Link} to='/edit' size="small" color="primary">
-              Modify trip
-          </Button>
+          <Link to={`edit/${props.trip.id}`}>
+            <Button size="small" color="primary">
+               Modify trip
+            </Button>
+          </Link>
           <Button onClick={handleMenu} size="small" color="primary">
             Contact driver
           </Button>

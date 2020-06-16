@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function EditForm(props){
+    const userId = props.match.params.userId;
     const dispatch = useDispatch();
     const [isUpdated, setUpdate] = useState(false);
     const [state, setState] = useState({
@@ -29,8 +30,6 @@ export default function EditForm(props){
     });
     
     const classes = useStyles();
- 
-    const firestore = useFirestore();
 
     const handleChange = (e) => {
         setState({
@@ -43,12 +42,18 @@ export default function EditForm(props){
         setState({...state,
             startDate: date
         });
-    }
+    };
+
+    const firestore = useFirestore();
+    var trip = firestore.collection("trips").doc('NZ07glQhOvTZ9tkn7XZI');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setUpdate(true);
-        console.log(props.trip);
+        firestore.update({
+            collection: 'trips',
+            doc: userId,
+        });
         // setState({
         //     pickup:props.trip.from,
         //     destination:props.trip.to,

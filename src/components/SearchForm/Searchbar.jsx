@@ -7,6 +7,7 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
+import { createTrip } from "../../redux/actions/tripsActions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -52,7 +53,7 @@ const Searchbar = ({ onCreate }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //dispatch(createTrip({pickup:'Invalidenstraße 117, 10115 Berlin, Deutschland'}))
+    dispatch(createTrip({pickup:'Invalidenstraße 117, 10115 Berlin, Deutschland'}))
     onCreate({ ...state, startDate: state.startDate.toISOString() });
     setState({
       pickup: "",

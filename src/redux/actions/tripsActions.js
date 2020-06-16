@@ -41,7 +41,9 @@ export const createTrip = (payload) => {
 //https://stackoverflow.com/questions/49682327/how-to-update-a-single-firebase-firestore-document
 export const editTrip = (payload, id) => {
   //TODO edit trip in the database based on id
-  const trips = firestore.collection("trips");
+  var trips = firestore.collection("trips");
+  console.log(trips.doc('NZ07glQhOvTZ9tkn7XZI'));
+  console.log(id);
   return async (dispatch) => {
     trips.doc(id).update({
       ...payload
