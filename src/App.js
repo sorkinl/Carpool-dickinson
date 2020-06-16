@@ -17,7 +17,7 @@ import EmailVerify from "./components/LogInForm/EmailVerify";
 
 
 
-function App( {user} ) {
+function App() {
   return (
     <div className="App">
       <Router>
@@ -33,7 +33,7 @@ function App( {user} ) {
             <Route path="/logIn" component={LogIn} />
             <Route path="/signUp" component={SignUp} />
             <Route path="/landingPage" component={LandingPage} />
-            <Route path="/edit/:userId" component={EditForm} />
+            <Route path="/edit/:tripId" component={EditForm} />
             <Route path="/verifyEmail" component={EmailVerify}/>
             <Route path="/registrationForm" component={ProfileCreate} />
           </Switch>

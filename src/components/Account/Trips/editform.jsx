@@ -20,13 +20,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function EditForm(props){
-    const userId = props.match.params.userId;
+    //get tripId from path
+    const firestore = useFirestore();
+    const tripId = props.match.params.tripId;
     const dispatch = useDispatch();
     const [isUpdated, setUpdate] = useState(false);
+
     const [state, setState] = useState({
-        pickup: props.from,
-        destination: props.to,
-        startDate: props.startDate,
+        destTitle: '',
+        destination: '',
+        departTime: new Date(),
     });
     
     const classes = useStyles();
@@ -43,23 +46,23 @@ export default function EditForm(props){
             startDate: date
         });
     };
-
-    const firestore = useFirestore();
-    var trip = firestore.collection("trips").doc('NZ07glQhOvTZ9tkn7XZI');
-    console.log(trip);
+    
     const handleSubmit = (e) => {
         e.preventDefault();
+        const modifiedTrip = {
+            destTitle: state.destination,
+            destination: {
+                latitude: 23,
+                longitude: 52} ,
+            departTime: state.startDate,
+        }
         setUpdate(true);
+        console.log(modifiedTrip);
         firestore.update({
             collection: 'trips',
-            doc: userId,
-        });
-        // setState({
-        //     pickup:props.trip.from,
-        //     destination:props.trip.to,
-        //     startDate: new Date()
-        // })
-    }
+            doc: tripId,
+        }, modifiedTrip);
+    };
 
     return (
         <div className="container">
