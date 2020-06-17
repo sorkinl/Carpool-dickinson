@@ -40,9 +40,9 @@ const Searchbar = ({onCreate}) => {
 
     const classes = useStyles();
     const [searchInput, setSearchInput] = useState({
-        pickupTitle:'',
-        destination:'',
-        startDate: new Date()
+        originTitle:'',
+        destTitle:'',
+        departDate: new Date()
     })
     const dispatch = useDispatch();
 
@@ -58,7 +58,7 @@ const Searchbar = ({onCreate}) => {
     const handleDateChange = date => {
         setSearchInput({
             ...searchInput,
-            startDate: date
+            departDate: date
         });
     }
 
@@ -70,7 +70,7 @@ const Searchbar = ({onCreate}) => {
             console.log("submitted")
      
 
-        onCreate({...searchInput, startDate: searchInput.startDate.toISOString()});
+        onCreate({...searchInput, departDate: searchInput.departDate.toISOString()});
         dispatch(getTrips(searchInput))
         // setState({
         //     pickup:'',
@@ -88,14 +88,14 @@ const Searchbar = ({onCreate}) => {
                 </InputLabel>
             <OutlinedInput
                 type='text'
-                value={searchInput.pickupTitle}
+                value={searchInput.originTitle}
                 variant="outlined"
                 margin="normal"
                 required
                 fullWidth
-                id="pickupTitle"
+                id="originTitle"
                 onChange={handleChange}
-                name="pickupTitle"
+                name="originTitle"
             />
             </FormControl>
             <FormControl className={classes.FormControl} variant="outlined">
@@ -104,18 +104,18 @@ const Searchbar = ({onCreate}) => {
                 </InputLabel>
             <OutlinedInput
                 type='text'
-                value={searchInput.destination}
+                value={searchInput.destTitle}
                 margin="normal"
                 required
                 fullWidth
-                id="destination"
+                id="destTitle"
                 onChange={handleChange}
-                name="destination"
+                name="destTitle"
             />
             </FormControl>
             <DatePicker
                     placeholderText="choose date and time"
-                    selected={searchInput.startDate}
+                    selected={searchInput.departDate}
                     onChange={handleDateChange}
                     showTimeSelect
                     dateFormat="Pp"
