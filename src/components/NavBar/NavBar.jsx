@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, styled } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -10,7 +10,6 @@ import AccountIcon from "./AccountIcon";
 import SignIn from "../LogInForm/LogIn";
 import { toggleLogin } from "../../redux/actions/authActions";
 import DriveEtaIcon from "@material-ui/icons/DriveEta";
-import { red } from '@material-ui/core/colors';
 import { Redirect, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { NavigateBeforeRounded } from "@material-ui/icons";
@@ -22,16 +21,16 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
+  //menuButton: {
+  //  marginRight: theme.spacing(2),
+  //},
   title: {
     flexGrow: 1,
     color: "white",
     textDecoration: "none",
   },
   appBar: {
-    zIndex: 3,
+    //zIndex: 3,
     background: '#F7F5F5',
   },
   logIn: {
@@ -82,9 +81,7 @@ const useStyles = makeStyles((theme) => ({
       top: '13px',
 
     },
-    accIcon: {
-      fill: '#C50505'
-    },
+
  
 }));
 
@@ -137,7 +134,7 @@ const NavBar = () => {
             {/* <DriveEtaIcon /> *
           </IconButton> */}
 
-          <Link className={classes.title} to="/">Carpool</Link>
+          {/* <Link className={classes.title} to="/">Carpool</Link> */}
 
           <CardMedia
             className={classes.uride}
@@ -145,7 +142,7 @@ const NavBar = () => {
             title="uride"
             /> 
 
-          { loggedIn? <AccountIcon style={{ fill: red[900] }}/>:<><Button component={Link} to="/logIn" edge="start" className={classes.logIn} color="inherit" aria-label="menu" variant="outlined">Log in</Button>
+          { loggedIn? <AccountIcon className={classes.accIcon}/>:<><Button component={Link} to="/logIn" edge="start" className={classes.logIn} color="inherit" aria-label="menu" variant="outlined">Log in</Button>
           <Button component={Link} to="/signUp" edge="start" className={classes.signUp} color="inherit" aria-label="menu" variant="outlined">Sign up</Button></> }
 
         </Toolbar>
