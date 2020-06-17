@@ -46,9 +46,11 @@ function SearchResult() {
   
    // useDispatch enables us to use redux dispatch function
   const dispatch = useDispatch();
-  React.useEffect(() => {
-    dispatch(getTrips()) 
-  },[]);
+
+
+  // React.useEffect(() => {
+  //   dispatch(getTrips()) 
+  // },[]);
 
   const tripList = trips.map((trip) => 
     <EachResult

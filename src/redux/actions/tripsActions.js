@@ -10,7 +10,7 @@ export function getTrips(payload) {
   console.log("render")
 
   var trips = firestore.collection("trips")
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
         console.log( payload)
         const getTrips =  await trips.where('pickupTitle', "==", payload.pickupTitle)
           .get()
