@@ -9,7 +9,7 @@ import { verifyUser } from '../actions/authActions';
 
 const store = createStore(
     rootReducer,
-    composeWithDevTools(applyMiddleware(authMiddleware, thunk, logger))
+    composeWithDevTools(applyMiddleware(authMiddleware, thunk,logger))
     );
 
 store.dispatch(verifyUser());

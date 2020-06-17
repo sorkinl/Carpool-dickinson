@@ -1,11 +1,6 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import "./Footer.css"
-import LogIn from '../LogInForm/LogIn';
-import SignUp from '../LogInForm/SignUp';
-import { Switch, Link, Route, BrowserRouter as Router } from 'react-router-dom';
-
-import { AppBar,Toolbar } from '@material-ui/core';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 /* New attempt at footer code */
 const Footer = () => {
@@ -40,28 +35,3 @@ const Footer = () => {
 }
 export default Footer;
 
-
-/* Previous attempt at footer code */
-/* const useStyles = makeStyles((theme) => ({
-    footer: {
-        top: 'auto',
-        height:20,
-        bottom: 0,
-        position:"relative"
-      },
-})); */
-
-
-/* export default function MenuAppBar() {
-    const classes = useStyles();
-  return (
-    <div>
-      { <AppBar classes = {{root:classes.footer}}>
-          <Toolbar>
-              dasdas
-          </Toolbar>
-
-      </AppBar> }
-    </div>
-  );
-} */

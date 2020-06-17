@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-import './Profile.css';
-
 import avatar from "../../../static/img/avatar.png"
 import EditButton from './EditButton';
 import EditField from './EditField';

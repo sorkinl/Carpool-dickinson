@@ -2,8 +2,11 @@ import React, {useState} from 'react';
 import './PostRideField.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from "@material-ui/core/Link";
-import { Paper, Container, Box, TextField, Grid, CssBaseline, Typography, Button, Radio, RadioGroup, FormControlLabel, FormControl, IconButton} from '@material-ui/core';
+import {TextareaAutosize, Paper, Container, Box, TextField, Grid, CssBaseline, Typography, Button, Radio, RadioGroup, FormControlLabel, FormControl, InputAdornment} from '@material-ui/core';
 import {StepLabel, Step, Stepper } from '@material-ui/core';
+import { green } from '@material-ui/core/colors';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import EditIcon from '@material-ui/icons/Edit';
 import DateFnsUtils from '@date-io/date-fns';
 import {MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker} from '@material-ui/pickers';
@@ -35,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
     title: {
         width: "100%", // Fix IE 11 issue.
         marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(1),
         paddingLeft: theme.spacing(4)
     },
     caption: {
@@ -67,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
     profileField: {
         marginLeft: theme.spacing(4),
         marginRight: theme.spacing(1),
-        marginTop: theme.spacing(2),
+        marginTop: theme.spacing(1),
         width: '22ch',
     }
 }));
@@ -82,136 +86,12 @@ var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
 //Global trip variable for stepper
 let makeTrip = {
-    departure: "",
-    destination:"",
+    origin_title: "",
+    destination_title:"",
     pickupDate: date,
     pickupTime: "",
-    numSeat: ""
-}
-
-function RideField() {
-
-    const classes = useStyles();
-    const [state, setState] = useState(makeTrip);
-
-    function handleChange(e) {
-        const {name, value} = e.target;
-        setState((state) => ({...state, [name]: value}));
-        makeTrip[name] = value;
-    }
-    return (
-        <div >
-             <Container component="secondStep" maxWidth="md">
-                <CssBaseline/>
-
-                 <Paper className={classes.paper} elevation={3}>
-
-                    <Typography variant="h5" align='left' className={classes.title} >
-                        Offer a ride
-                    </Typography>
-
-                    <div className="line2"></div>
-
-                    {/* main form */}
-                    <form className={classes.form} /*onSubmit={}*/>
-                        <Grid container spacing={2}>
-
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    className={classes.textField}
-                                    autoComplete="depart"
-                                    name="departure"
-                                    required
-                                    size='small'
-                                    fullWidth
-                                    placeholder="From"
-                                    label="Departure"
-                                    autoFocus
-                                    value={state.departure}
-                                    onChange={handleChange}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    className={classes.textField}
-                                    required
-                                    size='small'
-                                    fullWidth
-                                    label="Destination"
-                                    name="destination"
-                                    autoComplete="dest"
-                                    placeholder="To"
-                                    value={state.destination}
-                                    onChange={handleChange}
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} sm={5}>
-
-                                <Typography variant="subtitle2" align='left' className={classes.title} >
-                                        Travel time
-                                </Typography>
-                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                    <KeyboardDatePicker
-                                        disableToolbar
-                                        required
-                                        variant="inline"
-                                        format="MM/dd/yyyy"
-                                        margin="normal"
-                                        label="Date"
-                                        name="pickupDate"
-                                        value={state.pickupDate}
-                                        onChange={handleChange}
-                                        KeyboardButtonProps={{
-                                            'aria-label': 'change date',
-                                        }}
-                                    />
-                                </MuiPickersUtilsProvider>
-                            </Grid>
-                        </Grid>
-                        <Grid container spacing={2}>
-
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    className={classes.timeField}
-                                    required
-                                    fullWidth
-                                    label="Pickup time"
-                                    name="pickupTime"
-                                    value={state.pickupTime}
-                                    placeholder="eg: 8am/9:30am-2pm/Anytime"
-                                    value={state.pickupTime}
-                                    onChange={handleChange}
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} sm={3}>
-                                <Typography variant="subtitle2" align='left' className={classes.title} >
-                                    Number of seats
-                                </Typography>
-                                <FormControl>
-                                   {/*<FormLabel component="legend">Number of seats</FormLabel>*/}
-                                    <RadioGroup name="numSeat" value={state.numSeat} onChange={handleChange} value={state.numSeat}>
-                                        <FormControlLabel value="seat1" control={<Radio />} label="1" />
-                                        <FormControlLabel value="seat2" control={<Radio />} label="2" />
-                                        <FormControlLabel value="seat3" control={<Radio />} label="3" />
-                                        <FormControlLabel value="seat4" control={<Radio />} label="4" />
-                                        <FormControlLabel value="seat5" control={<Radio />} label="5" />
-                                        <FormControlLabel value="seat6" control={<Radio />} label="6" />
-                                    </RadioGroup>
-                                </FormControl>
-                            </Grid>
-                        </Grid>
-
-                    </form>
-                    <Box mt={5}></Box>
-                </Paper>
-
-              </Container>
-        </div>
-    );
+    numSeat: "",
+    comment: "",
 }
 
 function ContactField() {
@@ -245,9 +125,6 @@ function ContactField() {
                                 as it will be seen by your ride requesters.
                             </Box>
                         </Typography>
-                        {/*<IconButton color="primary" fontSize="small" >Edit info*/}
-                        {/*    <EditIcon fontSize="small"></EditIcon>*/}
-                        {/*</IconButton>*/}
                         <Button href="../Account/Profile/Profile.jsx" size="small" color="primary"  variant="contained" endIcon={<EditIcon />} className={classes.editButton}>
                             Edit profile
                         </Button>
@@ -344,6 +221,176 @@ function ContactField() {
     );
 }
 
+function RideField() {
+
+    const classes = useStyles();
+    const [state, setState] = useState(makeTrip);
+
+    function handleChange(e) {
+        const {name, value} = e.target;
+        setState((state) => ({...state, [name]: value}));
+        makeTrip[name] = value;
+    }
+    return (
+        <div >
+            <Container component="secondStep" maxWidth="md">
+                <CssBaseline/>
+
+                <Paper className={classes.paper} elevation={3}>
+
+                    <Typography variant="h5" align='left' className={classes.title} >
+                        Offer a ride
+                    </Typography>
+
+                    <div className="line2"></div>
+
+                    {/* main form */}
+                    <form className={classes.form} /*onSubmit={}*/>
+                        <Grid container spacing={2}>
+
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    className={classes.textField}
+                                    name="origin_title"
+                                    required
+                                    fullWidth
+                                    variant="filled"
+                                    placeholder="From"
+                                    label="Origin"
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <LocationOnIcon color="primary"/>
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                    value={state.origin_title}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    className={classes.textField}
+                                    required
+                                    variant="filled"
+                                    fullWidth
+                                    label="Destination"
+                                    name="destination_title"
+                                    placeholder="To"
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <LocationOnIcon color="secondary"/>
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                    value={state.destination_title}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={5}>
+
+                                <Typography variant="h6" align='left' className={classes.title} >
+                                    Ride schedule
+                                </Typography>
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <KeyboardDatePicker
+                                        disableToolbar
+                                        required
+                                        variant="inline"
+                                        format="MM/dd/yyyy"
+                                        margin="normal"
+                                        label="Date"
+                                        name="pickupDate"
+                                        value={state.pickupDate}
+                                        onChange={handleChange}
+                                        KeyboardButtonProps={{
+                                            'aria-label': 'change date',
+                                        }}
+                                    />
+                                </MuiPickersUtilsProvider>
+                            </Grid>
+                        </Grid>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    className={classes.timeField}
+                                    required
+                                    fullWidth
+                                    label="Pickup time"
+                                    name="pickupTime"
+                                    value={state.pickupTime}
+                                    placeholder="eg: 8am/9:30am-2pm/Anytime"
+                                    value={state.pickupTime}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={3}>
+                                <Typography variant="h6" align='left' className={classes.title} >
+                                    Empty seats
+                                </Typography>
+                                <FormControl>
+                                    {/*<FormLabel component="legend">Number of seats</FormLabel>*/}
+                                    <RadioGroup name="numSeat" value={state.numSeat} onChange={handleChange} value={state.numSeat}>
+                                        <FormControlLabel value="seat1" control={<Radio />} label="1" />
+                                        <FormControlLabel value="seat2" control={<Radio />} label="2" />
+                                        <FormControlLabel value="seat3" control={<Radio />} label="3" />
+                                        <FormControlLabel value="seat4" control={<Radio />} label="4" />
+                                        <FormControlLabel value="seat5" control={<Radio />} label="5" />
+                                        <FormControlLabel value="seat6" control={<Radio />} label="6" />
+                                    </RadioGroup>
+                                </FormControl>
+                            </Grid>
+                        </Grid>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={4}>
+                                <Typography variant="h6" align='left' className={classes.title} >
+                                    Trip description
+                                </Typography>
+                                <TextareaAutosize rowsMin={6}
+                                                  rowsMax={8}
+                                                  placeholder="Add description"
+                                                  onChange={handleChange}
+                                                  value={state.comment}
+                                />
+                            </Grid>
+                        </Grid>
+
+                    </form>
+                    <Box mt={5}></Box>
+                </Paper>
+
+            </Container>
+        </div>
+    );
+}
+
+function ConfirmField() {
+
+    const classes = useStyles();
+    return (
+        <div>
+            <Container component="secondStep" maxWidth="md">
+                <CssBaseline/>
+                <Paper className={classes.paper} elevation={3}>
+                    <Typography variant="h5"  className={classes.title} color="primary">
+                        Woohoo! All steps completed <DoneOutlineIcon style={{ color: green[500] }}/>
+                    </Typography>
+                    <Typography variant="body2" className={classes.caption} color='textSecondary'>
+                        <Box fontStyle="italic">
+                            A ride confirmation page has been sent to your email.
+                        </Box>
+                    </Typography>
+                </Paper>
+            </Container>
+        </div>
+    );
+}
+
 export function getStepContent(step) {
     switch (step) {
         case 0:
@@ -351,7 +398,7 @@ export function getStepContent(step) {
         case 1:
             return <RideField></RideField>;
         case 2:
-            return 'This is the bit I really care about!';
+            return <ConfirmField></ConfirmField>
         default:
             return 'Unknown step';
     }
@@ -390,9 +437,10 @@ export default function PostRideField() {
                 ))}
             </Stepper>
             <div>
-                {activeStep === steps.length ? (
+                {activeStep === 2 ? (
+
                     <div>
-                        <Typography className={classes.instructions}>All steps completed</Typography>
+                       <ConfirmField></ConfirmField>
                         <Button
                             onClick={handleReset}
                             variant="contained"
@@ -405,6 +453,7 @@ export default function PostRideField() {
                                 variant="contained"
                                 color="primary"
                                 className={classes.submit}
+                                // href="../App.js"
                         >
                             Back to home
                         </Button>
@@ -421,8 +470,8 @@ export default function PostRideField() {
                             >
                                 Back
                             </Button>
-                            {activeStep === steps.length - 1 ? <Button variant="contained" color="primary" onClick={handleSubmit} className={classes.submit}>
-                                Confirm ride
+                            {activeStep === steps.length - 2 ? <Button variant="contained" color="primary" onClick={handleSubmit} className={classes.submit}>
+                                Post ride
                             </Button>
                                 :<Button variant="contained" color="primary" onClick={handleNext} className={classes.submit}>
                                 Next

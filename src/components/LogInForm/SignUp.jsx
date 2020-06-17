@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -8,9 +8,9 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import {isLoaded, isEmpty} from 'react-redux-firebase'
+import { isLoaded, isEmpty } from "react-redux-firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { sendEmail, register } from "../../redux/actions/authActions";
+import { register } from "../../redux/actions/authActions";
 import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
 
-
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -42,13 +41,8 @@ export default function SignUp() {
     password2: "",
   });
 
-
-  // const registering = useSelector(state => state.registering);
-  const userReady = useSelector(state => state.firebase.auth)
+  const userReady = useSelector((state) => state.firebase.auth);
   const dispatch = useDispatch();
-
-  //handles change for each label in the form
-  //updates user State appropriately
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -62,14 +56,13 @@ export default function SignUp() {
     if (user.password !== user.password2) {
       console.log("password doesn't match!");
     } else {
-      // dispatch actions
       dispatch(register(user));
-      /* dispatch(sendEmail({user})) */
     }
   }
 
-
-  return (isLoaded(userReady) && !isEmpty(userReady)?<Redirect to="/registrationForm"/>:(
+  return isLoaded(userReady) && !isEmpty(userReady) ? (
+    <Redirect to="/registrationForm" />
+  ) : (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -113,7 +106,6 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-
                 onChange={handleChange}
               />
             </Grid>
@@ -126,9 +118,7 @@ export default function SignUp() {
                 label="Password"
                 type="password"
                 id="password"
-                // autoComplete="current-password"
                 onChange={handleChange}
-
               />
             </Grid>
             <Grid item xs={12}>
@@ -141,7 +131,6 @@ export default function SignUp() {
                 type="password"
                 id="password2"
                 onChange={handleChange}
-
               />
             </Grid>
           </Grid>
@@ -164,6 +153,6 @@ export default function SignUp() {
         </form>
       </div>
       <Box mt={5}></Box>
-    </Container>)
+    </Container>
   );
 }
