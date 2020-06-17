@@ -7,10 +7,13 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
 import Container from "@material-ui/core/Container";
-import { isLoaded, isEmpty } from "react-redux-firebase";
-import { useDispatch, useSelector } from "react-redux";
-import { register } from "../../redux/actions/authActions";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import { useSelector } from "react-redux";
+import { useFirestore, isEmpty } from "react-redux-firebase";
 import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,50 +23,69 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-
+  avatar: {
+    position: "absolute",
+    left: "50%",
+  },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%", 
     marginTop: theme.spacing(3),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  label: {
+    backgroundColor: "white",
+  },
 }));
 
-export default function SignUp() {
+export default function ProfileCreate() {
   const classes = useStyles();
 
   const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    password2: "",
+    school: "Dickinson College",
+    major: "",
+    classYear: "",
+    hub: "",
+    gender: "",
+    phone: "",
   });
-
-  const userReady = useSelector((state) => state.firebase.auth);
-  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.firebase.auth);
+  const userProfile = useSelector((state) => state.firebase.profile);
+  const firestore = useFirestore();
 
   function handleChange(e) {
     const { name, value } = e.target;
 
     setUser((user) => ({ ...user, [name]: value }));
   }
+  function handleSelect(e) {
+    setUser((user) => ({ ...user, [e.target.name]: e.target.value }));
+  }
   function handleSubmit(e) {
-    "";
     e.preventDefault();
 
     if (user.password !== user.password2) {
       console.log("password doesn't match!");
     } else {
-      dispatch(register(user));
+      firestore.set(
+        {
+          collection: "users",
+          doc: currentUser.uid,
+        },
+        {
+          ...user,
+          status: 2,
+        },
+        { merge: true }
+      );
     }
   }
 
-  return isLoaded(userReady) && !isEmpty(userReady) ? (
-    <Redirect to="/registrationForm" />
+  return userProfile.status === 2 || isEmpty(currentUser) ? (
+    <Redirect to="/" />
   ) : (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="md">
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
@@ -72,64 +94,86 @@ export default function SignUp() {
         {/* main form */}
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
+                value={user.school}
+                id=""
+                label="School"
+                name="school"
                 autoComplete="lname"
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id=""
+                label="Major"
+                name="major"
+                autoComplete="lname"
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
+                id=""
+                label="Class year"
+                name="classYear"
+                autoComplete="lname"
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
-                name="password2"
-                label="Confirm-password"
-                type="password"
-                id="password2"
+                id=""
+                label="HUB Box number"
+                name="hub"
+                autoComplete="lname"
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <FormControl
+                variant="outlined"
+                className={classes.formControl}
+                fullWidth
+              >
+                <InputLabel className={classes.label} id="gender-label">
+                  Gender
+                </InputLabel>
+                <Select
+                  labelId="gender-label"
+                  value={user.gender}
+                  id="gender"
+                  name="gender"
+                  placeholder="Gender"
+                  onChange={handleSelect}
+                >
+                  <MenuItem value={"Male"}>Male</MenuItem>
+                  <MenuItem value={"Female"}>Female</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id=""
+                label="Phone Number"
+                name="phone"
+                autoComplete="lname"
                 onChange={handleChange}
               />
             </Grid>
