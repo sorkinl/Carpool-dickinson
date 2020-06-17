@@ -5,10 +5,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { editTrip } from '../../../redux/actions/tripsActions';
 import { Button } from '@material-ui/core';
-import { useFirestore } from 'react-redux-firebase';
+import { useFirestore, useFirestoreConnect } from 'react-redux-firebase';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,6 +26,15 @@ export default function EditForm(props){
     const dispatch = useDispatch();
     const [isUpdated, setUpdate] = useState(false);
 
+    useFirestoreConnect([
+        { collection: 'trips' }
+    ]);
+
+    //having trouble with iterating this array of object
+    const tripToEdit = useSelector((state) => state.firestore.ordered.trips);
+    console.log(tripToEdit);
+
+    
     const [state, setState] = useState({
         destTitle: '',
         destination: '',

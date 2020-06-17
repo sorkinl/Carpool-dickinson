@@ -18,7 +18,7 @@ import LocationOnIcon from "@material-ui/icons/LocationOn";
 import LocationCityIcon from "@material-ui/icons/LocationCity";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import { Menu, MenuItem } from "@material-ui/core/";
-import { useFirestore } from "react-redux-firebase";
+import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import EditForm from "./editform";
 import { Link , useRouteMatch, Route } from 'react-router-dom';
 
@@ -35,6 +35,7 @@ export default function Trip(props) {
   const trip = props.trip;
   const classes = useStyles();
   let match = useRouteMatch();
+
   //------------ Menu handlers ------------//
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
