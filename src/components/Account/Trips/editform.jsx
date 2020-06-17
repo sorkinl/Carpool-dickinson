@@ -38,7 +38,7 @@ export default function EditForm(props){
     
     const [state, setState] = useState({
         destTitle: '',
-        destination: '',
+        destination: tripToEdit.destTitle,
         departTime: new Date(),
     });
     
