@@ -6,6 +6,7 @@ import EditField from './EditField';
 import { withStyles } from '@material-ui/core/styles';
 import {makeStyles, CssBaseline, Button, Avatar, Card, CardHeader, CardMedia, CardContent, CardActions, Typography, Box, Grid, Collapse} from '@material-ui/core';
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -34,6 +35,7 @@ export default function Profile(props){
     const [isClicked, setClick] = useState(false);
 
     const classes = useStyles();
+    const user = useSelector(state => state.firebase.profile);
       return(
         <div className={classes.root}>
           {/* Display user's Name, Email, and Location */}
@@ -41,11 +43,11 @@ export default function Profile(props){
               <Card className={classes.root}>
                 <CardHeader
                     title={
-                      <Typography className={classes.title} variant="h5">Naruto Le</Typography>
+                    <Typography className={classes.title} variant="h5">{user.firstName} {user.lastName}</Typography>
                     }
                     align='left'
                     subheader={
-                      <>Carlisle, PA<br/>naruto@gmail.com</>
+                    <>Carlisle, PA<br/>{user.email}</>
                     }
                     avatar={
                       <Avatar src={avatar} aria-label="name" className={classes.avatarSize}>K</Avatar>
@@ -58,7 +60,7 @@ export default function Profile(props){
                 {/* Expand Profile card and display EditField component*/}
                 <Collapse in={isClicked} timeout="auto" unmountOnExit>
                   <CardContent>
-                      <EditField />
+                      <EditField user={user}/>
                   </CardContent>
                 </Collapse>
               </Card>
