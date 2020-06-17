@@ -6,7 +6,6 @@ import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import { useDispatch, useSelector } from 'react-redux';
-import { editTrip } from '../../../redux/actions/tripsActions';
 import { Button } from '@material-ui/core';
 import { useFirestore, useFirestoreConnect } from 'react-redux-firebase';
 
@@ -26,15 +25,13 @@ export default function EditForm(props){
     const dispatch = useDispatch();
     const [isUpdated, setUpdate] = useState(false);
 
-    useFirestoreConnect([
-        { collection: 'trips' }
-    ]);
+    // useFirestoreConnect([
+    //     { collection: 'trips' }
+    // ]);
 
-    //having trouble with iterating this array of object
-    const tripToEdit = useSelector((state) => state.firestore.data.userTrips[tripId]);
-    const selector = useSelector((state)=> state.firestore);
-   // console.log(tripToEdit);
-   // console.log(selector);
+    // //having trouble with iterating this array of object
+    // const tripToEdit = useSelector((state) => state.firestore.data.userTrips[tripId]);
+    // console.log(tripToEdit);
     
     const [state, setState] = useState({
         destTitle: '',
