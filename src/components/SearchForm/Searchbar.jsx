@@ -7,7 +7,8 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
-import { createTrip } from "../../redux/actions/tripsActions";
+import {createTrip} from '../../redux/actions/tripsActions'
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
