@@ -31,9 +31,10 @@ export default function EditForm(props){
     ]);
 
     //having trouble with iterating this array of object
-    const tripToEdit = useSelector((state) => state.firestore.ordered.trips);
-    console.log(tripToEdit);
-
+    const tripToEdit = useSelector((state) => state.firestore.data.userTrips[tripId]);
+    const selector = useSelector((state)=> state.firestore);
+   // console.log(tripToEdit);
+   // console.log(selector);
     
     const [state, setState] = useState({
         destTitle: '',
