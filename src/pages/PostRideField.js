@@ -13,6 +13,7 @@ import {MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker} from '@
 import {useDispatch, useSelector} from "react-redux";
 import { useFirestoreConnect } from 'react-redux-firebase';
 import {BrowserRouter as Router} from "react-router-dom";
+import {autoSuggest} from "../redux/actions/tripsActions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -101,7 +102,8 @@ function ContactField() {
     ])
 
     const [state, setState] = useState("");
-    const users = useSelector((state) => state.firestore.ordered.users);
+    //const users = useSelector((state) => state.firestore.ordered.users);
+    const user = useSelector(state => state.firebase.profile);
 
     function handleChange(e) {
         const {name, value} = e.target;
@@ -122,7 +124,7 @@ function ContactField() {
                         <Typography variant="body2" align='left' className={classes.caption} color='textSecondary'>
                             <Box fontStyle="italic">
                                 *Please make sure the information below is correct before continuing, <br/>
-                                as it will be seen by your ride requesters.
+                                as it will be seen by your passengers.
                             </Box>
                         </Typography>
                         <Button href="../Account/Profile/Profile.jsx" size="small" color="primary"  variant="contained" endIcon={<EditIcon />} className={classes.editButton}>
@@ -146,11 +148,10 @@ function ContactField() {
                                     disabled
                                     size='small'
                                     className={classes.profileField}
-                                    name="departure"
                                     fullWidth
                                     placeholder="From"
-                                    label="First name"
-                                    value={state.departure}
+                                    // label="First name"
+                                    value={user.firstName}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -161,10 +162,9 @@ function ContactField() {
                                     size='small'
                                     className={classes.profileField}
                                     fullWidth
-                                    label="Last name"
-                                    name="lastName"
+                                    // label="Last name"
                                     placeholder="To"
-                                    value={state.destination}
+                                    value={user.lastName}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -175,9 +175,7 @@ function ContactField() {
                                     size='small'
                                     className={classes.profileField}
                                     fullWidth
-                                    label="Class year"
-                                    name="classYear"
-                                    value={state.destination}
+                                    value={user.classYear}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -192,9 +190,9 @@ function ContactField() {
                                     disabled
                                     size='small'
                                     className={classes.profileField}
-                                    label="Email"name="email"
+                                    // label="Email"
                                     fullWidth
-                                    value={state.departure}
+                                    value={user.email}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -205,9 +203,7 @@ function ContactField() {
                                     size='small'
                                     className={classes.profileField}
                                     fullWidth
-                                    label="Phone number"
-                                    name="phoneNum"
-                                    value={state.destination}
+                                    value={user.phone}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -225,11 +221,20 @@ function RideField() {
 
     const classes = useStyles();
     const [state, setState] = useState(makeTrip);
+    //
+    // function handleChange(e) {
+    //     const {name, value} = e.target;
+    //     setState((state) => ({...state, [name]: value}));
+    //     makeTrip[name] = value;
+    // }
+    const dispatch = useDispatch();
 
     function handleChange(e) {
-        const {name, value} = e.target;
-        setState((state) => ({...state, [name]: value}));
-        makeTrip[name] = value;
+       e.preventDefault();
+        setState({
+            origin_title: e.target.value
+        })
+        dispatch(autoSuggest(state.origin_title));
     }
     return (
         <div >

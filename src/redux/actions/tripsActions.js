@@ -27,6 +27,8 @@ export const createTrip = (payload) => {
       console.log(response);
       const data = await firestore.collection("trips").add({
         uid: firebase.auth().currentUser.uid,
+        //name, email, phonenum using currentUser
+        //originTitle: response
         destTitle: response.data.items[0].title,
         destination: new firebase.firestore.GeoPoint(
             response.data.items[0].position.lat,
@@ -37,6 +39,31 @@ export const createTrip = (payload) => {
       dispatch({type: MAKE_TRIP, payload: data});
     } catch (err) {
       console.log("MAKE_TRIP dispatch error", err);
+    }
+  };
+}
+// var objectConstructor = ({}).constructor;
+// function isObject(obj)
+// {
+//   if (obj.constructor === objectConstructor) {
+//     return "Object";
+//   }
+// }
+
+export const autoSuggest = (payload) => {
+  return async (dispatch) => {
+    try {
+      const search = encodeURI(payload);
+      const response = await axios.get(
+          `https://places.ls.hereapi.com/places/v1/autosuggest?apiKey=${process.env.REACT_APP_HERE_KEY}&q=${search}&at=40.202552,-77.196571&result_types=place&pretty`
+      );
+      console.log(response.data.results[0].title);
+      // const data = await firestore.collection("trips").add({
+      //   origin_title: response.data.items[0].title,
+      // });
+
+    } catch (err) {
+      console.log("Dickinson autosuggest dispatch error", err);
     }
   };
 }
