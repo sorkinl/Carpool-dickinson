@@ -14,8 +14,8 @@ import ProfileCreate from "./components/LogInForm/ProfileCreate";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import EditForm from "./components/Account/Trips/editform";
 import EmailVerify from "./components/LogInForm/EmailVerify";
-
-
+import Loading from './components/Loading'
+import PostRideField from "./pages/PostRideField";
 
 function App() {
   return (
@@ -36,6 +36,7 @@ function App() {
             <Route path="/edit/:tripId" component={EditForm} />
             <Route path="/verifyEmail" component={EmailVerify}/>
             <Route path="/registrationForm" component={ProfileCreate} />
+            <Route path = "/postRide" component = {PostRideField}/>
           </Switch>
         </div>
       </Router>

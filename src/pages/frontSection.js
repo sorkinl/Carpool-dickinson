@@ -64,15 +64,24 @@ export default function FrontSection(props){
                 </Typography>
                 </CardActions>
                 <CardActions>
-                    <Button 
-                    component={Link} 
-                    to='/search' 
-                    color='primary' 
-                    variant='outlined'
-                    className={classes.findbtn}
+                    <Button
+                        component={Link}
+                        to='/search'
+                        color='primary'
+                        variant='outlined'
+                        className={classes.findbtn}
                     >
                         Find a ride
-                 </Button>
+                    </Button>
+                    <Button
+                        component={Link}
+                        to='/postRide'
+                        color='secondary'
+                        variant='outlined'
+                        className={classes.findbtn}
+                    >
+                        Offer a ride
+                    </Button>
                 </CardActions>
                 {/*second section with text, 'About' button and the image */}
             </CardContent>
@@ -81,26 +90,26 @@ export default function FrontSection(props){
                 image={fpone}
                 title="first img"
             />
-                        <CardContent className={classes.intro}>
-                <Typography variant='h4' component='text2'>
-                        ...About...
-                </Typography>
-                <CardActions>
-                    <Button 
-                        component={Link} 
-                        to='/search' 
-                        color='primary' 
-                        variant='outlined'
-                        className={classes.aboutbtn}
-                >
-                        About
-                    </Button>
-                </CardActions>
-            </CardContent>
+                <CardContent className={classes.intro}>
+                    <Typography variant='h4' component='text2'>
+                            ...About...
+                    </Typography>
+                    <CardActions>
+                        <Button
+                            component={Link}
+                            to='/search'
+                            color='primary'
+                            variant='outlined'
+                            className={classes.aboutbtn}
+                        >
+                            About
+                        </Button>
+                    </CardActions>
+                </CardContent>
             <CardMedia
-                        className={classes.aboutimg}
-                        image={fptwo}
-                        title="second img"
+                className={classes.aboutimg}
+                image={fptwo}
+                title="second img"
             />
             <Grid container spacing={1} className={classes.container}>
                 <Grid item xs={12}>
