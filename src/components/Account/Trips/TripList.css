@@ -4,7 +4,7 @@
   flex-flow: row wrap;
   margin: 0.1rem 20%;
   padding-top: 10px;
-  flex: none | [ 0 3 || auto ];
+  flex: 0 3 auto;
 }
 .Past-trip-list {
   display: flex;
@@ -12,5 +12,5 @@
   flex-flow: row wrap;
   margin: 0.1rem 20%;
   padding-top: 10px;
-  flex: none | [ 0 3 || auto ];
+  flex:  0 3 auto;
 }

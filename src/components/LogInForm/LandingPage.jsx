@@ -8,9 +8,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { useDispatch } from 'react-redux';
 
-/* import {emailVerification} from '../../redux/actions/authActions'; */
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -18,43 +16,36 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%",
     marginTop: theme.spacing(3),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
 }));
+
 export default function LandingPage() {
-  const userValue = JSON.parse(window.localStorage.getItem('user'));
   const classes = useStyles();
-    const dispatch = useDispatch();
-    const [user, setUser] = useState({
-      firstName: "",
-      lastName: "",
-      password: "",
-      password2: "",
-    });
-    function handleChange(e) {
-      const { name, value } = e.target;
-  
-      setUser((user) => ({ ...user, [name]: value }));
-    }
-    function handleSubmit(e){''
-      e.preventDefault();
-      console.log("button clicked")
-    //   if(user.password !== user.password2){
-    //     console.log("password doesn't match!")
-    //   }else{
-    //     // dispatch actions
-        /* dispatch(emailVerification(user)) */
-    //   }
-      
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    password: "",
+    password2: "",
+  });
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setUser((user) => ({ ...user, [name]: value }));
   }
-    return(
-      <Container component="main" maxWidth="xs">
+
+  function handleSubmit(e) {
+    "";
+    e.preventDefault();
+    console.log("button clicked");
+  }
+  return (
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
@@ -63,7 +54,7 @@ export default function LandingPage() {
         {/* main form */}
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="fname"
                 name="firstName"
@@ -73,7 +64,6 @@ export default function LandingPage() {
                 id="firstName"
                 label="First Name"
                 autoFocus
-            
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -96,7 +86,6 @@ export default function LandingPage() {
                 label="Password"
                 type="password"
                 id="password"
-                // autoComplete="current-password"
                 onChange={handleChange}
               />
             </Grid>
@@ -109,7 +98,6 @@ export default function LandingPage() {
                 label="Confirm-password"
                 type="password"
                 id="password2"
-                // autoComplete="current-password"
                 onChange={handleChange}
               />
             </Grid>
@@ -134,5 +122,5 @@ export default function LandingPage() {
       </div>
       <Box mt={5}></Box>
     </Container>
-    )
+  );
 }
