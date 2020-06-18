@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
-import { createTrip } from '../../redux/actions/tripsActions';
+import { createTrip, getTrips } from '../../redux/actions/tripsActions';
 
+
+import { Link, useRouteMatch, Switch, Route} from 'react-router-dom';
+import SearchResult from '../SearchResults/SearchResult';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -30,45 +34,55 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+ 
 
 const Searchbar = ({onCreate}) => {
+
+    let match = useRouteMatch();
+
     const classes = useStyles();
-    const [state, setState] = useState({
-        pickup:'',
+    const [searchInput, setSearchInput] = useState({
+        pickupTitle:'',
         destination:'',
         startDate: new Date()
     })
-const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-//change the state when the search input is typed
-const handleChange = (e) => {
-    setState({
-        ...state,
-        [e.target.name]: e.target.value
-    });
-}
+    // change the state when the search input is typed
+    const handleChange = (e) => {
+        setSearchInput({
+            ...searchInput,
+            [e.target.name]: e.target.value
+        });
+    }
 
-//change the state when the date input is typed
-const handleDateChange = date => {
-    setState({...state,
-        startDate: date
-    });
-}
+    //change the state when the date input is typed
+    const handleDateChange = date => {
+        setSearchInput({
+            ...searchInput,
+            startDate: date
+        });
+    }
 
-//handles submit feature when the event is called.
-//after the submission, the state is reset
-const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(createTrip({pickup:'Invalidenstraße 117, 10115 Berlin, Deutschland'}))
-    onCreate({...state, startDate: state.startDate.toISOString()});
-    setState({
-        pickup:'',
-        destination:'',
-        startDate: new Date()
-    })
-}
+    //handles submit feature when the event is called.
+    //after the submission, the state is reset
+    const handleSubmit = (e) => {
+        // e.preventDefault();    
+        // dispatch(createTrip({pickup:searchInput.pickup}))
+            console.log("submitted")
+     
+
+        onCreate({...searchInput, startDate: searchInput.startDate.toISOString()});
+        dispatch(getTrips(searchInput))
+        // setState({
+        //     pickup:'',
+        //     destination:'',
+        //     startDate: new Date()
+        // })
+    }
 
     return(
+
         <form className={classes.form} noValidate>
             <FormControl className={classes.FormControl} variant="outlined">
                 <InputLabel htmlFor="component-outlined">
@@ -76,14 +90,14 @@ const handleSubmit = (e) => {
                 </InputLabel>
             <OutlinedInput
                 type='text'
-                value={state.pickup}
+                value={searchInput.pickupTitle}
                 variant="outlined"
                 margin="normal"
                 required
                 fullWidth
-                id="pickup"
+                id="pickupTitle"
                 onChange={handleChange}
-                name="pickup"
+                name="pickupTitle"
             />
             </FormControl>
             <FormControl className={classes.FormControl} variant="outlined">
@@ -92,7 +106,7 @@ const handleSubmit = (e) => {
                 </InputLabel>
             <OutlinedInput
                 type='text'
-                value={state.destination}
+                value={searchInput.destination}
                 margin="normal"
                 required
                 fullWidth
@@ -103,22 +117,35 @@ const handleSubmit = (e) => {
             </FormControl>
             <DatePicker
                     placeholderText="choose date and time"
-                    selected={state.startDate}
+                    selected={searchInput.startDate}
                     onChange={handleDateChange}
                     showTimeSelect
                     dateFormat="Pp"
             />
-            <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                onClick={handleSubmit}
-                className={classes.submit}
-            >
-                submit
-            </Button>
+
+    {/* Moved */}
+
+    <Link to={`${match.url}/results`} onClick = {handleSubmit}>
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    // onClick={handleSubmit}
+                    className={classes.submit}
+                >
+                    submit
+                </Button>
+   
+        </Link>
+        <Switch>
+            <Route path={`${match.path}/results`}>
+                <SearchResult/>
+            </Route>
+        </Switch>
+
         </form>
+
     )
 }
 

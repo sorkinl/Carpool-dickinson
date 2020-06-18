@@ -8,7 +8,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import PersonInChat from '../PersonInChat/PersonInChat';
-import {Stack, Node} from '../../../Utils/Stack';
 import {useStyles} from './mainChatStyles';
 
 
@@ -16,8 +15,7 @@ import {useStyles} from './mainChatStyles';
 const MainChat = () => {
   //exporting styles from outside file
   const classes = useStyles();
-  // attempt to implement a stack data structure for messages
-  const messageStack = new Stack();
+  
     return (<div className={classes.root}>
         <CssBaseline>
         <Drawer

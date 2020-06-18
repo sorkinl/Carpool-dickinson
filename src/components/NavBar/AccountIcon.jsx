@@ -8,25 +8,22 @@ import { red } from '@material-ui/core/colors';
 import {logOut} from '../../redux/actions/authActions';
 
 export default function AccountIcon() {
-  // set the position of the menu
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    //construct a boolean out of the above state. If value is Boolean() is equals to null, NaN or undefined, returns false.
-    const open = Boolean(anchorEl);
-    //Two functions to handle menu. Set anchorEl to the position of the menu.
-    const handleMenu = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+  const dispatch = useDispatch();
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-    
-    const dispatch = useDispatch();
+  // ------------ Menu Handlers ------------ //
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
-    function handleLogOut(e) {
-      e.preventDefault();
-      dispatch(logOut());
-    }
+  function handleLogOut(e) {
+    e.preventDefault();
+    dispatch(logOut());
+  }
 
     const useStyles = makeStyles((theme) => ({
       accIcon: {
