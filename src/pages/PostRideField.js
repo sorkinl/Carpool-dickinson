@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import './PostRideField.css';
 import { makeStyles } from '@material-ui/core/styles';
-import Link from "@material-ui/core/Link";
 import {TextareaAutosize, Paper, Container, Box, TextField, Grid, CssBaseline, Typography, Button, Radio, RadioGroup, FormControlLabel, FormControl, InputAdornment} from '@material-ui/core';
 import {StepLabel, Step, Stepper } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
@@ -12,7 +11,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import {MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker} from '@material-ui/pickers';
 import {useDispatch, useSelector} from "react-redux";
 import { useFirestoreConnect } from 'react-redux-firebase';
-import {BrowserRouter as Router} from "react-router-dom";
+import {createTrip} from "../redux/actions/tripsActions";
 import {autoSuggest} from "../redux/actions/tripsActions";
 
 const useStyles = makeStyles((theme) => ({
@@ -87,12 +86,14 @@ var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
 //Global trip variable for stepper
 let makeTrip = {
-    origin_title: "",
-    destination_title:"",
-    pickupDate: date,
-    pickupTime: "",
+    originTitle: "",
+    destTitle:"",
+    departDate: date,
+    departTime: "",
     numSeat: "",
     comment: "",
+    firstName: "",
+    lastName: "",
 }
 
 function ContactField() {
@@ -100,16 +101,10 @@ function ContactField() {
     useFirestoreConnect([
         { collection: 'users' }
     ])
-
-    const [state, setState] = useState("");
-    //const users = useSelector((state) => state.firestore.ordered.users);
     const user = useSelector(state => state.firebase.profile);
+    makeTrip.firstName = user.firstName;
+    makeTrip.lastName = user.lastName;
 
-    function handleChange(e) {
-        const {name, value} = e.target;
-        setState((state) => ({...state, [name]: value}));
-        makeTrip[name] = value;
-    }
     return (
         <div >
             <Container component="firstStep" maxWidth="sm">
@@ -130,13 +125,6 @@ function ContactField() {
                         <Button href="../Account/Profile/Profile.jsx" size="small" color="primary"  variant="contained" endIcon={<EditIcon />} className={classes.editButton}>
                             Edit profile
                         </Button>
-
-                        {/*<div>*/}
-                        {/*    <Router>*/}
-                        {/*        <a >Edit profile </a><EditIcon />*/}
-                        {/*    </Router>*/}
-                        {/*</div>*/}
-
                         <Typography variant="subtitle2" align='left' className={classes.title} >
                             Profile information
                         </Typography>
@@ -151,8 +139,7 @@ function ContactField() {
                                     fullWidth
                                     placeholder="From"
                                     // label="First name"
-                                    value={user.firstName}
-                                    onChange={handleChange}
+                                    value={makeTrip.firstName}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -164,8 +151,7 @@ function ContactField() {
                                     fullWidth
                                     // label="Last name"
                                     placeholder="To"
-                                    value={user.lastName}
-                                    onChange={handleChange}
+                                    value={makeTrip.lastName}
                                 />
                             </Grid>
                             <Grid item>
@@ -176,7 +162,6 @@ function ContactField() {
                                     className={classes.profileField}
                                     fullWidth
                                     value={user.classYear}
-                                    onChange={handleChange}
                                 />
                             </Grid>
                         </Grid>
@@ -193,7 +178,6 @@ function ContactField() {
                                     // label="Email"
                                     fullWidth
                                     value={user.email}
-                                    onChange={handleChange}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -204,14 +188,12 @@ function ContactField() {
                                     className={classes.profileField}
                                     fullWidth
                                     value={user.phone}
-                                    onChange={handleChange}
                                 />
                             </Grid>
                         </Grid>
                     </form>
                     <Box mt={3}></Box>
                 </Paper>
-
             </Container>
         </div>
     );
@@ -221,21 +203,17 @@ function RideField() {
 
     const classes = useStyles();
     const [state, setState] = useState(makeTrip);
-    //
-    // function handleChange(e) {
-    //     const {name, value} = e.target;
-    //     setState((state) => ({...state, [name]: value}));
-    //     makeTrip[name] = value;
-    // }
-    const dispatch = useDispatch();
 
     function handleChange(e) {
-       e.preventDefault();
-        setState({
-            origin_title: e.target.value
-        })
-        dispatch(autoSuggest(state.origin_title));
+        const {name, value} = e.target;
+        setState((state) => ({...state, [name]: value}));
+        makeTrip[name] = value;
     }
+
+    function handleDateChange(date) {
+        setState({ ...state, departDate: date });
+    };
+
     return (
         <div >
             <Container component="secondStep" maxWidth="md">
@@ -256,7 +234,7 @@ function RideField() {
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     className={classes.textField}
-                                    name="origin_title"
+                                    name="originTitle"
                                     required
                                     fullWidth
                                     variant="filled"
@@ -269,7 +247,7 @@ function RideField() {
                                             </InputAdornment>
                                         ),
                                     }}
-                                    value={state.origin_title}
+                                    value={state.originTitle}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -280,7 +258,7 @@ function RideField() {
                                     variant="filled"
                                     fullWidth
                                     label="Destination"
-                                    name="destination_title"
+                                    name="destTitle"
                                     placeholder="To"
                                     InputProps={{
                                         startAdornment: (
@@ -289,7 +267,7 @@ function RideField() {
                                             </InputAdornment>
                                         ),
                                     }}
-                                    value={state.destination_title}
+                                    value={state.destTitle}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -308,9 +286,9 @@ function RideField() {
                                         format="MM/dd/yyyy"
                                         margin="normal"
                                         label="Date"
-                                        name="pickupDate"
-                                        value={state.pickupDate}
-                                        onChange={handleChange}
+                                        name="departDate"
+                                        value={state.departDate}
+                                        onChange={handleDateChange}
                                         KeyboardButtonProps={{
                                             'aria-label': 'change date',
                                         }}
@@ -325,10 +303,9 @@ function RideField() {
                                     required
                                     fullWidth
                                     label="Pickup time"
-                                    name="pickupTime"
-                                    value={state.pickupTime}
+                                    name="departTime"
+                                    value={state.departTime}
                                     placeholder="eg: 8am/9:30am-2pm/Anytime"
-                                    value={state.pickupTime}
                                     onChange={handleChange}
                                 />
                             </Grid>
@@ -340,13 +317,13 @@ function RideField() {
                                 </Typography>
                                 <FormControl>
                                     {/*<FormLabel component="legend">Number of seats</FormLabel>*/}
-                                    <RadioGroup name="numSeat" value={state.numSeat} onChange={handleChange} value={state.numSeat}>
-                                        <FormControlLabel value="seat1" control={<Radio />} label="1" />
-                                        <FormControlLabel value="seat2" control={<Radio />} label="2" />
-                                        <FormControlLabel value="seat3" control={<Radio />} label="3" />
-                                        <FormControlLabel value="seat4" control={<Radio />} label="4" />
-                                        <FormControlLabel value="seat5" control={<Radio />} label="5" />
-                                        <FormControlLabel value="seat6" control={<Radio />} label="6" />
+                                    <RadioGroup name="numSeat" value={state.numSeat} onChange={handleChange}>
+                                        <FormControlLabel value="1" control={<Radio />} label="1" />
+                                        <FormControlLabel value="2" control={<Radio />} label="2" />
+                                        <FormControlLabel value="3" control={<Radio />} label="3" />
+                                        <FormControlLabel value="4" control={<Radio />} label="4" />
+                                        <FormControlLabel value="5" control={<Radio />} label="5" />
+                                        <FormControlLabel value="6" control={<Radio />} label="6" />
                                     </RadioGroup>
                                 </FormControl>
                             </Grid>
@@ -359,6 +336,7 @@ function RideField() {
                                 <TextareaAutosize rowsMin={6}
                                                   rowsMax={8}
                                                   placeholder="Add description"
+                                                  name="comment"
                                                   onChange={handleChange}
                                                   value={state.comment}
                                 />
@@ -375,7 +353,6 @@ function RideField() {
 }
 
 function ConfirmField() {
-
     const classes = useStyles();
     return (
         <div>
@@ -413,8 +390,9 @@ export default function PostRideField() {
 
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
-    const [isHome, setHome] = React.useState(false);
+    // const [isHome, setHome] = React.useState(false);
     const steps = getSteps();
+    const dispatch = useDispatch();
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -428,8 +406,11 @@ export default function PostRideField() {
         setActiveStep(0);
     };
     const handleSubmit = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        //dispatch
+
+        //e.preventDefault();
+        console.log(makeTrip);
+        dispatch(createTrip(makeTrip));
+        //setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
 
     return (
@@ -478,7 +459,7 @@ export default function PostRideField() {
                             {activeStep === steps.length - 2 ? <Button variant="contained" color="primary" onClick={handleSubmit} className={classes.submit}>
                                 Post ride
                             </Button>
-                                :<Button variant="contained" color="primary" onClick={handleNext} className={classes.submit}>
+                                : <Button variant="contained" color="primary" onClick={handleNext} className={classes.submit}>
                                 Next
                             </Button>}
 
