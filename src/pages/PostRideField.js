@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './PostRideField.css';
 import { makeStyles } from '@material-ui/core/styles';
-import {Fade, CircularProgress, TextareaAutosize, Paper, Container, Box, TextField, Grid, CssBaseline, Typography, Button, Radio, RadioGroup, FormControlLabel, FormControl, InputAdornment} from '@material-ui/core';
+import {Snackbar, Fade, CircularProgress, TextareaAutosize, Paper, Container, Box, TextField, Grid, CssBaseline, Typography, Button, Radio, RadioGroup, FormControlLabel, FormControl, InputAdornment} from '@material-ui/core';
 import {StepLabel, Step, Stepper } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 import { green } from '@material-ui/core/colors';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
@@ -12,10 +13,11 @@ import {MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker} from '@
 import {useDispatch, useSelector} from "react-redux";
 import { useFirestoreConnect } from 'react-redux-firebase';
 import {createTrip} from "../redux/actions/tripsActions";
-import Loading from "../components/Loading";
-import { isLoaded } from "react-redux-firebase";
 import {autoSuggest} from "../redux/actions/tripsActions";
-import EachResult from "../components/SearchResults/EachResult/EachResult";
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -104,9 +106,9 @@ function ContactField() {
     useFirestoreConnect([
         { collection: 'users' }
     ])
-    const user = useSelector(state => state.firebase.profile);
-    makeTrip.firstName = user.firstName;
-    makeTrip.lastName = user.lastName;
+    //const user = useSelector(state => state.firebase.profile);
+    makeTrip.firstName = "";//user.firstName;
+    makeTrip.lastName = ""; //user.lastName;
 
     return (
         <div >
@@ -164,7 +166,7 @@ function ContactField() {
                                     size='small'
                                     className={classes.profileField}
                                     fullWidth
-                                    value={user.classYear}
+                                    value="nothing" //{user.classYear}
                                 />
                             </Grid>
                         </Grid>
@@ -180,7 +182,7 @@ function ContactField() {
                                     className={classes.profileField}
                                     // label="Email"
                                     fullWidth
-                                    value={user.email}
+                                    value="nothing" //{user.email}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -190,7 +192,7 @@ function ContactField() {
                                     size='small'
                                     className={classes.profileField}
                                     fullWidth
-                                    value={user.phone}
+                                    value="nothing" //{user.phone}
                                 />
                             </Grid>
                         </Grid>
@@ -216,7 +218,6 @@ function RideField() {
     function handleDateChange(date) {
         setState({ ...state, departDate: date });
         makeTrip["departDate"] = date;
-        console.log(makeTrip["departDate"]);
     };
 
     return (
@@ -318,7 +319,7 @@ function RideField() {
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={3}>
                                 <Typography variant="h6" align='left' className={classes.title} >
-                                    Empty seats
+                                    Empty seats*
                                 </Typography>
                                 <FormControl>
                                     {/*<FormLabel component="legend">Number of seats</FormLabel>*/}
@@ -336,7 +337,7 @@ function RideField() {
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={4}>
                                 <Typography variant="h6" align='left' className={classes.title} >
-                                    Trip description
+                                    Trip description (optional)
                                 </Typography>
                                 <TextareaAutosize rowsMin={6}
                                                   rowsMax={8}
@@ -367,11 +368,11 @@ function ConfirmField() {
                     <Typography variant="h5"  className={classes.title} color="primary">
                         Woohoo! All steps completed <DoneOutlineIcon style={{ color: green[500] }}/>
                     </Typography>
-                    <Typography variant="body2" className={classes.caption} color='textSecondary'>
-                        <Box fontStyle="italic">
-                            A ride confirmation page has been sent to your email.
-                        </Box>
-                    </Typography>
+                    {/*<Typography variant="body2" className={classes.caption} color='textSecondary'>*/}
+                    {/*    <Box fontStyle="italic">*/}
+                    {/*        A ride confirmation page has been sent to your email.*/}
+                    {/*    </Box>*/}
+                    {/*</Typography>*/}
                 </Paper>
             </Container>
         </div>
@@ -393,11 +394,25 @@ export default function PostRideField() {
 
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
+    const [error, setError] = React.useState(false);
     const [query, setQuery] = React.useState('default');
     const timerRef = React.useRef();
     const steps = getSteps();
     const dispatch = useDispatch();
-    const isAllFilled = false;
+
+    const handleClose = () => {
+        setError(false);
+    };
+    function validateInput() {
+        if(makeTrip.originTitle === ""
+                || makeTrip.destTitle === ""
+                || makeTrip.departDate === ""
+                || makeTrip.departTime === "") {
+            return false;
+        }else{
+            return true;
+        }
+    }
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -411,14 +426,16 @@ export default function PostRideField() {
     const handleSubmit = (e) => {
         e.preventDefault();
         //dispatch(createTrip(makeTrip));
-
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        clearTimeout(timerRef.current);
-        setQuery('progress');
-        timerRef.current = setTimeout(() => {
-            setQuery('success');
-        }, 2000);
-
+        if(validateInput()) {
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            clearTimeout(timerRef.current);
+            setQuery('progress');
+            timerRef.current = setTimeout(() => {
+                setQuery('success');
+            }, 2500);
+        } else {
+            setError(true);
+        }
     };
 
     return (
@@ -452,7 +469,7 @@ export default function PostRideField() {
                                         <Fade
                                             in={query === 'progress'}
                                             style={{
-                                                transitionDelay: query === 'progress' ? '1000ms' : '0ms',
+                                                transitionDelay: query === 'progress' ? '1500ms' : '0ms',
                                             }}
                                             unmountOnExit
                                         >
@@ -491,9 +508,15 @@ export default function PostRideField() {
                             >
                                 Back
                             </Button>
-                            {activeStep === steps.length - 2 ? <Button variant="contained" color="primary" onClick={handleSubmit} className={classes.submit}>
-                                Post ride
-                            </Button>
+                            {activeStep === steps.length - 2 ?
+                                <Button variant="contained"
+                                        color="primary"
+                                        onClick={handleSubmit}
+                                        className={classes.submit}
+                                        // disabled={inputValidate}
+                                >
+                                    Post ride
+                                </Button>
                                 : <Button variant="contained" color="primary" onClick={handleNext} className={classes.submit}>
                                 Next
                             </Button>}
@@ -501,6 +524,17 @@ export default function PostRideField() {
                     </div>
                 )}
             </div>
+            <Snackbar open={error}
+                      autoHideDuration={6000}
+                      onClose={handleClose}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+            }}>
+                <Alert onClose={handleClose} severity="error">
+                    One or more fields missing!
+                </Alert>
+            </Snackbar>
         </div>
     );
 }
