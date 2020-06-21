@@ -1,7 +1,25 @@
 import React, {useState, useEffect} from 'react';
 import './PostRideField.css';
 import { makeStyles } from '@material-ui/core/styles';
-import {Snackbar, Fade, CircularProgress, TextareaAutosize, Paper, Container, Box, TextField, Grid, CssBaseline, Typography, Button, Radio, RadioGroup, FormControlLabel, FormControl, InputAdornment} from '@material-ui/core';
+import {
+    Snackbar,
+    Fade,
+    CircularProgress,
+    TextareaAutosize,
+    Paper,
+    Container,
+    Box,
+    TextField,
+    Grid,
+    CssBaseline,
+    Typography,
+    Button,
+    Radio,
+    RadioGroup,
+    FormControlLabel,
+    FormControl,
+    InputAdornment
+} from '@material-ui/core';
 import {StepLabel, Step, Stepper } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import { green } from '@material-ui/core/colors';
@@ -12,6 +30,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import {MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker} from '@material-ui/pickers';
 import {useDispatch, useSelector} from "react-redux";
 import { useFirestoreConnect } from 'react-redux-firebase';
+import { Link } from "react-router-dom";
 import {createTrip} from "../redux/actions/tripsActions";
 import {autoSuggest} from "../redux/actions/tripsActions";
 
@@ -19,71 +38,69 @@ function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
+
 const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-    },
-    instructions: {
-        marginTop: theme.spacing(1),
-        marginBottom: theme.spacing(1),
-    },
-    paper: {
-        marginTop: theme.spacing(2),
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: theme.spacing(4),
-
-    },
-    form: {
-        width: "100%", // Fix IE 11 issue.
-        marginTop: theme.spacing(4),
-
-    },
-    title: {
-        width: "100%", // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-        marginBottom: theme.spacing(1),
-        paddingLeft: theme.spacing(4)
-    },
-    caption: {
-        width: "100%", // Fix IE 11 issue.
-        paddingLeft: theme.spacing(4),
-    },
-    title2: {
-        width: "100%", // Fix IE 11 issue.
-        marginTop: theme.spacing(2),
-        paddingLeft: theme.spacing(4)
-    },
-    submit: {
-        margin: theme.spacing(3, 3, 2),
-    },
-    editButton: {
-        width: 130, // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-        marginLeft: theme.spacing(35)
-    },
-    textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        width: '40ch',
-    },
-    timeField: {
-        marginLeft: theme.spacing(0),
-        marginRight: theme.spacing(3),
-        width: '30ch',
-    },
-    profileField: {
-        marginLeft: theme.spacing(4),
-        marginRight: theme.spacing(1),
-        marginTop: theme.spacing(1),
-        width: '22ch',
-    }
+  root: {
+    width: "100%",
+  },
+  instructions: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+  paper: {
+    marginTop: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: theme.spacing(4),
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(4),
+  },
+  title: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    paddingLeft: theme.spacing(4),
+  },
+  caption: {
+    width: "100%", // Fix IE 11 issue.
+    paddingLeft: theme.spacing(4),
+  },
+  title2: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(2),
+    paddingLeft: theme.spacing(4),
+  },
+  submit: {
+    margin: theme.spacing(3, 3, 2),
+  },
+  editButton: {
+    width: 130, // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+    marginLeft: theme.spacing(35),
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: "40ch",
+  },
+  timeField: {
+    marginLeft: theme.spacing(0),
+    marginRight: theme.spacing(3),
+    width: "30ch",
+  },
+  profileField: {
+    marginLeft: theme.spacing(4),
+    marginRight: theme.spacing(1),
+    marginTop: theme.spacing(1),
+    width: "22ch",
+  },
 }));
 
-
 function getSteps() {
-    return ['CONTACT INFORMATION', 'YOUR RIDE DETAILS', 'CONFIRM RIDE'];
+  return ["CONTACT INFORMATION", "YOUR RIDE DETAILS", "CONFIRM RIDE"];
 }
 //Get current date
 var today = new Date();
@@ -91,21 +108,19 @@ var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
 //Global trip variable for stepper
 let makeTrip = {
-    originTitle: "",
-    destTitle:"",
-    departDate: date,
-    departTime: "",
-    numSeat: "",
-    description: "",
-    firstName: "",
-    lastName: "",
-}
+  originTitle: "",
+  destTitle: "",
+  departDate: date,
+  departTime: "",
+  numSeat: "",
+  description: "",
+  firstName: "",
+  lastName: "",
+};
 
 function ContactField() {
     const classes = useStyles();
-    useFirestoreConnect([
-        { collection: 'users' }
-    ])
+    useFirestoreConnect([{ collection: 'users' }])
     //const user = useSelector(state => state.firebase.profile);
     makeTrip.firstName = "";//user.firstName;
     makeTrip.lastName = ""; //user.lastName;
@@ -205,33 +220,31 @@ function ContactField() {
 }
 
 function RideField() {
+  const classes = useStyles();
+  const [state, setState] = useState(makeTrip);
 
-    const classes = useStyles();
-    const [state, setState] = useState(makeTrip);
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setState((state) => ({ ...state, [name]: value }));
+    makeTrip[name] = value;
+  }
 
-    function handleChange(e) {
-        const {name, value} = e.target;
-        setState((state) => ({...state, [name]: value}));
-        makeTrip[name] = value;
-    }
+  function handleDateChange(date) {
+    setState({ ...state, departDate: date });
+    makeTrip["departDate"] = date;
+  }
 
-    function handleDateChange(date) {
-        setState({ ...state, departDate: date });
-        makeTrip["departDate"] = date;
-    };
+  return (
+    <div>
+      <Container component="secondStep" maxWidth="md">
+        <CssBaseline />
 
-    return (
-        <div >
-            <Container component="secondStep" maxWidth="md">
-                <CssBaseline/>
+        <Paper className={classes.paper} elevation={3}>
+          <Typography variant="h5" align="left" className={classes.title}>
+            Offer a ride
+          </Typography>
 
-                <Paper className={classes.paper} elevation={3}>
-
-                    <Typography variant="h5" align='left' className={classes.title} >
-                        Offer a ride
-                    </Typography>
-
-                    <div className="line2"></div>
+          <div className="line2"></div>
 
                     {/* main form */}
                     <form className={classes.form} /*onSubmit={}*/>
@@ -380,14 +393,14 @@ function ConfirmField() {
 }
 
 export function getStepContent(step) {
-    switch (step) {
-        case 0:
-            return <ContactField></ContactField>;
-        case 1:
-            return <RideField></RideField>;
-        default:
-            return 'Unknown step';
-    }
+  switch (step) {
+    case 0:
+      return <ContactField></ContactField>;
+    case 1:
+      return <RideField></RideField>;
+    default:
+      return "Unknown step";
+  }
 }
 
 export default function PostRideField() {
@@ -487,14 +500,16 @@ export default function PostRideField() {
                         >
                                 Create another ride
                         </Button>
-                        <Button onClick={handleReset}
-                                variant="contained"
-                                color="primary"
-                                className={classes.submit}
-                                // href="../App.js"
-                        >
-                            Back to home
-                        </Button>
+
+                        <Link to="/account">
+                            <Button onClick={handleReset}
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.submit}
+                            >
+                                Back to home
+                            </Button>
+                        </Link>
                     </div>
                 ) : (
                     <div>
@@ -513,7 +528,6 @@ export default function PostRideField() {
                                         color="primary"
                                         onClick={handleSubmit}
                                         className={classes.submit}
-                                        // disabled={inputValidate}
                                 >
                                     Post ride
                                 </Button>
