@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './PostRideField.css';
 import { makeStyles } from '@material-ui/core/styles';
-import {TextareaAutosize, Paper, Container, Box, TextField, Grid, CssBaseline, Typography, Button, Radio, RadioGroup, FormControlLabel, FormControl, InputAdornment} from '@material-ui/core';
+import {Fade, CircularProgress, TextareaAutosize, Paper, Container, Box, TextField, Grid, CssBaseline, Typography, Button, Radio, RadioGroup, FormControlLabel, FormControl, InputAdornment} from '@material-ui/core';
 import {StepLabel, Step, Stepper } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -12,7 +12,10 @@ import {MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker} from '@
 import {useDispatch, useSelector} from "react-redux";
 import { useFirestoreConnect } from 'react-redux-firebase';
 import {createTrip} from "../redux/actions/tripsActions";
+import Loading from "../components/Loading";
+import { isLoaded } from "react-redux-firebase";
 import {autoSuggest} from "../redux/actions/tripsActions";
+import EachResult from "../components/SearchResults/EachResult/EachResult";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -91,7 +94,7 @@ let makeTrip = {
     departDate: date,
     departTime: "",
     numSeat: "",
-    comment: "",
+    description: "",
     firstName: "",
     lastName: "",
 }
@@ -212,6 +215,8 @@ function RideField() {
 
     function handleDateChange(date) {
         setState({ ...state, departDate: date });
+        makeTrip["departDate"] = date;
+        console.log(makeTrip["departDate"]);
     };
 
     return (
@@ -336,9 +341,9 @@ function RideField() {
                                 <TextareaAutosize rowsMin={6}
                                                   rowsMax={8}
                                                   placeholder="Add description"
-                                                  name="comment"
+                                                  name="description"
                                                   onChange={handleChange}
-                                                  value={state.comment}
+                                                  value={state.description}
                                 />
                             </Grid>
                         </Grid>
@@ -379,8 +384,6 @@ export function getStepContent(step) {
             return <ContactField></ContactField>;
         case 1:
             return <RideField></RideField>;
-        case 2:
-            return <ConfirmField></ConfirmField>
         default:
             return 'Unknown step';
     }
@@ -390,27 +393,32 @@ export default function PostRideField() {
 
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
-    // const [isHome, setHome] = React.useState(false);
+    const [query, setQuery] = React.useState('default');
+    const timerRef = React.useRef();
     const steps = getSteps();
     const dispatch = useDispatch();
+    const isAllFilled = false;
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
-
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
-
     const handleReset = () => {
         setActiveStep(0);
     };
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        //dispatch(createTrip(makeTrip));
 
-        //e.preventDefault();
-        console.log(makeTrip);
-        dispatch(createTrip(makeTrip));
-        //setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        clearTimeout(timerRef.current);
+        setQuery('progress');
+        timerRef.current = setTimeout(() => {
+            setQuery('success');
+        }, 2000);
+
     };
 
     return (
@@ -424,9 +432,36 @@ export default function PostRideField() {
             </Stepper>
             <div>
                 {activeStep === 2 ? (
-
                     <div>
-                       <ConfirmField></ConfirmField>
+                        <div>
+                            <Container component="secondStep" maxWidth="md">
+                                <CssBaseline/>
+                                <Paper className={classes.paper} elevation={3}>
+                                    {query === 'success' ? (
+                                        <div>
+                                            <Typography variant="h5"  className={classes.title} color="primary">
+                                            Woohoo! All steps completed <DoneOutlineIcon style={{ color: green[500] }}/>
+                                            </Typography>
+                                            <Typography variant="body2" className={classes.caption} color='textSecondary'>
+                                                <Box fontStyle="italic">
+                                                    A ride confirmation page has been sent to your email.
+                                                </Box>
+                                            </Typography>
+                                        </div>)
+                                        : (
+                                        <Fade
+                                            in={query === 'progress'}
+                                            style={{
+                                                transitionDelay: query === 'progress' ? '1000ms' : '0ms',
+                                            }}
+                                            unmountOnExit
+                                        >
+                                            <CircularProgress />
+                                        </Fade>
+                                    )}
+                                </Paper>
+                            </Container>
+                        </div>
                         <Button
                             onClick={handleReset}
                             variant="contained"
@@ -462,7 +497,6 @@ export default function PostRideField() {
                                 : <Button variant="contained" color="primary" onClick={handleNext} className={classes.submit}>
                                 Next
                             </Button>}
-
                         </div>
                     </div>
                 )}

@@ -51,7 +51,7 @@ export const createTrip = (payload) => {
           },
           departDate: payload.departDate,
           departTime: payload.departTime,
-          comment: payload.comment,
+          description: payload.description,
         }
         await firestore.collection("trips").add(tripToAdd);
         dispatch({type: MAKE_TRIP});
