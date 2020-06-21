@@ -100,10 +100,8 @@ export default function Trip(props) {
     setOpenPopup(false);
   };
 
-    
-
   //button shows different component depending on whether tripToEdit exists
-  const showLink = tripToEdit ? (
+  const showLink = tripToEdit? (
     <Link to={`edit/${props.trip.id}`}>
             <Button size="small" color="primary">
                Modify trip

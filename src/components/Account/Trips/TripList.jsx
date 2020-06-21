@@ -102,6 +102,7 @@ export default function TripList(props) {
                               from: trip.origin_title,
                               to: trip.destination_title,
                               id: trip.id,
+                              //uid: currentUser,
                             }}
                           />
                         );

@@ -7,7 +7,8 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@material-ui/core';
-import { useFirestore, useFirestoreConnect } from 'react-redux-firebase';
+import { Alert, AlertTitle } from '@material-ui/lab';
+import { useFirestore, useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,23 +25,24 @@ export default function EditForm(props){
     const tripId = props.match.params.tripId;
     const dispatch = useDispatch();
     const [isUpdated, setUpdate] = useState(false);
-
-    // useFirestoreConnect([
-    //     { collection: 'trips' }
-    // ]);
-
-    // //having trouble with iterating this array of object
-    // const tripToEdit = useSelector((state) => state.firestore.data.userTrips[tripId]);
-    // console.log(tripToEdit);
-    
-    const [state, setState] = useState({
-        destTitle: '',
-        destination: '',
-        departTime: new Date(),
-    });
-    
     const classes = useStyles();
 
+    useFirestoreConnect([
+        { collection: 'trips' }
+    ]);
+
+     //having trouble with iterating this array of object
+     const dataToEdit = useSelector((state) => state.firestore.data.userTrips);
+     const tripToEdit = useSelector((state) => state.firestore.data.trips);
+     const [state, setState] = useState({
+        originTitle: '',
+        destTitle: '',
+        departDate: new Date(),
+        departTime: '',
+    });
+
+
+    
     const handleChange = (e) => {
         setState({
             ...state,
@@ -50,82 +52,103 @@ export default function EditForm(props){
 
     const handleDateChange = date => {
         setState({...state,
-            startDate: date
+            departDate: date
         });
     };
     
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(state.departTime);
         const modifiedTrip = {
-            destTitle: state.destination,
+            originTitle: state.originTitle,
+            destTitle: state.destTitle,
             destination: {
                 latitude: 23,
                 longitude: 52} ,
-            departTime: state.startDate,
+            departTime: state.departTime,
+            departDate: state.departDate,
         }
         setUpdate(true);
-        console.log(modifiedTrip);
         firestore.update({
             collection: 'trips',
             doc: tripId,
         }, modifiedTrip);
     };
 
-    return (
+    return isLoaded(dataToEdit) && !isEmpty(dataToEdit) ? (
         <div className="container">
-            <form className="submit-btn">
-                <FormControl className={classes.FormControl} variant="outlined">
-                    <InputLabel htmlFor="component-outlined">
-                        pickup
-                    </InputLabel>
-                    <OutlinedInput
+        <form className="submit-btn">
+            <FormControl className={classes.FormControl} variant="outlined">
+                <InputLabel htmlFor="component-outlined">
+                    previous: { tripToEdit[tripId].originTitle }
+                </InputLabel>
+                <OutlinedInput
+                type='text'
+                placeholder="pickup"
+                value={state.originTitle}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="originTitle"
+                onChange={handleChange}
+                name="originTitle"
+                />
+            </FormControl>
+            <FormControl className={classes.FormControl} variant="outlined">
+                <InputLabel htmlFor="component-outlined">
+                    previous: { tripToEdit[tripId].destTitle }
+                </InputLabel>
+                <OutlinedInput
                     type='text'
-                    value={state.pickup}
-                    variant="outlined"
+                    value={state.destTitle}
                     margin="normal"
+                    placeholder="destination"
                     required
                     fullWidth
-                    id="pickup"
+                    id="destTitle"
                     onChange={handleChange}
-                    name="pickup"
-                    />
-                </FormControl>
-                <FormControl className={classes.FormControl} variant="outlined">
-                    <InputLabel htmlFor="component-outlined">
-                        destination
-                    </InputLabel>
-                    <OutlinedInput
-                        type='text'
-                        value={state.destination}
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="destination"
-                        onChange={handleChange}
-                        name="destination"
-                    />
-                </FormControl>
-                <DatePicker
-                    placeholderText="choose date and time"
-                    selected={state.startDate}
-                    onChange={handleDateChange}
-                    showTimeSelect
-                    dateFormat="Pp"
-                    />
-                <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                    //onClick={()=>{setUpdate(true)}}
-                    onClick={handleSubmit}
-                >
-                    Edit
-                </Button>
-            </form>
-        </div>
-
-       
-
-    )
+                    name="destTitle"
+                />
+            </FormControl>
+            <FormControl className={classes.FormControl} variant="outlined">
+                <InputLabel htmlFor="component-outlined">
+                    previous: { tripToEdit[tripId].departTime }
+                </InputLabel>
+                <OutlinedInput
+                    type='text'
+                    value={state.departTime}
+                    margin="normal"
+                    placeholder="choose time"
+                    required
+                    fullWidth
+                    id="departTime"
+                    onChange={handleChange}
+                    name="departTime"
+                />
+            </FormControl>
+            <DatePicker
+                placeholderText="choose date"
+                selected={state.departDate}
+                onChange={handleDateChange}
+                />
+            <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={handleSubmit}
+            >
+                Edit
+            </Button>
+        </form>
+    </div>
+    ) : (
+        <div>
+        <Alert severity="error">
+        <AlertTitle>Error</AlertTitle>
+        This is an error alert — <strong>check it out!</strong>
+      </Alert>
+      </div>
+      ) 
 };
