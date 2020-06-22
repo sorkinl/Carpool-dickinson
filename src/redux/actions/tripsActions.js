@@ -69,37 +69,6 @@ export const autoSuggest = (payload) => {
   };
 }
 
-//payload.uid
-//https://stackoverflow.com/questions/49682327/how-to-update-a-single-firebase-firestore-document
-export const editTrip = (payload, id) => {
-  //TODO edit trip in the database based on id
-  var trips = firestore.collection("trips");
-  console.log(trips.doc('NZ07glQhOvTZ9tkn7XZI'));
-  console.log(id);
-  return async (dispatch) => {
-    trips.doc(id).update({
-      ...payload
-    });
-
-    //const data = trips.doc(tripId);
-    // const data = trips.doc('rcHJgOZl9jToAVUPLRzD');
-    // await data.update({
-    //   departTime: payload.departTime,
-    //   destTitle: payload.destTitle,
-    //   pickupTitle: payload.pickupTitle, 
-    //  // destination: payload.destination,
-
-    // })
-    // .then(doc => {
-    //   if(doc){
-    //     console.log(doc.data());
-    //   }
-    //   console.log(payload);
-    // });
-   // dispatch({type: EDIT_TRIP, payload: data});
-  };
-}
-
 export const deleteTrip = (tripId) => {
   var trips = firestore.collection("trips");
   return async (dispatch) => {
