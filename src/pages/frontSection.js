@@ -1,9 +1,11 @@
 import React from 'react';
-import { Button, Card, CardMedia, CardContent, CardActions, Typography, Grid, Paper } from '@material-ui/core';
+import { Button, Card, CardMedia, CardContent, CardActions, Typography, Grid, Paper, Box } from '@material-ui/core';
 import fpone from "../static/img/frontpage1.jpg"
 import fptwo from "../static/img/frontpage2.jpg"
+import carimage from "../static/img/carimage.png"
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import { display } from '@material-ui/system';
 
 const theme = createMuiTheme({
     typography: {
@@ -28,8 +30,9 @@ const theme = createMuiTheme({
 
     ride: {
         padding: 50,
-        height: '50px',
-        marginLeft: 200
+        marginLeft: 200, 
+        top: '180px',
+    
     },
     findbtn: {
         margin: '20px',
@@ -94,7 +97,48 @@ const theme = createMuiTheme({
         background: '#EEE5D0',
          "&:hover": { backgroundColor: '#E0D2B2'},
         borderRadius: '10px',
-         
+    },
+    carimage: {
+        position: 'relative',
+        width: '631px',
+        height: '432px',
+        
+    },
+    driveText: {
+        position: 'absolute',
+        width: '424px',
+        height: '161px',
+        right: '80px',
+        top: '90px',
+        fontFamily: 'Merriweather',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: '38px',
+        lineHeight: '48px',
+        display: 'flex',
+        alignItems: 'center',
+        textAlign: 'center',
+        color: '#000000',
+    },
+    offerButton: {
+        position: 'absolute',
+        width: '230px',
+        height: '53px',
+        right: '140px',
+        top: '250px',
+        background: '#EEE5D0',
+        "&:hover": { backgroundColor: '#E0D2B2'},
+        border: '1px solid #000000',
+        boxSizing: 'border-box',
+        borderRadius: '10px',
+        fontFamily: 'Merriweather',
+        fontStyle: 'normal',
+        fontWeight: 'normal',
+        fontSize: '26px',
+        lineHeight: '33px',
+        display: 'flex',
+        alignItems: 'center',
+        
 
     }
  });
@@ -120,9 +164,29 @@ export default function FrontSection(props){
                     >
                         Find a ride
                  </Button>
-
             </CardContent>
-            {/*first section with text, 'Find a ride' button and the image */}
+            <div className={classes.find}>
+             <Box >
+            <CardMedia
+                className={classes.carimage}
+                image={carimage}
+                title="car image"
+            />
+            </Box>
+                <Box >
+            <Typography className={classes.driveText}>
+                 Or find passengers to share a ride with you!
+                </Typography>
+            <Button
+                 component={Link}
+                 to='/postRide'
+                 className={classes.offerButton}
+            >
+                    Offer a ride
+            </Button>
+            </Box>
+            </div>
+            {/* first section with text, 'Find a ride' button and the image
             <CardContent className={classes.find}>
                 <CardActions className={classes.ride}>
                 <Typography variant='h4' component='text1'>
@@ -150,7 +214,7 @@ export default function FrontSection(props){
                         Offer a ride
                     </Button>
                 </CardActions>
-                {/*second section with text, 'About' button and the image */}
+                {/*second section with text, 'About' button and the image 
             </CardContent>
             <CardMedia
                 className={classes.findimg}
@@ -200,7 +264,7 @@ export default function FrontSection(props){
                         <Typography variant='h6'>You can book your ride in advance. No need to wait.</Typography>
                     </Paper>
                 </Grid>
-            </Grid>
+            </Grid> */}
         </Card>
 
     );

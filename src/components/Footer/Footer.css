@@ -1,5 +1,5 @@
 .footer-main {
-    background-color: #3F51B5;
+    background-color: #F7F5F5;
     color: #FFF;
     padding: 2em;
     width: 100%;
@@ -9,23 +9,27 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    color: #000000;
 
 }
 
 .footer-col {
     text-align: left;
+    color: #000000;
 }
 
 .footer-spacing {
     width: 80px;
+    color: #000000;
 }
 
 .footer-list {
     list-style-type: none;
     padding-left: 0px;
+    color: #000000;
 }
 
 .footer-list a {
-    color: #FFFFFF;
+    color: #000000;
     text-decoration: none;
 }
