@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Button } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useFirestore, useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
@@ -23,15 +23,18 @@ export default function EditForm(props){
     //get tripId from path
     const firestore = useFirestore();
     const tripId = props.match.params.tripId;
-    const dispatch = useDispatch();
     const [isUpdated, setUpdate] = useState(false);
     const classes = useStyles();
 
+    //connect to firebase with redux
     useFirestoreConnect([
         { collection: 'trips' }
     ]);
 
-     //having trouble with iterating this array of object
+     /**
+      * dataToEdit is used when there is no data loaded from redux; this is used when the user tries to access to edit form directly using tripId
+      * tripToEdit is used when the user access to editform via buttons (step by step)
+      */
      const dataToEdit = useSelector((state) => state.firestore.data.userTrips);
      const tripToEdit = useSelector((state) => state.firestore.data.trips);
      const [state, setState] = useState({
@@ -42,7 +45,6 @@ export default function EditForm(props){
     });
 
 
-    
     const handleChange = (e) => {
         setState({
             ...state,
@@ -56,9 +58,10 @@ export default function EditForm(props){
         });
     };
     
+    //change departDate field from Date to string when storing in firebase
+    //handleSubmit function updates the information to firebase
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(state.departTime);
         const modifiedTrip = {
             originTitle: state.originTitle,
             destTitle: state.destTitle,
@@ -75,6 +78,7 @@ export default function EditForm(props){
         }, modifiedTrip);
     };
 
+    //when the dataToEdit is not empty it shows the edit form and when it is empty it shows error popup with go back link
     return isLoaded(dataToEdit) && !isEmpty(dataToEdit) ? (
         <div className="container">
         <form className="submit-btn">
