@@ -66,7 +66,7 @@ export default function EditForm(props){
                 latitude: 23,
                 longitude: 52} ,
             departTime: state.departTime,
-            departDate: state.departDate,
+            departDate: state.departDate.toDateString(),
         }
         setUpdate(true);
         firestore.update({
@@ -147,7 +147,7 @@ export default function EditForm(props){
         <div>
         <Alert severity="error">
         <AlertTitle>Error</AlertTitle>
-        This is an error alert — <strong>check it out!</strong>
+        Cannot find requested trip — <strong><a href='/account'>Click here to check your trip again!</a></strong>
       </Alert>
       </div>
       ) 
