@@ -5,15 +5,17 @@ import axios from "axios";
 const firestore = firebase.firestore();
 export function getTrips(payload) {
 
-  console.log("render")
-
   var trips = firestore.collection("trips")
   return async (dispatch, getState) => {
-        console.log( payload)
-        const getTrips =  await trips.where('pickupTitle', "==", payload.pickupTitle)
+
+        const getTrips =  await trips.where('originTitle', "==", payload.originTitle)
           .get()
           .catch((e)=>{console.log(e)});
-        dispatch({type: GET_TRIPS, payload: getTrips.docs.map(doc => doc.data())})
+
+        const returnTrips = []
+        getTrips.docs.map(doc => returnTrips.push(doc.data()))
+        
+        dispatch({type: GET_TRIPS, payload: returnTrips})
     }
 }
 export const createTrip = (payload) => {

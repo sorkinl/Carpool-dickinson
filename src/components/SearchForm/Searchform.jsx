@@ -6,7 +6,7 @@ import Searchbar from './Searchbar';
 const SearchForm = () =>{
     //handleCreate will be passed down to child as a prop
     const handleCreate = data => {
-        console.log(data);
+        // console.log(data);
     }
         //Moved Link to SearchBar
         // let match = useRouteMatch();
