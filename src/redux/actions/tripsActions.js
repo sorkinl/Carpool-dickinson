@@ -8,14 +8,45 @@ export function getTrips(payload) {
   var trips = firestore.collection("trips")
   return async (dispatch, getState) => {
 
-        const getTrips =  await trips.where('originTitle', "==", payload.originTitle)
-          .get()
-          .catch((e)=>{console.log(e)});
 
-        const returnTrips = []
-        getTrips.docs.map(doc => returnTrips.push(doc.data()))
+      if(payload.originTitle === '' && payload.destTitle !== ''){
+
+          const getTrips =  await trips.where('destTitle', "==", payload.destTitle)
+            .get()
+            .catch((e)=>{console.log(e)});
+
+          const returnTrips = []
+          getTrips.docs.map(doc => returnTrips.push(doc.data()))
         
         dispatch({type: GET_TRIPS, payload: returnTrips})
+      }
+      else if(payload.originTitle !== '' && payload.destTitle === ''){
+
+          const getTrips =  await trips.where('originTitle', "==", payload.originTitle)
+            .get()
+            .catch((e)=>{console.log(e)});
+
+          const returnTrips = []
+          getTrips.docs.map(doc => returnTrips.push(doc.data()))
+          
+          dispatch({type: GET_TRIPS, payload: returnTrips})
+      }
+      else if(payload.originTitle !== '' && payload.destTitle !== ''){
+
+        const getTrips =  await trips
+            .where('originTitle', "==", payload.originTitle)
+            .where('destTitle', "==", payload.destTitle)
+            .get()
+            .catch((e)=>{console.log(e)});
+
+          const returnTrips = []
+          getTrips.docs.map(doc => returnTrips.push(doc.data()))
+          
+          dispatch({type: GET_TRIPS, payload: returnTrips})
+
+      }
+
+    
     }
 }
 export const createTrip = (payload) => {

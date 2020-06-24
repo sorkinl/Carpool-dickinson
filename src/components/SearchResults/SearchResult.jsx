@@ -49,7 +49,7 @@ function SearchResult() {
 
     //comment out the code below when uncommenting the firebase code above
     const trips = useSelector(state=>state.tripsReducer)
- 
+
     const tripList = trips.trips.map((trip) => (
       <EachResult info = {trip}
         // comment={"Leaving between 2pm-4pm"}
@@ -68,7 +68,7 @@ function SearchResult() {
             {/* Text Space */}
             <Grid item classes={{ root: classes.text }}>
               <Typography variant="body2" color="textSecondary">
-                3 results
+                {trips.trips.length} results
               </Typography>
               <Typography variant="h3">Trip to...</Typography>
             </Grid>
