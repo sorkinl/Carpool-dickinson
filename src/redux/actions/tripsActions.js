@@ -4,6 +4,7 @@ import axios from "axios";
 import { useFirestore } from 'react-redux-firebase'
 
 const firestore = firebase.firestore();
+
 // export function getTrips() {
 //   //TODO retrieve trips from the database
 //   var trips = firestore.collection("trips");
@@ -87,10 +88,6 @@ export const autoSuggest = (payload) => {
   // };
 }
 
-export const editTrip = (payload) => {
-  //TODO edit trip in the database based on id
-};
-
 export const deleteTrip = (tripId) => {
   var trips = firestore.collection("trips");
   return async (dispatch) => {
@@ -101,3 +98,4 @@ export const deleteTrip = (tripId) => {
     }
   };
 };
+

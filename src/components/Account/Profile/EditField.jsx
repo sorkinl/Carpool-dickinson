@@ -42,10 +42,9 @@ const locations = [
 function EditField(props){
   const classes = useStyles();
   const[isUpdated, setUpdate]= useState(false);
-
   //Set multiple states of the profile object. Individual states can be called using input.stateName
   const [input, setInput] = useState(
-    {firstName: 'Naruto', lastName: 'Le', email: 'naruto@gmail.com', location: 'Carlisle, PA', phoneNum: ''}
+    {firstName: props.user.firstName, lastName: props.user.lastName, email: props.user.email, location: 'Carlisle, PA', phoneNum: props.user.phone}
   );
 
   //-------- EXPERIMENTING REDUX START-------------------------------//
