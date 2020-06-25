@@ -1,10 +1,12 @@
 import firebase from "../../firebase/firebaseConfig";
 import { GET_TRIPS, MAKE_TRIP, DELETE_TRIP } from "../constants/trip-types";
 import axios from "axios";
+import { useFirestore } from 'react-redux-firebase'
 
 const firestore = firebase.firestore();
-export function getTrips(payload) {
 
+
+export function getTrips(payload){
   var trips = firestore.collection("trips")
   return async (dispatch, getState) => {
 
@@ -51,31 +53,48 @@ export function getTrips(payload) {
 }
 export const createTrip = (payload) => {
   //TODO put trip into the database
-
   return async (dispatch) => {
     try {
-      const search = encodeURIComponent(payload.pickup);
-      const response = await axios.get(
-          `https://geocode.search.hereapi.com/v1/geocode?q=${search}&apiKey=${process.env.REACT_APP_HERE_KEY}`
+      const originSearch = encodeURIComponent(payload.originTitle);
+      const destSearch = encodeURIComponent(payload.destTitle);
+
+      const originRes = await axios.get(
+          `https://geocode.search.hereapi.com/v1/geocode?q=${originSearch}&apiKey=${process.env.REACT_APP_HERE_KEY}`
       );
-      console.log(response);
-      const data = await firestore.collection("trips").add({
-        uid: firebase.auth().currentUser.uid,
-        //name, email, phonenum using currentUser
-        //originTitle: response
-        destTitle: response.data.items[0].title,
-        destination: new firebase.firestore.GeoPoint(
-            response.data.items[0].position.lat,
-            response.data.items[0].position.lng
-        ),
-        departTime: new firebase.firestore.Timestamp.now(),
-      });
-      dispatch({type: MAKE_TRIP, payload: data});
+      const destRes = await axios.get(
+          `https://geocode.search.hereapi.com/v1/geocode?q=${destSearch}&apiKey=${process.env.REACT_APP_HERE_KEY}`
+      );
+      console.log(originRes);
+      console.log(destRes);
+      const tripToAdd = {
+          uid: firebase.auth().currentUser.uid,
+          user: {
+            firstName: payload.firstName,
+            lastName: payload.lastName,
+            //photoURL:,
+         },
+          originTitle: originRes.data.items[0].title,
+          origin: {
+              latitude: originRes.data.items[0].position.lat,
+              longitude: originRes.data.items[0].position.lng
+          },
+          destTitle: destRes.data.items[0].title,
+          destination: {
+              latitude: destRes.data.items[0].position.lat,
+              longitude: destRes.data.items[0].position.lng
+          },
+          departDate: payload.departDate,
+          departTime: payload.departTime,
+          description: payload.description,
+        }
+        await firestore.collection("trips").add(tripToAdd);
+        dispatch({type: MAKE_TRIP});
     } catch (err) {
-      console.log("MAKE_TRIP dispatch error", err);
+      console.log("Create Trip error", err);
     }
   };
 }
+
 // var objectConstructor = ({}).constructor;
 // function isObject(obj)
 // {
@@ -85,21 +104,21 @@ export const createTrip = (payload) => {
 // }
 
 export const autoSuggest = (payload) => {
-  return async (dispatch) => {
-    try {
-      const search = encodeURI(payload);
-      const response = await axios.get(
-          `https://places.ls.hereapi.com/places/v1/autosuggest?apiKey=${process.env.REACT_APP_HERE_KEY}&q=${search}&at=40.202552,-77.196571&result_types=place&pretty`
-      );
-      console.log(response.data.results[0].title);
-      // const data = await firestore.collection("trips").add({
-      //   origin_title: response.data.items[0].title,
-      // });
-
-    } catch (err) {
-      console.log("Dickinson autosuggest dispatch error", err);
-    }
-  };
+  // return async (dispatch) => {
+  //   try {
+  //     const search = encodeURI(payload);
+  //     const response = await axios.get(
+  //         `https://places.ls.hereapi.com/places/v1/autosuggest?apiKey=${process.env.REACT_APP_HERE_KEY}&q=${search}&at=40.202552,-77.196571&result_types=place&pretty`
+  //     );
+  //     console.log(response.data.results[0].title);
+  //     // const data = await firestore.collection("trips").add({
+  //     //   origin_title: response.data.items[0].title,
+  //     // });
+  //
+  //   } catch (err) {
+  //     console.log("Dickinson autosuggest dispatch error", err);
+  //   }
+  // };
 }
 
 export const deleteTrip = (tripId) => {
