@@ -5,19 +5,52 @@ import { useFirestore } from 'react-redux-firebase'
 
 const firestore = firebase.firestore();
 
-// export function getTrips() {
-//   //TODO retrieve trips from the database
-//   var trips = firestore.collection("trips");
-//   return async (dispatch, getState) => {
-//     const getTrips = await trips.where("destination.longitude", "<=", 14).get();
-//     dispatch({
-//       type: GET_TRIPS,
-//       payload: getTrips.docs.map((doc) => doc.data()),
-//     });
-//   };
-// }
-//check Redux dev to see geopoint (firebase)
-// const firestore = useFirestore();
+
+export function getTrips(payload){
+  var trips = firestore.collection("trips")
+  return async (dispatch, getState) => {
+
+
+      if(payload.originTitle === '' && payload.destTitle !== ''){
+
+          const getTrips =  await trips.where('destTitle', "==", payload.destTitle)
+            .get()
+            .catch((e)=>{console.log(e)});
+
+          const returnTrips = []
+          getTrips.docs.map(doc => returnTrips.push(doc.data()))
+        
+        dispatch({type: GET_TRIPS, payload: returnTrips})
+      }
+      else if(payload.originTitle !== '' && payload.destTitle === ''){
+
+          const getTrips =  await trips.where('originTitle', "==", payload.originTitle)
+            .get()
+            .catch((e)=>{console.log(e)});
+
+          const returnTrips = []
+          getTrips.docs.map(doc => returnTrips.push(doc.data()))
+          
+          dispatch({type: GET_TRIPS, payload: returnTrips})
+      }
+      else if(payload.originTitle !== '' && payload.destTitle !== ''){
+
+        const getTrips =  await trips
+            .where('originTitle', "==", payload.originTitle)
+            .where('destTitle', "==", payload.destTitle)
+            .get()
+            .catch((e)=>{console.log(e)});
+
+          const returnTrips = []
+          getTrips.docs.map(doc => returnTrips.push(doc.data()))
+          
+          dispatch({type: GET_TRIPS, payload: returnTrips})
+
+      }
+
+    
+    }
+}
 export const createTrip = (payload) => {
   //TODO put trip into the database
   return async (dispatch) => {
