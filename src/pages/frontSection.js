@@ -4,6 +4,7 @@ import fpone from "../static/img/frontpage1.jpg"
 import fptwo from "../static/img/frontpage2.jpg"
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import Autocomplete from '../components/Autocomplete';
 
 
 const theme = createMuiTheme({
@@ -62,6 +63,7 @@ export default function FrontSection(props){
                 <Typography variant='h4' component='text1'>
                         Are you looking for a ride to your destination?
                 </Typography>
+                <Autocomplete/>
                 </CardActions>
                 <CardActions>
                     <Button
