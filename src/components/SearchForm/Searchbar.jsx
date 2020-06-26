@@ -125,7 +125,7 @@ const Searchbar = ({onCreate}) => {
 
     {/* Moved */}
 
-    <Link to={`${match.url}/results`} onClick = {handleSubmit}>
+    <Link to={`${match.url}/results/?originTitle=${searchInput.originTitle}&destTitle=${searchInput.destTitle}`} onClick = {handleSubmit}>
                 <Button
                     type="submit"
                     fullWidth
