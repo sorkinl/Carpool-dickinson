@@ -1,12 +1,14 @@
 import React from 'react';
 import {CssBaseline} from '@material-ui/core';
-import ReactFullpage from '@fullpage/react-fullpage';
 import "./frontPageFigma.css"
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import logo from "../static/img/car.png"
 import { Link } from 'react-router-dom';
 import SearchBar from "../components/SearchResults/Searchbar"
+
+import Fullpage, { FullPageSections, FullpageSection } from '@ap.cx/react-fullpage'
+
 
 const useStyles = makeStyles((theme) => ({
     button:{
@@ -29,50 +31,50 @@ export default function FrontPageFigma(props) {
 
     return(
     <CssBaseline>
-        <div id ="fullpage">
-        <ReactFullpage
-            // licenseKey = {'YOUR_KEY_HERE'}
-            scrollingSpeed = {500} /* Options here */
-
-            render={({ state, fullpageApi }) => {
-            return (
-                
-                <ReactFullpage.Wrapper>
+        <Fullpage id ="fullpage">
+            <FullPageSections>
+                <FullpageSection>
                     <div className="section section1">
-                        <div className = "title">
-                            <img src = {logo} alt = "this" />
-                            <div className = "Dpool">DPOOL</div>
-                        </div>
-                        <div className = "buttons">
-                            <Button className = {classes.button}
-                             color='primary'
-                             variant='outlined'
-                             onClick={() => fullpageApi.moveSectionDown()}>
-                            Find a Ride</Button>
+                        <div className = "main">
+                            <div className = "title">
+                                <img src = {logo} alt = "this" />
+                                <div className = "Dpool">DPOOL</div>
+                            </div>
+                
+                            <div className = "buttons">
+                                <Button className = {classes.button}
+                                color='primary'
+                                variant='outlined'
+                                 onClick={() => window.scrollBy(0, 500)}
+                                >
+                                Find a Ride</Button>
 
-                            <Button className = {classes.button}
-                            component={Link}
-                            to='/postRide'
-                            color='secondary'
-                            variant='outlined'>
-                            Offer a Ride</Button>
+                                <Button className = {classes.button}
+                                component={Link}
+                                to='/postRide'
+                                color='secondary'
+                                variant='outlined'>
+                                Offer a Ride</Button>
+                            </div>
                         </div>
 
                     </div>
-
+                </FullpageSection>
+                <FullpageSection>
                     <div className="section section2">
                         <SearchBar/>
                 
 
-                </div>
-                <div className="section">
-                    <p>Section 3</p>
-                </div>
-                </ReactFullpage.Wrapper>
-            );
-            }}
-        />
-         </div>
+                    </div>
+                </FullpageSection>
+                <FullpageSection>
+                    <div className="section">
+                        <p>Section 3</p>
+                    </div>
+                </FullpageSection>
+                
+            </FullPageSections>
+        </Fullpage>
   </CssBaseline>
     )
 }
