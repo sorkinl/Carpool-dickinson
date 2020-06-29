@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import avatar from "../../../static/img/avatar.png"
 import EditButton from './EditButton';
 import EditField from './EditField';
 import { withStyles } from '@material-ui/core/styles';
@@ -47,7 +46,11 @@ export default function Profile(props){
                         align='left'
                         subheader={user.email}
                         avatar={
-                            <Avatar src={user.photoUrl} aria-label="name" className={classes.avatarSize}>K</Avatar>
+                            <Avatar src={user.photoUrl}
+                                    alt="/broken-image.jpg"
+                                    aria-label="name"
+                                    className={classes.avatarSize}>
+                            </Avatar>
                         }
                     />
                     {/*Display the EditField if EditButton is clicked*/}

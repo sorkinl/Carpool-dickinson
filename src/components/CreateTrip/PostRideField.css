@@ -1,13 +1,6 @@
 #main {
     background-color: #ff9933;
 }
-.line1{
-    width: 430px;
-    height: 47px;
-    border-bottom: 1px solid lightgrey;
-    position: absolute;
-    margin-top: 9px;
-}
 .line2{
     width: 790px;
     height: 47px;

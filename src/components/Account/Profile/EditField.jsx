@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {makeStyles, Container, TextField, Button, Grid, CssBaseline, MenuItem, Divider} from '@material-ui/core';
+import {makeStyles, Container, Input, TextField, Button, Grid, CssBaseline, MenuItem, Divider, Typography} from '@material-ui/core';
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 import { useSelector} from 'react-redux';
 import firebase from '../../../firebase/firebaseConfig';
@@ -40,60 +40,89 @@ function EditField(props){
 
     const firestore = useFirestore();
     const currentUser = useSelector((state) => state.firebase.auth);
+    const uid = currentUser.uid;
+    const [isEdit, setEdit] = useState(false);
 
     const allInputs = {imgUrl: ''};
-    const [imageFile, setImageAsFile] = useState("");
+    const [imageFile, setImageAsFile] = useState(null);
     const [imageUrl, setImageAsUrl] = useState(allInputs);
 
     const [input, setInput] = useState({
         firstName: props.user.firstName,
         lastName: props.user.lastName,
         email: props.user.email,
-        phoneNum: props.user.phone}
+        phone: props.user.phone}
     );
 
     const handleEdit = event => {
         const { name, value } = event.target;
         setInput({ [name]: value });
+        setEdit(true);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        //Only handling photo upload for now. Profile data later
         //Upcoming tasks: add exception handlers, limit photo size, async upload button
+
+        //Update photo Url
         console.log('start of upload')
         if(imageFile === null ) {
-            console.error(`not an image, the image file is a ${typeof(imageFile)}`)
+            console.error(`not an image OR no images uploaded`)
         }
-        const metadata = {
-            contentType: imageFile.type
-        }
-        const storageRef = firebase.storage().ref();
-        const uploadTask = storageRef.child('images/' + imageFile.name).put(imageFile, metadata);
-        uploadTask.on('state_changed',
-            (snapShot) => {
-                //takes a snap shot of the process as it is happening
-                console.log(snapShot)
-            }, (err) => {
-                //catches the errors
-                console.log(err)
-            }, () => {
-                uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-                    setImageAsUrl(prevObject => ({...prevObject, imgUrl: downloadURL}))
-                    console.log(downloadURL); //OK
-                    console.log(imageUrl); //undefined --> weird
+        else {
+            const metadata = {
+                contentType: imageFile.type
+            }
+            const storageRef = firebase.storage().ref();
+            const uploadTask = storageRef.child('images/' + imageFile.name).put(imageFile, metadata);
+            uploadTask.on('state_changed',
+                (snapShot) => {
+                    //takes a snap shot of the process as it is happening
+                    console.log(snapShot)
+                }, (err) => {
+                    //catches the errors
+                    console.log(err)
+                }, () => {
+                    uploadTask
+                        .snapshot
+                        .ref
+                        .getDownloadURL()
+                        .then(function(downloadURL) {
+                            setImageAsUrl(prevObject => ({...prevObject, imgUrl: downloadURL}))
+                            console.log(downloadURL); //OK
+                            console.log(imageUrl); //undefined --> weird
 
-                    firestore.collection("users").doc(currentUser.uid).set({
-                        photoUrl: downloadURL
-                    }, { merge: true })
-                });
-            })
+                            firestore.collection("users").doc(uid).set({
+                                photoUrl: downloadURL
+                            }, { merge: true })
+                        });
+                })
+        }
+        //Update profile info
+        console.log(Object.assign({}, input));
+        if (isEdit === false) {
+            console.log("No fields updated");
+        } else {
+            firestore
+                .collection("users")
+                .doc(uid)
+                .update(
+                    Object.assign({}, input)
+                    // {
+                    //     "firstName": input.firstName,
+                    //     "lastName": input.lastName,
+                    //     "email": input.email,
+                    //     "phoneNum": input.phone,
+                    // },
+                );
+        }
     }
-
-    function handleImageAsFile(e){
-        const file = e.target.files[0];
-        setImageAsFile(imageFile => (file));
+    const handleImageAsFile = (e) => {
+        if (e.target.files[0]) {
+            const file = e.target.files[0];
+            setImageAsFile(imageFile => (file));
+            console.log(file);
+       }
     }
     return(
         <Container component="main" maxWidth="sm">
@@ -101,20 +130,25 @@ function EditField(props){
                 <Divider />
                 <div className={classes.paper}>
                     <form className={classes.form} onSubmit={handleSubmit}>
-                        {/* A grid container storing each grid item as a textbox */}
                         <Grid container spacing={3}>
-                            {/* Change profile photo button */}
-                            <Grid xs={12}>
-                                <input /*accept="image/*"*/ className={classes.input} id="contained-button-file" type="file" onClick={handleImageAsFile}></input>
+                            <Grid item xs={12}>
+                                <input
+                                    accept="image/*"
+                                    className={classes.input}
+                                    id="contained-button-file"
+                                    multiple
+                                    type="file"
+                                    onChange={handleImageAsFile}
+                                />
                                 <label htmlFor="contained-button-file">
-                                    <Button variant="contained" color="primary" component="span" >
-                                        Change profile photo
+                                    <Button variant="contained" color="primary" component="span">
+                                        Upload profile photo
                                     </Button>
                                 </label>
                             </Grid>
                             {/* First name textbox:
-               "defaultValue" displays the current state of firstName
-               "inputProps" stores the attributes for later use with handleEdit*/}
+                                "defaultValue" displays the current state of firstName
+                                "inputProps" stores the attributes for later use with handleEdit*/}
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     required
@@ -135,8 +169,8 @@ function EditField(props){
                                 />
                             </Grid>
                             {/* Last name textbox:
-              "defaultValue" displays the current state of lastName
-              "inputProps" stores the attributes for later use with handleEdit*/}
+                                "defaultValue" displays the current state of lastName
+                                "inputProps" stores the attributes for later use with handleEdit*/}
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     required
@@ -157,8 +191,8 @@ function EditField(props){
                                 />
                             </Grid>
                             {/* Email textbox:
-              "defaultValue" displays the current state of email
-              "inputProps" stores the attributes for later use with handleEdit*/}
+                                "defaultValue" displays the current state of email
+                                "inputProps" stores the attributes for later use with handleEdit*/}
                             <Grid item xs={12}>
                                 <TextField
                                     required
@@ -182,8 +216,8 @@ function EditField(props){
                                 />
                             </Grid>
                             {/* Phone number textbox:
-              "defaultValue" displays the current state of phone number
-              "inputProps" stores the attributes for later use with handleEdit*/}
+                                 "defaultValue" displays the current state of phone number
+                                "inputProps" stores the attributes for later use with handleEdit*/}
                             <Grid item xs={12}>
                                 <TextField
                                     id="phoneNum"
@@ -197,7 +231,7 @@ function EditField(props){
                                         shrink: true,
                                     }}
                                     variant="filled"
-                                    defaultValue={input.phoneNum}
+                                    defaultValue={input.phone}
                                     inputProps={{
                                         name: 'phoneNum',
                                         id: 'user-phoneNum',
