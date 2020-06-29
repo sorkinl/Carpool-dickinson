@@ -33,6 +33,7 @@ import { useFirestoreConnect } from 'react-redux-firebase';
 import { Link } from "react-router-dom";
 import {createTrip} from "../redux/actions/tripsActions";
 import {autoSuggest} from "../redux/actions/tripsActions";
+import AutocompleteHERE from '../components/Autocomplete';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -234,6 +235,10 @@ function RideField() {
     makeTrip["departDate"] = date;
   }
 
+  function onSuggestionSelect(data){
+      console.log(data);
+  }
+
   return (
     <div>
       <Container component="secondStep" maxWidth="md">
@@ -251,7 +256,7 @@ function RideField() {
                         <Grid container spacing={2}>
 
                             <Grid item xs={12} sm={6}>
-                                <TextField
+                                {/* <TextField
                                     className={classes.textField}
                                     name="originTitle"
                                     required
@@ -268,7 +273,9 @@ function RideField() {
                                     }}
                                     value={state.originTitle}
                                     onChange={handleChange}
-                                />
+                                /> */}
+                                <AutocompleteHERE 
+                                onSuggestionSelect={onSuggestionSelect}/>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField

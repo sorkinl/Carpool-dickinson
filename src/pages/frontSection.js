@@ -63,7 +63,7 @@ export default function FrontSection(props){
                 <Typography variant='h4' component='text1'>
                         Are you looking for a ride to your destination?
                 </Typography>
-                <Autocomplete/>
+                
                 </CardActions>
                 <CardActions>
                     <Button
