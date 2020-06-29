@@ -30,21 +30,35 @@ const useStyles = makeStyles((theme) => ({
 
 function SearchResult() {
   const classes = useStyles();
-  useFirestoreConnect(["trips"]);
-  const trips = useSelector((state) => state.firestore.ordered.trips);
 
-  const tripList = isLoaded(trips) ? (
-    trips.map((trip) => (
-      <EachResult
-        comment={"Leaving between 2pm-4pm"}
-        starting={trip.origin_title}
-        destination={trip.destination_title}
+  // useFirestoreConnect(["trips"]);
+  // const trips = useSelector((state) => state.firestore.ordered.trips);
+
+
+  // const tripList = isLoaded(trips) ? (
+  //   trips.map((trip) => (
+  //     <EachResult
+  //       comment={"Leaving between 2pm-4pm"}
+  //       starting={trip.origin_title}
+  //       destination={trip.destination_title}
+  //     />
+  //   ))
+  // ) : (
+  //   <Loading />
+  // );
+
+    //comment out the code below when uncommenting the firebase code above
+    const trips = useSelector(state=>state.tripsReducer)
+ 
+    const tripList = trips.trips.map((trip) => (
+      <EachResult info = {trip}
+        // comment={"Leaving between 2pm-4pm"}
+        // starting={trip.origin_title}
+        // destination={trip.destination_title}
       />
     ))
-  ) : (
-    <Loading />
-  );
-
+  
+   
   return (
     <Paper classes={{ root: classes.paper }}>
       {/* Search Form */}

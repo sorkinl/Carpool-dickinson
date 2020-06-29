@@ -42,13 +42,14 @@ const useStyles = makeStyles((theme) => ({
 function EachResult(props) {
   const classes = useStyles();
 
+  console.log(props)
   return (
     <div>
       <div className="eachResult">
         {/* avatar and nickname */}
         <div className="avatarAndNickname">
           <Avatar
-            src={avatar}
+            src={props.info.user.photoUrl}
             variant="square"
             alt="temp"
             className={classes.avatarSize}
@@ -61,9 +62,10 @@ function EachResult(props) {
             <ListItemIcon classes={{ root: classes.ListItemIcon }}>
               <PersonIcon />
             </ListItemIcon>
+            {/* name */}
             <ListItemText
               classes={{ root: classes.ListItemText }}
-              primary={props.name}
+              primary={props.info.user.firstName +" " + props.info.user.lastName}
               secondary={props.occupation}
             />
           </ListItem>
@@ -71,22 +73,26 @@ function EachResult(props) {
             <ListItemIcon classes={{ root: classes.ListItemIcon }}>
               <LocationOnIcon />
             </ListItemIcon>
-            <ListItemText primary={props.starting} secondary={props.comment} />
+            {/* //startinglocation */}
+            <ListItemText 
+              primary={props.info.originTitle} 
+              secondary={props.comment} />
           </ListItem>
           <ListItem button classes={{ root: classes.ListItem }}>
             <ListItemIcon classes={{ root: classes.ListItemIcon }}>
               <LocationCityIcon />
             </ListItemIcon>
-            <ListItemText primary="Harrisburg" />
+            {/* destination */}
+            <ListItemText primary= {props.info.destTitle} />
           </ListItem>
-          <ListItem classes={{ root: classes.ListItem }}>
+          {/* <ListItem classes={{ root: classes.ListItem }}>
             <Rating
               name="rating-for-fun"
               value={props.rating}
               precision={0.5}
               readOnly
             />
-          </ListItem>
+          </ListItem> */}
         </List>
       </div>
       <hr />

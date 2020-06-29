@@ -12,6 +12,7 @@ import SignUp from "./components/LogInForm/SignUp";
 import LandingPage from "./components/LogInForm/LandingPage";
 import ProfileCreate from "./components/LogInForm/ProfileCreate";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import EditForm from "./components/Account/Trips/editform";
 import EmailVerify from "./components/LogInForm/EmailVerify";
 import Loading from './components/Loading'
 import PostRideField from "./pages/PostRideField";
@@ -32,6 +33,7 @@ function App() {
             <Route path="/logIn" component={LogIn} />
             <Route path="/signUp" component={SignUp} />
             <Route path="/landingPage" component={LandingPage} />
+            <Route path="/edit/:tripId" component={EditForm} />
             <Route path="/verifyEmail" component={EmailVerify}/>
             <Route path="/registrationForm" component={ProfileCreate} />
             <Route path = "/postRide" component = {PostRideField}/>
