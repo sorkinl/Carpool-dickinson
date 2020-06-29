@@ -40,67 +40,67 @@ function Alert(props) {
 
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-  },
-  instructions: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-  paper: {
-    marginTop: theme.spacing(2),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    padding: theme.spacing(4),
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(4),
-  },
-  title: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-    paddingLeft: theme.spacing(4),
-  },
-  caption: {
-    width: "100%", // Fix IE 11 issue.
-    paddingLeft: theme.spacing(4),
-  },
-  title2: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(2),
-    paddingLeft: theme.spacing(4),
-  },
-  submit: {
-    margin: theme.spacing(3, 3, 2),
-  },
-  editButton: {
-    width: 130, // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-    marginLeft: theme.spacing(35),
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: "40ch",
-  },
-  timeField: {
-    marginLeft: theme.spacing(0),
-    marginRight: theme.spacing(3),
-    width: "30ch",
-  },
-  profileField: {
-    marginLeft: theme.spacing(4),
-    marginRight: theme.spacing(1),
-    marginTop: theme.spacing(1),
-    width: "22ch",
-  },
+    root: {
+        width: "100%",
+    },
+    instructions: {
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(1),
+    },
+    paper: {
+        marginTop: theme.spacing(2),
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        padding: theme.spacing(4),
+    },
+    form: {
+        width: "100%", // Fix IE 11 issue.
+        marginTop: theme.spacing(4),
+    },
+    title: {
+        width: "100%", // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(1),
+        paddingLeft: theme.spacing(4),
+    },
+    caption: {
+        width: "100%", // Fix IE 11 issue.
+        paddingLeft: theme.spacing(4),
+    },
+    title2: {
+        width: "100%", // Fix IE 11 issue.
+        marginTop: theme.spacing(2),
+        paddingLeft: theme.spacing(4),
+    },
+    submit: {
+        margin: theme.spacing(3, 3, 2),
+    },
+    editButton: {
+        width: 130, // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+        marginLeft: theme.spacing(35),
+    },
+    textField: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: "40ch",
+    },
+    timeField: {
+        marginLeft: theme.spacing(0),
+        marginRight: theme.spacing(3),
+        width: "30ch",
+    },
+    profileField: {
+        marginLeft: theme.spacing(4),
+        marginRight: theme.spacing(1),
+        marginTop: theme.spacing(1),
+        width: "22ch",
+    },
 }));
 
 function getSteps() {
-  return ["CONTACT INFORMATION", "YOUR RIDE DETAILS", "CONFIRM RIDE"];
+    return ["CONTACT INFORMATION", "YOUR RIDE DETAILS", "CONFIRM RIDE"];
 }
 //Get current date
 var today = new Date();
@@ -108,22 +108,22 @@ var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
 //Global trip variable for stepper
 let makeTrip = {
-  originTitle: "",
-  destTitle: "",
-  departDate: date,
-  departTime: "",
-  numSeat: "",
-  description: "",
-  firstName: "",
-  lastName: "",
+    originTitle: "",
+    destTitle: "",
+    departDate: date,
+    departTime: "",
+    numSeat: "",
+    description: "",
+    firstName: "",
+    lastName: "",
 };
 
 function ContactField() {
     const classes = useStyles();
     useFirestoreConnect([{ collection: 'users' }])
-    //const user = useSelector(state => state.firebase.profile);
-    makeTrip.firstName = "";//user.firstName;
-    makeTrip.lastName = ""; //user.lastName;
+    const user = useSelector(state => state.firebase.profile);
+    makeTrip.firstName = user.firstName;
+    makeTrip.lastName = user.lastName;
 
     return (
         <div >
@@ -157,9 +157,8 @@ function ContactField() {
                                     size='small'
                                     className={classes.profileField}
                                     fullWidth
-                                    placeholder="From"
-                                    // label="First name"
-                                    value={makeTrip.firstName}
+                                    //label = "First Name"
+                                    value={user.firstName}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -169,9 +168,8 @@ function ContactField() {
                                     size='small'
                                     className={classes.profileField}
                                     fullWidth
-                                    // label="Last name"
-                                    placeholder="To"
-                                    value={makeTrip.lastName}
+                                    //label="Last name"
+                                    value={user.lastName}
                                 />
                             </Grid>
                             <Grid item>
@@ -179,9 +177,10 @@ function ContactField() {
                                     variant='filled'
                                     disabled
                                     size='small'
+                                    // label="Class year"
                                     className={classes.profileField}
                                     fullWidth
-                                    value="nothing" //{user.classYear}
+                                    value={user.classYear}
                                 />
                             </Grid>
                         </Grid>
@@ -197,7 +196,7 @@ function ContactField() {
                                     className={classes.profileField}
                                     // label="Email"
                                     fullWidth
-                                    value="nothing" //{user.email}
+                                    value={user.email}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -206,8 +205,9 @@ function ContactField() {
                                     disabled
                                     size='small'
                                     className={classes.profileField}
+                                    // label ="Phone number"
                                     fullWidth
-                                    value="nothing" //{user.phone}
+                                    value={user.phone}
                                 />
                             </Grid>
                         </Grid>
@@ -220,31 +220,31 @@ function ContactField() {
 }
 
 function RideField() {
-  const classes = useStyles();
-  const [state, setState] = useState(makeTrip);
+    const classes = useStyles();
+    const [state, setState] = useState(makeTrip);
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setState((state) => ({ ...state, [name]: value }));
-    makeTrip[name] = value;
-  }
+    function handleChange(e) {
+        const { name, value } = e.target;
+        setState((state) => ({ ...state, [name]: value }));
+        makeTrip[name] = value;
+    }
 
-  function handleDateChange(date) {
-    setState({ ...state, departDate: date });
-    makeTrip["departDate"] = date;
-  }
+    function handleDateChange(date) {
+        setState({ ...state, departDate: date });
+        makeTrip["departDate"] = date;
+    }
 
-  return (
-    <div>
-      <Container component="secondStep" maxWidth="md">
-        <CssBaseline />
+    return (
+        <div>
+            <Container component="secondStep" maxWidth="md">
+                <CssBaseline />
 
-        <Paper className={classes.paper} elevation={3}>
-          <Typography variant="h5" align="left" className={classes.title}>
-            Offer a ride
-          </Typography>
+                <Paper className={classes.paper} elevation={3}>
+                    <Typography variant="h5" align="left" className={classes.title}>
+                        Offer a ride
+                    </Typography>
 
-          <div className="line2"></div>
+                    <div className="line2"></div>
 
                     {/* main form */}
                     <form className={classes.form} /*onSubmit={}*/>
@@ -393,14 +393,14 @@ function ConfirmField() {
 }
 
 export function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <ContactField></ContactField>;
-    case 1:
-      return <RideField></RideField>;
-    default:
-      return "Unknown step";
-  }
+    switch (step) {
+        case 0:
+            return <ContactField></ContactField>;
+        case 1:
+            return <RideField></RideField>;
+        default:
+            return "Unknown step";
+    }
 }
 
 export default function PostRideField() {
@@ -418,15 +418,14 @@ export default function PostRideField() {
     };
     function validateInput() {
         if(makeTrip.originTitle === ""
-                || makeTrip.destTitle === ""
-                || makeTrip.departDate === ""
-                || makeTrip.departTime === "") {
+            || makeTrip.destTitle === ""
+            || makeTrip.departDate === ""
+            || makeTrip.departTime === "") {
             return false;
         }else{
             return true;
         }
     }
-
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
@@ -438,7 +437,6 @@ export default function PostRideField() {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        //dispatch(createTrip(makeTrip));
         if(validateInput()) {
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
             clearTimeout(timerRef.current);
@@ -449,6 +447,7 @@ export default function PostRideField() {
         } else {
             setError(true);
         }
+        dispatch(createTrip(makeTrip));
     };
 
     return (
@@ -468,27 +467,27 @@ export default function PostRideField() {
                                 <CssBaseline/>
                                 <Paper className={classes.paper} elevation={3}>
                                     {query === 'success' ? (
-                                        <div>
-                                            <Typography variant="h5"  className={classes.title} color="primary">
-                                            Woohoo! All steps completed <DoneOutlineIcon style={{ color: green[500] }}/>
-                                            </Typography>
-                                            <Typography variant="body2" className={classes.caption} color='textSecondary'>
-                                                <Box fontStyle="italic">
-                                                    A ride confirmation page has been sent to your email.
-                                                </Box>
-                                            </Typography>
-                                        </div>)
+                                            <div>
+                                                <Typography variant="h5"  className={classes.title} color="primary">
+                                                    Woohoo! All steps completed <DoneOutlineIcon style={{ color: green[500] }}/>
+                                                </Typography>
+                                                <Typography variant="body2" className={classes.caption} color='textSecondary'>
+                                                    <Box fontStyle="italic">
+                                                        A ride confirmation page has been sent to your email.
+                                                    </Box>
+                                                </Typography>
+                                            </div>)
                                         : (
-                                        <Fade
-                                            in={query === 'progress'}
-                                            style={{
-                                                transitionDelay: query === 'progress' ? '1500ms' : '0ms',
-                                            }}
-                                            unmountOnExit
-                                        >
-                                            <CircularProgress />
-                                        </Fade>
-                                    )}
+                                            <Fade
+                                                in={query === 'progress'}
+                                                style={{
+                                                    transitionDelay: query === 'progress' ? '1500ms' : '0ms',
+                                                }}
+                                                unmountOnExit
+                                            >
+                                                <CircularProgress />
+                                            </Fade>
+                                        )}
                                 </Paper>
                             </Container>
                         </div>
@@ -498,7 +497,7 @@ export default function PostRideField() {
                             color="secondary"
                             className={classes.submit}
                         >
-                                Create another ride
+                            Create another ride
                         </Button>
 
                         <Link to="/account">
@@ -532,8 +531,8 @@ export default function PostRideField() {
                                     Post ride
                                 </Button>
                                 : <Button variant="contained" color="primary" onClick={handleNext} className={classes.submit}>
-                                Next
-                            </Button>}
+                                    Next
+                                </Button>}
                         </div>
                     </div>
                 )}
@@ -542,9 +541,9 @@ export default function PostRideField() {
                       autoHideDuration={6000}
                       onClose={handleClose}
                       anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
-            }}>
+                          vertical: 'top',
+                          horizontal: 'center',
+                      }}>
                 <Alert onClose={handleClose} severity="error">
                     One or more fields missing!
                 </Alert>
