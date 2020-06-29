@@ -37,6 +37,8 @@ function App() {
             <Route path="/verifyEmail" component={EmailVerify}/>
             <Route path="/registrationForm" component={ProfileCreate} />
             <Route path = "/postRide" component = {PostRideField}/>
+            
+            <Route path = "/front" component = {FrontSection}/>
           </Switch>
         </div>
       </Router>
