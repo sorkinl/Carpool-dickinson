@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -12,51 +12,47 @@ import Container from "@material-ui/core/Container";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-import { useDispatch, useSelector } from "react-redux";
-import { sendEmail, register } from "../../redux/actions/authActions";
+import { useSelector } from "react-redux";
+import { useFirestore, isEmpty } from "react-redux-firebase";
+import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 200,
-  },
-
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
-
+  avatar: {
+    position: "absolute",
+    left: "50%",
+  },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%", 
     marginTop: theme.spacing(3),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
   label: {
-      backgroundColor: "white"
-     }
+    backgroundColor: "white",
+  },
 }));
 
 export default function ProfileCreate() {
   const classes = useStyles();
 
   const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    password2: "",
+    school: "Dickinson College",
+    major: "",
+    classYear: "",
+    hub: "",
     gender: "",
+    phone: "",
   });
-
-  // const registering = useSelector(state => state.registering);
-  const dispatch = useDispatch();
-
-  //handles change for each label in the form
-  //updates user State appropriately
+  const currentUser = useSelector((state) => state.firebase.auth);
+  const userProfile = useSelector((state) => state.firebase.profile);
+  const firestore = useFirestore();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -64,22 +60,31 @@ export default function ProfileCreate() {
     setUser((user) => ({ ...user, [name]: value }));
   }
   function handleSelect(e) {
-    setUser((user) => ({...user, [e.target.name]: e.target.value}));
+    setUser((user) => ({ ...user, [e.target.name]: e.target.value }));
   }
   function handleSubmit(e) {
-    "";
     e.preventDefault();
 
     if (user.password !== user.password2) {
       console.log("password doesn't match!");
     } else {
-      // dispatch actions
-      dispatch(register(user));
-      /* dispatch(sendEmail({user})) */
+      firestore.set(
+        {
+          collection: "users",
+          doc: currentUser.uid,
+        },
+        {
+          ...user,
+          status: 2,
+        },
+        { merge: true }
+      );
     }
   }
 
-  return (
+  return userProfile.status === 2 || isEmpty(currentUser) ? (
+    <Redirect to="/" />
+  ) : (
     <Container component="main" maxWidth="md">
       <CssBaseline />
       <div className={classes.paper}>
@@ -89,11 +94,12 @@ export default function ProfileCreate() {
         {/* main form */}
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
+                value={user.school}
                 id=""
                 label="School"
                 name="school"
@@ -101,21 +107,51 @@ export default function ProfileCreate() {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
                 id=""
                 label="Major"
-                name="school"
+                name="major"
                 autoComplete="lname"
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel className={classes.label} id="gender-label">Gender</InputLabel>
+            <Grid item xs={12} sm={4}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id=""
+                label="Class year"
+                name="classYear"
+                autoComplete="lname"
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id=""
+                label="HUB Box number"
+                name="hub"
+                autoComplete="lname"
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <FormControl
+                variant="outlined"
+                className={classes.formControl}
+                fullWidth
+              >
+                <InputLabel className={classes.label} id="gender-label">
+                  Gender
+                </InputLabel>
                 <Select
                   labelId="gender-label"
                   value={user.gender}
@@ -128,6 +164,18 @@ export default function ProfileCreate() {
                   <MenuItem value={"Female"}>Female</MenuItem>
                 </Select>
               </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id=""
+                label="Phone Number"
+                name="phone"
+                autoComplete="lname"
+                onChange={handleChange}
+              />
             </Grid>
           </Grid>
           <Button

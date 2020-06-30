@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { HereMap } from "../HereMap/HereMap";
 import "./SearchResult.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useFirestoreConnect, isLoaded } from "react-redux-firebase";
 import Loading from "../Loading";
 
@@ -31,22 +31,34 @@ const useStyles = makeStyles((theme) => ({
 function SearchResult() {
   const classes = useStyles();
 
-  useFirestoreConnect(["trips"]);
-  const trips = useSelector((state) => state.firestore.ordered.trips);
-  //const trips = useSelector(state => state.tripsReducer.trips)
-  //useDispatch enables us to use redux dispatch function
-  //const dispatch = useDispatch();
-  const tripList = isLoaded(trips) ? (
-    trips.map((trip) => (
-      <EachResult
-        comment={"Leaving between 2pm-4pm"}
-        starting={trip.origin_title}
-        destination={trip.destination_title}
+  // useFirestoreConnect(["trips"]);
+  // const trips = useSelector((state) => state.firestore.ordered.trips);
+
+
+  // const tripList = isLoaded(trips) ? (
+  //   trips.map((trip) => (
+  //     <EachResult
+  //       comment={"Leaving between 2pm-4pm"}
+  //       starting={trip.origin_title}
+  //       destination={trip.destination_title}
+  //     />
+  //   ))
+  // ) : (
+  //   <Loading />
+  // );
+
+    //comment out the code below when uncommenting the firebase code above
+    const trips = useSelector(state=>state.tripsReducer)
+
+    const tripList = trips.trips.map((trip) => (
+      <EachResult info = {trip}
+        // comment={"Leaving between 2pm-4pm"}
+        // starting={trip.origin_title}
+        // destination={trip.destination_title}
       />
     ))
-  ) : (
-    <Loading />
-  );
+  
+   
   return (
     <Paper classes={{ root: classes.paper }}>
       {/* Search Form */}
@@ -56,28 +68,15 @@ function SearchResult() {
             {/* Text Space */}
             <Grid item classes={{ root: classes.text }}>
               <Typography variant="body2" color="textSecondary">
-                3 results
+                {trips.trips.length} results
               </Typography>
               <Typography variant="h3">Trip to...</Typography>
             </Grid>
-
-            {/* <EachResult
-                name = {"ABCD Lee"}
-                occupation = {"Dickinson College"}
-                comment = {"Leaving between 2pm-4pm"}
-                starting = {"Dickinson College"}
-                destination = {"Harrisburg"}
-                rating = {4}
-                nickname = "Alex"
-                /> */}
-
             {tripList}
           </Grid>
-
           {/* Map */}
           <div id="dasdas">
             <div id="mapDiv">
-              {/* <img id = "map" alt = "temp map" src = {tempMap} /> */}
               <HereMap />
             </div>
           </div>

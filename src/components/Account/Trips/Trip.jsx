@@ -1,9 +1,7 @@
 import React from "react";
-import "./Trip.css";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { red } from "@material-ui/core/colors";
 import Rating from "@material-ui/lab/Rating";
-import { useDispatch } from "react-redux";
 import {
   Grid,
   Card,
@@ -15,14 +13,20 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
+import Dialog from '@material-ui/core/Dialog';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import EventIcon from "@material-ui/icons/Event";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import LocationCityIcon from "@material-ui/icons/LocationCity";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-import { IconButton, Menu, MenuItem } from "@material-ui/core/";
-import { Link } from "react-router-dom";
-import { deleteTrip } from "../../../redux/actions/tripsActions";
-import { useFirestore } from "react-redux-firebase";
+import { Menu, MenuItem } from "@material-ui/core/";
+import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
+import { Link , useRouteMatch } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles({
   media: {
@@ -33,32 +37,121 @@ const useStyles = makeStyles({
     backgroundColor: red[500],
   },
 });
-//Create a Trip component
+
+//styling for popup
+const styles = (theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(2),
+  },
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
+  },
+});
+
+const DialogTitle = withStyles(styles)((props) => {
+  const { children, classes, onClose, ...other } = props;
+  return (
+    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+      <Typography variant="h6">{children}</Typography>
+      {onClose ? (
+        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </MuiDialogTitle>
+  );
+});
+const DialogContent = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2),
+  },
+}))(MuiDialogContent);
+const DialogActions = withStyles((theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(1),
+  },
+}))(MuiDialogActions);
+
 export default function Trip(props) {
-  const firestore = useFirestore();
-  //Passing the props "trip" of Trip component in TripList to a variable
-  const trip = props.trip;
   const classes = useStyles();
+
+  const trip = props.trip;
+  //get trip id from trip object that is coming from TripList
+  const tripId = props.trip.id;
+
+  //connect with firestore and retrieve the data directly from the firestore
+  useFirestoreConnect([
+    { collection: 'trips' }
+  ]);
+  //get trip object that has qeuried tripId
+  const tripToEdit = useSelector((state) => state.firestore.data.userTrips[tripId]);
+
+  //useState for controlling popup
+  const [openPopup, setOpenPopup] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpenPopup(true);
+  };
+  const handleClosePopup = () => {
+    setOpenPopup(false);
+  };
+
+  //button shows different component depending on whether tripToEdit exists
+  const showLink = tripToEdit? (
+    <Link to={`edit/${props.trip.id}`}>
+            <Button size="small" color="primary">
+               Modify trip
+            </Button>
+    </Link>
+  ) : (
+    <div>
+      <Button size="small" color="primary" onClick={handleClickOpen}>
+        Modify trip
+      </Button>
+      <Dialog onClose={handleClosePopup} aria-labelledby="customized-dialog-title" open={openPopup}>
+        <DialogTitle id="customized-dialog-title" onClose={handleClosePopup}>
+          Warning
+        </DialogTitle>
+        <DialogContent dividers>
+          <Typography gutterBottom>
+            404: Cannot find the requested trip!
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+           <Button autoFocus onClick={handleClosePopup} color="primary">
+             Close
+           </Button>
+         </DialogActions>
+       </Dialog>
+    </div>   
+   );
+
+
+
+  //------------ Menu handlers ------------//
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-
-  const handleMenu = (event) => {
+  function handleMenu (event){
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const dispatch = useDispatch();
-
+  const firestore = useFirestore(); //use firestore reducer from 'react-redux-firebase'
   function handleDelete(e) {
     e.preventDefault();
-    //dispatch(deleteTrip(props.trip.id));
     firestore.delete({
-      collection: 'trips',
-      doc: props.trip.id
-    })
+      collection: "trips", //function similar to the one in firebase, updates both firestore and local firestore reducer
+      doc: props.trip.id, //prop is passed from trip list
+    });
   }
+
   return (
     <Grid item xs={4} className="Trip">
       <Card className={classes.root} gutterBottom>
@@ -105,10 +198,8 @@ export default function Trip(props) {
         </CardContent>
         {/* Buttons */}
         <CardActions>
+          {showLink}
           <Button onClick={handleMenu} size="small" color="primary">
-            Modify trip
-          </Button>
-          <Button size="small" color="primary">
             Contact driver
           </Button>
           <Menu

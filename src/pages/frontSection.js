@@ -4,6 +4,8 @@ import fpone from "../static/img/frontpage1.jpg"
 import fptwo from "../static/img/frontpage2.jpg"
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import Autocomplete from '../components/Autocomplete';
+import {useStyles} from './frontSectionStyles';
 
 
 const theme = createMuiTheme({
@@ -23,38 +25,24 @@ const theme = createMuiTheme({
     },
   });
 
- const useStyles = makeStyles({
 
-    ride: {
-        padding: 50,
-        height: '50px',
-        marginLeft: 200
-    },
-    findbtn: {
-        margin: '20px',
-        left: 470
-    },
-    aboutbtn: {
-        margin: '20px',
-        left: 470
-    },
-    aboutimg: {
-        height: 800,
-        margin: '50px'
-    },
-    findimg: {
-        height: 800,
-        margin: '50px'
-    },
-    paper: {
-        height: 200,
-        margin: '30px'
-    },
- });
 
 export default function FrontSection(props){
     const classes = useStyles();
-    return(
+    return(<>
+        <header className={classes.header}>
+            <div>
+            <div className={classes.logo_box}>
+                
+            </div>
+            <div className={classes.text_box}>
+                <h1 className={classes.heading_primary}>
+                    <span className={classes.heading_primary_main}>Are you looking for a ride?</span>
+                </h1>
+                <Link to="/search" className={`${classes.btn} ${classes.btn_white} ${classes.btn_animated}`}>Find a ride</Link>
+            </div>
+            </div>
+        </header>
         <Card className={classes.rootone}>
             {/*first section with text, 'Find a ride' button and the image */}
             <CardContent className={classes.find}>
@@ -62,17 +50,27 @@ export default function FrontSection(props){
                 <Typography variant='h4' component='text1'>
                         Are you looking for a ride to your destination?
                 </Typography>
+                
                 </CardActions>
                 <CardActions>
-                    <Button 
-                    component={Link} 
-                    to='/search' 
-                    color='primary' 
-                    variant='outlined'
-                    className={classes.findbtn}
+                    <Button
+                        component={Link}
+                        to='/search'
+                        color='primary'
+                        variant='outlined'
+                        className={classes.findbtn}
                     >
                         Find a ride
-                 </Button>
+                    </Button>
+                    <Button
+                        component={Link}
+                        to='/postRide'
+                        color='secondary'
+                        variant='outlined'
+                        className={classes.findbtn}
+                    >
+                        Offer a ride
+                    </Button>
                 </CardActions>
                 {/*second section with text, 'About' button and the image */}
             </CardContent>
@@ -81,26 +79,26 @@ export default function FrontSection(props){
                 image={fpone}
                 title="first img"
             />
-                        <CardContent className={classes.intro}>
-                <Typography variant='h4' component='text2'>
-                        ...About...
-                </Typography>
-                <CardActions>
-                    <Button 
-                        component={Link} 
-                        to='/search' 
-                        color='primary' 
-                        variant='outlined'
-                        className={classes.aboutbtn}
-                >
-                        About
-                    </Button>
-                </CardActions>
-            </CardContent>
+                <CardContent className={classes.intro}>
+                    <Typography variant='h4' component='text2'>
+                            ...About...
+                    </Typography>
+                    <CardActions>
+                        <Button
+                            component={Link}
+                            to='/search'
+                            color='primary'
+                            variant='outlined'
+                            className={classes.aboutbtn}
+                        >
+                            About
+                        </Button>
+                    </CardActions>
+                </CardContent>
             <CardMedia
-                        className={classes.aboutimg}
-                        image={fptwo}
-                        title="second img"
+                className={classes.aboutimg}
+                image={fptwo}
+                title="second img"
             />
             <Grid container spacing={1} className={classes.container}>
                 <Grid item xs={12}>
@@ -127,5 +125,5 @@ export default function FrontSection(props){
             </Grid>
         </Card>
 
-    );
+    </>);
 }

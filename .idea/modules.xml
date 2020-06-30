@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Carpool-dickinson.iml" filepath="$PROJECT_DIR$/.idea/Carpool-dickinson.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Desktop/mytin_frontend/.idea/mytin_frontend.iml" filepath="$PROJECT_DIR$/../Desktop/mytin_frontend/.idea/mytin_frontend.iml" />
+    </modules>
+  </component>
+</project>
