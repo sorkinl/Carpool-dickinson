@@ -1,0 +1,43 @@
+.trip-box{
+    display: block;
+    border: solid 1px black;
+    border-radius: 20px;
+    width: 20%;
+    height: 100%;
+    position: relative;
+    background-color: white;
+    box-shadow: 0 10px 20px rgba(0,0,0,.2);
+    text-align: left;
+    padding: 0 15px;
+}
+.heading{
+    height: 80px;
+}
+.avatar{
+    display: inline-block;
+    position: absolute;
+    top: 27px;
+    left: 2%
+}
+.trip-heading{
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    right: 15%;
+}
+.trip-sub{
+    position: absolute;
+    top:50px;
+    right: 15%;
+}
+
+/* @keyframes fadeInOnHover{
+    0%{
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 0.8;
+    }
+} */
+

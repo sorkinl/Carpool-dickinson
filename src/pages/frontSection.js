@@ -5,6 +5,8 @@ import fptwo from "../static/img/frontpage2.jpg"
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import Autocomplete from '../components/Autocomplete';
+import {useStyles} from './frontSectionStyles';
+import TripMainPage from '../components/TripMainPage';
 
 
 const theme = createMuiTheme({
@@ -24,38 +26,30 @@ const theme = createMuiTheme({
     },
   });
 
- const useStyles = makeStyles({
 
-    ride: {
-        padding: 50,
-        height: '50px',
-        marginLeft: 200
-    },
-    findbtn: {
-        margin: '20px',
-        left: 470
-    },
-    aboutbtn: {
-        margin: '20px',
-        left: 470
-    },
-    aboutimg: {
-        height: 800,
-        margin: '50px'
-    },
-    findimg: {
-        height: 800,
-        margin: '50px'
-    },
-    paper: {
-        height: 200,
-        margin: '30px'
-    },
- });
 
 export default function FrontSection(props){
     const classes = useStyles();
-    return(
+    return(<>
+        <header className={classes.header}>
+            <div>
+            <div className={classes.logo_box}>
+                
+            </div>
+            <div className={classes.text_box}>
+                <h1 className={classes.heading_primary}>
+                    <span className={classes.heading_primary_main}>Are you looking for a ride?</span>
+                </h1>
+                <Link to="/search" className={`${classes.btn} ${classes.btn_white} ${classes.btn_animated}`}>Find a ride</Link>
+            </div>
+            </div>
+        </header>
+        <div className="recent-trips">
+            <h1 className="recent-trips-header">Recent trips</h1>
+            <div className="recent-trips-box"> 
+                  <TripMainPage/>  
+            </div>
+        </div>
         <Card className={classes.rootone}>
             {/*first section with text, 'Find a ride' button and the image */}
             <CardContent className={classes.find}>
@@ -63,7 +57,7 @@ export default function FrontSection(props){
                 <Typography variant='h4' component='text1'>
                         Are you looking for a ride to your destination?
                 </Typography>
-                <Autocomplete/>
+                
                 </CardActions>
                 <CardActions>
                     <Button
@@ -138,5 +132,5 @@ export default function FrontSection(props){
             </Grid>
         </Card>
 
-    );
+    </>);
 }

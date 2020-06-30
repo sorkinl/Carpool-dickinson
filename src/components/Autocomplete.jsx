@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import { TextField } from "@material-ui/core";
 import axios from "axios";
+import {Autocomplete} from '@material-ui/lab'
 
-const Autocomplete = (props) => {
+const AutocompleteHERE = (props) => {
   const [state, setState] = useState({
     suggestions: [],
     text: "",
@@ -75,17 +76,28 @@ const Autocomplete = (props) => {
   }
 
   const suggestionSelected = item => {
+    console.log(item.label)
       /* setState({
           ...state,
           text: item.label,
           locationId: item.locationId,
           suggestions: []
       }) */
+      console.log("Hi")
+      props.onSuggestionSelect(item)
       setText(item.label);
       setLocationId(item.locationId)
       setSuggestions([])
   }
-  return (<><div><TextField type="text" value={text} onChange={onTextChanged} variant={props.variant}/></div> <div>{renderSuggestions()}</div></>);
+  return (<>{/* <div><TextField type="text" value={text} onChange={onTextChanged} variant={props.variant}/></div> <div>{renderSuggestions()}</div> */}
+  <Autocomplete
+  options={suggestions}
+  onChange={(event,value) => suggestionSelected(value)}
+  //groupBy={(option) => option.firstLetter}
+  getOptionLabel={(option) => option.label}
+  style={{ width: 300 }}
+  renderInput={(params) => <TextField {...params} value={text} onChange={onTextChanged} label="With categories" variant="outlined" />}
+/></>);
 };
 
-export default Autocomplete;
+export default AutocompleteHERE;
