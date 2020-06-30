@@ -1,10 +1,14 @@
 import React, {useState} from 'react';
-import {makeStyles, Container, Input, TextField, Button, Grid, CssBaseline, MenuItem, Divider, Typography} from '@material-ui/core';
+import {makeStyles, Container, TextField, Button, Grid, CssBaseline, Divider, MenuItem} from '@material-ui/core';
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 import { useSelector} from 'react-redux';
 import firebase from '../../../firebase/firebaseConfig';
 import {useFirestore} from "react-redux-firebase";
 
+//A few improvements to be made:
+// + Save Update button reloads the page
+// + make imgUrl store the photoUrl (optional)
+// + add some more edit fields if needed
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(1),
         width: '34ch',
     },
+    field: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+    },
     form: {
         width: '100%',
         marginTop: theme.spacing(3),
@@ -33,6 +41,16 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3,3, 2),
     },
 }));
+//Select options of class year
+const years = [
+    { value: '2019', label: '2019',},
+    { value: '2020', label: '2020',},
+    { value: '2021', label: '2021',},
+    { value: '2022', label: '2022',},
+    { value: '2023', label: '2023',},
+    { value: '2024', label: '2024',},
+    { value: '2025', label: '2025',},
+];
 
 // An edit profile component
 function EditField(props){
@@ -51,23 +69,24 @@ function EditField(props){
         firstName: props.user.firstName,
         lastName: props.user.lastName,
         email: props.user.email,
-        phone: props.user.phone}
-    );
-
+        phone: props.user.phone,
+        classYear: props.user.classYear,
+        hub: props.user.hub,
+        major: props.user.major,
+    });
     const handleEdit = event => {
         const { name, value } = event.target;
-        setInput({ [name]: value });
+        setInput((input) => ({ ...input, [name]: value }));
         setEdit(true);
     };
-
+    //A few improvements to be made: add exception handlers, enable image preview before upload
     const handleSubmit = (e) => {
         e.preventDefault();
-        //Upcoming tasks: add exception handlers, limit photo size, async upload button
 
         //Update photo Url
-        console.log('start of upload')
+        console.log('Start of upload')
         if(imageFile === null ) {
-            console.error(`not an image OR no images uploaded`)
+            console.error(`Not an image OR no images uploaded`)
         }
         else {
             const metadata = {
@@ -99,21 +118,13 @@ function EditField(props){
                 })
         }
         //Update profile info
-        console.log(Object.assign({}, input));
         if (isEdit === false) {
             console.log("No fields updated");
         } else {
             firestore
                 .collection("users")
                 .doc(uid)
-                .update(
-                    Object.assign({}, input)
-                    // {
-                    //     "firstName": input.firstName,
-                    //     "lastName": input.lastName,
-                    //     "email": input.email,
-                    //     "phoneNum": input.phone,
-                    // },
+                .update({...input}
                 );
         }
     }
@@ -121,7 +132,6 @@ function EditField(props){
         if (e.target.files[0]) {
             const file = e.target.files[0];
             setImageAsFile(imageFile => (file));
-            console.log(file);
        }
     }
     return(
@@ -198,11 +208,9 @@ function EditField(props){
                                     required
                                     id="email"
                                     label="Email"
-                                    style={{ margin: 4 }}
+                                    className={classes.field}
                                     placeholder="Your email"
-                                    helperText="Please enter your email"
                                     fullWidth
-                                    margin="normal"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
@@ -220,21 +228,75 @@ function EditField(props){
                                 "inputProps" stores the attributes for later use with handleEdit*/}
                             <Grid item xs={12}>
                                 <TextField
-                                    id="phoneNum"
+                                    id="phone"
                                     label="Phone Number"
-                                    style={{ margin: 4 }}
                                     fullWidth
+                                    className={classes.field}
                                     placeholder="(123)-456-789"
-                                    helperText="Please enter your phone number"
-                                    margin="normal"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
                                     variant="filled"
                                     defaultValue={input.phone}
                                     inputProps={{
-                                        name: 'phoneNum',
-                                        id: 'user-phoneNum',
+                                        name: 'phone',
+                                        id: 'user-phone',
+                                    }}
+                                    onChange={handleEdit}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    id="major"
+                                    label="Major"
+                                    className={classes.field}
+                                    placeholder="Your school major(s)"
+                                    fullWidth
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    variant="filled"
+                                    defaultValue={input.major}
+                                    inputProps={{
+                                        name: 'major',
+                                        id: 'user-major',
+                                    }}
+                                    onChange={handleEdit}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    select
+                                    label="Class Year"
+                                    variant="filled"
+                                    className={classes.textField}
+                                    align='start'
+                                    defaultValue={input.classYear}
+                                    inputProps={{
+                                        name: 'classYear',
+                                    }}
+                                    onChange={handleEdit}
+                                >
+                                    {years.map((option) => (
+                                        <MenuItem value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="HUB Number"
+                                    variant="filled"
+                                    className={classes.textField}
+                                    defaultValue={input.hub}
+                                    inputProps={{
+                                        name: 'hub',
+                                        maxLength: 4,
+                                    }}
+                                    placeholder="4-digit number"
+                                    InputLabelProps={{
+                                        shrink: true,
                                     }}
                                     onChange={handleEdit}
                                 />

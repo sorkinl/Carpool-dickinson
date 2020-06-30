@@ -44,7 +44,12 @@ export default function Profile(props){
                             <Typography className={classes.title} variant="h5">{user.firstName} {user.lastName}</Typography>
                         }
                         align='left'
-                        subheader={user.email}
+                        subheader={
+                            <>
+                                <Typography variant="subtitle1" color="textPrimary">{user.school}</Typography>
+                                <Typography variant="body2">{user.email}</Typography>
+                            </>
+                        }
                         avatar={
                             <Avatar src={user.photoUrl}
                                     alt="/broken-image.jpg"
