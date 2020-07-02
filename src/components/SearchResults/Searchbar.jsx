@@ -12,7 +12,7 @@ import { createTrip, getTrips } from '../../redux/actions/tripsActions';
 
 
 import { Link, useRouteMatch, Switch, Route} from 'react-router-dom';
-import SearchResult from '../SearchResults/SearchResult';
+import SearchResult from './SearchResult';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
  
 
-const Searchbar = ({onCreate}) => {
+const Searchbar = () => {
 
     let match = useRouteMatch();
 
@@ -72,7 +72,7 @@ const Searchbar = ({onCreate}) => {
             console.log("submitted")
      
 
-        onCreate({...searchInput, departDate: searchInput.departDate.toISOString()});
+        // onCreate({...searchInput, departDate: searchInput.departDate.toISOString()});
         dispatch(getTrips(searchInput))
         // setState({
         //     pickup:'',
@@ -125,7 +125,7 @@ const Searchbar = ({onCreate}) => {
 
     {/* Moved */}
 
-    <Link to={`${match.url}/results`} onClick = {handleSubmit}>
+    <Link to={`${match.url}/results/?originTitle=${searchInput.originTitle}&destTitle=${searchInput.destTitle}`} onClick = {handleSubmit}>
                 <Button
                     type="submit"
                     fullWidth

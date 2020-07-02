@@ -3,10 +3,11 @@ import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
-import SearchForm from "./components/SearchForm/Searchform";
+import Searchbar from "./components/SearchResults/Searchbar";
 import Account from "./components/Account/Account";
 import MainChat from "./components/Chat/MainChat/MainChat";
 import FrontPage from "./pages/frontpage";
+import FrontPageFigma from "./pages/frontpageFigma";
 import LogIn from "./components/LogInForm/LogIn";
 import SignUp from "./components/LogInForm/SignUp";
 import LandingPage from "./components/LogInForm/LandingPage";
@@ -17,18 +18,16 @@ import EmailVerify from "./components/LogInForm/EmailVerify";
 import Loading from './components/Loading'
 import PostRideField from "./components/CreateTrip/PostRideField";
 import ConfirmField from "./components/CreateTrip/ConfirmField";
+import { withRouter } from 'react-router-dom';
 
-function App() {
+
+const Routes = withRouter(({location})=>{ 
   return (
-    <div className="App">
-      <Router>
-        <div>
-          <NavBar />
-          <hr />
-          <main></main>
+    <div>
+          { location.pathname!=="/frontpagetrial" &&    <NavBar /> }
           <Switch>
             <Route path="/" exact component={FrontPage} />
-            <Route path="/search" component={SearchForm} />
+            <Route path="/search" component={Searchbar} />
             <PrivateRoute path="/account" component={Account} />
             <PrivateRoute path="/chat" component={MainChat} />
             <Route path="/logIn" component={LogIn} />
@@ -39,8 +38,16 @@ function App() {
             <Route path="/registrationForm" component={ProfileCreate} />
             <Route path = "/postRide" component = {PostRideField}/>
             <Route path = "/postRide/confirm" component = {ConfirmField}/>
+            <Route path = "/frontPageTrial" component = {FrontPageFigma}/>
           </Switch>
         </div>
+  )
+})
+function App() {
+  return (
+    <div className="App">
+      <Router>
+        <Routes/>
       </Router>
       <Footer />
     </div>

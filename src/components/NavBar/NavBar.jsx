@@ -69,19 +69,7 @@ const NavBar = () => {
   
   return (
     <div className={classes.root}>
-      {/* controls login button */}
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={!!auth.uid}
-              onChange={() => dispatch(toggleLogin({ word: "allowed" }))}
-              aria-label="login switch"
-            />
-          }
-          label={auth.uid ? "Logout" : "Login"}
-        />
-      </FormGroup>
+  
       <AppBar className={classes.appBar} position="fixed">
         <Toolbar>
           <IconButton

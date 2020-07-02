@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { Button } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useFirestore, useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
+import Autocomplete from '../../Autocomplete';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -145,6 +146,7 @@ export default function EditForm(props){
             >
                 Edit
             </Button>
+            <Autocomplete/>
         </form>
     </div>
     ) : (
