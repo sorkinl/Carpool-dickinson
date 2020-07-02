@@ -159,33 +159,33 @@ export default function Trip(props) {
         <CardHeader
           avatar={
             <Avatar aria-label="name" className={classes.avatar}>
-              M
+              {tripToEdit.photoUrl}
             </Avatar>
           }
-          title={trip.first + " " + trip.last}
+          title={tripToEdit.user.firstName + " " + tripToEdit.user.lastName}
           align="left"
           subheader={trip.school}
         />
         {/* Picture (can be removed) */}
-        <CardMedia className={classes.media} image={trip.image} title="Car" />
+        {/* <CardMedia className={classes.media} image={trip.image} title="Car" /> */}
         {/* Display a trip's bsic info */}
         <CardContent>
           {/* Date */}
           <Typography variant="body1" color="primary" align="left">
-            <EventIcon color="primary" /> {trip.date}
+            <EventIcon color="primary" /> {tripToEdit.departDate}
           </Typography>
           {/* Starting point */}
           <Typography variant="body1" color="textPrimary" align="left">
-            <LocationOnIcon color="action" /> {trip.from}
+            <LocationOnIcon color="action" /> {tripToEdit.originTitle}
           </Typography>
           {/* Destination */}
           <Typography variant="body1" color="textPrimary" align="left">
-            <LocationCityIcon color="action" /> {trip.to}
+            <LocationCityIcon color="action" /> {tripToEdit.destTitle}
           </Typography>
           {/* Cost */}
-          <Typography variant="body1" color="inherit" align="left" gutterBottom>
+          {/* <Typography variant="body1" color="inherit" align="left" gutterBottom>
             <AttachMoneyIcon color="action" /> {trip.cost}
-          </Typography>
+          </Typography> */}
           {/* Rating */}
           <Typography variant="body1" color="inherit" align="left">
             <Rating
