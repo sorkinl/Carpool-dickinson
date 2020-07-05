@@ -16,20 +16,18 @@ import {
     RadioGroup,
     FormControlLabel,
     FormControl,
-    InputAdornment
 } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
 import DateFnsUtils from '@date-io/date-fns';
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { useFirestore } from 'react-redux-firebase';
 import ConfirmField from "./ConfirmField";
 import axios from "axios";
 import firebase from "../../firebase/firebaseConfig";
 import {useFirestoreConnect} from "react-redux-firebase";
-import {MAKE_TRIP} from "../../redux/constants/trip-types";
-
+import AutoOrigin from "./AutoOrigin";
+import AutoDestination from './AutoDestination';
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -76,56 +74,50 @@ var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
 //Global trip variable
 let makeTrip = {
-    originTitle: "",
-    destTitle: "",
+    origin: {
+        title: '',
+        lat: '',
+        lng: '',
+    },
+    destination: {
+        title: '',
+        lat: '',
+        lng: '',
+    },
     departDate: date,
-    departTime: "",
-    emptySeat: "",
-    description: "",
-    firstName: "",
-    lastName: "",
-    photoUrl: "",
+    departTime: '',
+    emptySeat: '',
+    description: '',
+    firstName: '',
+    lastName: '',
+    photoUrl: '',
 };
 let tripToAdd = {};
 
-export const createTrip = async (payload) => {
-    try {
-        const originSearch = encodeURIComponent(payload.originTitle);
-        const destSearch = encodeURIComponent(payload.destTitle);
-        const originRes = await axios
-            .get(
-            `https://geocode.search.hereapi.com/v1/geocode?q=${originSearch}&apiKey=${process.env.REACT_APP_HERE_KEY}`)
-            .catch((e)=>{console.log(e, " at originRes")});
-        const destRes = await axios.get(
-            `https://geocode.search.hereapi.com/v1/geocode?q=${destSearch}&apiKey=${process.env.REACT_APP_HERE_KEY}`)
-            .catch((e)=>{console.log(e, " at destRes")});
-
-        tripToAdd = {
-            uid: firebase.auth().currentUser.uid,
-            user: {
-                firstName: payload.firstName,
-                lastName: payload.lastName,
-                photoUrl: payload.photoUrl,
-            },
-            originTitle: originRes.data.items[0].title,
-            origin: {
-                latitude: originRes.data.items[0].position.lat,
-                longitude: originRes.data.items[0].position.lng
-            },
-            destTitle: destRes.data.items[0].title,
-            destination: {
-                latitude: destRes.data.items[0].position.lat,
-                longitude: destRes.data.items[0].position.lng
-            },
-            departDate: payload.departDate,
-            departTime: payload.departTime,
-            description: payload.description,
-            emptySeat: payload.emptySeat,
-        }
-        console.log(tripToAdd);
-    } catch (error) {
-        console.log("Create Trip error", error);
+export const createTrip = (payload) => {
+    tripToAdd = {
+        uid: firebase.auth().currentUser.uid,
+        user: {
+            firstName: payload.firstName,
+            lastName: payload.lastName,
+            photoUrl: payload.photoUrl,
+        },
+        originTitle: payload.origin.title,
+        origin: {
+            latitude: payload.origin.lat,
+            longitude: payload.origin.lng,
+        },
+        destTitle: payload.destination.title,
+        destination: {
+            latitude: payload.destination.lat,
+            longitude: payload.destination.lng,
+        },
+        departDate: payload.departDate,
+        departTime: payload.departTime,
+        description: payload.description,
+        emptySeat: payload.emptySeat,
     }
+    console.log(tripToAdd);
 }
 
 export default function PostRideField() {
@@ -145,7 +137,15 @@ export default function PostRideField() {
     function handleChange(e) {
         const { name, value } = e.target;
         setState((state) => ({ ...state, [name]: value }));
+        //console.log(state.emptySeat); cannot see state
         makeTrip[name] = value;
+    }
+    function handleLocation(value, name) {
+        //setState((state) => ({ ...state, originTitle: value }));
+        //console.log(state.originTitle); cannot see state
+        makeTrip[name].title = value.label;
+        makeTrip[name].lat = value.lat;
+        makeTrip[name].lng = value.lng;
     }
     function handleDateChange(date) {
         setState({ ...state, departDate: date });
@@ -155,8 +155,8 @@ export default function PostRideField() {
         setError(false);
     };
     function validateInput() {
-        if(makeTrip.originTitle === ""
-            || makeTrip.destTitle === ""
+        if(makeTrip.origin.title === ""
+            || makeTrip.destination.title === ""
             || makeTrip.departDate === ""
             || makeTrip.departTime === ""
             || makeTrip.emptySeat === "") {
@@ -173,8 +173,13 @@ export default function PostRideField() {
         }, 2500);
     }
     const submitTrip = async () => {
-        await createTrip(makeTrip);
-        await firestore.collection("trips").add(tripToAdd);
+        try {
+            await createTrip(makeTrip);
+            await firestore.collection("trips").add(tripToAdd);
+        }
+        catch (error) {
+            console.log("Create Trip error", error);
+        }
     }
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -209,44 +214,10 @@ export default function PostRideField() {
                                 <Grid container spacing={2}>
 
                                     <Grid item xs={12} sm={6}>
-                                        <TextField
-                                            className={classes.textField}
-                                            name="originTitle"
-                                            required
-                                            fullWidth
-                                            variant="filled"
-                                            placeholder="From"
-                                            label="Origin"
-                                            InputProps={{
-                                                startAdornment: (
-                                                    <InputAdornment position="start">
-                                                        <LocationOnIcon color="primary"/>
-                                                    </InputAdornment>
-                                                ),
-                                            }}
-                                            value={state.originTitle}
-                                            onChange={handleChange}
-                                        />
+                                        <AutoOrigin onSuggestionSelect={handleLocation}/>
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
-                                        <TextField
-                                            className={classes.textField}
-                                            required
-                                            variant="filled"
-                                            fullWidth
-                                            label="Destination"
-                                            name="destTitle"
-                                            placeholder="To"
-                                            InputProps={{
-                                                startAdornment: (
-                                                    <InputAdornment position="start">
-                                                        <LocationOnIcon color="secondary"/>
-                                                    </InputAdornment>
-                                                ),
-                                            }}
-                                            value={state.destTitle}
-                                            onChange={handleChange}
-                                        />
+                                       <AutoDestination onSuggestionSelect={handleLocation}/>
                                     </Grid>
                                 </Grid>
                                 <Grid container spacing={2}>

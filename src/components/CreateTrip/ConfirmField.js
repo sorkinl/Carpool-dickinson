@@ -97,11 +97,10 @@ export default function ConfirmField(prop) {
             {/*        Create another ride*/}
             {/*    </Button>*/}
             {/*</Route>*/}
-            <Link to="/account">
+            <Link to="/">
                 <Button variant="contained"
                         color="primary"
                         className={classes.submit}
-
                 >
                     Back to home
                 </Button>
