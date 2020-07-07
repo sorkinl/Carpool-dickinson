@@ -16,7 +16,8 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import EditForm from "./components/Account/Trips/editform";
 import EmailVerify from "./components/LogInForm/EmailVerify";
 import Loading from './components/Loading'
-import PostRideField from "./pages/PostRideField";
+import PostRideField from "./components/CreateTrip/PostRideField";
+import ConfirmField from "./components/CreateTrip/ConfirmField";
 import { withRouter } from 'react-router-dom';
 
 
@@ -36,6 +37,7 @@ const Routes = withRouter(({location})=>{
             <Route path="/verifyEmail" component={EmailVerify}/>
             <Route path="/registrationForm" component={ProfileCreate} />
             <Route path = "/postRide" component = {PostRideField}/>
+            <Route path = "/postRide/confirm" component = {ConfirmField}/>
             <Route path = "/frontPageTrial" component = {FrontPageFigma}/>
           </Switch>
         </div>
