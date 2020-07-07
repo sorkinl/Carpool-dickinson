@@ -9,7 +9,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 import { createTrip, getTrips } from '../../redux/actions/tripsActions';
-
+import Autocomplete from '../Autocomplete'
 
 import { Link, useRouteMatch, Switch, Route} from 'react-router-dom';
 import SearchResult from './SearchResult';
@@ -81,14 +81,18 @@ const Searchbar = () => {
         // })
     }
 
+    const onSuggestionSelect = (data) => {
+        console.log(data)
+    }
+
     return(
 
         <form className={classes.form} noValidate>
             <FormControl className={classes.FormControl} variant="outlined">
-                <InputLabel htmlFor="component-outlined">
+                {/* <InputLabel htmlFor="component-outlined">
                     pickup
-                </InputLabel>
-            <OutlinedInput
+                </InputLabel> */}
+            {/* <OutlinedInput
                 type='text'
                 value={searchInput.originTitle}
                 variant="outlined"
@@ -98,7 +102,8 @@ const Searchbar = () => {
                 id="originTitle"
                 onChange={handleChange}
                 name="originTitle"
-            />
+            /> */}
+            <Autocomplete onSuggestionSelect={onSuggestionSelect}/>
             </FormControl>
             <FormControl className={classes.FormControl} variant="outlined">
             <InputLabel htmlFor="component-outlined">

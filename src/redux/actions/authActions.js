@@ -10,7 +10,7 @@ import firebase from "../../firebase/firebaseConfig";
 import { getProfileData } from "./profileActions";
 
 var actionCodeSettings = {
-  url: "http://localhost:3000/",
+  url: "https://remote-students-community-app.web.app/",
   handleCodeInApp: true,
 };
 
