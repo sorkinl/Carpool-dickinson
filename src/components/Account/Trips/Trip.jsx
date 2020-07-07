@@ -22,7 +22,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import EventIcon from "@material-ui/icons/Event";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import LocationCityIcon from "@material-ui/icons/LocationCity";
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+import TimerIcon from '@material-ui/icons/Timer';
+import CommentIcon from '@material-ui/icons/Comment';
 import { Menu, MenuItem } from "@material-ui/core/";
 import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import { Link , useRouteMatch } from 'react-router-dom';
@@ -79,8 +80,9 @@ const DialogActions = withStyles((theme) => ({
 
 export default function Trip(props) {
   const classes = useStyles();
-
+ 
   const trip = props.trip;
+
   //get trip id from trip object that is coming from TripList
   const tripId = props.trip.id;
 
@@ -174,6 +176,10 @@ export default function Trip(props) {
           <Typography variant="body1" color="primary" align="left">
             <EventIcon color="primary" /> {trip.date}
           </Typography>
+          <Typography variant="body1" color="primary" align="left">
+            <TimerIcon color="primary" /> {trip.time}
+          </Typography>
+          
           {/* Starting point */}
           <Typography variant="body1" color="textPrimary" align="left">
             <LocationOnIcon color="action" /> {trip.from}
@@ -184,17 +190,17 @@ export default function Trip(props) {
           </Typography>
           {/* Cost */}
           <Typography variant="body1" color="inherit" align="left" gutterBottom>
-            <AttachMoneyIcon color="action" /> {trip.cost}
+            <CommentIcon color="action" /> {trip.comment}
           </Typography>
           {/* Rating */}
-          <Typography variant="body1" color="inherit" align="left">
+          {/* <Typography variant="body1" color="inherit" align="left">
             <Rating
               name="rating-for-fun"
               value={trip.rating}
               precision={0.5}
               readOnly
             />
-          </Typography>
+          </Typography> */}
         </CardContent>
         {/* Buttons */}
         <CardActions>
