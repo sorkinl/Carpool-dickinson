@@ -19,6 +19,7 @@ import Loading from './components/Loading'
 import PostRideField from "./components/CreateTrip/PostRideField";
 import ConfirmField from "./components/CreateTrip/ConfirmField";
 import { withRouter } from 'react-router-dom';
+import MainPage from "./pages/FrontPage/MainPage/MainPage";
 
 
 const Routes = withRouter(({location})=>{ 
@@ -26,7 +27,7 @@ const Routes = withRouter(({location})=>{
     <div>
           { location.pathname!=="/frontpagetrial" &&    <NavBar /> }
           <Switch>
-            <Route path="/" exact component={FrontPage} />
+            <Route path="/" exact component={MainPage} />
             <Route path="/search" component={Searchbar} />
             <PrivateRoute path="/account" component={Account} />
             <PrivateRoute path="/chat" component={MainChat} />
