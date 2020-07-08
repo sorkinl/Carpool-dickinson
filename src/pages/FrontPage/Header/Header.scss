@@ -129,10 +129,15 @@ $default-font-size: 1.6rem;
 }
 
 .illustration {
-    position: absolute;
-    top:10rem;
-    right: 30rem;
+    display: inline-block;
+    width: 100vw;
+    height:100vh;
     &__image{
-        height: 40rem;
+        height: 50%;
+        width: 40%;
+        position: absolute;
+    top:13%;
+    right: 10%;
+    margin-left: 5rem;
     }
 }
