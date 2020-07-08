@@ -11,6 +11,7 @@ import {
     Grid,
     Collapse} from '@material-ui/core';
 import { useSelector } from 'react-redux';
+import './Profile.scss';
 
 const useStyles = makeStyles((theme)=>({
     root: {
@@ -46,7 +47,7 @@ export default function Profile(props){
         <div className={classes.root}>
             {/* Display user's Name, school, and Email*/}
             <Grid item>
-                <Card className={classes.root}>
+                <Card className={classes.root} id="card">
                     <CardHeader
                         title={
                             <Typography className={classes.title} variant="h5">{user.firstName} {user.lastName}</Typography>

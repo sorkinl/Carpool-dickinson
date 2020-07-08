@@ -10,5 +10,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="mytin_frontend" />
     <orderEntry type="module" module-name="mytin_frontend" />
+    <orderEntry type="module" module-name="advanced-css-course-master" />
   </component>
 </module>

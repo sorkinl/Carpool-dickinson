@@ -1,5 +1,5 @@
 import React from 'react';
-import './Account.css'
+import './Account.scss'
 import Profile from './Profile/Profile';
 import TripList from './Trips/TripList';
 import {Grid, CssBaseline} from '@material-ui/core';

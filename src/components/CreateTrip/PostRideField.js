@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(3),
         width: "30ch",
     },
-}));
+}))
 //Get current date
 const today = new Date();
 const yesterday = new Date(today);
