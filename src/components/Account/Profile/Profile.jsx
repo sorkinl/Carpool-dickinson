@@ -1,10 +1,15 @@
 import React, {useState} from 'react';
 import EditButton from './EditButton';
 import EditField from './EditField';
-import avatar from '../../../static/img/avatar.png';
-import { withStyles } from '@material-ui/core/styles';
-import {makeStyles, CssBaseline, Button, Avatar, Card, CardHeader, CardMedia, CardContent, CardActions, Typography, Box, Grid, Collapse} from '@material-ui/core';
-import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
+import {
+    makeStyles,
+    Card,
+    CardHeader,
+    CardContent,
+    CardActions,
+    Typography,
+    Grid,
+    Collapse} from '@material-ui/core';
 import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme)=>({
@@ -15,10 +20,9 @@ const useStyles = makeStyles((theme)=>({
     avatarSize: {
         width: theme.spacing(19),
         height: theme.spacing(19),
-        borderRadius: "1000px",
+        borderRadius: "700px",
         display: "inline-block",
         marginRight: "15px",
-        // padding: theme.spacing(0),
     },
     title: {
         fontSize: theme.typography.pxToRem(29),
@@ -40,7 +44,7 @@ export default function Profile(props){
     const user = useSelector(state => state.firebase.profile);
     return(
         <div className={classes.root}>
-            {/* Display user's Name, Email, and Location */}
+            {/* Display user's Name, school, and Email*/}
             <Grid item>
                 <Card className={classes.root}>
                     <CardHeader

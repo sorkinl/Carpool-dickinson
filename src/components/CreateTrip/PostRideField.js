@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import './PostRideField.css';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -23,9 +23,7 @@ import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers'
 import { useSelector } from "react-redux";
 import { useFirestore } from 'react-redux-firebase';
 import ConfirmField from "./ConfirmField";
-import axios from "axios";
 import firebase from "../../firebase/firebaseConfig";
-import {useFirestoreConnect} from "react-redux-firebase";
 import AutoOrigin from "./AutoOrigin";
 import AutoDestination from './AutoDestination';
 function Alert(props) {
