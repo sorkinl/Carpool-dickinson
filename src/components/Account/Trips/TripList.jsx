@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./TripList.css";
 import Trip from "./Trip";
 import { pink } from "@material-ui/core/colors";
 import {
   makeStyles,
   CssBaseline,
-  Paper,
   Typography,
   Box,
   Grid,
@@ -14,7 +13,7 @@ import {
   ExpansionPanelSummary,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { getTripsByUser } from "../../../redux/actions/profileActions";
 import { useFirestoreConnect } from "react-redux-firebase";
 
@@ -35,8 +34,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function TripList(props) {
-  const [fuTrip, setFuTrip] = useState(false);
-  const [pastTrip, setPastTrip] = useState(false);
+  const [pastTripList, setPastTripList] = useState("")
+  const [upcomingTripList, setUpcomingPastTripList] = useState("")
 
   // ------------- Handling trips ----------------- //
 
@@ -49,22 +48,36 @@ export default function TripList(props) {
       storeAs: "userTrips", //name of the object to store in firestore reducer
     },
   ]);
-  const userTrips = useSelector((state) => state.firestore.ordered.userTrips); //takes out array of trips queried above and takes it out of firestore reducer
 
+  // function onCreate()
+
+  const userTrips = useSelector((state) => state.firestore.ordered.userTrips); //takes out array of trips queried above and takes it out of firestore reducer
+  // const pastTripList =[]
+
+  const tempNext = []
+  const tempPrev = []
+  useEffect(()=>{
+    if(userTrips){
+      userTrips.map((x)=>{
+          if(x.departTime < new Date().setHours(0,0,0,0)){
+            tempPrev.push(x)
+          }else{
+            tempNext.push(x)
+          }
+  
+        })
+     }
+
+  }, [userTrips, tempNext, tempPrev])
+  const change = ()=>{
+    setPastTripList(tempPrev)  
+    setUpcomingPastTripList(tempNext)
+  } 
   const classes = useStyles();
-  const trip = {
-    image:
-      "https://cdn.aarp.net/content/dam/aarp/travel/tips/2020/05/1140-person-driving.jpg",
-    date: "mm/dd/yyyy",
-    cost: "$3.05",
-    from: "Carlisle",
-    to: "New York",
-    first: "Miyamoto",
-    last: "Smith",
-    school: "Dickinson College",
-  };
-  //List of past trips
-  const pastTripList = [trip, trip, trip, trip, trip];
+ 
+   //List of past trips, queried by every trips before today 
+
+
 
   return (
     <CssBaseline>
@@ -74,10 +87,7 @@ export default function TripList(props) {
         </Typography>
         <div className={classes.root}>
           {/* View future trip list panel. Change the state of fuTrip if this panel is clicked. */}
-          <ExpansionPanel
-            onChange={() => {
-              setFuTrip(!fuTrip);
-            }}
+          <ExpansionPanel     
             classes={{ expanded: classes.expandedPanel }}
           >
             <ExpansionPanelSummary
@@ -91,17 +101,23 @@ export default function TripList(props) {
             </ExpansionPanelSummary>
             {/* Display trips if there exists at least 1 trip, otherwise just text*/}
             <ExpansionPanelDetails>
-              {fuTrip == true &&
-                (userTrips.length > 0 ? (
+              {
+              // fuTrip === true
+              upcomingTripList!=="" &&
+                (upcomingTripList.length > 0 ? (
                   <Grid container spacing={3} className="Future-trip-list">
                     {
-                      userTrips.map((trip) => {
+                      upcomingTripList.map((trip) => {
+                  
                         return (
                           <Trip
                             trip={{
-                              from: trip.origin_title,
-                              to: trip.destination_title,
-                              id: trip.id,
+                              from: trip.originTitle,
+                              to: trip.destTitle,
+                              date: new Date(trip.departDate.seconds*1000).toLocaleDateString("en-US"),
+                              time: trip.departTime,
+                              comment: trip.description,
+                              id: trip.id
                               //uid: currentUser,
                             }}
                           />
@@ -116,11 +132,10 @@ export default function TripList(props) {
                 ))}
             </ExpansionPanelDetails>
           </ExpansionPanel>
-          {/* View past trip list panel. Change the state of pastTrip if this panel is clicked. */}
+          {/* View past trip list panel. */}
+          {console.log(pastTripList)}
           <ExpansionPanel
-            onChange={() => {
-              setPastTrip(!pastTrip);
-            }}
+          onChange={change}
             classes={{ expanded: classes.expandedPanel }}
           >
             <ExpansionPanelSummary
@@ -134,11 +149,23 @@ export default function TripList(props) {
             </ExpansionPanelSummary>
             {/* Display trips if there exists at least 1 trip, otherwise just text*/}
             <ExpansionPanelDetails>
-              {pastTrip == true &&
+              {pastTripList !== "" &&
                 (pastTripList.length > 0 ? (
                   <Grid container spacing={3} className="Past-trip-list">
                     {pastTripList.map((trip) => {
-                      return <Trip trip={trip} />;
+                      return (
+                        <Trip
+                          trip={{
+                            from: trip.originTitle,
+                            to: trip.destTitle,
+                            date: new Date(trip.departDate.seconds*1000).toLocaleDateString("en-US"),
+                            time: trip.departTime,
+                            comment: trip.description,
+                            id: trip.id
+                            //uid: currentUser,
+                          }}
+                        />
+                      );
                     })}
                   </Grid>
                 ) : (

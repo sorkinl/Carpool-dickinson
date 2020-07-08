@@ -105,7 +105,7 @@ export const createTrip = async (payload) => {
             user: {
                 firstName: payload.firstName,
                 lastName: payload.lastName,
-                photoUrl: payload.photoUrl,
+                // photoUrl: payload.photoUrl,
             },
             originTitle: originRes.data.items[0].title,
             origin: {
@@ -172,6 +172,7 @@ export default function PostRideField() {
             setLoad('success');
         }, 2500);
     }
+
     const submitTrip = async () => {
         await createTrip(makeTrip);
         await firestore.collection("trips").add(tripToAdd);
@@ -185,7 +186,8 @@ export default function PostRideField() {
             makeTrip.firstName = user.firstName;
             makeTrip.lastName = user.lastName;
             makeTrip.photoUrl = user.photoUrl;
-            submitTrip();
+            // submitTrip().then(handleLoad);
+            submitTrip().then();
             handleLoad();
             setSubmit(true);
         }
