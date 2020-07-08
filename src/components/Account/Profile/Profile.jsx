@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import EditButton from './EditButton';
 import EditField from './EditField';
+import avatar from '../../../static/img/avatar.png';
 import { withStyles } from '@material-ui/core/styles';
 import {makeStyles, CssBaseline, Button, Avatar, Card, CardHeader, CardMedia, CardContent, CardActions, Typography, Box, Grid, Collapse} from '@material-ui/core';
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
@@ -9,12 +10,15 @@ import { useSelector } from 'react-redux';
 const useStyles = makeStyles((theme)=>({
     root: {
         maxWidth: '100%',
-        padding: theme.spacing(3),
+        padding: theme.spacing(4),
     },
     avatarSize: {
         width: theme.spacing(19),
         height: theme.spacing(19),
-        padding: theme.spacing(0),
+        borderRadius: "1000px",
+        display: "inline-block",
+        marginRight: "15px",
+        // padding: theme.spacing(0),
     },
     title: {
         fontSize: theme.typography.pxToRem(29),
@@ -51,11 +55,10 @@ export default function Profile(props){
                             </>
                         }
                         avatar={
-                            <Avatar src={user.photoUrl}
+                            <img src={user.photoUrl}
                                     alt="/broken-image.jpg"
-                                    aria-label="name"
                                     className={classes.avatarSize}>
-                            </Avatar>
+                            </img>
                         }
                     />
                     {/*Display the EditField if EditButton is clicked*/}

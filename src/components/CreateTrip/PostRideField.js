@@ -69,61 +69,36 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 //Get current date
-var today = new Date();
-var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-
-//Global trip variable
-let makeTrip = {
-    origin: {
-        title: '',
-        lat: '',
-        lng: '',
-    },
-    destination: {
-        title: '',
-        lat: '',
-        lng: '',
-    },
-    departDate: date,
-    departTime: '',
-    emptySeat: '',
-    description: '',
-    firstName: '',
-    lastName: '',
-    photoUrl: '',
-};
-let tripToAdd = {};
-
-export const createTrip = (payload) => {
-    tripToAdd = {
-        uid: firebase.auth().currentUser.uid,
-        user: {
-            firstName: payload.firstName,
-            lastName: payload.lastName,
-            photoUrl: payload.photoUrl,
-        },
-        originTitle: payload.origin.title,
-        origin: {
-            latitude: payload.origin.lat,
-            longitude: payload.origin.lng,
-        },
-        destTitle: payload.destination.title,
-        destination: {
-            latitude: payload.destination.lat,
-            longitude: payload.destination.lng,
-        },
-        departDate: payload.departDate,
-        departTime: payload.departTime,
-        description: payload.description,
-        emptySeat: payload.emptySeat,
-    }
-    console.log(tripToAdd);
-}
+const today = new Date();
+const yesterday = new Date(today);
+yesterday.setDate(today.getDate() - 1);
+const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
 export default function PostRideField() {
     const classes = useStyles();
+    const user = useSelector(state => state.firebase.profile);
     const [error, setError] = React.useState(false);
-    const [state, setState] = useState(makeTrip);
+    const [dateError, setDateError] = React.useState(false);
+    const [state, setState] = React.useState({
+            originTitle: '',
+            origin: {
+                latitude: '',
+                longitude: '',
+            },
+            destTitle: '',
+            destination: {
+                latitude: '',
+                longitude: '',
+            },
+            departDate: date,
+            departTime: '',
+            emptySeat: '',
+            description: '',
+            uid: '',
+            firstName: '',
+            lastName: '',
+            photoUrl: '',
+    });
 
     const [load, setLoad] = React.useState('default');
     const timerRef = React.useRef();
@@ -131,38 +106,56 @@ export default function PostRideField() {
     const [submit, setSubmit] = React.useState(false);
     const firestore = useFirestore();
 
-    useFirestoreConnect([{ collection: 'users' }])
-    const user = useSelector(state => state.firebase.profile);
-
     function handleChange(e) {
         const { name, value } = e.target;
         setState((state) => ({ ...state, [name]: value }));
-        //console.log(state.emptySeat); cannot see state
-        makeTrip[name] = value;
     }
-    function handleLocation(value, name) {
-        //setState((state) => ({ ...state, originTitle: value }));
-        //console.log(state.originTitle); cannot see state
-        makeTrip[name].title = value.label;
-        makeTrip[name].lat = value.lat;
-        makeTrip[name].lng = value.lng;
+    function handleLocationChange(value, name) {
+        if(name === "origin"){
+            setState({...state, originTitle: value.label})
+        } else {
+            setState({...state, destTitle: value.label})
+        }
+        const newValues = {...state};
+        newValues[name]["latitude"] = value.lat;
+        newValues[name]["longitude"] = value.lng;
+        // setState((state)=> ({...state,
+        //     [name]: {
+        //         latitude: value.lat,
+        //         longitude: value.lng,
+        //     }
+        // })); --> THIS DOESN'T WORK
+
     }
     function handleDateChange(date) {
-        setState({ ...state, departDate: date });
-        makeTrip["departDate"] = date;
+        if(validateDate(date) === false){
+            setState({ ...state, departDate: date });
+            setDateError(false);
+        }
+        else {
+            setDateError(true);
+        }
     }
     function handleClose() {
+        setDateError(false);
         setError(false);
     };
-    function validateInput() {
-        if(makeTrip.origin.title === ""
-            || makeTrip.destination.title === ""
-            || makeTrip.departDate === ""
-            || makeTrip.departTime === ""
-            || makeTrip.emptySeat === "") {
+    function checkEmptyInput() {
+        if(state.originTitle === ""
+            || state.destTitle === ""
+            || state.departTime === ""
+            || state.emptySeat === "") {
             return false;
         } else{
             return true;
+        }
+    }
+    function validateDate(date) {
+        if (date < yesterday){
+            return true;
+        }
+        else {
+            return false;
         }
     }
     function handleLoad() {
@@ -174,8 +167,7 @@ export default function PostRideField() {
     }
     const submitTrip = async () => {
         try {
-            await createTrip(makeTrip);
-            await firestore.collection("trips").add(tripToAdd);
+            await firestore.collection("trips").add({...state});
         }
         catch (error) {
             console.log("Create Trip error", error);
@@ -183,13 +175,19 @@ export default function PostRideField() {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(validateInput() === false) {
+        if(dateError === true){
+        }
+        else if(checkEmptyInput() === false) {
             setError(true);
-        } else {
-            //createTrip
-            makeTrip.firstName = user.firstName;
-            makeTrip.lastName = user.lastName;
-            makeTrip.photoUrl = user.photoUrl;
+            console.log({...state});
+        }
+        else {
+            //query user's data
+            state.uid = firebase.auth().currentUser.uid;
+            state.firstName = user.firstName;
+            state.lastName = user.lastName;
+            state.photoUrl = user.photoUrl;
+            console.log({...state});
             submitTrip();
             handleLoad();
             setSubmit(true);
@@ -214,10 +212,10 @@ export default function PostRideField() {
                                 <Grid container spacing={2}>
 
                                     <Grid item xs={12} sm={6}>
-                                        <AutoOrigin onSuggestionSelect={handleLocation}/>
+                                        <AutoOrigin onSuggestionSelect={handleLocationChange}/>
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
-                                       <AutoDestination onSuggestionSelect={handleLocation}/>
+                                       <AutoDestination onSuggestionSelect={handleLocationChange}/>
                                     </Grid>
                                 </Grid>
                                 <Grid container spacing={2}>
@@ -237,9 +235,6 @@ export default function PostRideField() {
                                                 name="departDate"
                                                 value={state.departDate}
                                                 onChange={handleDateChange}
-                                                KeyboardButtonProps={{
-                                                    'aria-label': 'change date',
-                                                }}
                                             />
                                         </MuiPickersUtilsProvider>
                                     </Grid>
@@ -264,7 +259,6 @@ export default function PostRideField() {
                                             Empty seats*
                                         </Typography>
                                         <FormControl>
-                                            {/*<FormLabel component="legend">Number of seats</FormLabel>*/}
                                             <RadioGroup name="emptySeat" value={state.emptySeat} onChange={handleChange}>
                                                 <FormControlLabel value="1" control={<Radio />} label="1" />
                                                 <FormControlLabel value="2" control={<Radio />} label="2" />
@@ -301,6 +295,17 @@ export default function PostRideField() {
                             Post ride
                         </Button>
                     </Container>
+                    <Snackbar open={dateError}
+                              autoHideDuration={6000}
+                              // onClose={handleClose}
+                              anchorOrigin={{
+                                  vertical: 'top',
+                                  horizontal: 'center',
+                              }}>
+                        <Alert severity="error">
+                            Date must not be in the past
+                        </Alert>
+                    </Snackbar>
                     <Snackbar open={error}
                               autoHideDuration={6000}
                               onClose={handleClose}
