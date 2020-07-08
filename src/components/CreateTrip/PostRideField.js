@@ -268,6 +268,7 @@ export default function PostRideField() {
                                                 name="departDate"
                                                 value={state.departDate}
                                                 onChange={handleDateChange}
+                                                minDate = {new Date().setHours(0,0,0,0)}
                                                 KeyboardButtonProps={{
                                                     'aria-label': 'change date',
                                                 }}
