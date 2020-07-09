@@ -205,7 +205,7 @@ export default function Trip(props) {
          {/* {showLink} */}
          <Button onClick = {handleClickOpen}> Modify trip</Button>
          <Dialog onClose={handleClosePopup}aria-labelledby="simple-dialog-title" open= {openPopup} >
-            <EditForm props={props.tripToEdit}/>
+            <EditForm props={props}/>
              </Dialog>
           <Button onClick={handleMenu} size="small" color="primary">
             Contact driver

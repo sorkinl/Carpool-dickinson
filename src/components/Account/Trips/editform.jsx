@@ -10,6 +10,7 @@ import { Button, Dialog } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useFirestore, useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import Autocomplete from '../../Autocomplete';
+import { Card } from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     form: {
-        verticalAlign: 'middle',
+        padding: "10px",
     },
 }));
 
@@ -28,7 +29,7 @@ export default function EditForm(props){
     //get tripId from path
     const firestore = useFirestore();
     const tripId = props.tripId;
-    const originTitle = props.originTitle;
+    const trip = props.trip;
     const [isUpdated, setUpdate] = useState(false);
     const classes = useStyles();
 
@@ -96,10 +97,10 @@ export default function EditForm(props){
     //when the dataToEdit is not empty it shows the edit form and when it is empty it shows error popup with go back link
     return isLoaded(dataToEdit) && !isEmpty(dataToEdit) ? (
         <div className="container" className={classes.form}>
-        <form>
-            <FormControl className={classes.FormControl} variant="outlined">
+            <Card>
+            <FormControl className={classes.FormControl} variant="outlined" allign='left'>
                 <InputLabel htmlFor="component-outlined">
-                { props.dataToEdit.originTitle}
+                 previous: {props.originTitle}
                 </InputLabel>
                 <OutlinedInput
                 type='text'
@@ -114,7 +115,9 @@ export default function EditForm(props){
                 name="originTitle"
                 />
             </FormControl>
-            <FormControl className={classes.FormControl} variant="outlined">
+            </Card>
+            <Card>
+            <FormControl className={classes.FormControl} variant="outlined" allign='left'>
                 <InputLabel htmlFor="component-outlined">
                     previous: { props.destTitle }
                 </InputLabel>
@@ -130,7 +133,9 @@ export default function EditForm(props){
                     name="destTitle"
                 />
             </FormControl>
-            <FormControl className={classes.FormControl} variant="outlined">
+            </Card>
+            <Card>
+            <FormControl className={classes.FormControl} variant="outlined" allign='left'>
                 <InputLabel htmlFor="component-outlined">
                     previous: { props.departTime }
                 </InputLabel>
@@ -146,12 +151,17 @@ export default function EditForm(props){
                     name="departTime"
                 />
             </FormControl>
-            <DatePicker
+            </Card>
+            <DatePicker allign="left"
                 placeholderText="choose date"
                 selected={state.departDate}
                 onChange={handleDateChange}
                 />
-            <Button
+            <Card allign= 'center'>
+            <Button 
+                position="absolute"
+                allign= 'center'
+                botom= "5px"
                 type="submit"
                 variant="contained"
                 color="primary"
@@ -160,8 +170,8 @@ export default function EditForm(props){
             >
                 Edit
             </Button>
-            <Autocomplete/>
-        </form>
+            </Card>
+            {/* <Autocomplete/> */}
     </div>
     ) : (
         <div>
