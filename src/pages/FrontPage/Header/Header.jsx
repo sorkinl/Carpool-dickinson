@@ -2,6 +2,7 @@ import React from "react";
 import "./Header.scss";
 import logo from "../../../assets/images/logo.png";
 import svg from "../../../assets/images/blue_off_road.svg";
+import DoubleArrow from "@material-ui/icons/DoubleArrow";
 const Header = () => {
   return (
     <header className="header">
@@ -21,6 +22,9 @@ const Header = () => {
         <div className="illustration">
           <img src={svg} alt="" className="illustration__image" />
         </div>
+      </div>
+      <div className="arrow">
+        <i class="arrow__icon icon-arrows-down-double"></i>
       </div>
     </header>
   );
