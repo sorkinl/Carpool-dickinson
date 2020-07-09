@@ -6,10 +6,11 @@ import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import { useSelector } from 'react-redux';
-import { Button } from '@material-ui/core';
+import { Button, Dialog } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useFirestore, useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import Autocomplete from '../../Autocomplete';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,12 +19,16 @@ const useStyles = makeStyles((theme) => ({
             width: '25ch',
         },
     },
+    form: {
+        verticalAlign: 'middle',
+    },
 }));
 
 export default function EditForm(props){
     //get tripId from path
     const firestore = useFirestore();
-    const tripId = props.match.params.tripId;
+    const tripId = props.tripId;
+    const originTitle = props.originTitle;
     const [isUpdated, setUpdate] = useState(false);
     const classes = useStyles();
 
@@ -58,6 +63,15 @@ export default function EditForm(props){
             departDate: date
         });
     };
+
+     //useState for controlling popup
+  const [openPopup, setOpenPopup] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpenPopup(true);
+  };
+  const handleClosePopup = () => {
+    setOpenPopup(false);
+  };
     
     //change departDate field from Date to string when storing in firebase
     //handleSubmit function updates the information to firebase
@@ -81,11 +95,11 @@ export default function EditForm(props){
 
     //when the dataToEdit is not empty it shows the edit form and when it is empty it shows error popup with go back link
     return isLoaded(dataToEdit) && !isEmpty(dataToEdit) ? (
-        <div className="container">
-        <form className="submit-btn">
+        <div className="container" className={classes.form}>
+        <form>
             <FormControl className={classes.FormControl} variant="outlined">
                 <InputLabel htmlFor="component-outlined">
-                    previous: { tripToEdit[tripId].originTitle }
+                { props.dataToEdit.originTitle}
                 </InputLabel>
                 <OutlinedInput
                 type='text'
@@ -102,7 +116,7 @@ export default function EditForm(props){
             </FormControl>
             <FormControl className={classes.FormControl} variant="outlined">
                 <InputLabel htmlFor="component-outlined">
-                    previous: { tripToEdit[tripId].destTitle }
+                    previous: { props.destTitle }
                 </InputLabel>
                 <OutlinedInput
                     type='text'
@@ -118,7 +132,7 @@ export default function EditForm(props){
             </FormControl>
             <FormControl className={classes.FormControl} variant="outlined">
                 <InputLabel htmlFor="component-outlined">
-                    previous: { tripToEdit[tripId].departTime }
+                    previous: { props.departTime }
                 </InputLabel>
                 <OutlinedInput
                     type='text'

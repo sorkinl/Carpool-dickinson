@@ -27,6 +27,9 @@ import { Menu, MenuItem } from "@material-ui/core/";
 import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import { Link , useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import EditForm from './editform';
+import DialogContentText from '@material-ui/core/DialogContentText';
+
 
 const useStyles = makeStyles({
   media: {
@@ -101,34 +104,35 @@ export default function Trip(props) {
   };
 
   //button shows different component depending on whether tripToEdit exists
-  const showLink = tripToEdit? (
-    <Link to={`edit/${props.trip.id}`}>
-            <Button size="small" color="primary">
-               Modify trip
-            </Button>
-    </Link>
-  ) : (
-    <div>
-      <Button size="small" color="primary" onClick={handleClickOpen}>
-        Modify trip
-      </Button>
-      <Dialog onClose={handleClosePopup} aria-labelledby="customized-dialog-title" open={openPopup}>
-        <DialogTitle id="customized-dialog-title" onClose={handleClosePopup}>
-          Warning
-        </DialogTitle>
-        <DialogContent dividers>
-          <Typography gutterBottom>
-            404: Cannot find the requested trip!
-          </Typography>
-        </DialogContent>
-        <DialogActions>
-           <Button autoFocus onClick={handleClosePopup} color="primary">
-             Close
-           </Button>
-         </DialogActions>
-       </Dialog>
-    </div>   
-   );
+  // const showLink = tripToEdit? (
+  //  <Link to={`edit/${props.trip.id}`}>
+  //           <Button size="small" color="primary">
+  //              Modify trip
+  //           </Button>
+  //  </Link>
+  // ) : (
+  //   <div>
+  //     <Button size="small" color="primary" onClick={handleClickOpen}>
+  //       Modify trip
+  //     </Button>
+  //     <Dialog onClose={handleClosePopup} aria-labelledby="customized-dialog-title" open={openPopup}>
+  //       <DialogTitle id="customized-dialog-title" onClose={handleClosePopup}>
+  //         Warning
+  //       </DialogTitle>
+  //       <DialogContent dividers>
+  //         <Typography gutterBottom>
+  //           404: Cannot find the requested trip!
+  //         </Typography>
+  //       </DialogContent>
+  //       <DialogActions>
+  //          <Button autoFocus onClick={handleClosePopup} color="primary">
+  //            Close
+  //          </Button>
+  //        </DialogActions>
+  //      </Dialog>
+  //   </div>   
+  // );
+
 
 
 
@@ -198,7 +202,11 @@ export default function Trip(props) {
         </CardContent>
         {/* Buttons */}
         <CardActions>
-          {showLink}
+         {/* {showLink} */}
+         <Button onClick = {handleClickOpen}> Modify trip</Button>
+         <Dialog onClose={handleClosePopup}aria-labelledby="simple-dialog-title" open= {openPopup} >
+            <EditForm props={props.tripToEdit}/>
+             </Dialog>
           <Button onClick={handleMenu} size="small" color="primary">
             Contact driver
           </Button>
