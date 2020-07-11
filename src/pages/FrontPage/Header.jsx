@@ -1,7 +1,7 @@
 import React from "react";
-import "./Header.scss";
-import logo from "../../../assets/images/logo.png";
-import svg from "../../../assets/images/blue_off_road.svg";
+import logo from "../../assets/images/logo.png";
+import svg from "../../assets/images/blue_off_road.svg";
+import DoubleArrow from "@material-ui/icons/DoubleArrow";
 const Header = () => {
   return (
     <header className="header">
@@ -18,9 +18,12 @@ const Header = () => {
             Discover our tours
           </a>
         </div>
-        <div className="illustration">
-          <img src={svg} alt="" className="illustration__image" />
+        <div className="header__illustration">
+          <img src={svg} alt="" className="header__illustration--image" />
         </div>
+      </div>
+      <div className="header__arrow">
+        <i class="header__arrow--icon icon-arrows-down-double"></i>
       </div>
     </header>
   );
