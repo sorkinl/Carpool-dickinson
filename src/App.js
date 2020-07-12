@@ -19,13 +19,13 @@ import Loading from './components/Loading'
 import PostRideField from "./components/CreateTrip/PostRideField";
 import ConfirmField from "./components/CreateTrip/ConfirmField";
 import { withRouter } from 'react-router-dom';
-import MainPage from "./pages/FrontPage/MainPage/MainPage";
+import MainPage from "./pages/FrontPage/MainPage";
 
 
 const Routes = withRouter(({location})=>{ 
   return (
     <div>
-          { location.pathname!=="/frontpagetrial" &&    <NavBar /> }
+          { /* location.pathname!=="/frontpagetrial" &&    <NavBar />  */}
           <Switch>
             <Route path="/" exact component={MainPage} />
             <Route path="/search" component={Searchbar} />
