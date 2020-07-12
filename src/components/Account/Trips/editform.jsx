@@ -45,10 +45,10 @@ export default function EditForm(props){
      const dataToEdit = useSelector((state) => state.firestore.data.userTrips);
      const tripToEdit = useSelector((state) => state.firestore.data.trips);
      const [state, setState] = useState({
-        originTitle: '',
-        destTitle: '',
+        originTitle: trip.originTitle,
+        destTitle: trip.destTitle,
         departDate: new Date(),
-        departTime: '',
+        departTime: trip.departTime,
     });
 
 
@@ -93,6 +93,7 @@ export default function EditForm(props){
             doc: tripId,
         }, modifiedTrip);
     };
+    console.log(props)
 
     //when the dataToEdit is not empty it shows the edit form and when it is empty it shows error popup with go back link
     return isLoaded(dataToEdit) && !isEmpty(dataToEdit) ? (
