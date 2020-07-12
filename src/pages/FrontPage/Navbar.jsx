@@ -1,10 +1,16 @@
-import React from 'react';
-import {Link} from 'react-router-dom'
-import {useSelector, dispatch} from 'react-redux'
-import firebase from '../../firebase/firebaseConfig'
+import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector, dispatch } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSignInAlt,
+  faUserPlus,
+  faHome,
+  faBars,
+} from "@fortawesome/free-solid-svg-icons";
+import firebase from "../../firebase/firebaseConfig";
 const Navbar = () => {
-
-    const auth = useSelector((state) => state.firebase.auth);
+  /*  const auth = useSelector((state) => state.firebase.auth);
 
     function handleLogOut(e) {
         e.preventDefault();
@@ -40,8 +46,53 @@ const Navbar = () => {
                 </ul>
             </nav>
         </div>
-    )
-}
+    ) */
 
+  const [active, setActive] = React.useState(false);
+
+  return (
+    <div>
+      <div
+        id="circularMenu1"
+        className={`circular-menu circular-menu-left ${active ? "active" : ""}`}
+      >
+        <Link
+          to="/"
+          className="floating-btn"
+          onClick={() => setActive(!active)}
+        >
+          <FontAwesomeIcon
+            className="floating-btn-icon"
+            size="2x"
+            icon={faBars}
+          />
+        </Link>
+        <menu className="items-wrapper">
+          <Link className="menu-item">
+            <FontAwesomeIcon
+              size="2x"
+              className="menu-item-icon"
+              icon={faHome}
+            />
+          </Link>
+          <Link to="/logIn" className="menu-item">
+            <FontAwesomeIcon
+              size="2x"
+              className="menu-item-icon"
+              icon={faSignInAlt}
+            />
+          </Link>
+          <Link to="/signUp" className="menu-item">
+            <FontAwesomeIcon
+              size="2x"
+              className="menu-item-icon"
+              icon={faUserPlus}
+            />
+          </Link>
+        </menu>
+      </div>
+    </div>
+  );
+};
 
 export default Navbar;
