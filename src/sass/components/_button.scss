@@ -32,7 +32,7 @@
         left: -25%;
 
         &::after{
-            background-color: $color-secondary;
+            background-color: $color-primary-light;
         }
     }
 
@@ -45,6 +45,7 @@
             background-color: $color-white;
         }
     }
+    
     
     &::after {
         content: "";
