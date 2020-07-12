@@ -6,6 +6,7 @@ import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import Autocomplete from '../components/Autocomplete';
 import {useStyles} from './frontSectionStyles';
+import TripMainPage from '../components/TripMainPage';
 
 
 const theme = createMuiTheme({
@@ -43,6 +44,12 @@ export default function FrontSection(props){
             </div>
             </div>
         </header>
+        <div className="recent-trips">
+            <h1 className="recent-trips-header">Recent trips</h1>
+            <div className="recent-trips-box"> 
+                  <TripMainPage/>  
+            </div>
+        </div>
         <Card className={classes.rootone}>
             {/*first section with text, 'Find a ride' button and the image */}
             <CardContent className={classes.find}>
