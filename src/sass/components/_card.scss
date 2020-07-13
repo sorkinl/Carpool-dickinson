@@ -1,0 +1,152 @@
+$standard: 10px;
+$card-height: 480px;
+$card-width: 300px;
+.card {
+    .outer-div,
+    .inner-div {
+        height: $card-height;
+        max-width: $card-width;
+        margin: 0 auto;
+        position: relative; 
+        box-shadow: 0 4px 12px -10px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .outer-div {
+        perspective: 900px;
+        perspective-origin: 50% calc(50% - 18em);
+    }
+
+    .inner-div {
+        margin: $standard * 5 auto;
+
+        border-radius: 5px;
+        font-weight: 400;
+        color: $color-primary-dark;
+        font-size: 1rem;
+        text-align: center;
+        transition: all 0.6s cubic-bezier(0.8, -0.4, 0.2, 1.7);
+        transform-style: preserve-3d;
+    }
+
+    .front {
+        position: relative;
+        top: 0;
+        left: 0;
+        backface-visibility: hidden;
+    }
+
+    .front {
+        height: 100%;
+        background: $color-white;
+        backface-visibility: hidden;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px -18px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3),
+            0 0 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .front__bkg-photo {
+        position: relative;
+        height: 150px;
+        width: $card-width;
+        background: url("https://wallpaperaccess.com/full/888763.jpg")
+            no-repeat;
+        background-size: cover;
+        backface-visibility: hidden;
+        overflow: hidden;
+        border-top-right-radius: 15px;
+        border-top-left-radius: 15px;
+
+    }
+
+    .front__face-photo {
+        position: relative;
+        top: -80px;
+        height: 150px;
+        width: 150px;
+        margin: 0 auto;
+        border-radius: 50%;
+        border: 5px solid $color-white;
+        background-size: contain;
+        backface-visibility: hidden;
+        overflow: hidden;
+        transition: all 0.6s cubic-bezier(0.8, -0.4, 0.2, 1.7);
+        z-index: 3;
+    }
+
+    .front__text {
+        position: relative;
+        top: -70px;
+        margin: 0 auto;
+        font-family: "Lato", sans-serif;//remove
+        font-size: 18px;
+        backface-visibility: hidden;
+
+        .front__text-header {
+            font-weight: 700;
+        }
+
+        .front__text-para {
+            position: relative;
+            top: 2px;
+
+            color: $color-primary-dark;
+            font-size: 14px;
+            letter-spacing: 0.4px;
+            font-weight: 400;
+        }
+        .front__text-sub {
+            position: relative;
+            top: 2rem;
+        
+            color:$color-primary-dark;
+            font-size: 13px;
+            letter-spacing: 0.4px;
+            font-weight: 380;
+        }
+        
+        .front__text-sub-2 {
+            position: relative;
+            top: 3rem;
+    
+            color: $color-primary-dark;
+            font-size: 13px;
+            letter-spacing: 0.4px;
+            font-weight: 380;
+        }
+
+        .front-icons {
+            position: relative;
+            top: 0;
+            font-size: 14px;
+            margin-right: 6px;
+            color: gray;
+        }
+    }
+    // &--simple {
+    //     width: 400px;
+    //     padding: 5px;
+    //     height: 10px;
+    //     border-radius: 50%;
+    // }
+    // .review-card {
+    //     display:grid;
+    //     // grid-template-columns: repeat( auto-fill, minmax(16rem, 1fr) );
+    //     grid-gap: 3rem;
+    //     padding:5rem;
+    //     background:#F5F7FA;
+    //     .card {
+    //         position: relative;
+    //         box-shadow:0 0 2rem -1rem rgba(0,0,0,.05);
+    //         .container {
+    //             position: absolute;
+    //             width:100%;
+    //             height:100%;
+    //             border-radius:1rem;
+    //             background:#f7de52;
+    //             color:#ffffff;
+    //         }
+    //     }
+    // }
+}
+
+

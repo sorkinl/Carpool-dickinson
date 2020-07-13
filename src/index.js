@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 import { createFirestoreInstance } from "redux-firestore";
 import { ReactReduxFirebaseProvider, isLoaded } from "react-redux-firebase";
 import Loading from "./components/Loading";
+import 'font-awesome/css/font-awesome.min.css';
+
 const rrfConfig = {
   userProfile: "users",
   useFirestoreForProfile: true,
