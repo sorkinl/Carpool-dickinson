@@ -35,6 +35,12 @@
             background-color: $color-primary-light;
         }
     }
+    &--yell {
+        background-color: #f7de52;
+        color: $color-secondary;
+        position: relative;
+        margin-top: 5rem;
+    }
 
     &--white {
         background-color: $color-white;
