@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import AutocompleteHERE from "../Autocomplete"
 import './PostRideField.css';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -15,20 +16,18 @@ import {
     Radio,
     RadioGroup,
     FormControlLabel,
-    FormControl,
-    InputAdornment
+    FormControl
+
 } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
 import DateFnsUtils from '@date-io/date-fns';
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import { useFirestore } from 'react-redux-firebase';
 import ConfirmField from "./ConfirmField";
 import axios from "axios";
 import firebase from "../../firebase/firebaseConfig";
 import {useFirestoreConnect} from "react-redux-firebase";
-import {MAKE_TRIP} from "../../redux/constants/trip-types";
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -75,17 +74,7 @@ var today = new Date();
 var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
 //Global trip variable
-let makeTrip = {
-    originTitle: "",
-    destTitle: "",
-    departDate: date,
-    departTime: "",
-    emptySeat: "",
-    description: "",
-    firstName: "",
-    lastName: "",
-    photoUrl: "",
-};
+
 let tripToAdd = {};
 
 export const createTrip = async (payload) => {
@@ -99,7 +88,6 @@ export const createTrip = async (payload) => {
         const destRes = await axios.get(
             `https://geocode.search.hereapi.com/v1/geocode?q=${destSearch}&apiKey=${process.env.REACT_APP_HERE_KEY}`)
             .catch((e)=>{console.log(e, " at destRes")});
-
         tripToAdd = {
             uid: firebase.auth().currentUser.uid,
             user: {
@@ -122,16 +110,31 @@ export const createTrip = async (payload) => {
             description: payload.description,
             emptySeat: payload.emptySeat,
         }
-        console.log(tripToAdd);
     } catch (error) {
         console.log("Create Trip error", error);
     }
 }
 
 export default function PostRideField() {
+
+    const [makeTrip, setMakeTrip] = React.useState(
+        {
+            originTitle: "",
+            destTitle: "",
+            departDate: date,
+            departTime: "",
+            emptySeat: "",
+            description: "",
+            firstName: "",
+            lastName: "",
+            photoUrl: "",
+        }
+    )
+
+
     const classes = useStyles();
     const [error, setError] = React.useState(false);
-    const [state, setState] = useState(makeTrip);
+    // const [state, setState] = useState(makeTrip);
 
     const [load, setLoad] = React.useState('default');
     const timerRef = React.useRef();
@@ -144,18 +147,26 @@ export default function PostRideField() {
 
     function handleChange(e) {
         const { name, value } = e.target;
-        setState((state) => ({ ...state, [name]: value }));
+        setMakeTrip({
+            ...makeTrip,
+            [name]:value
+        })
         makeTrip[name] = value;
     }
     function handleDateChange(date) {
-        setState({ ...state, departDate: date });
+        // setState({ ...state, departDate: date });
+        setMakeTrip({
+            ...makeTrip,
+            departDate:date
+        })
         makeTrip["departDate"] = date;
     }
     function handleClose() {
         setError(false);
     };
     function validateInput() {
-        if(makeTrip.originTitle === ""
+        if(
+            makeTrip.originTitle === ""
             || makeTrip.destTitle === ""
             || makeTrip.departDate === ""
             || makeTrip.departTime === ""
@@ -192,6 +203,7 @@ export default function PostRideField() {
             setSubmit(true);
         }
     };
+  
 
     return (
         <div className={classes.root} id="main">
@@ -205,50 +217,16 @@ export default function PostRideField() {
                             </Typography>
 
                             <div className="line2"></div>
-
+                            
                             {/* main form */}
                             <form className={classes.form}>
                                 <Grid container spacing={2}>
 
                                     <Grid item xs={12} sm={6}>
-                                        <TextField
-                                            className={classes.textField}
-                                            name="originTitle"
-                                            required
-                                            fullWidth
-                                            variant="filled"
-                                            placeholder="From"
-                                            label="Origin"
-                                            InputProps={{
-                                                startAdornment: (
-                                                    <InputAdornment position="start">
-                                                        <LocationOnIcon color="primary"/>
-                                                    </InputAdornment>
-                                                ),
-                                            }}
-                                            value={state.originTitle}
-                                            onChange={handleChange}
-                                        />
+                                        <AutocompleteHERE state = {{AutocompleteState:[makeTrip, setMakeTrip],field:"originTitle"}}/>
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
-                                        <TextField
-                                            className={classes.textField}
-                                            required
-                                            variant="filled"
-                                            fullWidth
-                                            label="Destination"
-                                            name="destTitle"
-                                            placeholder="To"
-                                            InputProps={{
-                                                startAdornment: (
-                                                    <InputAdornment position="start">
-                                                        <LocationOnIcon color="secondary"/>
-                                                    </InputAdornment>
-                                                ),
-                                            }}
-                                            value={state.destTitle}
-                                            onChange={handleChange}
-                                        />
+                                        <AutocompleteHERE state = {{AutocompleteState:[makeTrip, setMakeTrip],field:"destTitle"}}/>                
                                     </Grid>
                                 </Grid>
                                 <Grid container spacing={2}>
@@ -266,7 +244,7 @@ export default function PostRideField() {
                                                 margin="normal"
                                                 label="Date"
                                                 name="departDate"
-                                                value={state.departDate}
+                                                // value={state.departDate}
                                                 onChange={handleDateChange}
                                                 minDate = {new Date().setHours(0,0,0,0)}
                                                 KeyboardButtonProps={{
@@ -284,7 +262,7 @@ export default function PostRideField() {
                                             fullWidth
                                             label="Pickup time"
                                             name="departTime"
-                                            value={state.departTime}
+                                            // value={state.departTime}
                                             placeholder="eg: 8am/9:30am-2pm/Anytime"
                                             onChange={handleChange}
                                         />
@@ -297,7 +275,9 @@ export default function PostRideField() {
                                         </Typography>
                                         <FormControl>
                                             {/*<FormLabel component="legend">Number of seats</FormLabel>*/}
-                                            <RadioGroup name="emptySeat" value={state.emptySeat} onChange={handleChange}>
+                                            <RadioGroup name="emptySeat" 
+                                            // value={state.emptySeat} 
+                                            onChange={handleChange}>
                                                 <FormControlLabel value="1" control={<Radio />} label="1" />
                                                 <FormControlLabel value="2" control={<Radio />} label="2" />
                                                 <FormControlLabel value="3" control={<Radio />} label="3" />
@@ -318,7 +298,7 @@ export default function PostRideField() {
                                                           placeholder="Add description"
                                                           name="description"
                                                           onChange={handleChange}
-                                                          value={state.description}
+                                                        //   value={state.description}
                                         />
                                     </Grid>
                                 </Grid>
@@ -331,6 +311,7 @@ export default function PostRideField() {
                                 className={classes.submit}
                         >
                             Post ride
+                            {console.log(makeTrip)}
                         </Button>
                     </Container>
                     <Snackbar open={error}
