@@ -15,11 +15,13 @@ import ProfileCreate from "./components/LogInForm/ProfileCreate";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import EditForm from "./components/Account/Trips/editform";
 import EmailVerify from "./components/LogInForm/EmailVerify";
+import SearchPage from "./pages/SearchPage/SearchPage"
 import Loading from './components/Loading'
 import PostRideField from "./components/CreateTrip/PostRideField";
 import ConfirmField from "./components/CreateTrip/ConfirmField";
 import { withRouter } from 'react-router-dom';
 import MainPage from "./pages/FrontPage/MainPage";
+import SearchResult from "./components/SearchResults/SearchResult"
 
 
 const Routes = withRouter(({location})=>{ 
@@ -28,7 +30,7 @@ const Routes = withRouter(({location})=>{
           { /* location.pathname!=="/frontpagetrial" &&    <NavBar />  */}
           <Switch>
             <Route path="/" exact component={MainPage} />
-            <Route path="/search" component={Searchbar} />
+            <Route path="/search" component={SearchPage} />
             <PrivateRoute path="/account" component={Account} />
             <PrivateRoute path="/chat" component={MainChat} />
             <Route path="/logIn" component={LogIn} />
@@ -40,6 +42,7 @@ const Routes = withRouter(({location})=>{
             <Route path = "/postRide" component = {PostRideField}/>
             <Route path = "/postRide/confirm" component = {ConfirmField}/>
             <Route path = "/frontPageTrial" component = {FrontPageFigma}/>
+            <Route path = "/searchResult" component = {SearchResult}/>
           </Switch>
         </div>
   )

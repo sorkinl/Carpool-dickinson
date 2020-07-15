@@ -4,6 +4,12 @@ import axios from "axios";
 import {Autocomplete} from '@material-ui/lab'
 
 const AutocompleteHERE = (props) => {
+    console.log(props)
+
+  const { AutocompleteState: [stateFromProp, setStateFromProp]  } = {
+    ...(props.state || {})
+  };
+
   const [state, setState] = useState({
     suggestions: [],
     text: "",
@@ -76,15 +82,11 @@ const AutocompleteHERE = (props) => {
   }
 
   const suggestionSelected = item => {
-    console.log(item.label)
-      /* setState({
-          ...state,
-          text: item.label,
-          locationId: item.locationId,
-          suggestions: []
-      }) */
-      console.log("Hi")
-      props.onSuggestionSelect(item)
+    //gets and sets props passed from the parent component
+      setStateFromProp({...stateFromProp, 
+        [props.state.field]:item.label
+      })
+      
       setText(item.label);
       setLocationId(item.locationId)
       setSuggestions([])
