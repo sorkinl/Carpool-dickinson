@@ -2,8 +2,9 @@
   -webkit-tap-highlight-color: transparent;
 
   &__tab-list {
-    border-bottom: 1px solid #aaa;
-    margin: 0 0 10px;
+    text-align: center;
+    //border-bottom: 1px solid #aaa;
+    margin: 0 auto;
     padding: 0;
   }
 
@@ -15,13 +16,16 @@
     position: relative;
     list-style: none;
     padding: 6px 12px;
+    margin:0 5rem 0 0;
     cursor: pointer;
-
+    transition: all .3s;
+    font-size: 2rem;
     &--selected {
       background: #fff;
-      border-color: #aaa;
-      color: black;
-      border-radius: 5px 5px 0 0;
+      //border-color: #aaa;
+      color: $color-white;
+      background-color: $color-primary-dark;
+      border-radius: 5px;
     }
 
     &--disabled {
@@ -48,9 +52,26 @@
 
   &__tab-panel {
     display: none;
-
     &--selected {
+      animation: TabPanelAnimate ease .7s;
       display: block;
     }
+  }
+}
+
+
+@keyframes TabPanelAnimate {
+  0%{
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+
+  80%{
+    opacity: 0.8;
+    transform: translateX(5%);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0);
   }
 }

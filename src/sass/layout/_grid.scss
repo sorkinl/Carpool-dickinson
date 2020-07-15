@@ -6,6 +6,9 @@
     &:not(:last-child) {
         margin-bottom: $gutter-vertical;
     }
+    &:first-child {
+        margin-top: 3rem;
+    }
 
     @include clearfix;
 
