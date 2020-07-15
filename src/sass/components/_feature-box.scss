@@ -2,10 +2,9 @@
     background-color: rgba($color-white, .9);
     font-size: 1.5rem;
     padding: 2.5rem;
-    text-align: center;
+    text-align: left;
     border-radius: 3px;
     min-height: 25rem;
-    box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
     transition: transform .3s;
     &__icon {
         font-size: 6rem;
@@ -15,6 +14,28 @@
         background-clip: text;
         -webkit-background-clip: text;
         color: transparent;
+    
+    }
+    &__text {
+        font-size: 2rem;
+    }
+    &__number{
+        margin: 0 5rem;
+        position: relative;
+        text-align: center;
+        display: inline-block;
+        font-size: 10rem;
+         height: 15rem;
+        width: 15rem; 
+        border: solid 1px $color-primary-dark;
+        border-radius: 1000rem;
+        top: 5rem;
+        &--text{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     }
 
     &:hover {

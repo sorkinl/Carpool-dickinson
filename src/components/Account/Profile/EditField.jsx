@@ -1,5 +1,16 @@
 import React, {useState} from 'react';
-import {makeStyles, Container, TextField, Button, Grid, CssBaseline, Divider, MenuItem} from '@material-ui/core';
+import {
+    makeStyles,
+    Container,
+    TextField,
+    Button,
+    Grid,
+    CssBaseline,
+    Divider,
+    MenuItem,
+    Snackbar,
+} from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 import { useSelector} from 'react-redux';
 import firebase from '../../../firebase/firebaseConfig';
@@ -9,6 +20,9 @@ import {useFirestore} from "react-redux-firebase";
 // + Save Update button reloads the page
 // + make imgUrl store the photoUrl (optional)
 // + add some more edit fields if needed
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -60,6 +74,7 @@ function EditField(props){
     const currentUser = useSelector((state) => state.firebase.auth);
     const uid = currentUser.uid;
     const [isEdit, setEdit] = useState(false);
+    const [isSubmit, setSubmit] = useState(false);
 
     const allInputs = {imgUrl: ''};
     const [imageFile, setImageAsFile] = useState(null);
@@ -79,10 +94,8 @@ function EditField(props){
         setInput((input) => ({ ...input, [name]: value }));
         setEdit(true);
     };
-    //A few improvements to be made: add exception handlers, enable image preview before upload
-    const handleSubmit = (e) => {
-        e.preventDefault();
 
+    const updatePhoto = () => {
         //Update photo Url
         console.log('Start of upload')
         if(imageFile === null ) {
@@ -117,6 +130,13 @@ function EditField(props){
                         });
                 })
         }
+    }
+
+    //A few improvements to be made: add exception handlers, enable image preview before upload
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        //Update photo
+        updatePhoto();
         //Update profile info
         if (isEdit === false) {
             console.log("No fields updated");
@@ -127,6 +147,7 @@ function EditField(props){
                 .update({...input}
                 );
         }
+        setSubmit(true);
     }
     const handleImageAsFile = (e) => {
         if (e.target.files[0]) {
@@ -313,6 +334,16 @@ function EditField(props){
                             Save Update
                         </Button>
                     </form>
+                    <Snackbar open={isSubmit}
+                              autoHideDuration={6000}
+                              anchorOrigin={{
+                                  vertical: 'bottom',
+                                  horizontal: 'right',
+                              }}>
+                        <Alert severity="success">
+                            Profile updated successfully!
+                        </Alert>
+                    </Snackbar>
                 </div>
             </CssBaseline>
         </Container>
