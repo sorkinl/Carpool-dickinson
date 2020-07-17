@@ -4,7 +4,7 @@
   &__tab-list {
     text-align: center;
     //border-bottom: 1px solid #aaa;
-    margin: 0 auto;
+    margin: 5rem auto;
     padding: 0;
   }
 
@@ -63,7 +63,7 @@
 @keyframes TabPanelAnimate {
   0%{
     opacity: 0;
-    transform: translateX(-50%);
+    transform: translateX(-20%);
   }
 
   80%{

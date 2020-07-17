@@ -167,6 +167,7 @@
   }
   
   .circular-menu .floating-btn-icon {
+    color: $color-black;
     backface-visibility: hidden;
     margin-top: 1.7rem;
     transition: transform .2s;  
@@ -219,7 +220,7 @@
     border-radius: 50%;
     text-align: center;
     line-height: 3;
-    background-color: $color-primary-dark;
+    background-color: $color-primary-light;
     transition: transform .3s ease, background .2s ease;
 
     &-icon{
@@ -271,12 +272,12 @@
   
   .circular-menu.circular-menu-left .floating-btn {
     backface-visibility: hidden;
-    background-color: $color-primary-dark;
+    background-color: $color-secondary;
   }
   
   .circular-menu.circular-menu-left:after {
     backface-visibility: hidden;
-    background-color: $color-primary-light;
+    background-color: $color-secondary;
   }
   
   .circular-menu.circular-menu-left.active .floating-btn i {

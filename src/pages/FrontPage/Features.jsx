@@ -5,12 +5,14 @@ const Features = (props) => {
   return (
     <>
       
-      <Tabs>
-        <section class="section-features" ref={props.refProp}>
-            <TabList>
+      <Tabs >
+      <TabList>
+        
               <Tab>First Tab</Tab>
               <Tab>Second Tab</Tab>
+              <div ref={props.refProp}></div>
             </TabList>
+        <section class="section-features" >
           <TabPanel>
             <div class="row">
               <div class="col-1-of-3">
