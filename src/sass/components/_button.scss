@@ -36,10 +36,10 @@
         }
     }
     &--yell {
-        background-color: #f7de52;
-        color: $color-secondary;
+        background-color: $color-primary-light;
+        color: $color-secondary-dark;
         position: relative;
-        margin-top: 5rem;
+        margin-top: 6rem;
     }
 
     &--white {

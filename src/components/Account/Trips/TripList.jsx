@@ -166,7 +166,7 @@ export default function TripList(props) {
                             id: trip.id
                             //uid: currentUser,
                           }}
-                        />
+                        />  
                       );
                     })}
                   </Grid>

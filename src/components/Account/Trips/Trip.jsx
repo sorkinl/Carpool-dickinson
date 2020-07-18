@@ -91,7 +91,7 @@ export default function Trip(props) {
     { collection: 'trips' }
   ]);
   //get trip object that has qeuried tripId
-  const tripToEdit = useSelector((state) => state.firestore.data.userTrips[tripId]);
+  // const tripToEdit = useSelector((state) => state.firestore.data.userTrips[tripId]);
 
   //useState for controlling popup
   const [openPopup, setOpenPopup] = React.useState(false);
@@ -103,34 +103,34 @@ export default function Trip(props) {
   };
 
   //button shows different component depending on whether tripToEdit exists
-  const showLink = tripToEdit? (
-    <Link to={`edit/${props.trip.id}`}>
-            <Button size="small" color="primary">
-               Modify trip
-            </Button>
-    </Link>
-  ) : (
-    <div>
-      <Button size="small" color="primary" onClick={handleClickOpen}>
-        Modify trip
-      </Button>
-      <Dialog onClose={handleClosePopup} aria-labelledby="customized-dialog-title" open={openPopup}>
-        <DialogTitle id="customized-dialog-title" onClose={handleClosePopup}>
-          Warning
-        </DialogTitle>
-        <DialogContent dividers>
-          <Typography gutterBottom>
-            404: Cannot find the requested trip!
-          </Typography>
-        </DialogContent>
-        <DialogActions>
-           <Button autoFocus onClick={handleClosePopup} color="primary">
-             Close
-           </Button>
-         </DialogActions>
-       </Dialog>
-    </div>   
-   );
+  // const showLink = tripToEdit? (
+  //   <Link to={`edit/${props.trip.id}`}>
+  //           <Button size="small" color="primary">
+  //              Modify trip
+  //           </Button>
+  //   </Link>
+  // ) : (
+  //   <div>
+  //     <Button size="small" color="primary" onClick={handleClickOpen}>
+  //       Modify trip
+  //     </Button>
+  //     <Dialog onClose={handleClosePopup} aria-labelledby="customized-dialog-title" open={openPopup}>
+  //       <DialogTitle id="customized-dialog-title" onClose={handleClosePopup}>
+  //         Warning
+  //       </DialogTitle>
+  //       <DialogContent dividers>
+  //         <Typography gutterBottom>
+  //           404: Cannot find the requested trip!
+  //         </Typography>
+  //       </DialogContent>
+  //       <DialogActions>
+  //          <Button autoFocus onClick={handleClosePopup} color="primary">
+  //            Close
+  //          </Button>
+  //        </DialogActions>
+  //      </Dialog>
+  //   </div>   
+  //  );
 
 
 
@@ -161,10 +161,10 @@ export default function Trip(props) {
         <CardHeader
           avatar={
             <Avatar aria-label="name" className={classes.avatar}>
-              M
+              K
             </Avatar>
           }
-          title={trip.first + " " + trip.last}
+          title={trip.firstName + " " + trip.lastName}
           align="left"
           subheader={trip.school}
         />
@@ -179,18 +179,13 @@ export default function Trip(props) {
           <Typography variant="body1" color="primary" align="left">
             <TimerIcon color="primary" /> {trip.time}
           </Typography>
-          
-          {/* Starting point */}
-          <Typography variant="body1" color="textPrimary" align="left">
-            <LocationOnIcon color="action" /> {trip.from}
-          </Typography>
-          {/* Destination */}
-          <Typography variant="body1" color="textPrimary" align="left">
-            <LocationCityIcon color="action" /> {trip.to}
+          {/*Empty seats*/}
+          <Typography variant="body1" color="inherit" align="left" gutterBottom>
+            <CommentIcon color="action" /> {trip.emptySeat}
           </Typography>
           {/* Cost */}
           <Typography variant="body1" color="inherit" align="left" gutterBottom>
-            <CommentIcon color="action" /> {trip.comment}
+            <CommentIcon color="action" /> {trip.description}
           </Typography>
           {/* Rating */}
           {/* <Typography variant="body1" color="inherit" align="left">
@@ -204,7 +199,7 @@ export default function Trip(props) {
         </CardContent>
         {/* Buttons */}
         <CardActions>
-          {showLink}
+          {/* {showLink} */}
           <Button onClick={handleMenu} size="small" color="primary">
             Contact driver
           </Button>

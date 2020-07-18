@@ -1,6 +1,7 @@
 import React from 'react';
 import Profile from './Profile/Profile';
 import TripList from './Trips/TripList';
+import TripCard from './TripCard';
 import Record from './Record';
 import {
   Grid, 
@@ -38,7 +39,8 @@ export default function Account(props) {
                           <Record/>
                       </Grid>
                       <Grid item xs>
-                          <TripList />  
+                          <TripCard />  
+                          {/* <TripList/> */}
                       </Grid>
                   </Grid>    
               </Grid>

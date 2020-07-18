@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 const useStyles = makeStyles((theme)=>({
     container: {
-        marginTop: theme.spacing(5),
+        marginTop: theme.spacing(7),
         marginLeft: theme.spacing(3),
         marginRight: theme.spacing(30),
         padding: theme.spacing(2),
@@ -16,9 +16,8 @@ const useStyles = makeStyles((theme)=>({
         textAlign: 'center',
         height: "150px",
         width:"390px",
-        color: theme.palette.text.secondary,
         borderRadius: "2rem",
-        backgroundColor: "rgba(52, 144, 222, 0.5)", //$color-primary-dark
+        backgroundColor: "rgba(111, 231, 221, 0.4)", //$color-primary-dark
         padding: theme.spacing(4),
       },
       cardText: {
