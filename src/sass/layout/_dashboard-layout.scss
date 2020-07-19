@@ -1,0 +1,29 @@
+.container-dashboard {
+    width: 100vw;
+    height: 100vh;
+}
+
+.header-dashboard {
+    font-size: 1.4rem;
+    height: 7rem;
+    background-color: #ffffff;
+    border-bottom: $color-grey-dark;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content-dashboard {
+    display: flex;
+}
+
+.sidebar-dashboard {
+    background-color: $color-grey-dark-3;
+    flex: 0 0 18%
+}
+
+.hotel-view-dashboard {
+    background-color: #fff;
+    flex: 1;
+}

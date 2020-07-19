@@ -22,6 +22,7 @@ import ConfirmField from "./components/CreateTrip/ConfirmField";
 import { withRouter } from 'react-router-dom';
 import MainPage from "./pages/FrontPage/MainPage";
 import SearchResult from "./components/SearchResults/SearchResult"
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 
 const Routes = withRouter(({location})=>{ 
@@ -43,6 +44,7 @@ const Routes = withRouter(({location})=>{
             <Route path = "/postRide/confirm" component = {ConfirmField}/>
             <Route path = "/frontPageTrial" component = {FrontPageFigma}/>
             <Route path = "/searchResult" component = {SearchResult}/>
+            <Route path = "/dashboard" component = {Dashboard}/>
           </Switch>
         </div>
   )
