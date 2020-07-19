@@ -1,26 +1,18 @@
 @import "abstracts/functions";
 @import "abstracts/mixins";
 @import "abstracts/variables";
-
 @import "base/base";
 @import "base/animations";
 @import "base/typography";
 @import "base/utilities";
-
 @import "pages/home";
-
-@import "components/button";
-<<<<<<< HEAD
 @import "components/button";
 @import "components/profile-card";
 @import "components/tab";
 @import "components/trip-card";
-
-=======
-@import "components/card";
 @import "components/feature-box";
 @import "components/tabs";
->>>>>>> c2bd20b4ed933fca35104f93085317ad7e7ab48b
+
 @import "layout/header";
 @import "layout/navigation";
 @import "layout/grid";
