@@ -1,15 +1,32 @@
 import React, {useState} from "react";
-import { TextField } from "@material-ui/core";
+import {
+    Grid,
+    TextField,
+    Typography
+} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 import axios from "axios";
 import {Autocomplete} from '@material-ui/lab'
+import LocationOnIcon from "@material-ui/icons/LocationOn";
 
-const AutocompleteHERE = (props) => {
-    console.log(props)
+//Questions
+// + why need locationID?
+// + renderSuggestions ?
 
-  const { AutocompleteState: [stateFromProp, setStateFromProp]  } = {
-    ...(props.state || {})
-  };
+const useStyles = makeStyles((theme) => ({
+  textField: {
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(0),
+    width: "45ch",
+  },
+  icon: {
+    color: theme.palette.text.secondary,
+    marginRight: theme.spacing(2),
+  },
+}));
 
+const AutoDestination = (props) => {
+  const classes = useStyles();
   const [state, setState] = useState({
     suggestions: [],
     text: "",
@@ -17,10 +34,10 @@ const AutocompleteHERE = (props) => {
   });
   const [text, setText] = useState('');
   const [suggestions, setSuggestions] = useState([]);
-  const [locationId, setLocationId] = useState("")
+  const [locationId, setLocationId] = useState('')
 
   const onTextChanged = (e) => {
-      console.log(e.target.value)
+      console.log(e.target.value);
     const value = e.target.value;
     setText(value);
     setLocationId("");
@@ -29,7 +46,7 @@ const AutocompleteHERE = (props) => {
     if (value.length > 4) {
       /* setState({ ...state, text: value }); */
       setText(value)
-      console.log(value)
+      console.log(value);// print my input value
       axios
         .get(
           `https://autosuggest.search.hereapi.com/v1/autosuggest?q=${value}&at=40.2029,-77.1972&apiKey=6c42FMDtfvBHA3VuII3Ww4jsoPJXmugJBChRt_qDGrE`
@@ -37,23 +54,29 @@ const AutocompleteHERE = (props) => {
         .then((response) => response.data)
         .then((data) => {/* 
             console.log(data) */
-          var op = data.items.map((o) => ({
+          let op = data.items.map((o) => ({
             label: o.address.label,
+              lat: o.position.lat,
+              lng: o.position.lng,
+            //label: o.address.label.split(",", 1),
+            //index: o.address.label.indexOf(",") + 1,
+            //subAddress: o.address.label.slice(index),
             locationId: o.id,
           }));
           /* setState({ ...state, suggestions: op }); */
           setSuggestions(op);
+          console.log(suggestions);
         })
         .catch((err) => {
           console.log(err);
           /* setState({ ...state, suggestions: [] }); */
-          setSuggestions([])
+          setSuggestions([]);
         });
     } else {
         
       /* setState({ ...state,text: value, suggestions: [] }); */
-      setText(value)
-      setSuggestions([])
+      setText(value);
+      setSuggestions([]);
     }
   };
 
@@ -82,14 +105,20 @@ const AutocompleteHERE = (props) => {
   }
 
   const suggestionSelected = item => {
-    //gets and sets props passed from the parent component
-      setStateFromProp({...stateFromProp, 
-        [props.state.field]:item.label
-      })
-      
+    if(item){
+      /* setState({
+          ...state,
+          text: item.label,
+          locationId: item.locationId,
+          suggestions: []
+      }) */
+      props.onSuggestionSelect(item, "destination");
       setText(item.label);
-      setLocationId(item.locationId)
-      setSuggestions([])
+      setLocationId(item.locationId);
+      // console.log("Location ID: ", locationId);  --> locationId cannot be seen?
+      // console.log("Text: ", text);  --> text can be seen
+      setSuggestions([]);
+    }
   }
   return (<>{/* <div><TextField type="text" value={text} onChange={onTextChanged} variant={props.variant}/></div> <div>{renderSuggestions()}</div> */}
   <Autocomplete
@@ -98,8 +127,33 @@ const AutocompleteHERE = (props) => {
   //groupBy={(option) => option.firstLetter}
   getOptionLabel={(option) => option.label}
   style={{ width: 300 }}
-  renderInput={(params) => <TextField {...params} value={text} onChange={onTextChanged} label="With categories" variant="outlined" />}
-/></>);
+  renderInput={(params) =>
+      <TextField {...params}
+                 value={text}
+                 onChange={onTextChanged}
+                  className={classes.textField}
+                  name="destTitle"
+                  required
+                  fullWidth
+                  variant="filled"
+                  placeholder="To"
+                  label="Destination"
+      />}
+  renderOption={(option) => {
+      return (
+          <Grid container alignItems="center">
+            <Grid item>
+              <LocationOnIcon className={classes.icon}/>
+            </Grid>
+            <Grid item xs>
+              <Typography variant="body1" color="textSecondary">
+                {option.label}
+              </Typography>
+            </Grid>
+          </Grid>
+      );
+  }}
+  /></>);
 };
 
-export default AutocompleteHERE;
+export default AutoDestination;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./TripList.css";
 import Trip from "./Trip";
-import { pink } from "@material-ui/core/colors";
+import { blue } from "@material-ui/core/colors";
 import {
   makeStyles,
   CssBaseline,
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     align: "left",
   },
   expandedPanel: {
-    backgroundColor: pink[50],
+    backgroundColor: blue[50],
   },
 }));
 
@@ -89,6 +89,7 @@ export default function TripList(props) {
           {/* View future trip list panel. Change the state of fuTrip if this panel is clicked. */}
           <ExpansionPanel     
             classes={{ expanded: classes.expandedPanel }}
+            id = "upcoming-trip-panel"
           >
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
@@ -135,8 +136,9 @@ export default function TripList(props) {
           {/* View past trip list panel. */}
           {console.log(pastTripList)}
           <ExpansionPanel
-          onChange={change}
+            onChange={change}
             classes={{ expanded: classes.expandedPanel }}
+            id="past-trip-panel"
           >
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}

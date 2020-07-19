@@ -26,14 +26,20 @@
     }
     
     &--yellow {
-        background-color: $color-primary-light;
+        background-color: $color-secondary;
         color: $color-secondary-dark;
         position: absolute;
         left: -25%;
 
         &::after{
-            background-color: $color-primary-light;
+            background-color: $color-secondary;
         }
+    }
+    &--yell {
+        background-color: #f7de52;
+        color: $color-secondary;
+        position: relative;
+        margin-top: 5rem;
     }
 
     &--white {

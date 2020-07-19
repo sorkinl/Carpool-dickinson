@@ -6,7 +6,7 @@
     margin-bottom: 6rem;
 
     &--main{
-        display:block;
+        display: block;
         font-size: 3rem;
         font-weight: 300;
         letter-spacing: 2.0rem;
@@ -37,5 +37,17 @@
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
+    letter-spacing: 2px;
+}
+
+.heading-feature{
+    font-size: 4rem;
+    text-transform: uppercase;
+    font-weight: 300;
+    display: inline-block;
+    background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: $color-primary-dark;
     letter-spacing: 2px;
 }

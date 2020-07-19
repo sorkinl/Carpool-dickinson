@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../../assets/images/logo.png";
-import svg from "../../assets/images/blue_off_road.svg";
+import svg from "../../assets/images/yellow_off_rode.svg";
 import DoubleArrow from "@material-ui/icons/DoubleArrow";
 const Header = ({executeScroll}) => {
   return (
