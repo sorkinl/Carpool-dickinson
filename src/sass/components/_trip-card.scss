@@ -1,6 +1,44 @@
 .trip-card {
-    padding: 7px;
+    margin: auto;
+    padding: 10px;
     background: #6fe7dd;
-    width:50rem;
-    height: 70px;
+    width: 30%;
+    min-width: fit-content;
+    height: 39rem;
+    border-radius: 35px;
+    // position: relative;
+    &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 1rem 2rem rgba($color-black,.2);
+    } 
+    .inner-box {
+        margin-top: 0.1rem;
+        margin-left: 7px;
+        margin-right: 7px;
+        padding: 10px;
+        background: rgb(241, 241, 241);
+        width: 94%;
+        border-radius: 30px;
+        height: 24rem;
+        display: inline-block;
+    }
+    .trip_face-photo {
+        position: relative;
+        margin: 0.5rem;
+        margin-left: 1.5rem;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+    }
+    h5 {
+        color: #fff;
+        font-size: 18px;
+        margin-top: 0.4rem;
+    }
+    p {
+        font-size: 15px;
+        margin-top: 2px;
+        color: #fff;
+    }
+
 }

@@ -52,7 +52,7 @@ export default function TripCard(props){
     } 
 
     return (
-        <div class="tabs">
+        <div class="profile-tab">
             <h4>My Trips</h4>
             <hr/>
                 <input type="radio" id="tab1" name="tab-control"defaultChecked/>
@@ -103,6 +103,8 @@ export default function TripCard(props){
                     <h2>Posted</h2>
                     { upcomingTripList.length === 0 ? (
                     <><Grid container spacing={3} className="">
+                        <StyleTrip/>
+                        <StyleTrip/>
                         <StyleTrip/>
                         {/* <Trip
                             trip={{

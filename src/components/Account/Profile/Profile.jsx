@@ -79,21 +79,21 @@ export default function Profile(props){
     //     </div>
     // );
     return (
-        <div className="card outer-div">
-            <div className="card inner-div">
-                <div className="card front">
-                    <div className="card front__bkg-photo"></div>
-                    <img className ="card front__face-photo" 
+        <div className="profile-card outer-div">
+            <div className="profile-card inner-div">
+                <div className="profile-card front">
+                    <div className="profile-card front__bkg-photo"></div>
+                    <img className ="profile-card front__face-photo" 
                         src={user.photoUrl}
                         alt="/broken-image.jpg"/>
                     
-                    <div className="card front__text">
-                        <h3 className="card front__text-header">{user.firstName} {user.lastName}</h3>
-                        <p className="card front__text-para">{user.school} | {user.classYear}</p>
+                    <div className="profile-card front__text">
+                        <h3 className="profile-card front__text-header">{user.firstName} {user.lastName}</h3>
+                        <p className="profile-card front__text-para">{user.school} | {user.classYear}</p>
                     
-                        <p className="card front__text-sub"><i className="fa fa-envelope front-icons"></i>{user.email}</p>
-                        <p className="card front__text-sub-2"><i className="fa fa-phone front-icons"></i>{user.phone}</p>   
-                        <a href="#" className="btn btn--yell">
+                        <p className="profile-card front__text-sub"><i className="fa fa-envelope front-icons"></i>{user.email}</p>
+                        <p className="profile-card front__text-sub-2"><i className="fa fa-phone front-icons"></i>{user.phone}</p>   
+                        <a href="#" className="btn btn--blue">
                             Edit profile
                         </a>
                     </div>

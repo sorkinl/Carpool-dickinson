@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme)=>({
         textAlign: 'center',
         height: "150px",
         width:"390px",
-        borderRadius: "2rem",
+        borderRadius: "5rem",
         backgroundColor: "rgba(111, 231, 221, 0.4)", //$color-primary-dark
         padding: theme.spacing(4),
       },

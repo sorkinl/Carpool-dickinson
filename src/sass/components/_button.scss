@@ -35,9 +35,15 @@
             background-color: $color-secondary;
         }
     }
-    &--yell {
+    &--blue {
         background-color: $color-primary-light;
-        color: $color-secondary-dark;
+        color: $color-white;
+        position: relative;
+        margin-top: 6rem;
+    }
+    &--editTrip {
+        background-color: #428BFF;
+        color: $color-white;
         position: relative;
         margin-top: 6rem;
     }
