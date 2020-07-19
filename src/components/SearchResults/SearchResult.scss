@@ -1,0 +1,62 @@
+/* #searchResultRoot{
+    width:100vw;
+    display:flex;
+}
+
+#mapDiv{
+
+    width:50vw;
+    height:100vh;
+    position:sticky;
+ 
+    left:500px;
+    top:0;
+    left:0;
+  
+}
+
+ */
+
+ #searchresult__main{
+     display:flex;
+     flex-direction: row;
+     background-image: url("../../static/img/boat.jpg");
+     background-size: cover;
+     background-size: 100% 100%;
+     height:100vh;
+     width:100vw;
+    .searchresult__hr{
+        width:100%;
+        border-top:1px solid black;
+        margin:30px 0px;
+    }
+    #searchresult__left{
+        overflow: scroll;
+        padding: 2em 5em;
+        width:60%;
+        #searchresult__heading{
+            width:100%;
+            // background-color: green;
+            height:10em;
+            color: black;
+            #searchresult__triplength{
+                position: relative;
+                font-size: 3em;
+            }
+            #searchresult__tripname{
+                position: relative;
+                top:-15px;
+                font-size: 5em;
+            }
+        }
+        #searchresult__trips{
+            
+        }
+
+        
+    }
+    #searchresult__right{
+        width:40%;
+        background-color: red;
+     }
+ }

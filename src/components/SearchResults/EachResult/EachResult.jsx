@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import "./EachResult.css";
+import "./EachResult.scss";
 import { Avatar } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
@@ -40,62 +40,44 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function EachResult(props) {
+  console.log(props)
   const classes = useStyles();
 
-  console.log(props)
   return (
-    <div>
-      <div className="eachResult">
-        {/* avatar and nickname */}
-        <div className="avatarAndNickname">
-          <Avatar
-            src={props.info.user.photoUrl}
-            variant="square"
-            alt="temp"
-            className={classes.avatarSize}
-          />
-          <span className="nickname">{props.nickname}</span>
+   
+    <div className = "EachResult__main">
+      <div className = "info">
+        <div className = "EachResult__headingInfo">
+          <div className = "EachResult__address">
+            {props.info.destTitle}
+          </div>
+          <div className = "EachResult__date">
+           {props.info.departDate}
+          </div>
         </div>
-        <List className={classes.list}>
-          {/* name */}
-          <ListItem button classes={{ root: classes.ListItem }}>
-            <ListItemIcon classes={{ root: classes.ListItemIcon }}>
-              <PersonIcon />
-            </ListItemIcon>
-            {/* name */}
-            <ListItemText
-              classes={{ root: classes.ListItemText }}
-              primary={props.info.user.firstName +" " + props.info.user.lastName}
-              secondary={props.occupation}
-            />
-          </ListItem>
-          <ListItem button classes={{ root: classes.ListItem }}>
-            <ListItemIcon classes={{ root: classes.ListItemIcon }}>
-              <LocationOnIcon />
-            </ListItemIcon>
-            {/* //startinglocation */}
-            <ListItemText 
-              primary={props.info.originTitle} 
-              secondary={props.comment} />
-          </ListItem>
-          <ListItem button classes={{ root: classes.ListItem }}>
-            <ListItemIcon classes={{ root: classes.ListItemIcon }}>
-              <LocationCityIcon />
-            </ListItemIcon>
-            {/* destination */}
-            <ListItemText primary= {props.info.destTitle} />
-          </ListItem>
-          {/* <ListItem classes={{ root: classes.ListItem }}>
-            <Rating
-              name="rating-for-fun"
-              value={props.rating}
-              precision={0.5}
-              readOnly
-            />
-          </ListItem> */}
-        </List>
+        <div className = "EachResult__text">
+          <div className = "EachResult__comma">
+            “
+          </div>
+          <div className = "EachResult__description">
+            {props.info.departTime}
+          </div>
+          
+        </div>
       </div>
-      <hr />
+      <div className="EachResult__profile">
+        <div className = "EachResult__avatar">
+          <Avatar src = {props.info.user.photoUrl} style = {{width:"60px", height:"60px"}}/>
+        </div>
+        <div className = "EachResult__profile__info">
+          <div className = "EachResult__profile__name">
+            {props.info.user.firstName} {props.info.user.lastName} 
+          </div>
+          <div className = "EachResult__profile__year">
+            Dickinsonian '22'
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

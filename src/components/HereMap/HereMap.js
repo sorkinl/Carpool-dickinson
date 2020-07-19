@@ -34,5 +34,5 @@ export const HereMap = () => {
     };
   }, [mapRef]); // This will run this hook every time this ref is updated
 
-  return <div className="map" ref={mapRef} style={{ height: "500px" }} />;
+  return <div className="map" ref={mapRef} style={{ height: "100vh" }} />;
 };

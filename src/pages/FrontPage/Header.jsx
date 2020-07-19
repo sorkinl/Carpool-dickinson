@@ -1,8 +1,8 @@
 import React from "react";
 import logo from "../../assets/images/logo.png";
-import svg from "../../assets/images/blue_off_road.svg";
+import svg from "../../assets/images/yellow_off_rode.svg";
 import DoubleArrow from "@material-ui/icons/DoubleArrow";
-const Header = () => {
+const Header = ({executeScroll}) => {
   return (
     <header className="header">
       <div>
@@ -23,7 +23,7 @@ const Header = () => {
         </div>
       </div>
       <div className="header__arrow">
-        <i class="header__arrow--icon icon-arrows-down-double"></i>
+        <i onClick={executeScroll} className="header__arrow--icon icon-arrows-down-double"></i>
       </div>
     </header>
   );
