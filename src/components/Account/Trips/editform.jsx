@@ -6,11 +6,14 @@ import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import { useSelector } from 'react-redux';
-import { Button, Dialog } from '@material-ui/core';
+import { Button, Dialog, TextField, Input } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useFirestore, useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import Autocomplete from '../../Autocomplete';
 import { Card } from "@material-ui/core";
+import DialogTitle from '@material-ui/core/DialogTitle';
+import "./editform.css"
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,8 +24,25 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     form: {
-        padding: "10px",
+        padding: "15px",
+        display: "flex",
+        flexDirection: "column",
     },
+    fields: {
+        marginBottom: theme.spacing(2),
+        borderStyle: "1px solid",
+
+    },
+    button: {
+       // marginBottom: theme.spacing(1),
+
+    },
+    title: {
+       margin: theme.spacing(0),
+    },
+    date: {
+        boarderColor: "#92a8d1",
+    }
 }));
 
 export default function EditForm(props){
@@ -73,6 +93,11 @@ export default function EditForm(props){
   const handleClosePopup = () => {
     setOpenPopup(false);
   };
+
+  const closePopup = () => {
+      props.closePopup()
+  };
+
     
     //change departDate field from Date to string when storing in firebase
     //handleSubmit function updates the information to firebase
@@ -92,86 +117,84 @@ export default function EditForm(props){
             collection: 'trips',
             doc: tripId,
         }, modifiedTrip);
+        closePopup();
     };
     console.log(props)
 
     //when the dataToEdit is not empty it shows the edit form and when it is empty it shows error popup with go back link
     return isLoaded(dataToEdit) && !isEmpty(dataToEdit) ? (
-        <div className="container" className={classes.form}>
-            <Card>
-            <FormControl className={classes.FormControl} variant="outlined" allign='left'>
-                <InputLabel htmlFor="component-outlined">
-                 previous: {props.originTitle}
-                </InputLabel>
-                <OutlinedInput
-                type='text'
-                placeholder="pickup"
+        <div className="container">
+            <DialogTitle id="form-dialog-title" className={classes.title}>Modify This Trip</DialogTitle>
+            <InputLabel> Origin </InputLabel>
+           <div className='fields'>
+            <FormControl className={classes.FormControl} variant="outlined">
+                <Input 
+                // type="outlined-textarea"
                 value={state.originTitle}
-                variant="outlined"
                 margin="normal"
                 required
+                disableUnderline
                 fullWidth
                 id="originTitle"
                 onChange={handleChange}
                 name="originTitle"
+                label="Origin"
                 />
             </FormControl>
-            </Card>
-            <Card>
-            <FormControl className={classes.FormControl} variant="outlined" allign='left'>
-                <InputLabel htmlFor="component-outlined">
-                    previous: { props.destTitle }
-                </InputLabel>
-                <OutlinedInput
+            </div>
+            <InputLabel>Destination </InputLabel>
+            <div className="fields">
+            <FormControl className={classes.FormControl} variant="outlined">
+                <Input
                     type='text'
                     value={state.destTitle}
                     margin="normal"
-                    placeholder="destination"
                     required
+                    disableUnderline
                     fullWidth
                     id="destTitle"
                     onChange={handleChange}
                     name="destTitle"
                 />
             </FormControl>
-            </Card>
-            <Card>
-            <FormControl className={classes.FormControl} variant="outlined" allign='left'>
-                <InputLabel htmlFor="component-outlined">
-                    previous: { props.departTime }
-                </InputLabel>
-                <OutlinedInput
+            </div>
+            <InputLabel  htmlFor="component-simple" >Departure time</InputLabel>
+            <div className="fields">
+            <FormControl className={classes.FormControl} variant="outlined">
+                <Input
+                    id="outlined-basic"
                     type='text'
                     value={state.departTime}
                     margin="normal"
                     placeholder="choose time"
                     required
+                    disableUnderline
                     fullWidth
                     id="departTime"
                     onChange={handleChange}
                     name="departTime"
                 />
             </FormControl>
-            </Card>
-            <DatePicker allign="left"
+            </div>
+            <InputLabel>Date</InputLabel>
+            <div className="fields">
+             <DatePicker 
+                className="datePicker"
+                required
                 placeholderText="choose date"
                 selected={state.departDate}
                 onChange={handleDateChange}
+                popperPlacement="top"
                 />
-            <Card allign= 'center'>
-            <Button 
-                position="absolute"
-                allign= 'center'
-                botom= "5px"
+            </div>     
+            <Button className={classes.button}
                 type="submit"
                 variant="contained"
                 color="primary"
-                className={classes.submit}
-                onClick={handleSubmit}
-            >
+                onClick={handleSubmit}>
+        
                 Edit
             </Button>
-            </Card>
             {/* <Autocomplete/> */}
     </div>
     ) : (
