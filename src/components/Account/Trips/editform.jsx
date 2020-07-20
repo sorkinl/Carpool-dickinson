@@ -12,38 +12,38 @@ import { useFirestore, useFirestoreConnect, isLoaded, isEmpty } from 'react-redu
 import Autocomplete from '../../Autocomplete';
 import { Card } from "@material-ui/core";
 import DialogTitle from '@material-ui/core/DialogTitle';
-import "./editform.css"
+//import "./editform.css"
 
 
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '& .MuiTextField-root': {
-            margin: theme.spacing(1),
-            width: '25ch',
-        },
-    },
-    form: {
-        padding: "15px",
-        display: "flex",
-        flexDirection: "column",
-    },
-    fields: {
-        marginBottom: theme.spacing(2),
-        borderStyle: "1px solid",
+// const useStyles = makeStyles((theme) => ({
+//     root: {
+//         '& .MuiTextField-root': {
+//             margin: theme.spacing(1),
+//             width: '25ch',
+//         },
+//     },
+//     form: {
+//         padding: "15px",
+//         display: "flex",
+//         flexDirection: "column",
+//     },
+//     fields: {
+//         marginBottom: theme.spacing(2),
+//         borderStyle: "1px solid",
 
-    },
-    button: {
-       // marginBottom: theme.spacing(1),
+//     },
+//     button: {
+//        // marginBottom: theme.spacing(1),
 
-    },
-    title: {
-       margin: theme.spacing(0),
-    },
-    date: {
-        boarderColor: "#92a8d1",
-    }
-}));
+//     },
+//     title: {
+//        margin: theme.spacing(0),
+//     },
+//     date: {
+//         boarderColor: "#92a8d1",
+//     }
+// }));
 
 export default function EditForm(props){
     //get tripId from path
@@ -51,7 +51,7 @@ export default function EditForm(props){
     const tripId = props.tripId;
     const trip = props.trip;
     const [isUpdated, setUpdate] = useState(false);
-    const classes = useStyles();
+    //const classes = useStyles();
 
     //connect to firebase with redux
     useFirestoreConnect([
@@ -123,11 +123,14 @@ export default function EditForm(props){
 
     //when the dataToEdit is not empty it shows the edit form and when it is empty it shows error popup with go back link
     return isLoaded(dataToEdit) && !isEmpty(dataToEdit) ? (
-        <div className="container">
-            <DialogTitle id="form-dialog-title" className={classes.title}>Modify This Trip</DialogTitle>
-            <InputLabel> Origin </InputLabel>
-           <div className='fields'>
-            <FormControl className={classes.FormControl} variant="outlined">
+        <div className="edit-popup container">
+            <div className="edit-popup title" >
+            MODIFY THIS TRIP 
+            </div>
+            <div>
+        <InputLabel> Origin </InputLabel> 
+        </div><div className="edit-popup fields">
+            <FormControl variant="outlined">
                 <Input 
                 // type="outlined-textarea"
                 value={state.originTitle}
@@ -143,8 +146,8 @@ export default function EditForm(props){
             </FormControl>
             </div>
             <InputLabel>Destination </InputLabel>
-            <div className="fields">
-            <FormControl className={classes.FormControl} variant="outlined">
+            <div className="edit-popup fields">
+            <FormControl variant="outlined">
                 <Input
                     type='text'
                     value={state.destTitle}
@@ -158,9 +161,9 @@ export default function EditForm(props){
                 />
             </FormControl>
             </div>
-            <InputLabel  htmlFor="component-simple" >Departure time</InputLabel>
-            <div className="fields">
-            <FormControl className={classes.FormControl} variant="outlined">
+            <InputLabel  >Departure time</InputLabel>
+            <div className="edit-popup fields">
+            <FormControl variant="outlined">
                 <Input
                     id="outlined-basic"
                     type='text'
@@ -177,7 +180,7 @@ export default function EditForm(props){
             </FormControl>
             </div>
             <InputLabel>Date</InputLabel>
-            <div className="fields">
+            <div className="edit-popup fields">
              <DatePicker 
                 className="datePicker"
                 required
@@ -185,17 +188,16 @@ export default function EditForm(props){
                 selected={state.departDate}
                 onChange={handleDateChange}
                 popperPlacement="top"
-                />
-            </div>     
-            <Button className={classes.button}
-                type="submit"
-                variant="contained"
-                color="primary"
+                />  
+                </div>
+    
+            <a
+                className="btn btn--purple"
                 onClick={handleSubmit}>
         
                 Edit
-            </Button>
-            {/* <Autocomplete/> */}
+            </a>
+            {/* <Autocomplete/>  */}
     </div>
     ) : (
         <div>

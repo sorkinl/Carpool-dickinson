@@ -29,7 +29,8 @@ import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import { Link , useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import EditForm from './editform';
-import DialogContentText from '@material-ui/core/DialogContentText';
+import Popup from "reactjs-popup";
+
 
 
 const useStyles = makeStyles({
@@ -210,9 +211,15 @@ export default function Trip(props) {
         <CardActions>
          {/* {showLink} */}
          <Button onClick = {handleClickOpen}> Modify trip</Button>
-         <Dialog onClose={handleClosePopup}aria-labelledby="simple-dialog-title" open= {openPopup} >
+
+         <Popup 
+             contentStyle={{width: "30rem"}}
+             onClose={handleClosePopup}
+             className="edit-popup container"
+             open= {openPopup}   >  
             <EditForm trip={tripToEdit} tripId={tripId} closePopup={handleClosePopup} />
-             </Dialog>
+             </Popup>
+
           <Button onClick={handleMenu} size="small" color="primary">
             Contact driver
           </Button>
