@@ -11,7 +11,6 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import { useFirestore, useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import Autocomplete from '../../Autocomplete';
 import { Card } from "@material-ui/core";
-import DialogTitle from '@material-ui/core/DialogTitle';
 //import "./editform.css"
 
 
@@ -95,7 +94,11 @@ export default function EditForm(props){
   };
 
   const closePopup = () => {
-      props.closePopup()
+      props.closePopup();
+  };
+
+  function handleDelete(event) {
+      props.handleDelete();
   };
 
     
@@ -195,8 +198,13 @@ export default function EditForm(props){
                 className="btn btn--purple"
                 onClick={handleSubmit}>
         
-                Edit
+                EDIT
             </a>
+            <a 
+                className='btn btn--deleteTrip'
+                onCLick={handleDelete}>
+                    DELETE TRIP
+                </a>
             {/* <Autocomplete/>  */}
     </div>
     ) : (

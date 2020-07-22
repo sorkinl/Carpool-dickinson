@@ -217,13 +217,13 @@ export default function Trip(props) {
              onClose={handleClosePopup}
              className="edit-popup container"
              open= {openPopup}   >  
-            <EditForm trip={tripToEdit} tripId={tripId} closePopup={handleClosePopup} />
+            <EditForm trip={tripToEdit} tripId={tripId} closePopup={handleClosePopup} handleDelete={handleDelete} />
              </Popup>
 
           <Button onClick={handleMenu} size="small" color="primary">
             Contact driver
           </Button>
-          <Menu
+          {/* <Menu
             id="menu-appbar"
             anchorEl={anchorEl}
             anchorOrigin={{
@@ -239,7 +239,7 @@ export default function Trip(props) {
             onClose={handleClose}
           >
             <MenuItem onClick={handleDelete}>Delete this trip</MenuItem>
-          </Menu>
+          </Menu> */}
         </CardActions>
       </Card>
     </Grid>
