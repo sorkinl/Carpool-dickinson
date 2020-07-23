@@ -152,7 +152,8 @@ export default function Trip(props) {
 
   const firestore = useFirestore(); //use firestore reducer from 'react-redux-firebase'
   function handleDelete(e) {
-    e.preventDefault();
+    handleClosePopup();
+    //e.preventDefault();
     firestore.delete({
       collection: "trips", //function similar to the one in firebase, updates both firestore and local firestore reducer
       doc: props.trip.id, //prop is passed from trip list

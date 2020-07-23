@@ -11,6 +11,8 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import { useFirestore, useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import Autocomplete from '../../Autocomplete';
 import { Card } from "@material-ui/core";
+import Popup from "reactjs-popup";
+
 //import "./editform.css"
 
 
@@ -49,6 +51,7 @@ export default function EditForm(props){
     const firestore = useFirestore();
     const tripId = props.tripId;
     const trip = props.trip;
+    
     const [isUpdated, setUpdate] = useState(false);
     //const classes = useStyles();
 
@@ -84,24 +87,34 @@ export default function EditForm(props){
         });
     };
 
-     //useState for controlling popup
-  const [openPopup, setOpenPopup] = React.useState(false);
-  const handleClickOpen = () => {
-    setOpenPopup(true);
-  };
-  const handleClosePopup = () => {
-    setOpenPopup(false);
-  };
+//      //useState for controlling popup
+//   const [openPopup, setOpenPopup] = React.useState(false);
+//   const handleClickOpen = () => {
+//     setOpenPopup(true);
+//   };
+//   const handleClosePopup = () => {
+//     setOpenPopup(false);
+//   };
 
   const closePopup = () => {
       props.closePopup();
   };
 
-  function handleDelete(event) {
+  function handleDelete(e) {
       props.handleDelete();
   };
 
-    
+  const [openDelete, setOpenDelete] = React.useState(false);
+  const openDeletePopup = () => {
+      setOpenDelete(true);
+  };
+
+  const closeDeletePopup = () => {
+      setOpenDelete(false);
+  };
+  
+
+
     //change departDate field from Date to string when storing in firebase
     //handleSubmit function updates the information to firebase
     const handleSubmit = (e) => {
@@ -200,11 +213,20 @@ export default function EditForm(props){
         
                 EDIT
             </a>
-            <a 
+            <button
                 className='btn btn--deleteTrip'
-                onCLick={handleDelete}>
+                onClick={handleDelete}>
                     DELETE TRIP
-                </a>
+            </button>
+                <Popup
+                    open={openDelete}
+                    contentStyle={{width: "20rem"}}
+                    onClose={closeDeletePopup}
+                    className="edit-popup container"
+
+                    >
+                        lalal
+                </Popup>
             {/* <Autocomplete/>  */}
     </div>
     ) : (
