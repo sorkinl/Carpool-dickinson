@@ -6,26 +6,54 @@ import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import { useSelector } from 'react-redux';
-import { Button } from '@material-ui/core';
+import { Button, Dialog, TextField, Input } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useFirestore, useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import Autocomplete from '../../Autocomplete';
+import { Card } from "@material-ui/core";
+import Popup from "reactjs-popup";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '& .MuiTextField-root': {
-            margin: theme.spacing(1),
-            width: '25ch',
-        },
-    },
-}));
+//import "./editform.css"
+
+
+
+// const useStyles = makeStyles((theme) => ({
+//     root: {
+//         '& .MuiTextField-root': {
+//             margin: theme.spacing(1),
+//             width: '25ch',
+//         },
+//     },
+//     form: {
+//         padding: "15px",
+//         display: "flex",
+//         flexDirection: "column",
+//     },
+//     fields: {
+//         marginBottom: theme.spacing(2),
+//         borderStyle: "1px solid",
+
+//     },
+//     button: {
+//        // marginBottom: theme.spacing(1),
+
+//     },
+//     title: {
+//        margin: theme.spacing(0),
+//     },
+//     date: {
+//         boarderColor: "#92a8d1",
+//     }
+// }));
 
 export default function EditForm(props){
     //get tripId from path
     const firestore = useFirestore();
-    const tripId = props.match.params.tripId;
+    const tripId = props.tripId;
+    const trip = props.trip;
+    
     const [isUpdated, setUpdate] = useState(false);
-    const classes = useStyles();
+    //const classes = useStyles();
 
     //connect to firebase with redux
     useFirestoreConnect([
@@ -39,10 +67,10 @@ export default function EditForm(props){
      const dataToEdit = useSelector((state) => state.firestore.data.userTrips);
      const tripToEdit = useSelector((state) => state.firestore.data.trips);
      const [state, setState] = useState({
-        originTitle: '',
-        destTitle: '',
+        originTitle: trip.originTitle,
+        destTitle: trip.destTitle,
         departDate: new Date(),
-        departTime: '',
+        departTime: trip.departTime,
     });
 
 
@@ -58,7 +86,35 @@ export default function EditForm(props){
             departDate: date
         });
     };
-    
+
+//      //useState for controlling popup
+//   const [openPopup, setOpenPopup] = React.useState(false);
+//   const handleClickOpen = () => {
+//     setOpenPopup(true);
+//   };
+//   const handleClosePopup = () => {
+//     setOpenPopup(false);
+//   };
+
+  const closePopup = () => {
+      props.closePopup();
+  };
+
+  function handleDelete(e) {
+      props.handleDelete();
+  };
+
+  const [openDelete, setOpenDelete] = React.useState(false);
+  const openDeletePopup = () => {
+      setOpenDelete(true);
+  };
+
+  const closeDeletePopup = () => {
+      setOpenDelete(false);
+  };
+  
+
+
     //change departDate field from Date to string when storing in firebase
     //handleSubmit function updates the information to firebase
     const handleSubmit = (e) => {
@@ -77,77 +133,101 @@ export default function EditForm(props){
             collection: 'trips',
             doc: tripId,
         }, modifiedTrip);
+        closePopup();
     };
+    console.log(props)
 
     //when the dataToEdit is not empty it shows the edit form and when it is empty it shows error popup with go back link
     return isLoaded(dataToEdit) && !isEmpty(dataToEdit) ? (
-        <div className="container">
-        <form className="submit-btn">
-            <FormControl className={classes.FormControl} variant="outlined">
-                <InputLabel htmlFor="component-outlined">
-                    previous: { tripToEdit[tripId].originTitle }
-                </InputLabel>
-                <OutlinedInput
-                type='text'
-                placeholder="pickup"
+        <div className="edit-popup container">
+            <div className="edit-popup title" >
+            MODIFY THIS TRIP 
+            </div>
+            <div>
+        <InputLabel> Origin </InputLabel> 
+        </div><div className="edit-popup fields">
+            <FormControl variant="outlined">
+                <Input 
+                // type="outlined-textarea"
                 value={state.originTitle}
-                variant="outlined"
                 margin="normal"
                 required
+                disableUnderline
                 fullWidth
                 id="originTitle"
                 onChange={handleChange}
                 name="originTitle"
+                label="Origin"
                 />
             </FormControl>
-            <FormControl className={classes.FormControl} variant="outlined">
-                <InputLabel htmlFor="component-outlined">
-                    previous: { tripToEdit[tripId].destTitle }
-                </InputLabel>
-                <OutlinedInput
+            </div>
+            <InputLabel>Destination </InputLabel>
+            <div className="edit-popup fields">
+            <FormControl variant="outlined">
+                <Input
                     type='text'
                     value={state.destTitle}
                     margin="normal"
-                    placeholder="destination"
                     required
+                    disableUnderline
                     fullWidth
                     id="destTitle"
                     onChange={handleChange}
                     name="destTitle"
                 />
             </FormControl>
-            <FormControl className={classes.FormControl} variant="outlined">
-                <InputLabel htmlFor="component-outlined">
-                    previous: { tripToEdit[tripId].departTime }
-                </InputLabel>
-                <OutlinedInput
+            </div>
+            <InputLabel  >Departure time</InputLabel>
+            <div className="edit-popup fields">
+            <FormControl variant="outlined">
+                <Input
+                    id="outlined-basic"
                     type='text'
                     value={state.departTime}
                     margin="normal"
                     placeholder="choose time"
                     required
+                    disableUnderline
                     fullWidth
                     id="departTime"
                     onChange={handleChange}
                     name="departTime"
                 />
             </FormControl>
-            <DatePicker
+            </div>
+            <InputLabel>Date</InputLabel>
+            <div className="edit-popup fields">
+             <DatePicker 
+                className="datePicker"
+                required
                 placeholderText="choose date"
                 selected={state.departDate}
                 onChange={handleDateChange}
-                />
-            <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                onClick={handleSubmit}
-            >
-                Edit
-            </Button>
-            <Autocomplete/>
-        </form>
+                popperPlacement="top"
+                />  
+                </div>
+    
+            <a
+                className="btn btn--purple"
+                onClick={handleSubmit}>
+        
+                EDIT
+            </a>
+            <button
+                className='btn btn--deleteTrip'
+                onClick={handleDelete}>
+                    DELETE TRIP
+            </button>
+                <Popup
+                    open={openDelete}
+                    contentStyle={{width: "20rem"}}
+                    onClose={closeDeletePopup}
+                    className="edit-popup container"
+
+                    >
+                        lalal
+                </Popup>
+            {/* <Autocomplete/>  */}
     </div>
     ) : (
         <div>

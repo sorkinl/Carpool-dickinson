@@ -28,6 +28,10 @@ import { Menu, MenuItem } from "@material-ui/core/";
 import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import { Link , useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import EditForm from './editform';
+import Popup from "reactjs-popup";
+
+
 
 const useStyles = makeStyles({
   media: {
@@ -103,34 +107,35 @@ export default function Trip(props) {
   };
 
   //button shows different component depending on whether tripToEdit exists
-  const showLink = tripToEdit? (
-    <Link to={`edit/${props.trip.id}`}>
-            <Button size="small" color="primary">
-               Modify trip
-            </Button>
-    </Link>
-  ) : (
-    <div>
-      <Button size="small" color="primary" onClick={handleClickOpen}>
-        Modify trip
-      </Button>
-      <Dialog onClose={handleClosePopup} aria-labelledby="customized-dialog-title" open={openPopup}>
-        <DialogTitle id="customized-dialog-title" onClose={handleClosePopup}>
-          Warning
-        </DialogTitle>
-        <DialogContent dividers>
-          <Typography gutterBottom>
-            404: Cannot find the requested trip!
-          </Typography>
-        </DialogContent>
-        <DialogActions>
-           <Button autoFocus onClick={handleClosePopup} color="primary">
-             Close
-           </Button>
-         </DialogActions>
-       </Dialog>
-    </div>   
-   );
+  // const showLink = tripToEdit? (
+  //  <Link to={`edit/${props.trip.id}`}>
+  //           <Button size="small" color="primary">
+  //              Modify trip
+  //           </Button>
+  //  </Link>
+  // ) : (
+  //   <div>
+  //     <Button size="small" color="primary" onClick={handleClickOpen}>
+  //       Modify trip
+  //     </Button>
+  //     <Dialog onClose={handleClosePopup} aria-labelledby="customized-dialog-title" open={openPopup}>
+  //       <DialogTitle id="customized-dialog-title" onClose={handleClosePopup}>
+  //         Warning
+  //       </DialogTitle>
+  //       <DialogContent dividers>
+  //         <Typography gutterBottom>
+  //           404: Cannot find the requested trip!
+  //         </Typography>
+  //       </DialogContent>
+  //       <DialogActions>
+  //          <Button autoFocus onClick={handleClosePopup} color="primary">
+  //            Close
+  //          </Button>
+  //        </DialogActions>
+  //      </Dialog>
+  //   </div>   
+  // );
+
 
 
 
@@ -147,13 +152,14 @@ export default function Trip(props) {
 
   const firestore = useFirestore(); //use firestore reducer from 'react-redux-firebase'
   function handleDelete(e) {
-    e.preventDefault();
+    handleClosePopup();
+    //e.preventDefault();
     firestore.delete({
       collection: "trips", //function similar to the one in firebase, updates both firestore and local firestore reducer
       doc: props.trip.id, //prop is passed from trip list
     });
   }
-
+  console.log(trip)
   return (
     <Grid item xs={4} className="Trip">
       <Card className={classes.root} gutterBottom>
@@ -161,20 +167,20 @@ export default function Trip(props) {
         <CardHeader
           avatar={
             <Avatar aria-label="name" className={classes.avatar}>
-              M
+              {tripToEdit.photoUrl}
             </Avatar>
           }
-          title={trip.first + " " + trip.last}
+          title={trip.firstName + " " + trip.lastName}
           align="left"
           subheader={trip.school}
         />
         {/* Picture (can be removed) */}
-        <CardMedia className={classes.media} image={trip.image} title="Car" />
+        {/* <CardMedia className={classes.media} image={trip.image} title="Car" /> */}
         {/* Display a trip's bsic info */}
         <CardContent>
           {/* Date */}
           <Typography variant="body1" color="primary" align="left">
-            <EventIcon color="primary" /> {trip.date}
+            <EventIcon color="primary" /> {trip.date.getFullYear()+'-'+(trip.date.getMonth()+1)+'-'+trip.date.getDate()}
           </Typography>
           <Typography variant="body1" color="primary" align="left">
             <TimerIcon color="primary" /> {trip.time}
@@ -190,7 +196,7 @@ export default function Trip(props) {
           </Typography>
           {/* Cost */}
           <Typography variant="body1" color="inherit" align="left" gutterBottom>
-            <CommentIcon color="action" /> {trip.comment}
+            <CommentIcon color="action" /> {trip.description}
           </Typography>
           {/* Rating */}
           {/* <Typography variant="body1" color="inherit" align="left">
@@ -204,11 +210,21 @@ export default function Trip(props) {
         </CardContent>
         {/* Buttons */}
         <CardActions>
-          {showLink}
+         {/* {showLink} */}
+         <Button onClick = {handleClickOpen}> Modify trip</Button>
+
+         <Popup 
+             contentStyle={{width: "30rem"}}
+             onClose={handleClosePopup}
+             className="edit-popup container"
+             open= {openPopup}   >  
+            <EditForm trip={tripToEdit} tripId={tripId} closePopup={handleClosePopup} handleDelete={handleDelete} />
+             </Popup>
+
           <Button onClick={handleMenu} size="small" color="primary">
             Contact driver
           </Button>
-          <Menu
+          {/* <Menu
             id="menu-appbar"
             anchorEl={anchorEl}
             anchorOrigin={{
@@ -224,7 +240,7 @@ export default function Trip(props) {
             onClose={handleClose}
           >
             <MenuItem onClick={handleDelete}>Delete this trip</MenuItem>
-          </Menu>
+          </Menu> */}
         </CardActions>
       </Card>
     </Grid>
