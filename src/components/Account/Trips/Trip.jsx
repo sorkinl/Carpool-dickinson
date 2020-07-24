@@ -159,7 +159,7 @@ export default function Trip(props) {
       doc: props.trip.id, //prop is passed from trip list
     });
   }
-
+  console.log(trip)
   return (
     <Grid item xs={4} className="Trip">
       <Card className={classes.root} gutterBottom>
@@ -170,7 +170,7 @@ export default function Trip(props) {
               {tripToEdit.photoUrl}
             </Avatar>
           }
-          title={tripToEdit.user.firstName + " " + tripToEdit.user.lastName}
+          title={trip.firstName + " " + trip.lastName}
           align="left"
           subheader={trip.school}
         />
@@ -180,7 +180,7 @@ export default function Trip(props) {
         <CardContent>
           {/* Date */}
           <Typography variant="body1" color="primary" align="left">
-            <EventIcon color="primary" /> {tripToEdit.departDate}
+            <EventIcon color="primary" /> {trip.date.getFullYear()+'-'+(trip.date.getMonth()+1)+'-'+trip.date.getDate()}
           </Typography>
           <Typography variant="body1" color="primary" align="left">
             <TimerIcon color="primary" /> {trip.time}
@@ -188,15 +188,15 @@ export default function Trip(props) {
           
           {/* Starting point */}
           <Typography variant="body1" color="textPrimary" align="left">
-            <LocationOnIcon color="action" /> {tripToEdit.originTitle}
+            <LocationOnIcon color="action" /> {trip.from}
           </Typography>
           {/* Destination */}
           <Typography variant="body1" color="textPrimary" align="left">
-            <LocationCityIcon color="action" /> {tripToEdit.destTitle}
+            <LocationCityIcon color="action" /> {trip.to}
           </Typography>
           {/* Cost */}
           <Typography variant="body1" color="inherit" align="left" gutterBottom>
-            <CommentIcon color="action" /> {trip.comment}
+            <CommentIcon color="action" /> {trip.description}
           </Typography>
           {/* Rating */}
           {/* <Typography variant="body1" color="inherit" align="left">
