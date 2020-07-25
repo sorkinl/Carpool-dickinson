@@ -73,6 +73,9 @@ export default function EditForm(props){
         departTime: trip.departTime,
     });
 
+    var date = new Date();
+    date.setUTCHours(0,0,0,0);
+
 
     const handleChange = (e) => {
         setState({
@@ -82,9 +85,9 @@ export default function EditForm(props){
     }
 
     const handleDateChange = date => {
-        setState({...state,
-            departDate: date
-        });
+        date.setUTCHours(0,0,0,0);
+        console.log(date)
+        setState({...state, departDate: date})
     };
 
 //      //useState for controlling popup
@@ -126,7 +129,7 @@ export default function EditForm(props){
                 latitude: 23,
                 longitude: 52} ,
             departTime: state.departTime,
-            departDate: state.departDate.toDateString(),
+            departDate: state.departDate,
         }
         setUpdate(true);
         firestore.update({
@@ -137,7 +140,7 @@ export default function EditForm(props){
     };
     console.log(props)
 
-    //when the dataToEdit is not empty it opens an edit popup
+    //when the dataToEdit is not empty it opens an edit
     return isLoaded(dataToEdit) && !isEmpty(dataToEdit) ? (
         <div className="edit-popup container">
             <span className="edit-popup title" >
