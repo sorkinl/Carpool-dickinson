@@ -44,9 +44,29 @@
     font-weight: 520;
     color: $color-secondary-dark;
     }
-    
 
+    .deleteContainer{
+      margin: 1.5rem;
 
+    }
+
+    .deleteQuestion{
+    display: inline-block;
+    font-size: 1.8rem;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    }
+
+    .image{
+      height: 90%;
+      width: 80%;
+      position: relative;
+      top:10%;
+      left: 10%;
+      margin-bottom: 7%;
+      text-align: center;
+  }
 
     
 

@@ -10,8 +10,8 @@ import { Button, Dialog, TextField, Input } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useFirestore, useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import Autocomplete from '../../Autocomplete';
-import { Card } from "@material-ui/core";
 import Popup from "reactjs-popup";
+import svg from "../../../assets/images/travel_pic.svg";
 
 //import "./editform.css"
 
@@ -73,6 +73,9 @@ export default function EditForm(props){
         departTime: trip.departTime,
     });
 
+    var date = new Date();
+    date.setUTCHours(0,0,0,0);
+
 
     const handleChange = (e) => {
         setState({
@@ -82,9 +85,9 @@ export default function EditForm(props){
     }
 
     const handleDateChange = date => {
-        setState({...state,
-            departDate: date
-        });
+        date.setUTCHours(0,0,0,0);
+        console.log(date)
+        setState({...state, departDate: date})
     };
 
 //      //useState for controlling popup
@@ -126,7 +129,7 @@ export default function EditForm(props){
                 latitude: 23,
                 longitude: 52} ,
             departTime: state.departTime,
-            departDate: state.departDate.toDateString(),
+            departDate: state.departDate,
         }
         setUpdate(true);
         firestore.update({
@@ -137,12 +140,12 @@ export default function EditForm(props){
     };
     console.log(props)
 
-    //when the dataToEdit is not empty it shows the edit form and when it is empty it shows error popup with go back link
+    //when the dataToEdit is not empty it opens an edit
     return isLoaded(dataToEdit) && !isEmpty(dataToEdit) ? (
         <div className="edit-popup container">
-            <div className="edit-popup title" >
+            <span className="edit-popup title" >
             MODIFY THIS TRIP 
-            </div>
+            </span>
             <div>
         <InputLabel> Origin </InputLabel> 
         </div><div className="edit-popup fields">
@@ -213,19 +216,25 @@ export default function EditForm(props){
         
                 EDIT
             </a>
-            <button
+            <a
                 className='btn btn--deleteTrip'
-                onClick={handleDelete}>
+                onClick={openDeletePopup}
+                >
                     DELETE TRIP
-            </button>
+            </a>
                 <Popup
+                    contentStyle={{width: "25rem"}}
                     open={openDelete}
-                    contentStyle={{width: "20rem"}}
                     onClose={closeDeletePopup}
-                    className="edit-popup container"
-
                     >
-                        lalal
+                    <div className="edit-popup deleteContainer">
+                    <span className="edit-popup deleteQuestion"> Are you sure you you want to delete this trip?</span>
+                    <div>
+                    <img src={svg} alt="" className="edit-popup image"></img>
+                    </div> 
+                    <button className='btn btn--purple' onClick={closeDeletePopup}> Cancel</button>
+                    <button className='btn btn--deleteTrip' onClick={handleDelete} > Delete</button>
+                    </div>
                 </Popup>
             {/* <Autocomplete/>  */}
     </div>
