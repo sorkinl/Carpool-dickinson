@@ -6,9 +6,8 @@
 .header-dashboard {
     font-size: 1.4rem;
     height: 7rem;
-    background-color: #ffffff;
-    border-bottom: $color-grey-dark;
-
+    background-color: #fff;
+    border-bottom: $color-grey-light-2;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -19,11 +18,16 @@
 }
 
 .sidebar-dashboard {
-    background-color: $color-grey-dark-3;
-    flex: 0 0 18%
+    background-color: $color-primary;
+    flex: 0 0 15%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .hotel-view-dashboard {
     background-color: #fff;
     flex: 1;
+    height: 80rem;
 }

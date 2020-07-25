@@ -40,8 +40,50 @@ const Dashboard = () => {
                 </header>
                 <div className="content-dashboard">
                     <nav className="sidebar-dashboard">
-                        Navigation
+                       <ul className="side-nav-dash">
+                           <li className="side-nav-dash__item side-nav-dash__item--active">
+                               <a href="#" className="side-nav-dash__link--active">
+                                   <svg className="side-nav-dash__icon">
+                                       <use xlinkHref={`${icon}#icon-home`}></use>
+                                   </svg>
+                                   <span>Overview</span>
+                               </a>
+                           </li>
+                           <li className="side-nav-dash__item">
+                               <a href="#" className="side-nav-dash__link">
+                                   <svg className="side-nav-dash__icon">
+                                       <use xlinkHref={`${icon}#icon-location`}></use>
+                                   </svg>
+                                   <span>My trips</span>
+                               </a>
+                           </li>
+                           <li className="side-nav-dash__item">
+                               <a href="#" className="side-nav-dash__link">
+                                   <svg className="side-nav-dash__icon">
+                                       <use xlinkHref={`${icon}#icon-message`}></use>
+                                   </svg>
+                                   <span>Messages</span>
+                               </a>
+                           </li>
+                           <li className="side-nav-dash__item">
+                               <a href="#" className="side-nav-dash__link">
+                                   <svg className="side-nav-dash__icon">
+                                       <use xlinkHref={`${icon}#icon-user`}></use>
+                                   </svg>
+                                   <span>Profile</span>
+                               </a>
+                           </li>
+                           
+                       </ul>
+                       <li className="side-nav-dash__item">
+                               <a href="#" className="side-nav-dash__link">
+                                   <span>Logout</span>
+                               </a>
+                           </li>
+                       
                     </nav>
+
+
                     <main className="hotel-view-dashboard">
                         Hotel view
                     </main>
