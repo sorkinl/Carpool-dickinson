@@ -59,7 +59,7 @@ export default function TripList(props) {
   useEffect(()=>{
     if(userTrips){
       userTrips.map((x)=>{
-          if(x.departTime < new Date().setHours(0,0,0,0)){
+          if(x.departDate.toDate() < new Date().setHours(0,0,0,0)){
             tempPrev.push(x)
           }else{
             tempNext.push(x)
@@ -82,7 +82,7 @@ export default function TripList(props) {
     <CssBaseline>
       <Box m={3} pt={0} className="TripList">
         <Typography variant="h5" color="inherited" gutterBottom align="left">
-          My Trips
+          My Trips 
         </Typography>
         <div className={classes.root}>
           {/* View future trip list panel. Change the state of fuTrip if this panel is clicked. */}
@@ -107,20 +107,20 @@ export default function TripList(props) {
                 (userTrips.length > 0 ? (
                   <Grid container spacing={3} className="Future-trip-list">
                     {
-                     userTrips.filter(trip => trip.departDate < new Date()).map((trip) => {
+                     userTrips.filter(trip => trip.departDate.toDate() > new Date()).map((trip) => {
                   
                         return (
                           <Trip
                             trip={{
-                              from: trip.originTitle,
-                              to: trip.destTitle,
-                              date: trip.departDate.toDate(),
-                              time: trip.departTime,
-                              comment: trip.description,
+                              originTitle: trip.originTitle,
+                              destTitle: trip.destTitle,
+                              departDate: trip.departDate.toDate(),
+                              departTime: trip.departTime,
+                              emptySeat: trip.emptySeat,
+                              description: trip.description,
                               id: trip.id,
                               firstName: trip.firstName,
                               lastName: trip.lastName,
-                              
                               //uid: currentUser,
                             }}
                           />
@@ -155,21 +155,22 @@ export default function TripList(props) {
               {isLoaded(userTrips) &&
                 (userTrips.length > 0 ? (
                   <Grid container spacing={3} className="Past-trip-list">
-                    {userTrips.filter(trip => trip.departDate > new Date()).map((trip) => {
+                    {userTrips.filter(trip => trip.departDate.toDate() < new Date()).map((trip) => {
                       return (
                         <Trip
                           trip={{
-                            from: trip.originTitle,
-                            to: trip.destTitle,
-                            date: trip.departDate.toDate(),
-                            time: trip.departTime,
-                            comment: trip.description,
+                            originTitle: trip.originTitle,
+                            destTitle: trip.destTitle,
+                            departDate: trip.departDate.toDate(),
+                            departTime: trip.departTime,
+                            emptySeat: trip.emptySeat,
+                            description: trip.description,
                             id: trip.id,
                             firstName: trip.firstName,
                             lastName: trip.lastName,
                             //uid: currentUser,
                           }}
-                        />  
+                        />
                       );
                     })}
                   </Grid>

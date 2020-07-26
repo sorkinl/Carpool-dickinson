@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import Trip from "./Trips/Trip";
 import { useSelector } from "react-redux";
-import { useFirestoreConnect } from "react-redux-firebase";
+import { useFirestoreConnect, isLoaded } from "react-redux-firebase";
 import {
-    Typography,
     Grid
 } from '@material-ui/core';
 import StyleTrip from './Trips/StyleTrip';
 import Console from './Console.jsx';
 
 export default function TripArea(props){
-    const [pastTripList, setPastTripList] = useState("");
-    const [upcomingTripList, setUpcomingTripList] = useState("");
   
     // ------------- Handling trips ----------------- //
-  
     const currentUser = useSelector((state) => state.firebase.auth.uid); //takes the current user uid. Same as firebase.auth().currentUser.uid
     useFirestoreConnect([
       {
@@ -25,38 +20,13 @@ export default function TripArea(props){
       },
     ]);
   
-    // function onCreate()
-  
     const userTrips = useSelector((state) => state.firestore.ordered.userTrips); //takes out array of trips queried above and takes it out of firestore reducer
-    // const pastTripList =[]
-  
-    const tempNext = []
-    const tempPrev = []
-    
-    useEffect(()=>{
-      if(userTrips){
-        userTrips.map((x)=>{
-            if(x.departTime < new Date().setHours(0,0,0,0)){
-              tempPrev.push(x)
-            }else{
-              tempNext.push(x)
-            }
-    
-          })
-       }
-  
-    }, [userTrips, tempNext, tempPrev])
-    
-    const change = () => {
-      setPastTripList(tempPrev)  
-      setUpcomingTripList(tempNext)
-    } 
 
     return (
         <div class="profile-tab">
             <h4>My Trips</h4>
             <hr/>
-                <input type="radio" id="tab1" name="tab-control"defaultChecked/>
+                <input type="radio" id="tab1" name="tab-control" defaultChecked/>
                 <input type="radio" id="tab2" name="tab-control"/>
                 <input type="radio" id="tab3" name="tab-control"/>  
                 <input type="radio" id="tab4" name="tab-control"/>
@@ -102,13 +72,35 @@ export default function TripArea(props){
                 </section>
                 <section>
                     <h2>Posted</h2>
-                    { upcomingTripList.length === 0 ? (
+                    {/* { upcomingTripList.length === 0 ? (
                     <><Grid container spacing={3} className="">
                         <StyleTrip/>
                         <StyleTrip/>
                         <StyleTrip/>
                     </Grid></> )
-                 : "" }   
+                 : "" }    */}
+                    {isLoaded(userTrips) && (userTrips.length > 0 ? (
+                    <Grid container spacing={3}>
+                        {userTrips.map((trip) => {
+                            return (
+                                <StyleTrip
+                                    trip={{ 
+                                        originTitle: trip.originTitle,
+                                        destTitle: trip.destTitle,
+                                        departDate: trip.departDate.toDate(),
+                                        departTime: trip.departTime,
+                                        emptySeat: trip.emptySeat,
+                                        description: trip.description,
+                                        id: trip.id,
+                                        firstName: trip.firstName,
+                                        lastName: trip.lastName,
+                                        //uid: currentUser,
+                                    }}
+                                />
+                            );
+                        })}
+                    </Grid>
+                    ) : <>YOU CURRENTLY HAVE NO TRIPS</> )}
                 </section>
             </div>
         </div>    

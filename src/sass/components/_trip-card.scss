@@ -13,7 +13,7 @@
     } 
     .inner-box {
         margin: 0.1rem 0.5rem;
-        padding: 17px 10px;
+        padding: 15px 10px;
         background: rgb(241, 241, 241);
         width: 94%;
         border-radius: 30px;
@@ -38,7 +38,7 @@
         margin-top: 2px;
         color: #fff;
     }
-    //#9a7fda;
+
     .icon-circle {
         position: relative;
         border-radius: 50%;
@@ -85,7 +85,11 @@
         margin-left: 1rem;
         margin-top: 0.2rem;
         margin-bottom: 0.5rem;
-        // overflow: hidden;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* number of lines to show */
+        -webkit-box-orient: vertical;
     }
     div.trip-card-btn {
         background-color: #428BFF;

@@ -31,8 +31,6 @@ import { useSelector } from 'react-redux';
 import EditForm from './editform';
 import Popup from "reactjs-popup";
 
-
-
 const useStyles = makeStyles({
   media: {
     height: 0,
@@ -95,7 +93,7 @@ export default function Trip(props) {
     { collection: 'trips' }
   ]);
   //get trip object that has qeuried tripId
-  // const tripToEdit = useSelector((state) => state.firestore.data.userTrips[tripId]);
+  const tripToEdit = useSelector((state) => state.firestore.data.userTrips[tripId]);
 
   //useState for controlling popup
   const [openPopup, setOpenPopup] = React.useState(false);
@@ -180,10 +178,10 @@ export default function Trip(props) {
         <CardContent>
           {/* Date */}
           <Typography variant="body1" color="primary" align="left">
-            <EventIcon color="primary" /> {trip.date.getFullYear()+'-'+(trip.date.getMonth()+1)+'-'+trip.date.getDate()}
+            <EventIcon color="primary" /> {trip.departDate.getFullYear()+'-'+(trip.departDate.getMonth()+1)+'-'+trip.departDate.getDate()}
           </Typography>
           <Typography variant="body1" color="primary" align="left">
-            <TimerIcon color="primary" /> {trip.time}
+            <TimerIcon color="primary" /> {trip.departTime}
           </Typography>
           {/*Empty seats*/}
           <Typography variant="body1" color="inherit" align="left" gutterBottom>
