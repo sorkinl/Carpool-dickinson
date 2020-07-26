@@ -67,16 +67,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 //Get current date
-const today = new Date();
+/* const today = new Date();
 const yesterday = new Date(today);
 yesterday.setDate(today.getDate() - 1);
-const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(); */
 
 export default function PostRideField() {
     const classes = useStyles();
     const user = useSelector(state => state.firebase.profile);
     const [error, setError] = React.useState(false);
     const [dateError, setDateError] = React.useState(false);
+    var date = new Date();
+    date.setUTCHours(0,0,0,0);
     const [state, setState] = React.useState({
             originTitle: '',
             origin: {
@@ -97,6 +99,8 @@ export default function PostRideField() {
             lastName: '',
             photoUrl: '',
     });
+
+    
 
     const [load, setLoad] = React.useState('default');
     const timerRef = React.useRef();
@@ -126,14 +130,18 @@ export default function PostRideField() {
 
     }
     function handleDateChange(date) {
-        if(validateDate(date) === false){
+        /* if(validateDate(date) === false){
             setState({ ...state, departDate: date });
             setDateError(false);
         }
         else {
             setDateError(true);
-        }
+        } */
+        date.setUTCHours(0,0,0,0);
+        console.log(date)
+        setState({...state, departDate: date})
     }
+    console.log(date)
     function handleClose() {
         setDateError(false);
         setError(false);
@@ -148,14 +156,14 @@ export default function PostRideField() {
             return true;
         }
     }
-    function validateDate(date) {
+    /* function validateDate(date) {
         if (date < yesterday){
             return true;
         }
         else {
             return false;
         }
-    }
+    } */
     function handleLoad() {
         clearTimeout(timerRef.current);
         setLoad('progress');

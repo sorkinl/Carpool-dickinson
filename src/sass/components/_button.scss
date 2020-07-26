@@ -51,6 +51,37 @@
             background-color: $color-white;
         }
     }
+    &--purple {
+        background-color: $color-secondary-dark;
+        color: $color-white;
+        padding: 0.7rem 0.7rem;
+        text-align: center;
+        font-size: 1.2rem;
+        margin-top: 1rem;
+        border-radius: 100px;
+        display: inline-block;
+        cursor: default;
+        width: 47%;
+        outline: none;
+        border: none;
+
+    }
+
+    &--deleteTrip {
+        font-size: 1.2rem;
+        background-color: transparent;
+        width: 47%;
+        text-align: center;
+        margin-top: 1rem;
+        border: 1px solid  $color-secondary-dark;
+        padding: 0.7rem 0.7rem;
+        border-radius: 100px;
+        float: right;
+        cursor: default;
+        outline: none;
+
+
+    }
     
     
     &::after {
