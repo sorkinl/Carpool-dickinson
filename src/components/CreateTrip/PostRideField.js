@@ -255,7 +255,9 @@ export default function PostRideField() {
                                             label="Pickup time"
                                             name="departTime"
                                             value={state.departTime}
-                                            
+                                            inputProps={{
+                                                maxLength: 18,
+                                            }}
                                             placeholder="eg: 8am/9:30am-2pm/Anytime"
                                             onChange={handleChange}
                                         />

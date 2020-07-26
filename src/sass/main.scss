@@ -6,12 +6,16 @@
 @import "base/typography";
 @import "base/utilities";
 @import "pages/home";
+
 @import "components/button";
-@import "components/card";
+@import "components/profile-card";
+@import "components/profile-tab";
+@import "components/trip-card";
 @import "components/feature-box";
 @import "components/tabs";
 @import "components/nav-dashboard";
 @import "components/side-nav-dashboard";
+@import "components/console";
 @import "components/edit-popup";
 @import "layout/header";
 @import "layout/dashboard-layout";
