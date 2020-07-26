@@ -1,9 +1,9 @@
 .trip-card {
     margin: auto;
     padding: 10px;
-    background: #6fe7dd;
+    background: #5dd7df;
     width: 30%;
-    min-width: fit-content;
+    max-width: 30%;
     height: 39rem;
     border-radius: 35px;
     // position: relative;
@@ -12,10 +12,8 @@
         box-shadow: 0 1rem 2rem rgba($color-black,.2);
     } 
     .inner-box {
-        margin-top: 0.1rem;
-        margin-left: 7px;
-        margin-right: 7px;
-        padding: 10px;
+        margin: 0.1rem 0.5rem;
+        padding: 17px 10px;
         background: rgb(241, 241, 241);
         width: 94%;
         border-radius: 30px;
@@ -40,5 +38,72 @@
         margin-top: 2px;
         color: #fff;
     }
+    //#9a7fda;
+    .icon-circle {
+        position: relative;
+        border-radius: 50%;
+        display: inline-block;
+        width: 2.4rem;
+        height: 2.4rem;
+        margin-right: 0.5rem;
+        background-color:  #f1ca3d45;
+        .trip-icon {
+            position: relative;
+            font-size: 1.3rem;
+            color: #eebe31;
+            &--origin {
+                top: 0.15rem;
+                margin-left: 0.8rem;
+            }
+            &--destination {
+                top: 0.15rem;
+                margin-left: 0.7rem;
+            }
+            &--date {
+                top: 0rem;
+                margin-left: 0.6rem;
+            }
+            &--time {
+                top: 0.09rem;
+                margin-left: 0.6rem;
+            }
+            &--seats {
+                top: 0rem;
+                margin-left: 0.4rem;
+            }
+            &--note {
+                top: 0.1rem;
+                margin-left: 0.65rem;
+            }
+        }
+    }
 
+    .sub-text {
+        position: relative;
+        font-family: "Lato", "sans-serif";
+        color: #2799f7;
+        margin-left: 1rem;
+        margin-top: 0.2rem;
+        margin-bottom: 0.5rem;
+        // overflow: hidden;
+    }
+    div.trip-card-btn {
+        background-color: #428BFF;
+        color: #fff;
+        position: relative;
+        margin: 1.2rem 0.5rem;
+        border-radius: 3rem;
+        text-transform: uppercase;
+        padding: 1.2rem 2rem;
+        font-size: 15px;
+        font-weight: 500;
+        max-width: fit-content;
+        &:hover {
+            cursor: pointer;
+            opacity: 0.6;
+        }
+    }
+    grid-trip {
+        max-width: fit-content
+    }
 }

@@ -7,8 +7,9 @@ import {
     Grid
 } from '@material-ui/core';
 import StyleTrip from './Trips/StyleTrip';
+import Console from './Console.jsx';
 
-export default function TripCard(props){
+export default function TripArea(props){
     const [pastTripList, setPastTripList] = useState("");
     const [upcomingTripList, setUpcomingTripList] = useState("");
   
@@ -89,7 +90,7 @@ export default function TripCard(props){
             <div class="content">
                 <section>
                     <h2>Console</h2>
-                    Tab 1 
+                        <Console/>
                 </section>
                 <section>
                     <h2>Upcoming</h2>
@@ -106,52 +107,7 @@ export default function TripCard(props){
                         <StyleTrip/>
                         <StyleTrip/>
                         <StyleTrip/>
-                        {/* <Trip
-                            trip={{
-                                firstName: "Katie",
-                                lastName: "Le",
-                                from: "Dickinson",
-                                to: "Harvey Mudd",
-                                date: "",
-                                time: "5am",
-                                school: "Dickinson College",
-                                description: "no pets",
-                                emptySeat: "4 seats",
-                                id: "", 
-                                //uid: currentUser,
-                             }}
-                        />
-                        <Trip
-                            trip={{
-                                firstName: "Katie",
-                                lastName: "Le",
-                                from: "Dickinson",
-                                to: "Harvey Mudd",
-                                date: "",
-                                time: "5am",
-                                school: "Dickinson College",
-                                emptySeat: "4 seats",
-                                description: "no pets",
-                                id: "", 
-                                //uid: currentUser,
-                             }}
-                        />
-                        <Trip
-                            trip={{
-                                firstName: "Katie",
-                                lastName: "Le",
-                                from: "Dickinson",
-                                to: "Harvey Mudd",
-                                date: "",
-                                time: "5am",
-                                school: "Dickinson College",
-                                emptySeat: "4 seats",
-                                description: "no pets",
-                                id: "", 
-                                //uid: currentUser,
-                             }}
-                        /> */}
-                        </Grid></> )
+                    </Grid></> )
                  : "" }   
                 </section>
             </div>
