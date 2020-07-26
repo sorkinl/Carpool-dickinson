@@ -146,7 +146,6 @@
     width: 5.5em;
     height: 5.5em;
     border-radius: 50%;
-    background-color: hsl(4, 98%, 60%);
     box-shadow: 0 2px 5px 1px hsla(0, 0%, 0%, .26);  
     color: hsl(0, 0%, 100%);
     text-align: center;
@@ -167,7 +166,7 @@
   }
   
   .circular-menu .floating-btn-icon {
-    color: $color-black;
+    color: $color-white;
     backface-visibility: hidden;
     margin-top: 1.7rem;
     transition: transform .2s;  
@@ -189,7 +188,6 @@
     top: 3px;
     right: 3px;
     z-index: -2;
-    background-color: hsl(4, 98%, 60%);
     transition: all .3s ease;
   }
   
@@ -220,7 +218,7 @@
     border-radius: 50%;
     text-align: center;
     line-height: 3;
-    background-color: $color-primary-light;
+    background-color: $color-tertiary;
     transition: transform .3s ease, background .2s ease;
 
     &-icon{
@@ -272,12 +270,12 @@
   
   .circular-menu.circular-menu-left .floating-btn {
     backface-visibility: hidden;
-    background-color: $color-secondary;
+    background-color: $color-tertiary;
   }
   
   .circular-menu.circular-menu-left:after {
     backface-visibility: hidden;
-    background-color: $color-secondary;
+    background-color: $color-primary-light;
   }
   
   .circular-menu.circular-menu-left.active .floating-btn i {
