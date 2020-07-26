@@ -1,11 +1,13 @@
 .btn {
+    transition: all .1s;
+    
     &:link, &:visited {
         text-transform: uppercase;
         text-decoration: none;
         padding: 1.5rem 4rem;
         display: inline-block;
         border-radius: 10rem;
-        transition: all .2s;
+        
         position: relative;
         font-size: $default-font-size;
     }
@@ -13,11 +15,11 @@
     &:hover {
         transform: translateY(-.3rem);
         box-shadow: 0 1rem 2rem rgba($color-black,.2);
-
-        &::after{
+        cursor: pointer;
+        /* &::after{
             transform: scaleX(1.4) scaleY(1.6);
             opacity: 0;
-        }
+        } */
     
     }
     &:active{
@@ -52,7 +54,7 @@
         }
     }
     &--purple {
-        background-color: $color-secondary-dark;
+        background-color: $color-tertiary;
         color: $color-white;
         padding: 0.7rem 0.7rem;
         text-align: center;
