@@ -151,9 +151,11 @@ const SearchResultBox = ()=>{
                         </Button>
                      </Link>
                     <Switch>
-                        <Route path={`searchResult`}>
-                            <SearchResult/>
-                        </Route>
+                        <Route path={`searchResult`} render = {(props) =>(
+                            <SearchResult {...props}/>
+                        )}
+                        />
+                
                     </Switch>
                 </div>
             </div>

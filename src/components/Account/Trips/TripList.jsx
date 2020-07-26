@@ -15,7 +15,7 @@ import {
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { useSelector } from "react-redux";
 import { getTripsByUser } from "../../../redux/actions/profileActions";
-import { useFirestoreConnect } from "react-redux-firebase";
+import { useFirestoreConnect, isLoaded } from "react-redux-firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,7 +78,6 @@ export default function TripList(props) {
    //List of past trips, queried by every trips before today 
 
 
-
   return (
     <CssBaseline>
       <Box m={3} pt={0} className="TripList">
@@ -104,21 +103,24 @@ export default function TripList(props) {
             <ExpansionPanelDetails>
               {
               // fuTrip === true
-              upcomingTripList!=="" &&
-                (upcomingTripList.length > 0 ? (
+              isLoaded(userTrips) && 
+                (userTrips.length > 0 ? (
                   <Grid container spacing={3} className="Future-trip-list">
                     {
-                      upcomingTripList.map((trip) => {
+                     userTrips.filter(trip => trip.departDate < new Date()).map((trip) => {
                   
                         return (
                           <Trip
                             trip={{
                               from: trip.originTitle,
                               to: trip.destTitle,
-                              date: new Date(trip.departDate.seconds*1000).toLocaleDateString("en-US"),
+                              date: trip.departDate.toDate(),
                               time: trip.departTime,
                               comment: trip.description,
-                              id: trip.id
+                              id: trip.id,
+                              firstName: trip.firstName,
+                              lastName: trip.lastName,
+                              
                               //uid: currentUser,
                             }}
                           />
@@ -134,7 +136,6 @@ export default function TripList(props) {
             </ExpansionPanelDetails>
           </ExpansionPanel>
           {/* View past trip list panel. */}
-          {console.log(pastTripList)}
           <ExpansionPanel
             onChange={change}
             classes={{ expanded: classes.expandedPanel }}
@@ -151,19 +152,21 @@ export default function TripList(props) {
             </ExpansionPanelSummary>
             {/* Display trips if there exists at least 1 trip, otherwise just text*/}
             <ExpansionPanelDetails>
-              {pastTripList !== "" &&
-                (pastTripList.length > 0 ? (
+              {isLoaded(userTrips) &&
+                (userTrips.length > 0 ? (
                   <Grid container spacing={3} className="Past-trip-list">
-                    {pastTripList.map((trip) => {
+                    {userTrips.filter(trip => trip.departDate > new Date()).map((trip) => {
                       return (
                         <Trip
                           trip={{
                             from: trip.originTitle,
                             to: trip.destTitle,
-                            date: new Date(trip.departDate.seconds*1000).toLocaleDateString("en-US"),
+                            date: trip.departDate.toDate(),
                             time: trip.departTime,
                             comment: trip.description,
-                            id: trip.id
+                            id: trip.id,
+                            firstName: trip.firstName,
+                            lastName: trip.lastName,
                             //uid: currentUser,
                           }}
                         />  
