@@ -239,6 +239,7 @@ export default function PostRideField() {
                                                 margin="normal"
                                                 label="Date"
                                                 name="departDate"
+                                                minDate={new Date()}
                                                 value={state.departDate}
                                                 onChange={handleDateChange}
                                             />
@@ -254,6 +255,7 @@ export default function PostRideField() {
                                             label="Pickup time"
                                             name="departTime"
                                             value={state.departTime}
+                                            
                                             placeholder="eg: 8am/9:30am-2pm/Anytime"
                                             onChange={handleChange}
                                         />
