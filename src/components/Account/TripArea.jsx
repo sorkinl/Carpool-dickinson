@@ -4,8 +4,8 @@ import { useFirestoreConnect, isLoaded } from "react-redux-firebase";
 import {
     Grid
 } from '@material-ui/core';
-import StyleTrip from './Trips/StyleTrip';
-import Console from './Console.jsx';
+import StyleTrip from './Trip-new/StyleTrip';
+import Console from './Trip-new/Console';
 
 export default function TripArea(props){
   

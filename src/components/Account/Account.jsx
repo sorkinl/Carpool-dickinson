@@ -1,17 +1,10 @@
 import React from 'react';
 import Profile from './Profile/Profile';
-import TripList from './Trips/TripList';
 import TripArea from './TripArea';
 import Record from './Record';
 import {
   Grid, 
   CssBaseline, 
-  Paper, 
-  Card,
-  CardHeader,
-  CardContent,
-  CardActions,
-  Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -40,7 +33,6 @@ export default function Account(props) {
                       </Grid>
                       <Grid item xs>
                           <TripArea />  
-                          {/* <TripList/> */}
                       </Grid>
                   </Grid>    
               </Grid>

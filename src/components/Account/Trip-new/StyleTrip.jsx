@@ -13,7 +13,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from 'react-redux';
-import EditForm from './editform';
+import EditForm from '../Trips-old/editform';
 import Popup from "reactjs-popup";
 
 export default function StyleTrip (props) {
