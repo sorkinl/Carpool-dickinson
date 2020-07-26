@@ -5,8 +5,8 @@
 
 .header-dashboard {
     font-size: 1.4rem;
-    height: 7rem;
-    background-color: #fff;
+    height: 5.5rem;
+    background-image: linear-gradient(to right bottom,rgba($color-primary-light,1),rgba($color-primary,1));
     border-bottom: $color-grey-light-2;
     display: flex;
     justify-content: space-between;
@@ -18,7 +18,7 @@
 }
 
 .sidebar-dashboard {
-    background-color: $color-primary;
+    background-color: $color-primary-light;
     flex: 0 0 15%;
 
     display: flex;

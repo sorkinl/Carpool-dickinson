@@ -80,7 +80,7 @@
     &__icon{
         height: 2.25rem;
         width: 2.25rem;
-        fill: $color-grey-dark-2;
+        fill: $color-white;
         
     }
 
@@ -111,5 +111,6 @@
 
     &__user-name{
         margin-left: 6rem;
+        color: $color-white;
     }
 }
