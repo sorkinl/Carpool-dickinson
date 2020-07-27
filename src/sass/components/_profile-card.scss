@@ -37,7 +37,7 @@ $card-width: 300px;
         width: $card-width;
         background: $color-white;
         backface-visibility: hidden;
-        border-radius: 5rem;
+        border-radius: 2rem;
         box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
     }
 
@@ -49,8 +49,8 @@ $card-width: 300px;
         background-size: cover;
         backface-visibility: hidden;
         overflow: hidden;
-        border-top-right-radius: 5rem;
-        border-top-left-radius: 5rem;
+        border-top-right-radius: 2rem;
+        border-top-left-radius: 2rem;
 
     }
 
