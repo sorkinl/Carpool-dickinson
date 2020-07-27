@@ -1,15 +1,11 @@
 import React, {useState} from 'react';
 import EditButton from './EditButton';
 import EditField from './EditField';
+import unnamed from '../../../assets/images/unnamed.jpg';
 import {
     makeStyles,
-    Card,
-    CardHeader,
-    CardContent,
-    CardActions,
-    Typography,
     Grid,
-    Collapse} from '@material-ui/core';
+} from '@material-ui/core';
 import { useSelector } from 'react-redux';
 const useStyles = makeStyles((theme)=>({
     root: {
@@ -82,18 +78,39 @@ export default function Profile(props){
         <div className="profile-card outer-div">
             <div className="profile-card inner-div">
                 <div className="profile-card front">
-                    <div className="profile-card front__bkg-photo"></div>
+                    {/* <div className="profile-card front__bkg-photo"></div> */}
+                    <p className="section-name">Profile</p>
                     <img className ="profile-card front__face-photo" 
-                        src={user.photoUrl}
-                        alt="/broken-image.jpg"/>
+                        src={unnamed}
+                        //src={user.photoUrl}
+                        alt={unnamed}/>
                     
                     <div className="profile-card front__text">
                         <h3 className="profile-card front__text-header">{user.firstName} {user.lastName}</h3>
                         <p className="profile-card front__text-para">{user.school} | {user.classYear}</p>
+
+                        <Grid container className="record-profile">
+                            <Grid item xs={3}>
+                                <p className="record-main">7</p>
+                                <p className="record-sub">offers</p>
+                                
+                            </Grid>
+                            <div className="record-line"></div>
+                            <Grid item xs={3}>
+                                <p className="record-main">10</p>
+                                <p className="record-sub">rides</p>
+                                
+                            </Grid>
+                            <div className="record-line"></div>
+                            <Grid item xs={3}>
+                                <p className="record-main">20</p>
+                                <p className="record-sub">reviews</p>
+                            </Grid>
+                        </Grid>
                     
-                        <p className="profile-card front__text-sub"><i className="fa fa-envelope front-icons"></i>{user.email}</p>
-                        <p className="profile-card front__text-sub-2"><i className="fa fa-phone front-icons"></i>{user.phone}</p>   
-                        <a href="#" className="btn btn--blue">
+                        {/* <p className="profile-card front__text-sub"><i className="fa fa-envelope front-icons"></i>{user.email}</p>
+                        <p className="profile-card front__text-sub-2"><i className="fa fa-phone front-icons"></i>{user.phone}</p>    */}
+                        <a href="#" className="btn btn--editProfile">
                             Edit profile
                         </a>
                     </div>

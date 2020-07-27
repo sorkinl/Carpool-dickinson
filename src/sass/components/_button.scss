@@ -37,11 +37,11 @@
             background-color: $color-secondary;
         }
     }
-    &--blue {
-        background-color: $color-primary-light;
+    &--editProfile {
+        background-color: $color-tertiary-dark;
         color: $color-white;
         position: relative;
-        margin-top: 6rem;
+        margin-top: 1rem;
     }
 
     &--white {

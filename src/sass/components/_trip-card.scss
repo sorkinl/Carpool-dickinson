@@ -102,6 +102,11 @@
         font-size: 15px;
         font-weight: 500;
         max-width: fit-content;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1; /* number of lines to show */
+        -webkit-box-orient: vertical;
         &:hover {
             cursor: pointer;
             opacity: 0.6;

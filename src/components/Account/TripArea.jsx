@@ -57,14 +57,14 @@ export default function TripArea(props){
                 <div class="indicator"></div>
             </div>
                 
-            <div class="content">
+            <div class="content-profile">
                 <section>
                     <h2>Console</h2>
                         <Console/>
                 </section>
                 <section>
                     <h2>Upcoming</h2>
-                        Tab 2   
+                        Tab 22 
                 </section>
                 <section>
                     <h2>Past</h2>

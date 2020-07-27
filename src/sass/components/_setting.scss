@@ -7,7 +7,7 @@ $accent-inactive: desaturate($color-primary-dark, 85%);
 $secondary: $accent-inactive;
 
 /* tab setting */
-$tab-count: 4;
+$tab-count: 3;
 $indicator-width: 50px;
 $indicator-height: 4px;
 
@@ -20,9 +20,9 @@ $breakpoints: (
 /* selectors relative to radio inputs */
 $label-selector: "~ ul > li";
 $slider-selector: "~ .slider";
-$content-selector: "~ .content-profile > section";
+$content-selector: "~ .content-setting > section";
 
-@mixin profile-tab(
+@mixin setting(
   $label-selector: $label-selector,
   $slider-selector: $slider-selector,
   $content-selector: $content-selector) {
@@ -58,7 +58,7 @@ body {
   }
 }
 
-.profile-tab {
+.setting {
   left: 50%;
   transform: translateX(-50%);
   position: relative;
@@ -84,7 +84,7 @@ body {
     display: none;
   }
   
-  .content-profile section, h2
+  .content-setting section, h2
   ul li label {
     font-size: 18px;
     color: #428BFF;
@@ -155,7 +155,7 @@ body {
     font-size: 15px;
   }
 
-  .content-profile {
+  .content-setting {
     margin-top: 30px;
     
     section {
@@ -188,7 +188,7 @@ body {
   }
   
   input[name="tab-control"] {
-    @include profile-tab {
+    @include setting {
       > label {
         cursor: default;
         color: #428BFF;
@@ -199,7 +199,7 @@ body {
     }
   }
 
-  @keyframes content-profile {
+  @keyframes content-setting {
     from {
       opacity: 0;
       transform: translateY(5%);
@@ -230,7 +230,7 @@ body {
       display: none;
     }
 
-    .content-profile {
+    .content-setting {
       margin-top: 20px; 
       section h2 {
         display: block;
