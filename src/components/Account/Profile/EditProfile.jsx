@@ -31,7 +31,6 @@ import girl  from '../../../assets/images/freelancer_blue.svg';
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-
 export default function EditProfile(props) {
     
     const user = useSelector(state => state.firebase.profile);
@@ -42,9 +41,6 @@ export default function EditProfile(props) {
     const [isEdit, setEdit] = useState(false);
     const [isSubmit, setSubmit] = useState(false);
     
-    console.log("auth id:", currentUser.uid);
-    console.log("CURRENT USER", currentUser);
-    
     const [input, setInput] = useState({
         firstName: user.firstName,
         lastName: user.lastName,
@@ -54,17 +50,10 @@ export default function EditProfile(props) {
         major: user.major,
         classYear: user.classYear,
         hub: user.hub
-        // firstName: props.user.firstName,
-        // lastName: props.user.lastName,
-        // school: props.user.school,
-        // email: props.user.email,
-        // phone: props.user.phone,
-        // major: props.user.major,
-        // classYear: props.user.classYear,
-        // hub: props.user.hub
     });
    
-    //console.log("user",user);
+    console.log("CURRENT USER", currentUser);
+    console.log("user",user);
 
     function handleEdit(event) {
         const { name, value } = event.target;
@@ -73,8 +62,7 @@ export default function EditProfile(props) {
     };
     
     function handleSubmit(e) {
-        e.preventDefault(); //try remove
-        //Update profile info
+        e.preventDefault();
         if (isEdit === false) {
             console.log("No fields updated");
         } else {
@@ -100,8 +88,9 @@ export default function EditProfile(props) {
                 </a>
                 <form onSubmit={handleSubmit}>
                     <div className="edit-profile-main">
-                        <p className="edit-profile-title">Edit profile</p>
-                        <hr></hr>
+                        <div className="edit-profile-boxTitle">
+                            <p className="text">Edit profile</p>
+                        </div>
                         <section className="profile-basic-info">
                             <h3>Basic info</h3>
                             <Grid container className="content">
@@ -110,8 +99,6 @@ export default function EditProfile(props) {
                                     <label for="basic-first-name" className="basic-info-label">First name*</label>
                                     <input id="basic-first-name" required type="text"  name="firstName" value={input.firstName} 
                                         placeholder="Your first name" onChange={handleEdit}/>
-                                
-                                        {/* defaultValue={input.firstName} */}
                                 </Grid>
                                 {/* Last Name */}
                                 <Grid item xs={6} sm={6}>
@@ -148,14 +135,14 @@ export default function EditProfile(props) {
                                 <label for="basic-class-year" className="basic-info-label">Class year</label>
                                 <select id="basic-class-year" name="classYear" onChange={handleEdit}>
                                         <option value={input.classYear} label={input.classYear} selected></option>
-                                        <option value="19" label="2019"></option>
-                                        <option value="20" label="2020"></option>
-                                        <option value="21" label="2021"></option>
-                                        <option value="22" label="2022"></option>
-                                        <option value="23" label="2023"></option>
-                                        <option value="24" label="2024"></option>
-                                        <option value="25" label="2025"></option>
-                                        <option value="26" label="2026"></option>
+                                        <option value="2019" label="2019"></option>
+                                        <option value="2020" label="2020"></option>
+                                        <option value="2021" label="2021"></option>
+                                        <option value="2022" label="2022"></option>
+                                        <option value="2023" label="2023"></option>
+                                        <option value="2024" label="2024"></option>
+                                        <option value="2025" label="2025"></option>
+                                        <option value="2026" label="2026"></option>
                                 </select>
                                 {/* {years.map((option) => (
                                             <MenuItem value={option.value}>
@@ -189,10 +176,10 @@ export default function EditProfile(props) {
                         <div className="profile-end-buttons">
                             <Grid container className="content">
                                 <Grid item xs={5} sm={6}>
-                                    <a href="" className="edit-profile-btn edit-profile-btn--cancel">Cancel</a>
+                                    <a href="/account" className="edit-profile-btn edit-profile-btn--cancel">Cancel</a>
                                 </Grid>
                                 <Grid item xs sm={6}>  
-                                    <a href="" type="submit" className="edit-profile-btn edit-profile-btn--save">Save</a>
+                                    <div type="submit" onClick={handleSubmit} className="edit-profile-btn edit-profile-btn--save">Save</div>
                                 </Grid>
                             </Grid>
                         </div>
@@ -202,7 +189,7 @@ export default function EditProfile(props) {
                             autoHideDuration={6000}
                             anchorOrigin={{
                             vertical: 'bottom',
-                            horizontal: 'right',
+                            horizontal: 'center',
                 }}>
                         <Alert severity="success">
                             Profile updated successfully!

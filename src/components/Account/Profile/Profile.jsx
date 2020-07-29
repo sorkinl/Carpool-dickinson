@@ -15,7 +15,6 @@ export default function Profile(props){
     const [isClicked, setClick] = useState(false);
 
     const user = useSelector(state => state.firebase.profile);
-    
     // return(
     //     <div className={classes.root}>
     //         {/* Display user's Name, school, and Email*/}
