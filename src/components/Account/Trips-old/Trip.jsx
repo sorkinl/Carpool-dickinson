@@ -31,8 +31,6 @@ import { useSelector } from 'react-redux';
 import EditForm from './editform';
 import Popup from "reactjs-popup";
 
-
-
 const useStyles = makeStyles({
   media: {
     height: 0,
@@ -180,19 +178,14 @@ export default function Trip(props) {
         <CardContent>
           {/* Date */}
           <Typography variant="body1" color="primary" align="left">
-            <EventIcon color="primary" /> {trip.date.getFullYear()+'-'+(trip.date.getMonth()+1)+'-'+trip.date.getDate()}
+            <EventIcon color="primary" /> {trip.departDate.getFullYear()+'-'+(trip.departDate.getMonth()+1)+'-'+trip.departDate.getDate()}
           </Typography>
           <Typography variant="body1" color="primary" align="left">
-            <TimerIcon color="primary" /> {trip.time}
+            <TimerIcon color="primary" /> {trip.departTime}
           </Typography>
-          
-          {/* Starting point */}
-          <Typography variant="body1" color="textPrimary" align="left">
-            <LocationOnIcon color="action" /> {trip.from}
-          </Typography>
-          {/* Destination */}
-          <Typography variant="body1" color="textPrimary" align="left">
-            <LocationCityIcon color="action" /> {trip.to}
+          {/*Empty seats*/}
+          <Typography variant="body1" color="inherit" align="left" gutterBottom>
+            <CommentIcon color="action" /> {trip.emptySeat}
           </Typography>
           {/* Cost */}
           <Typography variant="body1" color="inherit" align="left" gutterBottom>

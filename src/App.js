@@ -13,7 +13,7 @@ import SignUp from "./components/LogInForm/SignUp";
 import LandingPage from "./components/LogInForm/LandingPage";
 import ProfileCreate from "./components/LogInForm/ProfileCreate";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import EditForm from "./components/Account/Trips/editform";
+import EditForm from "./components/Account/Trip-new/editform";
 import EmailVerify from "./components/LogInForm/EmailVerify";
 import SearchPage from "./pages/SearchPage/SearchPage"
 import Loading from './components/Loading'
