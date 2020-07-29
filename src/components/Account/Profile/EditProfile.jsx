@@ -47,14 +47,14 @@ export default function EditProfile(props) {
     console.log("CURRENT USER", currentUser);
     
     const [input, setInput] = useState({
-        firstName: user.firstName,
-        lastName: user.lastName,
-        school: user.school,
-        email: user.email,
-        phone: user.phone,
-        major: user.major,
-        classYear: user.classYear,
-        hub: user.hub
+        firstName: "",
+        lastName: "",
+        school: "",
+        email: "",
+        phone: "",
+        major: "",
+        classYear: "",
+        hub: ""
     });
 
     useEffect(() => {
