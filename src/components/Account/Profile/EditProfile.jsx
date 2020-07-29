@@ -16,7 +16,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import guy from '../../../assets/images/edit_profile.svg';
 import girl  from '../../../assets/images/freelancer_blue.svg';
-import { useEffect } from 'react';
 
 
 //Select options of class year
@@ -47,19 +46,7 @@ export default function EditProfile(props) {
     console.log("CURRENT USER", currentUser);
     
     const [input, setInput] = useState({
-        firstName: "",
-        lastName: "",
-        school: "",
-        email: "",
-        phone: "",
-        major: "",
-        classYear: "",
-        hub: ""
-    });
-
-    useEffect(() => {
-        setInput({
-            firstName: user.firstName,
+        firstName: user.firstName,
         lastName: user.lastName,
         school: user.school,
         email: user.email,
@@ -67,10 +54,17 @@ export default function EditProfile(props) {
         major: user.major,
         classYear: user.classYear,
         hub: user.hub
-        })
-    }, [user])
+        // firstName: props.user.firstName,
+        // lastName: props.user.lastName,
+        // school: props.user.school,
+        // email: props.user.email,
+        // phone: props.user.phone,
+        // major: props.user.major,
+        // classYear: props.user.classYear,
+        // hub: props.user.hub
+    });
    
-    console.log("user",user);
+    //console.log("user",user);
 
     function handleEdit(event) {
         const { name, value } = event.target;
