@@ -8,6 +8,7 @@ const Dashboard = () => {
         <>
             <div className="container-dashboard">
                 <header className="header-dashboard">
+                    
                     <img src={logo} alt="logo" className="logo-dashboard"/>
                     
                     <form action="#" className="search-dashboard">
@@ -84,8 +85,31 @@ const Dashboard = () => {
                     </nav>
 
 
-                    <main className="hotel-view-dashboard">
-                        Hotel view
+                    <main className="main-dash">
+                        <div className="main-dash__trip-header">
+                            <h1 className="main-dash__trip-heading">Most recent trips</h1>
+                            <div className="main-dash__arrows">
+                            <svg className="main-dash__arrow-icon">
+                                <use xlinkHref={`${icon}#icon-chevron-thin-left`}></use>
+                            </svg>
+                            <svg className="main-dash__arrow-icon">
+                                <use xlinkHref={`${icon}#icon-chevron-thin-right`}></use>
+                            </svg>
+                            </div>
+                        </div>
+                        
+                        
+                        <div className="main-dash__trip-section">
+                            <div className="main-dash__trip-card">
+                                Card
+                            </div>
+                            <div className="main-dash__trip-card">
+                                Card
+                            </div>
+                            <div className="main-dash__trip-card">
+                                Card
+                            </div>
+                        </div>
                     </main>
                 </div>
             </div>
