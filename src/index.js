@@ -27,7 +27,7 @@ const rrfProps = {
 function AuthIsLoaded({ children }) {
   const auth = useSelector((state) => state.firebase.auth);
   const user = useSelector((state) => state.firebase.profile);
-  if (!isLoaded(auth) && !isLoaded(user)) return <Loading />;
+  if (isLoaded(auth) === false && isLoaded(user) === false) return <Loading />;
   return children;
 }
 
