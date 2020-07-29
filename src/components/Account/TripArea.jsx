@@ -23,7 +23,7 @@ export default function TripArea(props){
     const userTrips = useSelector((state) => state.firestore.ordered.userTrips); //takes out array of trips queried above and takes it out of firestore reducer
 
     return (
-        <div class="profile-tab">
+        <div class="trip-tab">
             <h4>My Trips</h4>
             <hr/>
                 <input type="radio" id="tab1" name="tab-control" defaultChecked/>

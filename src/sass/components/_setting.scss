@@ -1,240 +1,237 @@
-/* optional colors */
-$blue: #428BFF;
-$dark: #333;
-
-
-$accent-inactive: desaturate($color-primary-dark, 85%);
-$secondary: $accent-inactive;
-
-/* tab setting */
-$tab-count: 3;
-$indicator-width: 50px;
-$indicator-height: 4px;
-
-/* breakpoints */
-$breakpoints: (
-  medium: #{$tab-count*250px},
-  small: #{$tab-count*150px}
-);
-
-/* selectors relative to radio inputs */
-$label-selector: "~ ul > li";
-$slider-selector: "~ .slider";
-$content-selector: "~ .content-setting > section";
-
-@mixin setting(
-  $label-selector: $label-selector,
-  $slider-selector: $slider-selector,
-  $content-selector: $content-selector) {
-    
-  @for $i from 1 through $tab-count {
-    &:nth-of-type(#{$i}):checked {
-      #{$label-selector}:nth-child(#{$i}) {
-        @content;
-      }
-
-      #{$slider-selector} {
-        transform: translateX(#{100% * ($i - 1)});
-      }
-
-      #{$content-selector}:nth-child(#{$i}) {
-        display: block;
-      }
-    }
-  }
-}
-
-html {
-  width: 100%;
-  height: 100%;
-}
-
-body {
-  hr {
-    display: block;
-    height: 2px;
-    border-top: 1px solid #e8e8e8;
-    margin: 2em 0;
-  }
-}
+  $white-light-gray  : #f9f9f9;
 
 .setting {
-  left: 50%;
+  left: 46%;
   transform: translateX(-50%);
   position: relative;
-  top:2rem;
+  top:5rem;
   background: $color-white;
-  padding: 50px;
-  padding-bottom: 80px;
+  // padding: 4rem;
+  margin-bottom: 35rem;
   width: 93%;
-  height: 590px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-  border-radius: 2rem;
-  min-width: #{$tab-count * 60px};
-  h4, label{
-    font-family: "Lato", "sans-serif";
-  }
-  h4 {
-    color: #428BFF;
-    margin-top: -15px;
-    font-size: 20px;
-  }
+  height: 90px;
+  // box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.06);
+  border-radius: 2rem 2rem 0rem 0rem;
   
-  input[name="tab-control"] {
-    display: none;
-  }
-  
-  .content-setting section, h2
-  ul li label {
-    font-size: 18px;
-    color: #428BFF;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding-left: 0;
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 10px;
-    justify-content: space-between;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    
-    li {
-      box-sizing: border-box;
-      flex: 1;
-      width: #{100%/$tab-count};
-      padding: 0 10px;
-      text-align: center;
-      
-      label {
-        font-weight: bold;
-        font-size: 18px;
-        transition: all 0.3s ease-in-out;
-        color: $secondary;
-        padding: 5px auto;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: block;
-        cursor: pointer;
-        transition: all 0.2s ease-in-out;
-        white-space: nowrap;
-        -webkit-touch-callout: none;
-        // @include user-select(none);
-        
-        &:hover,
-        &:focus,
-        &:active {
-          outline: 0;
-          color: lighten($secondary, 15%);
-        }
-      }
-    }
-  }
-  
-  .slider {
-    position: relative;
-    width: #{100%/$tab-count};
-    transition: all 0.33s cubic-bezier(0.38, 0.8, 0.32, 1.07);
-    .indicator {
-      position: relative;
-      width: $indicator-width;
-      max-width: 100%;
-      margin: 0 auto;
-      height: $indicator-height;
-      background: #f7de52;//yellow 
-      border-radius: 1px;     
-    }
-
-  }
-  .setting-name {
+  .setting-section-title {
     position: inherit;
     color: grey;
     text-transform: uppercase;
     font-family:  "Lato", sans-serif;
     font-size: 15px;
+    top: 3.5rem;
+    left: 4rem;
+    bottom: 4rem;
   }
 
-  .content-setting {
-    margin-top: 30px;
+  @mixin setting-user-select() {
+    user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+  }
+
+  #aspect-content {
+    margin: 7.8rem 0 0;
+    font-family: "Lato", sans-serif;
+      * {
+        box-sizing: border-box;
+      }
+  }
+  .aspect-tab {
+    position: relative;
+    // width: 100%;
+    // max-width: 93%;
+    margin: 0 auto 7px;
+    border-radius: 0.5rem;
+    background-color: $color-white;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    transition: box-shadow .2s, opacity .4s;
     
-    section {
-        font-family: "Lato", "sans-serif";
-        display: none;
-        animation: {
-        name: content;
-        direction: normal;
-        duration: 0.3s;
-        timing-function: ease-in-out;
-        iteration-count: 1;
-      }
-      line-height: 1.4;
-      
-      h2 {
-        color: #428BFF;
-        display: none;
-        &::after {
-          content: "";
-          position: relative;
-          display: block;
-          width: 30px;
-          height: 3px;
-          background: $color-primary-dark;
-          margin-top: 5px;
-          left: 1px;
-        }
-      }
+    &:hover {
+      box-shadow: 0 4px 10px 0 rgba(0, 0, 0, .11);
     }
   }
-  
-  input[name="tab-control"] {
-    @include setting {
-      > label {
-        cursor: default;
-        color: #428BFF;
-        @media (max-width: map-get($breakpoints, small)) {
-          background: rgba(0, 0, 0, 0.08);
-        }
-      }
+  .aspect-input {
+    display: none;
+  }
+  .aspect-input:checked ~ .aspect-content + .aspect-tab-content {
+    max-height: 3000px;
+  }
+  .aspect-input:checked ~ .aspect-content:after {
+      transform: rotate(0);
+  }
+  .aspect-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    max-height: 80px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+    z-index: 1;
+    cursor: pointer;
+    &:hover ~ .aspect-content:after {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTI0IDI0SDBWMGgyNHoiIG9wYWNpdHk9Ii44NyIvPgogICAgICAgIDxwYXRoIGZpbGw9IiM1NTZBRUEiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTE1Ljg4IDE1LjI5TDEyIDExLjQxbC0zLjg4IDMuODhhLjk5Ni45OTYgMCAxIDEtMS40MS0xLjQxbDQuNTktNC41OWEuOTk2Ljk5NiAwIDAgMSAxLjQxIDBsNC41OSA0LjU5Yy4zOS4zOS4zOSAxLjAyIDAgMS40MS0uMzkuMzgtMS4wMy4zOS0xLjQyIDB6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=');
     }
+  }
+  .aspect-content {
+    position: relative;
+    display: block;
+    height: 100px;
+    margin: 0;
+    padding: 0 87px 0 30px;
+    font-size: 0;
+    white-space: nowrap;
+    cursor: pointer;
+    @include setting-user-select();
+    &:before,
+    &:after  {
+      content: '';
+      display: inline-block;
+      vertical-align: middle;
+    }
+    &:before {
+      height: 100%;
+    }
+    &:after {
+      position: absolute;
+      width: 24px;
+      height: 100%;
+      right: 30px;
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTI0IDI0SDBWMGgyNHoiIG9wYWNpdHk9Ii44NyIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNBOUFDQUYiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTE1Ljg4IDE1LjI5TDEyIDExLjQxbC0zLjg4IDMuODhhLjk5Ni45OTYgMCAxIDEtMS40MS0xLjQxbDQuNTktNC41OWEuOTk2Ljk5NiAwIDAgMSAxLjQxIDBsNC41OSA0LjU5Yy4zOS4zOS4zOSAxLjAyIDAgMS40MS0uMzkuMzgtMS4wMy4zOS0xLjQyIDB6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=');
+      background-repeat: no-repeat;
+      background-position: center;
+      transform: rotate(180deg);
+      transition: 0.2s;
+    }
+  }
+  .aspect-name {
+    text-transform: uppercase;
+    display: inline-block;
+    width: 75%;
+    margin-left: 1.6rem;
+    font-weight: 600;
+    color: #4B5F92;
+    white-space: normal;
+    text-align: left;
+    vertical-align: middle;
+  }
+  //all-opinions,
+  .aspect-name {
+    font-size: 17px;
+    line-height: 22px;
   }
 
-  @keyframes content-setting {
-    from {
-      opacity: 0;
-      transform: translateY(5%);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0%);
+  .aspect-content + .aspect-tab-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .1s;
+  }
+  .aspect-content > div {
+    display: inline-block;
+  }
+  .aspect-content > div {
+    vertical-align: middle;
+  }
+  .aspect-info {
+    width: 60%;
+    white-space: nowrap;
+    font-size: 0;
+    &:before {
+      content: '';
+      display: inline-block;
+      height: 44px;
+      vertical-align: middle;
     }
   }
-  
-  @media (max-width: map-get($breakpoints, medium)) {
-    ul li label {
-      white-space: initial;
-    }
+  .aspect-tab-icon {
+    position: relative;
+    font-size: 21px;
+    color: grey;
+    text-align: left;
+    vertical-align: middle;
+    margin-left: 1.6rem;
   }
-  
-  @media (max-width: map-get($breakpoints, small)) {
-    ul li label {
-      padding: 5px;
-      border-radius: 5px;
-      
-      span {
+  // @include chart(44px, 4px);
+  .aspect-tab-content {
+    background-color: $white-light-gray;
+    font-size: 0;
+    text-align: justify;
+    border-radius: 0 0 0.5rem 0.5rem;
+    // &--lastTab {
+    //   margin-bottom: 15rem;
+    // }
+  }
+  .sentiment-wrapper {
+    padding: 24px 30px 30px;
+  }
+  .sentiment-wrapper > div {
+    display: inline-block;
+    width: 33.3%;
+    max-width: 390px;
+    padding: 0 5px;
+    box-sizing: border-box;
+    vertical-align: top;
+    cursor: default;
+  }
+  // .sentiment-wrapper > div > div {
+  //   width: 100%;
+  //   padding: 16px 24px 20px;
+  //   box-sizing: border-box;
+  //   border-radius: 2rem;
+  //   background-color: #fff;
+  //   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
+  //   // border: 1px solid #ececec;
+  //   text-align: left;
+  // }
+  @media screen and (max-width: 800px) {
+    .aspect-label {
+      max-height: 102px;
+    }
+    .aspect-content {
+      height: auto;
+      padding: 10px 87px 10px 30px;
+      &:before {
         display: none;
       }
-    }
-
-    .slider {
-      display: none;
-    }
-
-    .content-setting {
-      margin-top: 20px; 
-      section h2 {
-        display: block;
+      &:after {
+        top: 0;
       }
+    }
+    .aspect-content > div {
+      display: block;
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: 750px) {
+    .sentiment-wrapper > div {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+    .sentiment-wrapper > div:not(:first-child) {
+      margin-top: 10px;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .aspect-label {
+      max-height: 140px;
+    }
+    .aspect-stat > div {
+      display: block;
+      width: 100%;
+    }
+    .all-opinions {
+      margin-bottom: 10px;
+    }
+    .all-opinions + div > span:first-child {
+      margin: 0;
     }
   }
 }

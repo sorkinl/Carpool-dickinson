@@ -22,7 +22,7 @@ $label-selector: "~ ul > li";
 $slider-selector: "~ .slider";
 $content-selector: "~ .content-profile > section";
 
-@mixin profile-tab(
+@mixin trip-tab(
   $label-selector: $label-selector,
   $slider-selector: $slider-selector,
   $content-selector: $content-selector) {
@@ -58,17 +58,17 @@ body {
   }
 }
 
-.profile-tab {
-  left: 50%;
+.trip-tab {
+  left: 46%;
   transform: translateX(-50%);
   position: relative;
-  top:2rem;
+  top:40rem;
   background: $color-white;
   padding: 50px;
   padding-bottom: 80px;
   width: 93%;
   height: 590px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
   border-radius: 2rem;
   min-width: #{$tab-count * 60px};
   h4, label{
@@ -188,7 +188,7 @@ body {
   }
   
   input[name="tab-control"] {
-    @include profile-tab {
+    @include trip-tab {
       > label {
         cursor: default;
         color: #428BFF;

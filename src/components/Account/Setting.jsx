@@ -2,50 +2,86 @@ import React, { useState, useEffect } from 'react';
 import {
     Grid
 } from '@material-ui/core';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faBell,
+    faCreditCard,
+    faKeyboard
+} from "@fortawesome/free-regular-svg-icons";
+import {
+   faShieldAlt,
+   faWrench,
+} from "@fortawesome/free-solid-svg-icons";
+
 
 export default function Setting(props) {
     return (
         <div class="setting">
-            <p className="setting-name">Setting</p>
-            <hr/> 
-                <input type="radio" id="tab1" name="tab-control" defaultChecked/>
-                <input type="radio" id="tab2" name="tab-control"/>
-                <input type="radio" id="tab3" name="tab-control"/>  
-            <ul>
-                <li title="Console">
-                    <label for="tab1" role="button">
-                        <span>Reviews</span>
-                    </label>
-                </li>
-                <li title="Upcoming">
-                    <label for="tab2" role="button">
-                        <span>Notifications</span>
-                    </label>
-                </li>
-                <li title="Past">
-                    <label for="tab3" role="button">
-                        <span>Privacy & Security</span>
-                    </label>
-                </li>    
-            </ul>
-                
-            <div class="slider">
-                <div class="indicator"></div>
-            </div>
-                
-            <div class="content-setting">
-                <section>
-                    <h2>Reviews</h2>
-                        Tab 1
-                </section>
-                <section>
-                    <h2>Notifications</h2>
-                        Tab 2
-                </section>
-                <section>
-                    <h2>Privacy & Security</h2>
-                        Tab 3
-                </section>
+            <p className="setting-section-title">Setting</p>
+            <div id="aspect-content">
+                <div class="aspect-tab">
+                    <input id="item-18" type="checkbox" class="aspect-input" name="aspect"></input>
+                    <label for="item-18" class="aspect-label"></label>
+                    <div class="aspect-content">
+                        <div class="aspect-info">
+                        {/* <div class="chart-pie negative over50">
+                            </div>  */}
+                           <FontAwesomeIcon className="aspect-tab-icon" icon={faBell}></FontAwesomeIcon>
+                            <span class="aspect-name">Notifications</span>
+                        </div>
+
+                    </div>
+                    <div class="aspect-tab-content">
+                        <div class="sentiment-wrapper">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="aspect-tab">
+                    <input id="item-14" type="checkbox" class="aspect-input" name="aspect"></input>
+                    <label for="item-14" class="aspect-label"></label>
+                    <div class="aspect-content">
+                        <div class="aspect-info">
+                {/* <div class="chart-pie positive over50">
+                            </div>  */}
+                            <FontAwesomeIcon className="aspect-tab-icon" icon={faCreditCard}></FontAwesomeIcon>
+                            <span class="aspect-name">Payment method</span>
+                        </div>
+                    </div>
+                    <div class="aspect-tab-content">
+                        <div class="sentiment-wrapper">
+                        </div>
+                    </div>
+                </div>
+                <div class="aspect-tab">
+                    <input id="item-2" type="checkbox" class="aspect-input" name="aspect"></input>
+                    <label for="item-2" class="aspect-label"></label>
+                    <div class="aspect-content">
+                        <div class="aspect-info">
+                            <FontAwesomeIcon className="aspect-tab-icon" icon={faWrench}></FontAwesomeIcon> 
+                            <span class="aspect-name">Preferences</span>
+                        </div>
+                    </div>
+                    <div class="aspect-tab-content">
+                        <div class="sentiment-wrapper">
+                        </div>
+                    </div>
+                </div>
+                <div class="aspect-tab">
+                    <input id="item-210" type="checkbox" class="aspect-input" name="aspect"></input>
+                    <label for="item-210" class="aspect-label"></label>
+                    <div class="aspect-content">
+                        <div class="aspect-info">
+                            <FontAwesomeIcon className="aspect-tab-icon" icon={faShieldAlt}></FontAwesomeIcon>
+                            <span class="aspect-name">Privacy & Security
+                            </span>
+                        </div>
+                    </div>
+                    <div class="aspect-tab-content ">
+                        <div class="sentiment-wrapper">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>    
     )

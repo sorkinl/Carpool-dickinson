@@ -1,42 +1,21 @@
 import React, {useState} from 'react';
 import EditButton from './EditButton';
 import EditField from './EditField';
+import EditProfile from './EditProfile';
 import unnamed from '../../../assets/images/unnamed.jpg';
 import {
     makeStyles,
     Grid,
+    Link,
 } from '@material-ui/core';
 import { useSelector } from 'react-redux';
-const useStyles = makeStyles((theme)=>({
-    root: {
-        maxWidth: '100%',
-        padding: theme.spacing(4),
-    },
-    avatarSize: {
-        width: theme.spacing(19),
-        height: theme.spacing(19),
-        borderRadius: "700px",
-        display: "inline-block",
-        marginRight: "15px",
-    },
-    title: {
-        fontSize: theme.typography.pxToRem(29),
-        flexBasis: '19%',
-        flexShrink: 0,
-        color: theme.palette.inherit,
-    },
-    subHeader: {
-        fontSize: theme.typography.pxToRem(15),
-        flexBasis: '19%',
-        flexShrink: 0,
-    },
-}));
+
 /* Display the profile basic info */
 export default function Profile(props){
     const [isClicked, setClick] = useState(false);
 
-    const classes = useStyles();
     const user = useSelector(state => state.firebase.profile);
+    
     // return(
     //     <div className={classes.root}>
     //         {/* Display user's Name, school, and Email*/}
@@ -108,11 +87,15 @@ export default function Profile(props){
                             </Grid>
                         </Grid>
                     
-                        {/* <p className="profile-card front__text-sub"><i className="fa fa-envelope front-icons"></i>{user.email}</p>
-                        <p className="profile-card front__text-sub-2"><i className="fa fa-phone front-icons"></i>{user.phone}</p>    */}
-                        <a href="#" className="btn btn--editProfile">
-                            Edit profile
-                        </a>
+                        
+                        {/* <Link to="/edit-profile" className="btn btn--editProfile"> */}
+                            <a href="/edit-profile" className="btn btn--editProfile">
+                                Edit profile
+                            </a>
+                        {/* </Link> */}
+                            
+                        
+
                     </div>
                 </div>
             </div>

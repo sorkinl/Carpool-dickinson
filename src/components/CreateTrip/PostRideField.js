@@ -239,7 +239,7 @@ export default function PostRideField() {
                                                 margin="normal"
                                                 label="Date"
                                                 name="departDate"
-                                                minDate={new Date()}
+                                                minDate={new Date().setHours(0,0,0,0)}
                                                 value={state.departDate}
                                                 onChange={handleDateChange}
                                             />

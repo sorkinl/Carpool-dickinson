@@ -23,6 +23,7 @@ import { withRouter } from 'react-router-dom';
 import MainPage from "./pages/FrontPage/MainPage";
 import SearchResult from "./components/SearchResults/SearchResult"
 import Dashboard from "./pages/Dashboard/Dashboard";
+import EditProfile from "./components/Account/Profile/EditProfile";
 
 
 const Routes = withRouter(({location})=>{ 
@@ -33,6 +34,7 @@ const Routes = withRouter(({location})=>{
             <Route path="/" exact component={MainPage} />
             <Route path="/search" component={SearchPage} />
             <PrivateRoute path="/account" component={Account} />
+            <PrivateRoute path="/edit-profile" component={EditProfile}/>
             <PrivateRoute path="/chat" component={MainChat} />
             <Route path="/logIn" component={LogIn} />
             <Route path="/signUp" component={SignUp} />
