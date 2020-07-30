@@ -6,9 +6,9 @@ import unnamed from '../../../assets/images/unnamed.jpg';
 import {
     makeStyles,
     Grid,
-    Link,
 } from '@material-ui/core';
 import { useSelector } from 'react-redux';
+import {Link } from 'react-router-dom';
 
 /* Display the profile basic info */
 export default function Profile(props){
@@ -88,9 +88,9 @@ export default function Profile(props){
                     
                         
                         {/* <Link to="/edit-profile" className="btn btn--editProfile"> */}
-                            <a href="/edit-profile" className="btn btn--editProfile">
+                            <Link to="/edit-profile" className="btn btn--editProfile">
                                 Edit profile
-                            </a>
+                            </Link>
                         {/* </Link> */}
                             
                         
