@@ -83,7 +83,7 @@ export default function EditProfile(props) {
                 <div  className="edit-profile">
                 <a href='/account' className="edit-profile-btn edit-profile-btn--back">
                     <span><FontAwesomeIcon className="edit-profile-icon" icon={faChevronLeft}></FontAwesomeIcon></span>
-                    Back to account
+                    Back to profile
                 </a>
                 <form onSubmit={handleSubmit}>
                     <div className="edit-profile-main">
@@ -121,7 +121,7 @@ export default function EditProfile(props) {
                                 <Grid item xs={12} className="basic-sub-box">
                                 <label for="basic-phone" className="basic-info-label">Phone</label>
                                     <input id="basic-phone" type="text"  name="phone" value={input.phone} 
-                                        placeholder="Your phone number" onChange={handleEdit} /> 
+                                        placeholder="(123)-456-7892" onChange={handleEdit} /> 
                                 </Grid>
                                 {/* Major(s) */}
                                 <Grid item xs={12} sm={4}>
@@ -154,7 +154,7 @@ export default function EditProfile(props) {
                                 <Grid item xs={12} sm={4}>
                                 <label for="basic-hub" className="basic-info-label">HUB number</label>
                                     <input id="basic-hub" type="text"  name="hub" value={input.hub}
-                                        placeholder="Your HUB number" onChange={handleEdit}/>
+                                        placeholder="Your Dickinson HUB number" onChange={handleEdit} maxlength = "4"/>
                                 </Grid>
                             </Grid>
                         </section>
