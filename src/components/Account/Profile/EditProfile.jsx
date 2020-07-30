@@ -17,7 +17,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import guy from '../../../assets/images/edit_profile.svg';
 import girl  from '../../../assets/images/freelancer_blue.svg';
 
-
 //Select options of class year
 // const years = [
 //     { value: '2019', label: '2019',},

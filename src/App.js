@@ -36,6 +36,7 @@ const Routes = withRouter(({location})=>{
             <PrivateRoute path="/account" component={Account} />
             <PrivateRoute path="/edit-profile" component={EditProfile}/>
             <PrivateRoute path="/chat" component={MainChat} />
+            <Route path="/loading" component={Loading} />
             <Route path="/logIn" component={LogIn} />
             <Route path="/signUp" component={SignUp} />
             <Route path="/landingPage" component={LandingPage} />
