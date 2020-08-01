@@ -7,7 +7,6 @@ import {
     Snackbar,
 } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
-import firebase from '../../../firebase/firebaseConfig';
 import {useFirestore} from "react-redux-firebase";
 import {
     faChevronLeft,

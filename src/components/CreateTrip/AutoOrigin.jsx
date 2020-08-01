@@ -134,7 +134,7 @@ const AutoOrigin = (props) => {
                   name="originTitle"
                   required
                   fullWidth
-                  variant="filled"
+                  // variant="filled"
                   placeholder="From"
                   label="Origin"
       />}

@@ -72,13 +72,6 @@ export default function TripArea(props){
                 </section>
                 <section>
                     <h2>Posted</h2>
-                    {/* { upcomingTripList.length === 0 ? (
-                    <><Grid container spacing={3} className="">
-                        <StyleTrip/>
-                        <StyleTrip/>
-                        <StyleTrip/>
-                    </Grid></> )
-                 : "" }    */}
                     {isLoaded(userTrips) && (userTrips.length > 0 ? (
                     <Grid container spacing={3}>
                         {userTrips.map((trip) => {
