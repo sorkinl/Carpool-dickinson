@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import unnamed from '../../../assets/images/unnamed.jpg';
 import {
     Grid,
-    Link,
 } from '@material-ui/core';
 import { useSelector } from 'react-redux';
+import {Link } from 'react-router-dom';
 
 /* Display the profile basic info */
 export default function Profile(props){
@@ -42,9 +42,9 @@ export default function Profile(props){
                             </Grid>
                         </Grid>
                         {/* <Link to="/edit-profile" className="btn btn--editProfile"> */}
-                            <a href="/edit-profile" className="btn btn--editProfile">
+                            <Link to="/edit-profile" className="btn btn--editProfile">
                                 Edit profile
-                            </a>
+                            </Link>
                         {/* </Link> */}
                     </div>
                 </div>
