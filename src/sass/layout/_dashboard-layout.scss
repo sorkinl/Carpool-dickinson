@@ -1,5 +1,5 @@
 .container-dashboard {
-    width: 100vw;
+    width: 99vw;
     height: 100vh;
 }
 
@@ -30,7 +30,7 @@
     background-color: #fff;
     flex: 1;
     height: 150vh;
-    overflow-y: scroll;
+    overflow: hidden;
     &__trip-header{
         height: 6rem;
         display: flex;
@@ -62,6 +62,26 @@
         border: 1px solid $color-grey-light-4;
         height: 25rem;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
+  
+        overflow-x: auto;
+        &::before, &::after {
+            content: "";
+            border-left: 1rem solid transparent;
+        }
+
+        &::-webkit-scrollbar{
+            width: 10px;
+            height: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $color-primary-dark-3;
+            border-radius: 10px;
+          }
+          &::-webkit-scrollbar-track {
+            background: transparent;
+          }
+          
     }
 }

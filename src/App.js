@@ -44,7 +44,7 @@ const Routes = withRouter(({location})=>{
             <Route path = "/postRide/confirm" component = {ConfirmField}/>
             <Route path = "/frontPageTrial" component = {FrontPageFigma}/>
             <Route path = "/searchResult" component = {SearchResult}/>
-            <Route path = "/dashboard" component = {Dashboard}/>
+            <PrivateRoute path = "/dashboard" component = {Dashboard}/>
           </Switch>
         </div>
   )
