@@ -57,4 +57,11 @@
         margin: 1rem;
         fill: $color-grey-dark-1
     }
+
+    &__trip-section{
+        border: 1px solid $color-grey-light-4;
+        height: 25rem;
+        display: flex;
+        justify-content: space-around;
+    }
 }
