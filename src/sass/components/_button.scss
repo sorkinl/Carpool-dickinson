@@ -16,10 +16,10 @@
         transform: translateY(-.3rem);
         box-shadow: 0 1rem 2rem rgba($color-black,.2);
         cursor: pointer;
-        /* &::after{
+        &::after{
             transform: scaleX(1.4) scaleY(1.6);
             opacity: 0;
-        } */
+        }
     
     }
     &:active{
@@ -37,11 +37,11 @@
             background-color: $color-secondary;
         }
     }
-    &--blue {
-        background-color: $color-primary-light;
+    &--editProfile {
+        background-color: $color-tertiary-dark;
         color: $color-white;
         position: relative;
-        margin-top: 6rem;
+        margin-top: 1rem;
     }
 
     &--white {
