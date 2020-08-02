@@ -1,0 +1,106 @@
+.trip-card-dash{
+    flex: 0 0 30rem;
+    height: 17rem;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    
+    margin:3rem 3rem;
+    
+    position: relative;
+    z-index: 15;
+    &:hover{
+        .trip-card-dash__back{
+            transition: all .3s;
+            opacity: .9;
+            z-index: 20;
+        }
+    }
+
+    &__heading{
+        width: 100%;
+        height: 30%;
+        background-color: rgba(250, 233, 35, 0.3);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &--text{
+            text-transform: uppercase;
+            font-weight: 300;
+            font-size: 2rem;
+            margin-right: 7rem;
+            color: #000000;
+        }
+    }
+
+    &__image {
+        height: 4.5rem;
+        border-radius: 1000rem;
+        margin-left: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    &__middle{
+        height: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &--text{
+            min-width: 8rem;
+            max-width: 12rem;
+            font-weight: 700;
+            margin: 0 1.5rem;
+            font-size: 1.1rem;
+            
+        }
+    }
+
+    &__bottom{
+        height: 20%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &--align{
+            display: flex;
+            align-items: center;
+            margin-left: 1.5rem;
+            margin-right: 5rem;
+        }
+
+     &--text{
+         font-size: 1.3rem;
+         margin-left: 1rem;
+     }   
+    }
+    &__icon{
+        height: 1.7rem;
+        width: 1.7rem;
+        fill: $color-tertiary
+    }
+    
+}
+.trip-card-dash__back{
+    transition: all .3s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+    opacity: 0;
+    background-color: $color-primary-light;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    &--icon{
+
+        height: 5rem;
+        width: 5rem;
+        fill: $color-black;
+        transition: all .1s;
+        &:hover{
+            fill: $color-secondary;
+            cursor: pointer;
+        }
+    }
+
+}

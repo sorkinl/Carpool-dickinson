@@ -83,8 +83,8 @@ export default function ProfileCreate() {
     }
   }
 
-  return userProfile.status === 2 || isEmpty(currentUser) ? (
-    <Redirect to="/" />
+  return userProfile.status === 2 ? (
+    <Redirect to="/dashboard" />
   ) : (
     <Container component="main" maxWidth="md">
       <CssBaseline />

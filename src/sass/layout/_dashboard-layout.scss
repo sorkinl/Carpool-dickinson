@@ -1,11 +1,11 @@
 .container-dashboard {
-    width: 100vw;
+    width: 99vw;
     height: 100vh;
 }
 
 .header-dashboard {
     font-size: 1.4rem;
-    height: 5.5rem;
+    height: 7vh;
     background-image: linear-gradient(to right bottom,rgba($color-primary-light,1),rgba($color-primary,1));
     border-bottom: $color-grey-light-2;
     display: flex;
@@ -20,14 +20,68 @@
 .sidebar-dashboard {
     background-color: $color-primary-light;
     flex: 0 0 15%;
-
+    height: 93vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.hotel-view-dashboard {
+.main-dash {
     background-color: #fff;
     flex: 1;
-    height: 80rem;
+    height: 150vh;
+    overflow: hidden;
+    &__trip-header{
+        height: 6rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: solid $color-grey-light-4 1px;        
+    }
+
+    &__trip-heading{
+        text-transform: uppercase;
+        font-weight: 300;
+        font-size: 2.5rem;
+        margin-left: 3rem;
+        color: $color-grey-dark-1;
+    }
+    &__arrows{
+        margin-right: 3rem;
+        display: flex;
+        align-items: center;
+    }
+    &__arrow-icon{
+        width: 2rem;
+        height: 2rem;
+        margin: 1rem;
+        fill: $color-grey-dark-1
+    }
+
+    &__trip-section{
+        border: 1px solid $color-grey-light-4;
+        height: 25rem;
+        display: flex;
+        justify-content: space-between;
+  
+        overflow-x: auto;
+        &::before, &::after {
+            content: "";
+            border-left: 1rem solid transparent;
+        }
+
+        &::-webkit-scrollbar{
+            width: 10px;
+            height: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $color-primary-dark-3;
+            border-radius: 10px;
+          }
+          &::-webkit-scrollbar-track {
+            background: transparent;
+          }
+          
+    }
 }
