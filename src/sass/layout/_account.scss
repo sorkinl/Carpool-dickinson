@@ -1,9 +1,13 @@
 .account-page {
-    height: 300vh;
-    background-image: linear-gradient(to right bottom,rgba(#7d4ec0,0.7),rgba($color-primary-dark,1));
+    height: 145vh;
+    background-color: #e6eeff;
     background-size: contain;
     background-position: center;
-    position: relative;
+    position: absolute;
+    width: 100%;
+    z-index:100;
+    margin: 0 auto;
     padding-top: 3%;
-    padding-right: 3%;
+    padding-right: 2%;
+    padding-left: 3%
 }

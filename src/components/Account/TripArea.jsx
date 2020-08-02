@@ -23,7 +23,7 @@ export default function TripArea(props){
     const userTrips = useSelector((state) => state.firestore.ordered.userTrips); //takes out array of trips queried above and takes it out of firestore reducer
 
     return (
-        <div class="profile-tab">
+        <div class="trip-tab">
             <h4>My Trips</h4>
             <hr/>
                 <input type="radio" id="tab1" name="tab-control" defaultChecked/>
@@ -57,14 +57,14 @@ export default function TripArea(props){
                 <div class="indicator"></div>
             </div>
                 
-            <div class="content">
+            <div class="content-profile">
                 <section>
                     <h2>Console</h2>
                         <Console/>
                 </section>
                 <section>
                     <h2>Upcoming</h2>
-                        Tab 2   
+                        Tab 22 
                 </section>
                 <section>
                     <h2>Past</h2>
@@ -72,13 +72,6 @@ export default function TripArea(props){
                 </section>
                 <section>
                     <h2>Posted</h2>
-                    {/* { upcomingTripList.length === 0 ? (
-                    <><Grid container spacing={3} className="">
-                        <StyleTrip/>
-                        <StyleTrip/>
-                        <StyleTrip/>
-                    </Grid></> )
-                 : "" }    */}
                     {isLoaded(userTrips) && (userTrips.length > 0 ? (
                     <Grid container spacing={3}>
                         {userTrips.map((trip) => {
