@@ -15,9 +15,7 @@ import LocationOnIcon from "@material-ui/icons/LocationOn";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(0),
-    width: "45ch",
+    width: "50rem",
   },
   icon: {
     color: theme.palette.text.secondary,
@@ -134,10 +132,7 @@ const AutoDestination = (props) => {
                   className={classes.textField}
                   name="destTitle"
                   required
-                  fullWidth
-                  // variant="filled"
                   placeholder="To"
-                  label="Destination"
       />}
   renderOption={(option) => {
       return (

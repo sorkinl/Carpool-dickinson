@@ -1,3 +1,7 @@
+$field-label-font-size: 1.6rem;
+$heading-font-size: 2rem;
+$back-btn-font-size: 1.8rem;
+
 .edit-profile {
     margin: 1rem 14rem;
     position: relative;
@@ -8,7 +12,7 @@
     }
     .edit-profile-main {
         background: $color-white;
-        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 .2rem .3rem rgba(0, 0, 0, 0.1);
         width: 100%;
         height: fit-content;
         max-height: fit-content;
@@ -17,9 +21,9 @@
         // transition: width 2s, height 4s;
         .edit-profile-boxTitle {
             position: relative;
-            background-color: #09C6F9;
+            background-color: $color-primary-light;
             padding: 1.5rem 6rem;
-            box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: .2rem .3rem .5rem rgba(0, 0, 0, 0.2);
             width: 32rem;
             height: 5.5rem;
             margin-left: -6rem;
@@ -30,7 +34,8 @@
             .text {
                 font-family: "Lato", sans-serif;
                 visibility: visible;
-                font-size: 18px;color: #fff;
+                font-size: $back-btn-font-size;
+                color: $color-white;
                 text-transform: uppercase;
                 animation-name: boxTitle-text;
                 animation-duration: 0.8s;
@@ -52,7 +57,7 @@
             padding: 0 2rem;
             h3 {
                 text-transform: capitalize;
-                font-size: 20px;
+                font-size: $heading-font-size;
                 font-weight: 600;
                 color: #394972;
                 
@@ -62,10 +67,10 @@
             padding: 3rem 4rem;
             text-align: center;
             input[type="text"], select {
-                padding: 12px 20px;
+                padding: 1.2rem 2rem;
                 margin-top: 3rem;
                 display: inline-block;
-                border: 1.5px solid #ccc;
+                border: .15rem solid $color-grey-dark-3;
                 box-sizing: border-box;
                 border-radius: 1rem;
                 max-width: 41rem;
@@ -73,7 +78,7 @@
                 outline: none;
                 margin-bottom: 1rem;
                 &:hover, &:focus {
-                    border: 1.5px solid #57bcff;
+                    border: .15rem solid $color-primary-light;
                 }
             }
             #basic-class-year {
@@ -93,11 +98,11 @@
             }
             .basic-info-label {
                 text-transform: capitalize;
-                font-size: 16px;
+                font-size: $field-label-font-size;
                 font-weight: 400;
                 color: rgb(109, 108, 108);
                 position: absolute;
-                padding-left: 0.2rem;
+                padding-left: .2rem;
                 &--major {
                     text-transform: none;
                 }
@@ -108,21 +113,21 @@
             text-align: left;
             .security-label {
                 text-transform: capitalize;
-                font-size: 17px;
+                font-size: $field-label-font-size;
                 font-weight: 400;
                 color: rgb(109, 108, 108);
                 position: absolute;
                 padding-left: 0.2rem;   
             } 
             #security-password {
-                font-size: 16px;
+                font-size: $field-label-font-size;
                 font-weight: 800;
                 margin: 3.5rem 0rem;
                 position: relative;
-                color: #09C6F9;
+                color: $color-primary-light;
                 .security-password-icon {
-                    font-size: 16px;
-                    color: #09C6F9;
+                    font-size: $field-label-font-size;
+                    color: $color-primary-light;
                     margin-right: 1rem;
                 }
                 &:hover {
@@ -139,7 +144,7 @@
         }
     }
     .edit-profile-icon {
-        font-size: 16px;
+        font-size: $field-label-font-size;
         color: $color-primary;
         text-align: left;
         margin-right: 1rem;
@@ -151,7 +156,7 @@
         border-radius: 10rem;
         font-size: $default-font-size;
         display: inline-block;
-        font-size: 18px;
+        font-size: $back-btn-font-size;
         transition: all .1s;
         padding: 1.5rem 3rem;
         text-align: center;
@@ -186,23 +191,23 @@
         z-index: -1;
         &--image {
             display: inline-block;
-            height: 260px;
+            height: 26rem;
             width: auto;
-            margin-right: -50px;
-            margin-top: 20px;
+            margin-right: -5rem;
+            margin-top: 2rem;
         }
     }
     &__top-illustration {
         position: absolute;
-        margin-top: .8rem;
+        margin-top: 0.8rem;
         z-index: -1;
         margin-left: 85rem;
         &--image {
             display: inline-block;
-            height: 360px;
+            height: 36rem;
             width: auto;
-            margin-right: -50px;
-            margin-top: 20px;
+            margin-right: -5rem;
+            margin-top: 2rem;
         }
     }
 }  

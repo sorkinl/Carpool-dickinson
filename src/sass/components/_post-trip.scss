@@ -1,13 +1,19 @@
 $bg: #332f35;
 $fg: lighten($bg,20%);
-$borderWidth: 3px;
-$contW: 900px;
-$imgW: 300px;
-$formW: 750px;
+$contW: 90rem;
+$imgW: 31rem;
+$formW: 75rem;
 $switchAT: 1.2s;
 
+$radio-button-color: #c4f3ff;
+
+$field-label-font-size: 1.6rem;
+$input-font-size: 1.4rem;
+$heading-font-size: 2.5rem;
+$back-btn-font-size: 1.8rem;
+
 $inputW: 50rem;
-$btnH: 3.6rem;
+$btnH: 4rem;
 $diffRatio: ($contW - $imgW) / $contW;
 
 .post-trip {
@@ -15,279 +21,11 @@ $diffRatio: ($contW - $imgW) / $contW;
     position: relative;
     padding-top:1rem;
     font-family: "Lato", sans-serif;
-      * {
+    * {
         box-sizing: border-box;
     }
-    .post-trip-main {
-            h2 {
-                text-align: center;
-                font-size: 25px;
-            }
-          *, *:before, *:after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-          }
-          input {
-            border: none;
-            outline: none;
-            background: none;
-            font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-          }
-          
-          @mixin signUpActive {
-            .cont.s--signup & {
-              @content;
-            }
-          }
-          
-          .cont {
-            overflow: hidden;
-            position: relative;
-            width: 97%;
-            height: 60rem;
-            background: #fff;
-            border-radius: 0.4rem;
-            box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
-          }
-          
-          .form {
-            position: relative;
-            width: 74rem;
-            height: 100%;
-            transition: transform $switchAT ease-in-out;
-            padding: 3rem 5rem;
-          }
-          
-          .sub-cont {
-            overflow: hidden;
-            position: absolute;
-            margin-left: $formW;
-            top: 0;
-            width: $contW;
-            height: 100%;
-            // padding-left: $imgW;
-            background-color: #09C6F9;
-            transition: transform $switchAT ease-in-out;
-            box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
-          
-            @include signUpActive {
-              transform: translate3d($formW * -1,0,0);
-            }
-          }
-          
-          .img {
-            overflow: hidden;
-             z-index: 2;
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: $imgW;
-            height: 100%;
-            padding-top: 450px;
-          
-            &:before {
-              content: '';
-              position: absolute;
-              right: 0;
-              top: 0;
-              width: $contW;
-              height: 100%;
-              background-color: #09C6F9;
-              // background-size: cover;
-              transition: transform $switchAT ease-in-out;
-            }
-          
-            &:after {
-              content: '';
-              position: absolute;
-              left: 0;
-              top: 0;
-              width: 100%;
-              height: 100%;
-              background-color: #09C6F9;
-              // background: rgba(0,0,0,0.6);
-            }
-          
-            @include signUpActive {
-              &:before {
-                transform: translate3d($formW,0,0);
-              }
-            }
-          
-            &__text {
-              z-index: 2;
-              position: absolute;
-              left: 0;
-              top: 67px;
-              width: 100%;
-              padding: 0 20px;
-              text-align: center;
-              color: #fff;
-              transition: transform $switchAT ease-in-out;
-          
-              h2 {
-                font-size: 23px;
-                margin-bottom: 10px;
-                font-weight: normal;
-                font-weight: bold;
-              }
-          
-              p {
-                font-size: 16px;
-                line-height: 1.5;
-              }
-          
-              &.m--up {
-                @include signUpActive {
-                  transform: translateX($imgW*2);
-                }
-              }
-          
-              &.m--in {
-                transform: translateX($imgW * -2);
-                @include signUpActive {
-                  transform: translateX(0);
-                }
-              }
-            }
-          
-            &__btn {
-              overflow: hidden;
-              z-index: 2;
-              position: relative;
-              width: 100px;
-              height: $btnH;
-              margin: 0 auto;
-              color: #fff;
-              text-transform: uppercase;
-              font-size: 15px;
-              cursor: pointer;
-              
-              &:after {
-                content: '';
-                z-index: 2;
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-              }
-          
-              span {
-                position: absolute;
-                left: 0;
-                top: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-                height: 100%;
-                transition: transform $switchAT;
-                
-                &.m--in {
-                  transform: translateY($btnH*-2);
-                  
-                  @include signUpActive {
-                    transform: translateY(0);
-                  }
-                }
-                
-                &.m--up {
-                  background: #FA2368;
-                  border-radius: 30px;
-                  // border: 2px solid #fff;
-                  @include signUpActive {
-                    transform: translateY($btnH*2);
-                  }
-                }
-              }
-            }
-          }
-          
-          label {
-            display: block;
-            width: $inputW;
-            margin: 14px auto;
-          
-            span {
-              font-size: 16px;
-              color: #09C6F9;
-              text-transform: capitalize;
-            }
-            textarea {
-              margin-top: 6px;
-              resize:none;
-            }
-          }
-          
-          input {
-            display: block;
-            width: 100%;
-            margin-top: 4px;
-            padding-bottom: 5px;
-            font-size: 13px;
-            border-bottom: 1px solid rgba(0,0,0,0.4);
-          }
-          .sign-in {
-            transition-timing-function: ease-out;
-          
-            @include signUpActive {
-              transition-timing-function: ease-in-out;
-              transition-duration: $switchAT;
-              transform: translate3d($formW,0,0);
-            }
-          }
-          
-          .sign-up {
-            transform: translate3d($contW * -1,0,0);
-          
-            @include signUpActive {
-              transform: translate3d(0,0,0);
-            }
-          }
-          input[type=radio] {
-            position: absolute;
-            visibility: hidden;
-            display: none;
-            
-          }
-          .radio-label {
-              color: lighten($bg,40%);
-              display: inline-block;
-              cursor: pointer;
-            //   font-weight: bold;
-              width: 5rem;
-              height: 5rem;
-              // transform: translate(-50%, -50%);
-              background: #c4f3ff;
-              border-radius: 45%;
-              text-align: center;
-              cursor: pointer;
-              transition: ease .4s;
-              margin-right: 1rem;
-              p {
-                margin-top: 1.4rem;
-                font-size: 16px;
-              }
-            }
-          input[type=radio]:checked + label{
-            color: #fff;
-            background:  #0084ff;
-          }
-          input[type=radio]:hover + label{
-            color: #fff;
-            background: #0084ff;
-          }
-          .seat-radio-group {
-            padding: 0 5.5rem;
-            display: inline-block;
-            overflow: hidden;
-            width: 60rem;
-          }
-    }
     .post-trip-icon {
-        font-size: 16px;
+        font-size: $field-label-font-size;
         color: $color-primary;
         text-align: left;
         margin-right: 1rem;
@@ -297,9 +35,8 @@ $diffRatio: ($contW - $imgW) / $contW;
         text-transform: uppercase;
         text-decoration: none;
         border-radius: 10rem;
-        font-size: $default-font-size;
         display: inline-block;
-        font-size: 18px;
+        font-size: $back-btn-font-size;
         transition: all .1s;
         padding: 1.5rem 3rem;
         text-align: center;
@@ -313,4 +50,296 @@ $diffRatio: ($contW - $imgW) / $contW;
             cursor: pointer;
         }
     }
+    .post-trip-main {
+        h2 {
+            margin-left: 30rem;
+            color: $color-primary-light;
+            font-size: $heading-font-size;
+        }
+        *, *:before, *:after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        input {
+            border: none;
+            outline: none;
+            background: none;
+            font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+        }
+            
+        @mixin signUpActive {
+            .cont.s--signup & {
+                @content;
+            }
+        }
+            
+        .cont {
+            overflow: hidden;
+            position: relative;
+            width: 97%;
+            min-height: fit-content;
+            height: 62rem;
+            background: $color-white;
+            border-radius: 0.4rem;
+            box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+            padding-top: 4.5rem;
+        }
+            
+        .form {
+            position: relative;
+            width: 74rem;
+            height: 100%;
+            transition: transform $switchAT ease-in-out;
+            padding: .5rem 5rem;
+        }
+            
+        .sub-cont {
+            overflow: hidden;
+            position: absolute;
+            margin-left: $formW;
+            top: 0;
+            width: $contW;
+            height: 100%;
+            // padding-left: $imgW;
+            background-color: $color-primary-light;
+            transition: transform $switchAT ease-in-out;
+            box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+            @include signUpActive {
+                transform: translate3d($formW * -1,0,0);
+            }
+        }
+            
+        .img {
+            overflow: hidden;
+            z-index: 2;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: $imgW;
+            height: 100%;
+            padding-top: 43rem;
+            
+            &:before {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: $contW;
+                height: 100%;
+                background-color: $color-primary-light;
+                // background-size: cover;
+                transition: transform $switchAT ease-in-out;
+            }
+            
+            &:after {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: $color-primary-light;
+                // background: rgba(0,0,0,0.6);
+            }
+            @include signUpActive {
+                &:before {
+                    transform: translate3d($formW,0,0);
+                }
+            }
+            
+            &__text {
+                z-index: 2;
+                position: absolute;
+                left: 0;
+                top: 6.7rem;
+                width: 100%;
+                padding: 0 2rem;
+                text-align: center;
+                color: $color-white;
+                transition: transform $switchAT ease-in-out;
+                
+                &.side-illustration {
+                    position: absolute;
+                    z-index: 2;
+                    margin-top: 4rem;
+                    margin-left: 0rem;
+                    left: 0;
+                    top: 6.7rem;
+                    padding: 0 4rem;
+                    transition: transform $switchAT ease-in-out;
+                    &.side-image {
+                        display: inline-block;
+                        height: 17rem;//16rem //19rem //14
+                        width: auto;
+                        margin: 0 0rem;
+                    }
+                }
+                h2 {
+                    color: $color-white;
+                    margin-left: 0;
+                    font-size: $heading-font-size;
+                    margin-bottom: 1rem;
+                    font-weight: bold;
+                }
+            
+                p {
+                    color: $radio-button-color;
+                    margin-top: 32rem;
+                    font-size: $input-font-size;
+                    line-height: 1.5;
+                }
+            
+                &.m--up {
+                    @include signUpActive {
+                      transform: translateX($imgW*2);
+                    }
+                }
+            
+                &.m--in {
+                    transform: translateX($imgW * -2);
+                    @include signUpActive {
+                      transform: translateX(0);
+                    }
+                }
+            }
+            
+            &__btn {
+                overflow: hidden;
+                z-index: 2;
+                position: relative;
+                width: 12rem;
+                height: $btnH;
+                margin: 0 auto;
+                color: $color-white;
+                text-transform: uppercase;
+                font-size: $field-label-font-size;
+                border-radius: 3rem;
+                cursor: pointer;
+                transition: ease .4s;
+
+                &:hover {
+                    transform: translateY(-.3rem);
+                    box-shadow: 0 1rem 2rem rgba($color-black,.2);
+                }
+                
+                &:after {
+                    content: '';
+                    z-index: 2;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+            
+                span {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
+                    transition: transform $switchAT;
+                    &.m--in {
+                        transform: translateY($btnH*-2);
+                        @include signUpActive {
+                            transform: translateY(0);
+                        }
+                    }
+                    &.m--up {
+                        background: $color-tertiary;
+                        @include signUpActive {
+                            transform: translateY($btnH*2);
+                        }
+                    }
+                }
+            }
+        }
+          
+        label {
+            display: block;
+            width: $inputW;
+            margin: 1.4rem auto 0;
+          
+            span {
+                font-size: $field-label-font-size;
+                color: $color-primary-light;
+                text-transform: capitalize;
+            }
+            textarea {
+                margin-top: .6rem;
+                resize:none;
+            }
+        }
+          
+        input {
+            display: block;
+            width: 100%;
+            font-size: $input-font-size;
+            margin: .8rem 0 .3rem 0;
+            // border-bottom: .1rem solid rgba(0,0,0,0.4);
+        }
+        .sign-in {
+            transition-timing-function: ease-out;
+          
+            @include signUpActive {
+                transition-timing-function: ease-in-out;
+                transition-duration: $switchAT;
+                transform: translate3d($formW,0,0);
+            }
+        }   
+          
+        .sign-up {
+            transform: translate3d($contW * -1,0,0);
+          
+            @include signUpActive {
+                transform: translate3d(0,0,0);
+            }
+        }
+        input[type=radio] {
+            position: absolute;
+            visibility: hidden;
+            display: none;
+            
+        }
+        .radio-label {
+            color: lighten($bg,40%);
+            display: inline-block;
+            cursor: pointer;
+            width: 5rem;
+            height: 5rem;
+            // transform: translate(-50%, -50%);
+            background: $radio-button-color;
+            border-radius: 45%;
+            text-align: center;
+            cursor: pointer;
+            transition: ease .4s;
+            margin-right: 1rem;
+            
+            p {
+                margin-top: 1.4rem;
+                font-size: $field-label-font-size;
+            }
+        }
+        input[type=radio]:checked + label{
+            color: $color-white;
+            background:  $color-primary-dark;
+        }
+        input[type=radio]:hover + label{
+            color: $color-white;
+            background: $color-primary-dark;
+        }
+        .seat-radio-group {
+            padding: 0 5.5rem;
+            display: inline-block;
+            overflow: hidden;
+            width: 60rem;
+        }
+    }
+}
+.MuiAutocomplete-inputRoot[class*="MuiInput-root"] .MuiAutocomplete-input:first-child {
+    padding: 1.3rem 0;
 }
