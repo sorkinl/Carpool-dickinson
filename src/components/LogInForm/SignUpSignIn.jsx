@@ -25,10 +25,10 @@ export default function SignUpSignIn() {
 return(
   <header className="signUp">
     <div className="signUp rectangle">
-      <img scr={svg} className="header__illustration--image"/>
-
+    <div className="signUp__pic">
+          <img src={svg} alt="" className="signUp__pic--illustration" />
+        </div>
     </div>
-
   </header>
 );
 }

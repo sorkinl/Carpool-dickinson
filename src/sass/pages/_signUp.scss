@@ -6,12 +6,12 @@
     position: relative;
 
 .rectangle{
-      position: absolute;
-      width: 80vw;
+      position: relative;
+      width: 85vw;
       max-width: 120vh;
-      height: 80vh;
+      height: 85vh;
       margin: auto;
-      top: 0;
+      top: 7.5vh;
       bottom: 0;
       left: 0;
       right: 0;
@@ -20,7 +20,20 @@
       border-radius: 20px;
 }
 
-.pic{
-  display: flex;
+&__pic{ 
+
+      margin-left: 2vw;
+      height: 50vh;
+      width: 40vw;
+
+
+        &--illustration { 
+            height: 80%;
+            width: 45%;
+          position: absolute;
+
 }
+}
+
+
 }
