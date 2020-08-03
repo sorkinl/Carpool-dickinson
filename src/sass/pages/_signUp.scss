@@ -1,0 +1,26 @@
+.signUp{
+    height: 100vh;
+    background-image: linear-gradient(to right bottom,rgba($color-primary-light,1),rgba($color-primary-dark,1));
+    background-size: cover;
+    background-position: center;
+    position: relative;
+
+.rectangle{
+      position: absolute;
+      width: 80vw;
+      max-width: 120vh;
+      height: 80vh;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #FFFEFF;
+      mix-blend-mode: normal;
+      border-radius: 20px;
+}
+
+.pic{
+  display: flex;
+}
+}

@@ -8,8 +8,8 @@ import Account from "./components/Account/Account";
 import MainChat from "./components/Chat/MainChat/MainChat";
 import FrontPage from "./pages/frontpage";
 import FrontPageFigma from "./pages/frontpageFigma";
-import LogIn from "./components/LogInForm/LogIn";
-import SignUp from "./components/LogInForm/SignUp";
+import LogIn from "./components/LogInForm/SignUpSignIn";
+import SignUp from "./components/LogInForm/ProfileCreate";
 import LandingPage from "./components/LogInForm/LandingPage";
 import ProfileCreate from "./components/LogInForm/ProfileCreate";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
@@ -35,11 +35,11 @@ const Routes = withRouter(({location})=>{
             <PrivateRoute path="/account" component={Account} />
             <PrivateRoute path="/chat" component={MainChat} />
             <Route path="/logIn" component={LogIn} />
-            <Route path="/signUp" component={SignUp} />
-            <Route path="/landingPage" component={LandingPage} />
+            {/* <Route path="/" component={SignUp} /> */}
+            {/* <Route path="/landingPage" component={LandingPage} /> */}
             <Route path="/edit/:tripId" component={EditForm} />
             <Route path="/verifyEmail" component={EmailVerify}/>
-            <Route path="/registrationForm" component={ProfileCreate} />
+            {/* <Route path="/registrationForm" component={ProfileCreate} /> */}
             <Route path = "/postRide" component = {PostRideField}/>
             <Route path = "/postRide/confirm" component = {ConfirmField}/>
             <Route path = "/frontPageTrial" component = {FrontPageFigma}/>

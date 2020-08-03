@@ -9,13 +9,19 @@ import {
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import firebase from "../../firebase/firebaseConfig";
-const Navbar = () => {
-  //  const auth = useSelector((state) => state.firebase.auth);
+import { useDispatch } from "react-redux";
+import { logOut } from "../../redux/actions/authActions";
 
-  //   function handleLogOut(e) {
-  //       e.preventDefault();
-  //       firebase.auth().signOut()
-  //     }
+
+const Navbar = () => {
+   //const auth = useSelector((state) => state.firebase.auth);
+
+   const dispatch = useDispatch();
+
+   function handleLogOut(e) {
+    e.preventDefault();
+    dispatch(logOut());
+  }
 
   //   const links = auth.uid ? (
   //       <>
@@ -80,6 +86,7 @@ const Navbar = () => {
               size="2x"
               className="menu-item-icon"
               icon={faSignInAlt}
+              onClick={handleLogOut}
             />
           </Link>
           <Link to="/signUp" className="menu-item">
