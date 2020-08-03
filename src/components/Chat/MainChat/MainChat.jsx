@@ -9,6 +9,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import PersonInChat from '../PersonInChat/PersonInChat';
 import {useStyles} from './mainChatStyles';
+import DashboardNavbar from '../../Dashboard/DashboardNavbar';
 
 
 
@@ -16,32 +17,24 @@ const MainChat = () => {
   //exporting styles from outside file
   const classes = useStyles();
   
-    return (<div className={classes.root}>
-        <CssBaseline>
-        <Drawer
-          className={classes.drawer}
-          variant="permanent"
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-            <Toolbar/>
-          <div className={classes.drawerContainer}>
-          <List>
-            {['Jerry', 'Monkey', 'Vladimir', 'Covid'].map((text) => ( //for each element in array make a component such as ->
-              <ListItem button key={text}>
-                <ListItemIcon><PersonInChat/></ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
+    return (
+      <>
+      <DashboardNavbar/>
+        <div className="chat-container">
+          <div className="chat-sidebar">
+            Sidebar
           </div>
-        </Drawer>
-        <main className={classes.content}>
-          <ChatWindow/>
-        </main>
-        </CssBaseline>
-      </div>)
+          <div className="chat-window">
+            Main window
+          </div>
+
+        
+        <div className="chat-rightbar">
+          Right bar
+        </div>
+        </div>
+        </>
+        )
 }
 
 export default MainChat;

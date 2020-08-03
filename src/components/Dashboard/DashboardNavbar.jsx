@@ -2,6 +2,7 @@ import React from 'react'
 import logo from "../../assets/images/logo.png";
 import icon from "../../assets/sprite.svg";
 import avatar from "../../static/img/avatar.png";
+import { Link } from 'react-router-dom';
 
 const DashboardNavbar = () => {
     return (
@@ -29,9 +30,11 @@ const DashboardNavbar = () => {
               <span className="user-nav__notification">7</span>
             </div>
             <div className="user-nav__icon-box">
+              <Link to="/chat">
               <svg className="user-nav__icon">
                 <use xlinkHref={`${icon}#icon-chat`}></use>
               </svg>
+              </Link>
               <span className="user-nav__notification">7</span>
             </div>
             <div className="user-nav__user">
