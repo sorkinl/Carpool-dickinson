@@ -28,6 +28,21 @@ return(
     <div className="signUp__pic">
           <img src={svg} alt="" className="signUp__pic--illustration" />
         </div>
+        <Tabs selectedTabClassName="signUp is-selected" className="signUp tabs" >
+        <TabList>
+           <Tab className="signUp tab">Log In</Tab>
+           <Tab className="signUp tab">Sign Up</Tab>
+      </TabList>
+
+      <TabPanel>
+
+ 
+      </TabPanel>
+
+      {/* <div className="fields">
+    <input placeholder="First Name" type="text" className="signUp input"></input>
+    </div> */}
+    </Tabs>
     </div>
   </header>
 );
