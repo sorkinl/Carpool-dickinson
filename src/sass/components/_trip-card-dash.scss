@@ -101,6 +101,16 @@
             fill: $color-secondary;
             cursor: pointer;
         }
+
+        &-active{
+            height: 5rem;
+            width: 5rem;
+            transition: all .1s;
+            fill: $color-secondary;
+            &:hover{
+                cursor: pointer;
+            }
+        }
     }
 
 }
