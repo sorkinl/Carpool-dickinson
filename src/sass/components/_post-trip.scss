@@ -51,6 +51,9 @@ $diffRatio: ($contW - $imgW) / $contW;
         }
     }
     .post-trip-main {
+
+
+
         h2 {
             margin-left: 30rem;
             color: $color-primary-light;
@@ -74,7 +77,7 @@ $diffRatio: ($contW - $imgW) / $contW;
             }
         }
             
-        .cont {
+        .post-trip-cont {
             overflow: hidden;
             position: relative;
             width: 97%;
@@ -84,9 +87,33 @@ $diffRatio: ($contW - $imgW) / $contW;
             border-radius: 0.4rem;
             box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
             padding-top: 4.5rem;
+            &__boxTitle {
+                position: relative;
+                background-color: $color-primary-light;
+                padding: 1.5rem 6rem;
+                box-shadow: .2rem .3rem .5rem rgba(0, 0, 0, 0.2);
+                width: 25rem;
+                height: 5.5rem;
+                margin-bottom: .5rem;
+                // margin-left: -6rem;
+                // margin-bottom: 2.5rem;
+                animation-name: boxTitle;
+                animation-duration: 1s;
+                animation-timing-function: ease-out;
+                &__text {
+                    font-family: "Lato", sans-serif;
+                    visibility: visible;
+                    font-size: $back-btn-font-size;
+                    color: $color-white;
+                    text-transform: uppercase;
+                    animation-name: boxTitle-text;
+                    animation-duration: 0.8s;
+                    animation-timing-function: ease;
+                }
+            }
         }
             
-        .form {
+        .post-trip-form {
             position: relative;
             width: 74rem;
             height: 100%;
@@ -94,7 +121,7 @@ $diffRatio: ($contW - $imgW) / $contW;
             padding: .5rem 5rem;
         }
             
-        .sub-cont {
+        .post-trip-sub-cont {
             overflow: hidden;
             position: absolute;
             margin-left: $formW;
@@ -110,7 +137,7 @@ $diffRatio: ($contW - $imgW) / $contW;
             }
         }
             
-        .img {
+        .post-trip-img {
             overflow: hidden;
             z-index: 2;
             position: absolute;
@@ -271,10 +298,13 @@ $diffRatio: ($contW - $imgW) / $contW;
             }
             textarea {
                 margin-top: .6rem;
-                resize:none;
+                resize: none;
+                &:focus {
+                    outline: none !important;
+                    border: .15rem solid $color-tertiary;
+                }
             }
         }
-          
         input {
             display: block;
             width: 100%;
@@ -282,7 +312,7 @@ $diffRatio: ($contW - $imgW) / $contW;
             margin: .8rem 0 .3rem 0;
             // border-bottom: .1rem solid rgba(0,0,0,0.4);
         }
-        .sign-in {
+        .post-trip-sign-in {
             transition-timing-function: ease-out;
           
             @include signUpActive {
@@ -292,7 +322,7 @@ $diffRatio: ($contW - $imgW) / $contW;
             }
         }   
           
-        .sign-up {
+        .post-trip-submit {
             transform: translate3d($contW * -1,0,0);
           
             @include signUpActive {
@@ -305,7 +335,7 @@ $diffRatio: ($contW - $imgW) / $contW;
             display: none;
             
         }
-        .radio-label {
+        .post-trip-radio-label {
             color: lighten($bg,40%);
             display: inline-block;
             cursor: pointer;
@@ -332,14 +362,11 @@ $diffRatio: ($contW - $imgW) / $contW;
             color: $color-white;
             background: $color-primary-dark;
         }
-        .seat-radio-group {
+        .post-trip-seat-radio-group {
             padding: 0 5.5rem;
             display: inline-block;
             overflow: hidden;
             width: 60rem;
         }
     }
-}
-.MuiAutocomplete-inputRoot[class*="MuiInput-root"] .MuiAutocomplete-input:first-child {
-    padding: 1.3rem 0;
 }

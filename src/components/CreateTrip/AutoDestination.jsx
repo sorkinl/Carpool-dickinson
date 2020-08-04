@@ -141,7 +141,7 @@ const AutoDestination = (props) => {
               <LocationOnIcon className={classes.icon}/>
             </Grid>
             <Grid item xs>
-              <Typography variant="body1" color="textSecondary">
+              <Typography variant="h5" color="textSecondary">
                 {option.label}
               </Typography>
             </Grid>

@@ -88,7 +88,7 @@ export default function StyleTrip (props) {
                 <p className="sub-text">
                     <span className="icon-circle">
                         <FontAwesomeIcon className="trip-icon trip-icon--time" icon={faClock}></FontAwesomeIcon>
-                    </span>{trip.departTime}
+                    </span>{trip.departTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </p>
                 <p className="sub-text">
                     <span className="icon-circle">

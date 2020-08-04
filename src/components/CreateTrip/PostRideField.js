@@ -75,8 +75,10 @@ const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(); *
 export default function PostRideField() {
     const classes = useStyles();
     const user = useSelector(state => state.firebase.profile);
+    
     const [error, setError] = React.useState(false);
     const [dateError, setDateError] = React.useState(false);
+    
     var date = new Date();
     date.setUTCHours(0,0,0,0);
     const [state, setState] = React.useState({
@@ -99,9 +101,6 @@ export default function PostRideField() {
             lastName: '',
             photoUrl: '',
     });
-
-    
-
     const [load, setLoad] = React.useState('default');
     const timerRef = React.useRef();
 
@@ -127,21 +126,13 @@ export default function PostRideField() {
         //         longitude: value.lng,
         //     }
         // })); --> THIS DOESN'T WORK
-
     }
     function handleDateChange(date) {
-        /* if(validateDate(date) === false){
-            setState({ ...state, departDate: date });
-            setDateError(false);
-        }
-        else {
-            setDateError(true);
-        } */
         date.setUTCHours(0,0,0,0);
         console.log(date)
         setState({...state, departDate: date})
     }
-    console.log(date)
+    console.log(date);
     function handleClose() {
         setDateError(false);
         setError(false);
@@ -156,14 +147,6 @@ export default function PostRideField() {
             return true;
         }
     }
-    /* function validateDate(date) {
-        if (date < yesterday){
-            return true;
-        }
-        else {
-            return false;
-        }
-    } */
     function handleLoad() {
         clearTimeout(timerRef.current);
         setLoad('progress');
@@ -210,13 +193,10 @@ export default function PostRideField() {
                             <Typography variant="h5" align="left" className={classes.title}>
                                 Offer a ride
                             </Typography>
-
                             <div className="line2"></div>
-
                             {/* main form */}
                             <form className={classes.form}>
                                 <Grid container spacing={2}>
-
                                     <Grid item xs={12} sm={6}>
                                         <AutoOrigin onSuggestionSelect={handleLocationChange}/>
                                     </Grid>
@@ -226,7 +206,6 @@ export default function PostRideField() {
                                 </Grid>
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} sm={5}>
-
                                         <Typography variant="h6" align='left' className={classes.title} >
                                             Ride schedule
                                         </Typography>
@@ -261,21 +240,6 @@ export default function PostRideField() {
                                             placeholder="eg: 8am/9:30am-2pm/Anytime"
                                             onChange={handleChange}
                                         />
-                                        {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                            <KeyboardTimePicker
-                                                inputVariant="filled"  
-                                                //orientation="port" 
-                                                // variant=""
-                                                margin="normal"
-                                                id="time-picker"
-                                                label="Time picker"
-                                                //value={state.departTime} 
-                                                //onChange={handleDateChange}
-                                                KeyboardButtonProps={{
-                                                    'aria-label': 'change time',
-                                                }}
-                                            />
-                                        </MuiPickersUtilsProvider> */}
                                         
                                     </Grid>
                                 </Grid>
