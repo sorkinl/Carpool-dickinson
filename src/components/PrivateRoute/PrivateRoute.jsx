@@ -22,7 +22,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             );
           } else {
             if (user.profile.status == 1) {
-              console.log("Profile")
               return (
                 <Redirect
                   to={{
