@@ -8,19 +8,18 @@ import StyleTrip from './Trip-new/StyleTrip';
 import Console from './Trip-new/Console';
 
 export default function TripArea(props){
-  
+
     // ------------- Handling trips ----------------- //
     const currentUser = useSelector((state) => state.firebase.auth.uid); //takes the current user uid. Same as firebase.auth().currentUser.uid
     useFirestoreConnect([
-      {
-        // hook from 'react-redux-firebase' library to get the collection and store it in react-redux-firebase firestore reducer
-        collection: "trips",
-        where: ["uid", "==", currentUser], //condition
-        storeAs: "userTrips", //name of the object to store in firestore reducer
-      },
+        {
+            // hook from 'react-redux-firebase' library to get the collection and store it in react-redux-firebase firestore reducer
+            collection: "trips",
+            where: ["uid", "==", currentUser], //condition
+            storeAs: "userTrips", //name of the object to store in firestore reducer
+        },
     ]);
-  
-    const userTrips = useSelector((state) => state.firestore.ordered.userTrips); //takes out array of trips queried above and takes it out of firestore reducer
+    const userTrips = useSelector((state) => state.firestore.ordered.userTrips); //takes out array of trips queried above and takes it out of firestore reducer   
 
     return (
         <div class="trip-tab">

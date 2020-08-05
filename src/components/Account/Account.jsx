@@ -34,9 +34,9 @@ export default function Account(props) {
                       <Grid item xs>
                           <Setting/>
                       </Grid>
-                      {/* <Grid item xs>
+                      <Grid item xs>
                           <TripArea />  
-                      </Grid> */}
+                      </Grid>
                   </Grid>    
               </Grid>
             </Grid>

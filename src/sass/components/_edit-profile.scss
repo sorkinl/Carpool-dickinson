@@ -143,6 +143,10 @@ $back-btn-font-size: 1.8rem;
             overflow: hidden;
         }
     }
+    div[disabled] {
+        pointer-events: none;
+        opacity: 0.9;
+    }
     .edit-profile-icon {
         font-size: $field-label-font-size;
         color: $color-primary;

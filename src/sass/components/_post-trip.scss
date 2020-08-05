@@ -82,7 +82,7 @@ $diffRatio: ($contW - $imgW) / $contW;
             position: relative;
             width: 97%;
             min-height: fit-content;
-            height: 62rem;
+            height: 64rem;
             background: $color-white;
             border-radius: 0.4rem;
             box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
@@ -97,7 +97,7 @@ $diffRatio: ($contW - $imgW) / $contW;
                 margin-bottom: .5rem;
                 // margin-left: -6rem;
                 // margin-bottom: 2.5rem;
-                animation-name: boxTitle;
+                animation-name: postTripBoxTitle;
                 animation-duration: 1s;
                 animation-timing-function: ease-out;
                 &__text {
@@ -110,6 +110,10 @@ $diffRatio: ($contW - $imgW) / $contW;
                     animation-duration: 0.8s;
                     animation-timing-function: ease;
                 }
+            }
+            @keyframes postTripBoxTitle{
+                from {width: 0rem;}
+                to {width: 25rem;}
             }
         }
             

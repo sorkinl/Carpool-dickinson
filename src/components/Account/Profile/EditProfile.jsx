@@ -6,6 +6,7 @@ import {
     MenuItem,
     Snackbar,
 } from '@material-ui/core';
+import  { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import MuiAlert from '@material-ui/lab/Alert';
 import {useFirestore} from "react-redux-firebase";
 import {
@@ -26,6 +27,19 @@ import girl  from '../../../assets/images/freelancer_blue.svg';
 //     { value: '2024', label: '2024',},
 //     { value: '2025', label: '2025',},
 // ];
+const defaultMaterialTheme = createMuiTheme({
+    overrides: {
+        MuiAlert: {
+            root: {
+                fontFamily: "Lato, sans-serif",
+                fontSize: "1.6rem",
+            },
+            message: {
+                transition: "ease 3s"
+            }
+        }
+    }
+});
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -36,8 +50,9 @@ export default function EditProfile(props) {
     const currentUser = useSelector((state) => state.firebase.auth);
     const uid = currentUser.uid;
     
-    const [isEdit, setEdit] = useState(false);
+    const [isEdited, setEdited] = useState(false);
     const [isSubmit, setSubmit] = useState(false);
+    const [error, setError] = useState(false);
     
     const [input, setInput] = useState({
         firstName: user.firstName,
@@ -56,21 +71,33 @@ export default function EditProfile(props) {
     function handleEdit(event) {
         const { name, value } = event.target;
         setInput((input) => ({ ...input, [name]: value }));
-        setEdit(true);
+        setEdited(true);
     };
-    
+    function handleClose() {
+        setError(false);
+    };
+    function checkEmptyInput() {
+        if(input.firstName === ""
+            || input.lastName === ""
+            || input.email === ""
+            || input.school) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     function handleSubmit(e) {
         e.preventDefault();
-        if (isEdit === false) {
-            console.log("No fields updated");
+        if (checkEmptyInput() === false) {
+            setError(true);
         } else {
             firestore
                 .collection("users")
                 .doc(uid)
                 .update({...input}
                 );
-        }
-        setSubmit(true);
+            setSubmit(true);
+        }  
     }
     console.log("input",input);
     return (
@@ -177,7 +204,7 @@ export default function EditProfile(props) {
                                     <a href="/account" className="edit-profile-btn edit-profile-btn--cancel">Cancel</a>
                                 </Grid>
                                 <Grid item xs sm={6}>  
-                                    <div type="submit" onClick={handleSubmit} className="edit-profile-btn edit-profile-btn--save">Save</div>
+                                    <div disabled={isEdited === false} type="submit" onClick={handleSubmit} className="edit-profile-btn edit-profile-btn--save">Save</div>
                                 </Grid>
                             </Grid>
                         </div>
@@ -186,13 +213,29 @@ export default function EditProfile(props) {
                 <Snackbar open={isSubmit}
                             autoHideDuration={6000}
                             anchorOrigin={{
-                            vertical: 'bottom',
+                            vertical: 'top',
                             horizontal: 'center',
                 }}>
+                    <ThemeProvider theme={defaultMaterialTheme}>
                         <Alert severity="success">
                             Profile updated successfully!
                         </Alert>
+                    </ThemeProvider>
                 </Snackbar>
+
+                <Snackbar open={error}
+                              autoHideDuration={6000}
+                              onClose={handleClose}
+                              anchorOrigin={{
+                                  vertical: 'top',
+                                  horizontal: 'center',
+                              }}>
+                        <ThemeProvider theme={defaultMaterialTheme}>
+                            <Alert onClose={handleClose} severity="error">
+                                Required fields missing!
+                            </Alert>
+                        </ThemeProvider>
+                    </Snackbar>
             </div>
        </header>
      </CssBaseline>

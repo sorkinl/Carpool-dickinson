@@ -56,9 +56,9 @@ export default function PostTrip(props) {
     const [submit, setSubmit] = React.useState(false);
 
     let currentDate = new Date();
-    let currentTime = currentDate.getTime();//currentDate.toLocaleTimeString();
+    let departTime ='';
     currentDate.setUTCHours(0,0,0,0);
-    
+
     const [state, setState] = React.useState({
         originTitle: '',
         origin: {
@@ -71,7 +71,6 @@ export default function PostTrip(props) {
             longitude: '',
         },
         departDate: currentDate,
-        departTime: currentTime,
         emptySeat: '',
         description: '',
         uid: firebase.auth().currentUser.uid,
@@ -79,6 +78,8 @@ export default function PostTrip(props) {
         lastName: user.lastName,
         photoUrl: user.photoUrl,
     });
+    const [timeToPick, setTimePick] = React.useState(new Date());
+
     function handleChange(e) {  
         const { name, value } = e.target;
         if (name === "selector") {
@@ -86,16 +87,14 @@ export default function PostTrip(props) {
         }
         else {
             setState((state) => ({ ...state, [name]: value }));
-        }
-        console.log("name: ",name);
-        console.log("value: ",value);  
+        } 
     }
     function handleDateChange(date) {
         date.setUTCHours(0,0,0,0);
         setState({...state, departDate: date})
     }
-    function handleTimeChange(time) {
-        setState({...state, departTime: time})
+    function handleTimeChange(timeToPick) {
+        setTimePick(timeToPick);
     }
     function handleLocationChange(value, name) {
         if(name === "origin"){
@@ -121,7 +120,7 @@ export default function PostTrip(props) {
     }
     const submitTrip = async () => {
         try {
-            await firestore.collection("trips").add({...state});
+            await firestore.collection("trips").add({...state, departTime});
         }
         catch (error) {
             console.log("Create Trip error", error);
@@ -134,8 +133,8 @@ export default function PostTrip(props) {
             console.log({...state});
         }
         else {
-            //const toSubmitTime = state.departTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            // setState({...state, departTime: toSubmitTime})
+            departTime = timeToPick.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            console.log(departTime);
             console.log({...state});
             submitTrip();
             setSubmit(true);
@@ -199,7 +198,7 @@ export default function PostTrip(props) {
                                                     className={classes.dateTimePicker}
                                                     name="departTime"
                                                     margin="normal"
-                                                    value={state.departTime}
+                                                    value={timeToPick}
                                                     onChange={handleTimeChange}
                                                     KeyboardButtonProps={{
                                                         'aria-label': 'change time',

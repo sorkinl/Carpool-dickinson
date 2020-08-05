@@ -21,11 +21,11 @@ export default function StyleTrip (props) {
     const trip = props.trip;
     //get trip id from trip object that is coming from TripList
     const tripId = props.trip.id;
-
     //connect with firestore and retrieve the data directly from the firestore
     useFirestoreConnect([
         { collection: 'trips' }
     ]);
+
     //get trip object that has qeuried tripId
     const tripToEdit = useSelector((state) => state.firestore.data.userTrips[tripId]);
 
@@ -88,7 +88,7 @@ export default function StyleTrip (props) {
                 <p className="sub-text">
                     <span className="icon-circle">
                         <FontAwesomeIcon className="trip-icon trip-icon--time" icon={faClock}></FontAwesomeIcon>
-                    </span>{trip.departTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </span>{trip.departTime}
                 </p>
                 <p className="sub-text">
                     <span className="icon-circle">
