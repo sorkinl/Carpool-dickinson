@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 
 function SearchResult() {
   const trips = useSelector(state=>state.tripsReducer)
-  console.log(trips)
   const tripList = trips.trips.map((trip) => (
       <EachResult {...trip} />
 

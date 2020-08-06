@@ -3,6 +3,7 @@ import "./EachResult.scss";
 import { Avatar } from "@material-ui/core";
 
 function EachResult(props) {
+  console.log(props)
   return (
    
     <div className = "EachResult__main">
@@ -13,7 +14,7 @@ function EachResult(props) {
             
           </div>
           <div className = "EachResult__date">
-           {props.departDate}
+           {/* {props.departDate} */}
           </div>
         </div>
         <div className = "EachResult__text">
