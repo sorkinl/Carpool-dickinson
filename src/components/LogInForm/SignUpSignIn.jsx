@@ -28,6 +28,7 @@ return(
     <div className="signUp__pic">
           <img src={svg} alt="" className="signUp__pic--illustration" />
         </div>
+        <div >
         <Tabs selectedTabClassName="signUp is-selected" className="signUp tabs" >
         <TabList>
            <Tab className="signUp tab">Log In</Tab>
@@ -35,14 +36,25 @@ return(
       </TabList>
 
       <TabPanel>
-
- 
+       <form className="signUp login-form"> 
+        <input class="signUp input" type="text" placeholder="Email" autocomplete="off" required />
+        <input class="signUp input" type="text" placeholder="Password" autocomplete="off" required />
+       </form>
+      </TabPanel>
+      <TabPanel>
+        <form  className="signUp login-form"> 
+        <input class="signUp input" type="text" placeholder="First Name" autocomplete="off" required />
+        <input class="signUp input" type="text" placeholder="Last Name" autocomplete="off" required />
+        <input class="signUp input" type="text" placeholder="Password" autocomplete="off" required />
+        <input class="signUp input" type="text" placeholder="Confirm Password" autocomplete="off" required />
+        </form>
       </TabPanel>
 
       {/* <div className="fields">
     <input placeholder="First Name" type="text" className="signUp input"></input>
     </div> */}
     </Tabs>
+    </div>
     </div>
   </header>
 );

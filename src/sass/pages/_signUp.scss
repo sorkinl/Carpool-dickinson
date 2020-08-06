@@ -33,45 +33,83 @@
 }
 }
 
-.input{
+.tabs{
+      height: 65vh;
+      width: 43%;
+      position: absolute;
+      top: 10%;
+      right: 0;
+      left: 52%;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1vw;
+
+}
+
+.tab{
+      top:-60%;
+      position: relative;
+      font-size: 2rem;
+      display: inline;
+      background: transparent;
+      color: gray;
+      outline: none;
+      margin: 1vw;
+
+}
+
+.is-selected{
+      color: black;
+      font-size: 2.5rem;
+}
+
+.login-form{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: transparent;
+}
+
+.fields{
       border: 0;
       outline: 0;
       background: transparent;
       border-bottom: 1px solid black;
 }
 
-.fields{
-      margin: 2 vh;
-      display: felx;
-      flex-direction: column;
-
-}
-
-.tabs{
-      height: 40vh;
-      width: 25vw;
-      position: absolute;
-      right: 5%;
-      top: 5%;
+.input{
+      top: -5%;
+      margin-bottom: 2vh;
+      margin-left: 10%;
+      display:block;
       background: transparent;
-
-}
-
-.tab{
-      position: relative;
-      margin: 1vw;
       font-size: 1.8rem;
-      display: inline;
-      right: 20%;
-      background: transparent;
-      color: gray;
-      outline: none;
-
-}
-
-.is-selected{
-      color: black;
-      font-size: 2.3rem;
-}
-
+      height: 5.5rem;
+      width: 120%;;
+      padding-top: 1.5rem;
+      border: none;
+      border-bottom:1px solid $color-tertiary-dark;
+      &::placeholder{
+            font-size: 1.5rem;
+        -webkit-transform:translateY(0px);
+          transform:translateY(0px);
+        -webkit-transition:.5s;
+          transition:.5s;
+      }
+      &:hover,
+      &:focus,
+      &:active:focus{
+        color: $color-tertiary-dark;
+        outline:none;
+        border-bottom:1px solid $color-tertiary-dark;
+        &::placeholder{
+          position:relative;
+          -webkit-transform:translateY(-20px);
+          transform:translateY(-20px);
+          
+        }
+      }
+    }
 }
