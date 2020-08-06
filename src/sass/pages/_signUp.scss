@@ -80,7 +80,7 @@
 }
 
 .input{
-      top: -5%;
+      top: -8%;
       margin-bottom: 2vh;
       margin-left: 10%;
       display:block;
@@ -90,7 +90,7 @@
       width: 120%;;
       padding-top: 1.5rem;
       border: none;
-      border-bottom:1px solid $color-tertiary-dark;
+      border-bottom:1px solid $color-grey-dark;
       &::placeholder{
             font-size: 1.5rem;
         -webkit-transform:translateY(0px);
@@ -101,7 +101,7 @@
       &:hover,
       &:focus,
       &:active:focus{
-        color: $color-tertiary-dark;
+        color: $color-black;
         outline:none;
         border-bottom:1px solid $color-tertiary-dark;
         &::placeholder{

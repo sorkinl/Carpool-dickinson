@@ -81,10 +81,23 @@
         float: right;
         cursor: default;
         outline: none;
-
-
     }
     
+    &--signUp{
+        font-size: 1.8rem;
+        color: $color-black;
+        background-color: transparent;
+        width: 80%;
+        text-align: center;
+        margin-top: 0;
+        border: 2px solid  $color-tertiary-dark;
+        padding: 0.5rem 0.5rem;
+        border-radius: 100px;
+        cursor: default;
+        outline: none;
+        margin-top: -10%;
+
+    }
     
     &::after {
         content: "";

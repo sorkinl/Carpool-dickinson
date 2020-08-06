@@ -39,6 +39,7 @@ return(
        <form className="signUp login-form"> 
         <input class="signUp input" type="text" placeholder="Email" autocomplete="off" required />
         <input class="signUp input" type="text" placeholder="Password" autocomplete="off" required />
+        <a className="btn btn--signUp">Log in</a>
        </form>
       </TabPanel>
       <TabPanel>
@@ -47,6 +48,8 @@ return(
         <input class="signUp input" type="text" placeholder="Last Name" autocomplete="off" required />
         <input class="signUp input" type="text" placeholder="Password" autocomplete="off" required />
         <input class="signUp input" type="text" placeholder="Confirm Password" autocomplete="off" required />
+        <a className="btn btn--signUp">Sign up</a>
+
         </form>
       </TabPanel>
 
