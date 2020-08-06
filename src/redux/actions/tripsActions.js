@@ -46,13 +46,13 @@ export function getTrips(payload){
             const end1 = text1.replace(/.$/, c => String.fromCharCode(c.charCodeAt(0) + 1));
 
             const text2= payload.originTitle;
-            const end2 = text1.replace(/.$/, c => String.fromCharCode(c.charCodeAt(0) + 1));
+            const end2 = text2.replace(/.$/, c => String.fromCharCode(c.charCodeAt(0) + 1));
 
             const getTrips =  await trips
-                .where('destTitle', '>=', text1)
-                .where('destTitle', '<', end1)
-                .where('originTitle', '>=', text2)
-                .where('originTitle', '<', end2)
+                .where('destTitle', '==', text1)
+                // .where('destTitle', '<', end1)
+                .where('originTitle', '==', text2)
+                // .where('originTitle', '<', end2)
                 
                 .get()
                 .catch((e)=>{console.log(e)});
