@@ -1,0 +1,237 @@
+  $white-light-gray  : #f9f9f9;
+
+.setting {
+  left: 46%;
+  transform: translateX(-50%);
+  position: relative;
+  top:5rem;
+  background: $color-white;
+  // padding: 4rem;
+  margin-bottom: 35rem;
+  width: 93%;
+  height: 90px;
+  // box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.06);
+  border-radius: 2rem 2rem 0rem 0rem;
+  
+  .setting-section-title {
+    position: inherit;
+    color: grey;
+    text-transform: uppercase;
+    font-family:  "Lato", sans-serif;
+    font-size: 15px;
+    top: 3.5rem;
+    left: 4rem;
+    bottom: 4rem;
+  }
+
+  @mixin setting-user-select() {
+    user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+  }
+
+  #aspect-content {
+    margin: 7.8rem 0 0;
+    font-family: "Lato", sans-serif;
+      * {
+        box-sizing: border-box;
+      }
+  }
+  .aspect-tab {
+    position: relative;
+    // width: 100%;
+    // max-width: 93%;
+    margin: 0 auto 7px;
+    border-radius: 0.5rem;
+    background-color: $color-white;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    transition: box-shadow .2s, opacity .4s;
+    
+    &:hover {
+      box-shadow: 0 4px 10px 0 rgba(0, 0, 0, .11);
+    }
+  }
+  .aspect-input {
+    display: none;
+  }
+  .aspect-input:checked ~ .aspect-content + .aspect-tab-content {
+    max-height: 3000px;
+  }
+  .aspect-input:checked ~ .aspect-content:after {
+      transform: rotate(0);
+  }
+  .aspect-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    max-height: 80px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+    z-index: 1;
+    cursor: pointer;
+    &:hover ~ .aspect-content:after {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTI0IDI0SDBWMGgyNHoiIG9wYWNpdHk9Ii44NyIvPgogICAgICAgIDxwYXRoIGZpbGw9IiM1NTZBRUEiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTE1Ljg4IDE1LjI5TDEyIDExLjQxbC0zLjg4IDMuODhhLjk5Ni45OTYgMCAxIDEtMS40MS0xLjQxbDQuNTktNC41OWEuOTk2Ljk5NiAwIDAgMSAxLjQxIDBsNC41OSA0LjU5Yy4zOS4zOS4zOSAxLjAyIDAgMS40MS0uMzkuMzgtMS4wMy4zOS0xLjQyIDB6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=');
+    }
+  }
+  .aspect-content {
+    position: relative;
+    display: block;
+    height: 100px;
+    margin: 0;
+    padding: 0 87px 0 30px;
+    font-size: 0;
+    white-space: nowrap;
+    cursor: pointer;
+    @include setting-user-select();
+    &:before,
+    &:after  {
+      content: '';
+      display: inline-block;
+      vertical-align: middle;
+    }
+    &:before {
+      height: 100%;
+    }
+    &:after {
+      position: absolute;
+      width: 24px;
+      height: 100%;
+      right: 30px;
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTI0IDI0SDBWMGgyNHoiIG9wYWNpdHk9Ii44NyIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNBOUFDQUYiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTE1Ljg4IDE1LjI5TDEyIDExLjQxbC0zLjg4IDMuODhhLjk5Ni45OTYgMCAxIDEtMS40MS0xLjQxbDQuNTktNC41OWEuOTk2Ljk5NiAwIDAgMSAxLjQxIDBsNC41OSA0LjU5Yy4zOS4zOS4zOSAxLjAyIDAgMS40MS0uMzkuMzgtMS4wMy4zOS0xLjQyIDB6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=');
+      background-repeat: no-repeat;
+      background-position: center;
+      transform: rotate(180deg);
+      transition: 0.2s;
+    }
+  }
+  .aspect-name {
+    text-transform: uppercase;
+    display: inline-block;
+    width: 75%;
+    margin-left: 1.6rem;
+    font-weight: 600;
+    color: #4B5F92;
+    white-space: normal;
+    text-align: left;
+    vertical-align: middle;
+  }
+  //all-opinions,
+  .aspect-name {
+    font-size: 17px;
+    line-height: 22px;
+  }
+
+  .aspect-content + .aspect-tab-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .1s;
+  }
+  .aspect-content > div {
+    display: inline-block;
+  }
+  .aspect-content > div {
+    vertical-align: middle;
+  }
+  .aspect-info {
+    width: 60%;
+    white-space: nowrap;
+    font-size: 0;
+    &:before {
+      content: '';
+      display: inline-block;
+      height: 44px;
+      vertical-align: middle;
+    }
+  }
+  .aspect-tab-icon {
+    position: relative;
+    font-size: 21px;
+    color: grey;
+    text-align: left;
+    vertical-align: middle;
+    margin-left: 1.6rem;
+  }
+  // @include chart(44px, 4px);
+  .aspect-tab-content {
+    background-color: $white-light-gray;
+    font-size: 0;
+    text-align: justify;
+    border-radius: 0 0 0.5rem 0.5rem;
+    // &--lastTab {
+    //   margin-bottom: 15rem;
+    // }
+  }
+  .sentiment-wrapper {
+    padding: 24px 30px 30px;
+  }
+  .sentiment-wrapper > div {
+    display: inline-block;
+    width: 33.3%;
+    max-width: 390px;
+    padding: 0 5px;
+    box-sizing: border-box;
+    vertical-align: top;
+    cursor: default;
+  }
+  // .sentiment-wrapper > div > div {
+  //   width: 100%;
+  //   padding: 16px 24px 20px;
+  //   box-sizing: border-box;
+  //   border-radius: 2rem;
+  //   background-color: #fff;
+  //   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
+  //   // border: 1px solid #ececec;
+  //   text-align: left;
+  // }
+  @media screen and (max-width: 800px) {
+    .aspect-label {
+      max-height: 102px;
+    }
+    .aspect-content {
+      height: auto;
+      padding: 10px 87px 10px 30px;
+      &:before {
+        display: none;
+      }
+      &:after {
+        top: 0;
+      }
+    }
+    .aspect-content > div {
+      display: block;
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: 750px) {
+    .sentiment-wrapper > div {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+    .sentiment-wrapper > div:not(:first-child) {
+      margin-top: 10px;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .aspect-label {
+      max-height: 140px;
+    }
+    .aspect-stat > div {
+      display: block;
+      width: 100%;
+    }
+    .all-opinions {
+      margin-bottom: 10px;
+    }
+    .all-opinions + div > span:first-child {
+      margin: 0;
+    }
+  }
+}

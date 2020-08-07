@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from './Profile/Profile';
 import TripArea from './TripArea';
-import Record from './Record';
+import Setting from './Setting';
 import {
   Grid, 
   CssBaseline, 
@@ -27,13 +27,16 @@ export default function Account(props) {
               </Grid>
             
               <Grid item xs>
-                  <Grid container direction="column" spacing={2}>
-                      <Grid container spacing={1} className={classes.container}>
+                  <Grid container direction="column" spacing={1}>
+                      {/* <Grid container spacing={1} className={classes.container}>
                           <Record/>
-                      </Grid>
+                      </Grid> */}
                       <Grid item xs>
-                          <TripArea />  
+                          <Setting/>
                       </Grid>
+                      {/* <Grid item xs>
+                          <TripArea />  
+                      </Grid> */}
                   </Grid>    
               </Grid>
             </Grid>

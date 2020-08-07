@@ -9,17 +9,24 @@
 
 @import "components/button";
 @import "components/profile-card";
-@import "components/profile-tab";
+@import "components/trip-tab";
 @import "components/trip-card";
+@import "components/trip-card-dash";
 @import "components/feature-box";
 @import "components/tabs";
 @import "components/nav-dashboard";
 @import "components/side-nav-dashboard";
 @import "components/console";
 @import "components/edit-popup";
+@import "components/setting";
+@import "components/edit-profile";
+@import "components/loader";
+@import "components/post-trip";
+
 @import "layout/header";
 @import "layout/dashboard-layout";
 @import "layout/navigation";
 @import "layout/grid";
 @import "layout/account";
 @import "pages/signUp";
+@import "layout/chat-layout";

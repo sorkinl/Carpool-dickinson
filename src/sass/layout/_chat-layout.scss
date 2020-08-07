@@ -1,0 +1,113 @@
+.chat-container{
+    width: 100vw;
+    display: flex;
+    height: 92vh;
+}
+
+.chat-rightbar{
+    flex: 0 0 20%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-left: 1px solid $color-grey-dark-3;
+    &__image{
+    height: 20rem;
+    width: 20rem;
+    border-radius: 1000rem;
+    margin-top: 5rem;
+    margin-right: 0;
+    }
+    &__name{
+        font-size: 2.2rem;
+        margin-top: 2rem;
+        font-weight: 700;
+    }
+
+    &__major{
+        font-size: 1.3rem;
+    }
+}
+.chat-sidebar{
+    display: flex;
+    flex: 0 0 15%;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid $color-grey-dark-3;
+    &__link:link, &__link:visited{
+        text-decoration: none;
+        border-radius: 1000rem;
+    }
+    &__link{
+        cursor: pointer;
+        margin-top: 4rem;
+        padding: .5rem 2rem;
+        font-size: 1.5rem;
+        border-radius: 1rem;
+        background-color: #ffffff;
+        border: 2px solid $color-primary;
+    }
+
+    &__list{
+        margin-top: 5rem;
+        list-style: none;
+    }
+    &__list-element{
+        font-size: 1.4rem;
+        margin: 1rem;
+        border: 1px solid $color-tertiary;
+        padding: .5rem 2rem;
+        text-align: center;
+        border-radius: 1000rem;
+    }
+}
+.chat-window{
+    flex: 0 0 65%;
+    
+    &__top{
+        display: flex;
+        height: 90%;
+        border-bottom: 1px solid $color-grey-dark-3;
+        flex-direction: column;
+    }
+
+    &__message{
+        color:#fff;
+        margin: 1rem;
+        padding: .5rem 1.5rem;
+        border-radius: 5rem;
+        font-size: 1.3rem;
+        background-color: $color-primary-light;
+        display: inline-block;
+        &--in{
+           align-self:flex-end;
+        }
+        &--out{
+            align-self: flex-start;
+        }
+    }
+
+    &__bottom{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        min-height: 2.5rem;
+        height: 10%;
+        &--input{
+            margin-left: 3rem;
+            width: 60rem;
+            height: 70%;
+        }
+        &--button{
+            background-color: $color-tertiary;
+        color: $color-white;
+        padding: 0.7rem 0.7rem;
+        text-align: center;
+        font-size: 1.2rem;
+        border-radius: 100px;
+        cursor: pointer;
+        width: 7rem;
+        outline: none;
+        border: none;
+        }
+    }
+}

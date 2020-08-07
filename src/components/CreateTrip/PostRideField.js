@@ -19,7 +19,7 @@ import {
 } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import DateFnsUtils from '@date-io/date-fns';
-import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
+import {MuiPickersUtilsProvider, KeyboardDatePicker, KeyboardTimePicker} from '@material-ui/pickers';
 import { useSelector } from "react-redux";
 import { useFirestore } from 'react-redux-firebase';
 import ConfirmField from "./ConfirmField";
@@ -239,7 +239,7 @@ export default function PostRideField() {
                                                 margin="normal"
                                                 label="Date"
                                                 name="departDate"
-                                                minDate={new Date()}
+                                                minDate={new Date().setHours(0,0,0,0)}
                                                 value={state.departDate}
                                                 onChange={handleDateChange}
                                             />
@@ -261,6 +261,22 @@ export default function PostRideField() {
                                             placeholder="eg: 8am/9:30am-2pm/Anytime"
                                             onChange={handleChange}
                                         />
+                                        {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                            <KeyboardTimePicker
+                                                inputVariant="filled"  
+                                                //orientation="port" 
+                                                // variant=""
+                                                margin="normal"
+                                                id="time-picker"
+                                                label="Time picker"
+                                                //value={state.departTime} 
+                                                //onChange={handleDateChange}
+                                                KeyboardButtonProps={{
+                                                    'aria-label': 'change time',
+                                                }}
+                                            />
+                                        </MuiPickersUtilsProvider> */}
+                                        
                                     </Grid>
                                 </Grid>
                                 <Grid container spacing={2}>

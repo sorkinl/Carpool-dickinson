@@ -23,6 +23,8 @@ import { withRouter } from 'react-router-dom';
 import MainPage from "./pages/FrontPage/MainPage";
 import SearchResult from "./components/SearchResults/SearchResult"
 import Dashboard from "./pages/Dashboard/Dashboard";
+import EditProfile from "./components/Account/Profile/EditProfile";
+import PostTrip from "./components/CreateTrip/PostTrip";
 
 
 const Routes = withRouter(({location})=>{ 
@@ -33,18 +35,24 @@ const Routes = withRouter(({location})=>{
             <Route path="/" exact component={MainPage} />
             <Route path="/search" component={SearchPage} />
             <PrivateRoute path="/account" component={Account} />
+            <PrivateRoute path="/edit-profile" component={EditProfile}/>
             <PrivateRoute path="/chat" component={MainChat} />
+            <Route path="/loading" component={Loading} />
             <Route path="/logIn" component={LogIn} />
             {/* <Route path="/" component={SignUp} /> */}
             {/* <Route path="/landingPage" component={LandingPage} /> */}
-            <Route path="/edit/:tripId" component={EditForm} />
-            <Route path="/verifyEmail" component={EmailVerify}/>
             {/* <Route path="/registrationForm" component={ProfileCreate} /> */}
-            <Route path = "/postRide" component = {PostRideField}/>
-            <Route path = "/postRide/confirm" component = {ConfirmField}/>
+            <Route path="/signUp" component={SignUp} />
+            <Route path="/landingPage" component={LandingPage} />
+            <PrivateRoute path="/edit/:tripId" component={EditForm} />
+            <Route path="/verifyEmail" component={EmailVerify}/>
+            <Route path="/registrationForm" component={ProfileCreate} />
+            <PrivateRoute path = "/postRide" component = {PostRideField}/>
+            <PrivateRoute path = "/postTrip" component = {PostTrip}/>
+            <PrivateRoute path = "/postRide/confirm" component = {ConfirmField}/>
             <Route path = "/frontPageTrial" component = {FrontPageFigma}/>
             <Route path = "/searchResult" component = {SearchResult}/>
-            <Route path = "/dashboard" component = {Dashboard}/>
+            <PrivateRoute path = "/dashboard" component = {Dashboard}/>
           </Switch>
         </div>
   )

@@ -1,22 +1,31 @@
 import React, {useState} from "react";
+import ReactDOM from "react-dom";
 import {
     Grid,
     TextField,
     Typography
 } from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
 import axios from "axios";
 import {Autocomplete} from '@material-ui/lab'
 import LocationOnIcon from "@material-ui/icons/LocationOn";
+import  { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 
 //Questions
 // + why need locationID?
 
+const theme = createMuiTheme({
+    overrides: {
+        MuiAutoComplete: {
+          padding: "1.3rem 0",
+        }
+    }
+});
+
 const useStyles = makeStyles((theme) => ({
   textField: {
-    marginLeft: theme.spacing(4),
-    marginRight: theme.spacing(1),
-    width: "45ch",
+    width: "50rem",
+    paddingBottom: "1.3rem",
+    border: "none",
   },
   icon: {
     color: theme.palette.text.secondary,
@@ -120,44 +129,58 @@ const AutoOrigin = (props) => {
     }
   }
   return (<>{/* <div><TextField type="text" value={text} onChange={onTextChanged} variant={props.variant}/></div> <div>{renderSuggestions()}</div> */}
-  <Autocomplete
-  options={suggestions}
-  onChange={(event,value) => suggestionSelected(value)}
-  //groupBy={(option) => option.firstLetter}
-  getOptionLabel={(option) => option.label}
-  style={{ width: 300 }}
-  renderInput={(params) =>
-      <TextField {...params}
-                 value={text}
-                 onChange={onTextChanged}
-                  className={classes.textField}
-                  name="originTitle"
-                  required
-                  fullWidth
-                  variant="filled"
-                  placeholder="From"
-                  label="Origin"
-      />}
-  renderOption={(option) => {
-      return (
-          <Grid container alignItems="center">
-            <Grid item>
-              <LocationOnIcon className={classes.icon}/>
+  {/* <ThemeProvider theme={theme}> */}
+    <Autocomplete
+      options={suggestions}
+      onChange={(event,value) => suggestionSelected(value)}
+      //groupBy={(option) => option.firstLetter}
+      getOptionLabel={(option) => option.label}
+      style={{ width: 300 }}
+      renderInput={(params) =>
+      
+          <TextField {...params}
+              value={text}
+              onChange={onTextChanged}
+              className={classes.textField}
+              name="originTitle"
+              required
+              placeholder="From"   
+          />
+        // <input {...params} 
+        //       type="text" 
+        //       value={text} 
+        //       //id="origin-field" 
+        //       onChange={onTextChanged} 
+        //       required 
+        //       placeholder="From"
+        //       name="originTitle"
+        //       //ref={textInput}
+        // />
+      }
+    renderOption={(option) => {
+        return (
+            <Grid container alignItems="center">
+              <Grid item>
+                <LocationOnIcon className={classes.icon}/>
+              </Grid>
+              <Grid item xs>
+                {/*{parts.map((part, index) => (*/}
+                {/*    <span key={index} style={{fontWeight: part.highlight ? 700 : 400}}>*/}
+                {/*          {part.text}*/}
+                {/*        </span>*/}
+                {/*))}*/}
+                <Typography variant="h5" color="textSecondary">
+                  {option.label}
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item xs>
-              {/*{parts.map((part, index) => (*/}
-              {/*    <span key={index} style={{fontWeight: part.highlight ? 700 : 400}}>*/}
-              {/*          {part.text}*/}
-              {/*        </span>*/}
-              {/*))}*/}
-              <Typography variant="body1" color="textSecondary">
-                {option.label}
-              </Typography>
-            </Grid>
-          </Grid>
-      );
-  }}
-  /></>);
+        );
+    }}
+    />
+  {/* </ThemeProvider> */}
+  </>);
 };
 
+ReactDOM.render(<AutoOrigin />, document.getElementById("root"));
+// export default withStyles(styles)(NavigationBar);
 export default AutoOrigin;
