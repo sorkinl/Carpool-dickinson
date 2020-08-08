@@ -51,8 +51,8 @@ export default function EditProfile(props) {
     const uid = currentUser.uid;
     
     const [isEdited, setEdited] = useState(false);
-    const [isSubmit, setSubmit] = useState(false);
-    const [error, setError] = useState(false);
+    const [isSubmit, setSubmit] = useState('');
+    const [emptyError, setEmptyError] = useState(false);
     
     const [input, setInput] = useState({
         firstName: user.firstName,
@@ -74,32 +74,43 @@ export default function EditProfile(props) {
         setEdited(true);
     };
     function handleClose() {
-        setError(false);
+        setEmptyError(false);
+        setSubmit(false);
     };
     function checkEmptyInput() {
         if(input.firstName === ""
             || input.lastName === ""
             || input.email === ""
-            || input.school) {
+            || input.school === "") {
             return false;
         } else {
             return true;
         }
     }
+
     function handleSubmit(e) {
         e.preventDefault();
         if (checkEmptyInput() === false) {
-            setError(true);
+            setEmptyError(true);
         } else {
-            firestore
-                .collection("users")
-                .doc(uid)
-                .update({...input}
-                );
-            setSubmit(true);
-        }  
+            submitProfile();
+        }
     }
-    console.log("input",input);
+    
+    const submitProfile = async () => {
+        try {
+            await firestore
+                    .collection("users")
+                    .doc(uid)
+                    .update({...input}
+                );
+            setSubmit("submit-success");    
+        }
+        catch (error) {
+            console.log("Update profile error", error);
+            setSubmit("submit-error");
+        }
+    }
     return (
         <CssBaseline>
         <header className="account-page">
@@ -210,20 +221,21 @@ export default function EditProfile(props) {
                         </div>
                     </div>
                 </form>
-                <Snackbar open={isSubmit}
+                <Snackbar open={isSubmit === "submit-success"}
+                            onClose={handleClose} 
                             autoHideDuration={6000}
                             anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'center',
+                                vertical: 'top',
+                                horizontal: 'center',
                 }}>
                     <ThemeProvider theme={defaultMaterialTheme}>
-                        <Alert severity="success">
-                            Profile updated successfully!
+                        <Alert onClose={handleClose} severity="success">
+                            Profile Updated Successfully!
                         </Alert>
                     </ThemeProvider>
                 </Snackbar>
 
-                <Snackbar open={error}
+                <Snackbar open={emptyError}
                               autoHideDuration={6000}
                               onClose={handleClose}
                               anchorOrigin={{
@@ -232,10 +244,23 @@ export default function EditProfile(props) {
                               }}>
                         <ThemeProvider theme={defaultMaterialTheme}>
                             <Alert onClose={handleClose} severity="error">
-                                Required fields missing!
+                                Required Fields Missing!
                             </Alert>
                         </ThemeProvider>
-                    </Snackbar>
+                </Snackbar>
+                <Snackbar open={isSubmit === "submit-error"}
+                            autoHideDuration={4000}
+                            onClose={handleClose}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'center',
+                            }}>
+                        <ThemeProvider theme={defaultMaterialTheme}>
+                            <Alert onClose={handleClose} severity="error">
+                                Error Updating Profile :( Try Again 
+                            </Alert>
+                        </ThemeProvider>
+                </Snackbar>
             </div>
        </header>
      </CssBaseline>

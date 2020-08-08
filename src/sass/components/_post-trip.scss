@@ -51,9 +51,6 @@ $diffRatio: ($contW - $imgW) / $contW;
         }
     }
     .post-trip-main {
-
-
-
         h2 {
             margin-left: 30rem;
             color: $color-primary-light;
@@ -68,23 +65,21 @@ $diffRatio: ($contW - $imgW) / $contW;
             border: none;
             outline: none;
             background: none;
-            font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-        }
-            
+            // font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+        }  
         @mixin signUpActive {
-            .cont.s--signup & {
+            .post-trip-cont.s--signup & {
                 @content;
             }
-        }
-            
+        }       
         .post-trip-cont {
             overflow: hidden;
             position: relative;
             width: 97%;
             min-height: fit-content;
-            height: 64rem;
+            height: 66rem;
             background: $color-white;
-            border-radius: 0.4rem;
+            border-radius: 2rem;
             box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
             padding-top: 4.5rem;
             &__boxTitle {
@@ -95,8 +90,6 @@ $diffRatio: ($contW - $imgW) / $contW;
                 width: 25rem;
                 height: 5.5rem;
                 margin-bottom: .5rem;
-                // margin-left: -6rem;
-                // margin-bottom: 2.5rem;
                 animation-name: postTripBoxTitle;
                 animation-duration: 1s;
                 animation-timing-function: ease-out;
@@ -132,15 +125,62 @@ $diffRatio: ($contW - $imgW) / $contW;
             top: 0;
             width: $contW;
             height: 100%;
-            // padding-left: $imgW;
             background-color: $color-primary-light;
             transition: transform $switchAT ease-in-out;
             box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
             @include signUpActive {
                 transform: translate3d($formW * -1,0,0);
             }
-        }
-            
+        }  
+        .post-trip-confirm {
+            overflow: hidden;
+            position: absolute;
+            z-index: 3;
+            top: 0;
+            width: 106rem;
+            height: 100%;
+            background-color: $color-primary-light;
+            // transition: transform $switchAT ease-in-out;
+            box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+            animation-name: postTripConfirm;
+            animation-duration: .6s;
+            animation-timing-function: ease-out;
+            &.center-illustration {
+                position: absolute;
+                margin-top: 11rem;
+                margin-left: -7rem;
+                text-align: center;
+                transition: transform 1.2s ease-in-out;
+                box-shadow: none;
+                &.center-image {
+                    display: inline-block;
+                    height: 22rem;
+                    width: auto;
+                }
+            }
+            &__text {
+                color: $color-white;
+                text-align: center;
+                position: relative;
+                z-index: 3;
+                transition: transform 1.2s ease-in-out;
+                &--header {
+                    text-transform: capitalize;
+                    font-size: 2.5rem;
+                    margin-top: 14rem;
+                    z-index: 4;
+                    font-weight: bold;
+                }
+                &--caption {
+                    font-size: 1.6rem;
+                    margin-top: 1rem;
+                }
+            }
+        }  
+        @keyframes postTripConfirm{
+            from {margin-left: 110rem;}
+            to {margin-left: 0rem;}
+        }    
         .post-trip-img {
             overflow: hidden;
             z-index: 2;
@@ -159,7 +199,7 @@ $diffRatio: ($contW - $imgW) / $contW;
                 width: $contW;
                 height: 100%;
                 background-color: $color-primary-light;
-                // background-size: cover;
+                background-size: cover;
                 transition: transform $switchAT ease-in-out;
             }
             
@@ -190,6 +230,13 @@ $diffRatio: ($contW - $imgW) / $contW;
                 color: $color-white;
                 transition: transform $switchAT ease-in-out;
                 
+                &.mini-loader {
+                    overflow: hidden;
+                    position: relative;
+                    margin-top: -8rem;
+                    padding: 0 4rem;
+                    transition: transform 1.2s ease-in-out;
+                }
                 &.side-illustration {
                     position: absolute;
                     z-index: 2;
@@ -316,7 +363,7 @@ $diffRatio: ($contW - $imgW) / $contW;
             margin: .8rem 0 .3rem 0;
             // border-bottom: .1rem solid rgba(0,0,0,0.4);
         }
-        .post-trip-sign-in {
+        .post-trip-front-page {
             transition-timing-function: ease-out;
           
             @include signUpActive {

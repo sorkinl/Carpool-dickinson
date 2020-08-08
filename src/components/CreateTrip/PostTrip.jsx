@@ -6,6 +6,7 @@ import pink from '@material-ui/core/colors/pink';
 import { useSelector } from "react-redux";
 import { useFirestore } from 'react-redux-firebase';
 import firebase from "../../firebase/firebaseConfig";
+import Loader from 'react-loader-spinner'
 import {
     CssBaseline,
     Snackbar
@@ -18,6 +19,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import bmcYellow from "../../assets/images/bymycar-yellow.svg";
 import mountain from "../../assets/images/mountain.svg";
 import adventure from "../../assets/images/adventure.svg";
+import world from "../../assets/images/world.svg";
 
 import AutoOrigin from "./AutoOrigin";
 import AutoDestination from "./AutoDestination";
@@ -53,7 +55,10 @@ export default function PostTrip(props) {
     const user = useSelector(state => state.firebase.profile);
     const firestore = useFirestore();
     const [error, setError] = React.useState(false);
-    const [submit, setSubmit] = React.useState(false);
+    const [isSubmitted, setSubmit] = React.useState(false);
+    const [showSpinner, setSpinner] = React.useState("");
+
+    const [showBlue, setBlue] = React.useState("post-trip-cont");
 
     let currentDate = new Date();
     let departTime ='';
@@ -79,7 +84,6 @@ export default function PostTrip(props) {
         photoUrl: user.photoUrl,
     });
     const [timeToPick, setTimePick] = React.useState(new Date());
-
     function handleChange(e) {  
         const { name, value } = e.target;
         if (name === "selector") {
@@ -109,6 +113,7 @@ export default function PostTrip(props) {
     function handleClose() {
         setError(false);
     };
+
     function checkEmptyInput() {
         if(state.originTitle === ""
             || state.destTitle === ""
@@ -120,27 +125,33 @@ export default function PostTrip(props) {
     }
     const submitTrip = async () => {
         try {
+            setSubmit(true);
+            setSpinner(true);
             await firestore.collection("trips").add({...state, departTime});
+            setSpinner(false);
+            setBlue("post-trip-cont s--signup");
         }
         catch (error) {
             console.log("Create Trip error", error);
+        }
+        finally {
+            console.log("End of write");
+            setSpinner(false);
         }
     }
     function handleSubmit(e) {
         e.preventDefault();
         if(checkEmptyInput() === false) {
             setError(true);
-            console.log({...state});
+            console.log({...state}, "empty inputs");
         }
         else {
             departTime = timeToPick.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            console.log(departTime);
-            console.log({...state});
+            console.log({...state}, "success");
             submitTrip();
-            setSubmit(true);
         }
     };
-    // console.log("curren time: ",currentTime);
+    console.log("show spinner: ", showSpinner);
     return (
         <CssBaseline>
             <header className="account-page">
@@ -149,14 +160,14 @@ export default function PostTrip(props) {
                             <span><FontAwesomeIcon className="post-trip-icon" icon={faChevronLeft}></FontAwesomeIcon></span>
                             Back to dashboard
                     </a>
+
                     <div className="post-trip-main">
-                        <div className="post-trip-cont">
+                         <div className="post-trip-cont">
                             <div className="post-trip-cont__boxTitle">
                                 <p className="post-trip-cont__boxTitle__text">Post A Ride</p>
                             </div>
-                            {/* <h2>Post A Ride</h2> */}
-                            <div className="post-trip-form post-trip-sign-in">
-                                <form >
+                            <div className="post-trip-form post-trip-front-page">
+                                <form>
                                     <label htmlFor="origin-field">
                                         <span>Origin*</span>
                                         <AutoOrigin id="origin-field" onSuggestionSelect={handleLocationChange}/>
@@ -243,7 +254,6 @@ export default function PostTrip(props) {
                                             </div>
                                         </form>
                                     </label>
-                                   
                                     <label htmlFor="description-field">
                                         <span>Description</span>
                                         <br></br>
@@ -266,12 +276,31 @@ export default function PostTrip(props) {
                                     <div className="post-trip-img__text m--up">
                                         <p>Ready to share your ride?</p>
                                     </div>
-                                    <div className="post-trip-img__btn" onClick={handleSubmit}>
-                                        <span className="m--up">Submit</span>
-                                        {/* <span className="m--in">Sign In</span> */}
-                                    </div>
+                                    { isSubmitted === false ? 
+                                        <div className="post-trip-img__btn" onClick={handleSubmit}>
+                                            <span className="m--up">Submit</span>
+                                        </div>
+                                    :   <div className="post-trip-img__text m--up mini-loader">
+                                            <Loader
+                                                type= "BallTriangle" //"ThreeDots"//
+                                                color="#ffffff"
+                                                height={100}
+                                                width={100}
+                                                visible={showSpinner === true}
+                                            />
+                                        </div>
+                                    } 
                                 </div>
                             </div>
+                            { showSpinner === false ? 
+                            <div className="post-trip-confirm">
+                                <p className="post-trip-confirm__text post-trip-confirm__text--header">Your trip has been posted!</p>
+                                <div className="post-trip-confirm center-illustration">
+                                    <img src={world} alt="" className="post-trip-confirm center-illustration center-image"/>
+                                </div>
+                                <p className="post-trip-confirm__text post-trip-confirm__text--caption">We'll notify you when someone books your trip</p>
+                            </div> 
+                            : "" }
                         </div>
                     </div>
                     <Snackbar open={error}

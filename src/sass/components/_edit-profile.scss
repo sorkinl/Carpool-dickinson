@@ -143,10 +143,10 @@ $back-btn-font-size: 1.8rem;
             overflow: hidden;
         }
     }
-    div[disabled] {
-        pointer-events: none;
-        opacity: 0.9;
-    }
+    // div[disabled] {
+    //     pointer-events: none;
+    //     opacity: 0.9;
+    // }
     .edit-profile-icon {
         font-size: $field-label-font-size;
         color: $color-primary;
@@ -181,6 +181,11 @@ $back-btn-font-size: 1.8rem;
             background-color: $color-tertiary;
             color: $color-white;
             // padding: 1.5rem 0rem;
+            &[disabled] {
+                pointer-events: none;
+                color: rgb(202, 202, 202);
+                background-color: $color-grey-dark-3;
+            }
         }
         &:hover {
             opacity: 0.7;

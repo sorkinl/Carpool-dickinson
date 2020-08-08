@@ -17,9 +17,8 @@ export default function Profile(props){
                 <div className="profile-card front">
                     {/* <div className="profile-card front__bkg-photo"></div> */}
                     <p className="section-name">Profile</p>
-                    <img className ="profile-card front__face-photo" 
-                        src={unnamed}
-                        //src={user.photoUrl}
+                    <img className ="profile-card front__face-photo"
+                        src={user.photoUrl}
                         alt={unnamed}/>
                     <div className="profile-card front__text">
                         <h3 className="profile-card front__text-header">{user.firstName} {user.lastName}</h3>
