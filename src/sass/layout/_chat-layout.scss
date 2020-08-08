@@ -79,10 +79,10 @@
         background-color: $color-primary-light;
         display: inline-block;
         &--in{
-           align-self:flex-end;
+           align-self:flex-start;
         }
         &--out{
-            align-self: flex-start;
+            align-self: flex-end;
         }
     }
 
