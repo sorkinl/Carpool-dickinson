@@ -97,7 +97,7 @@ const AutocompleteHERE = (props) => {
   onChange={(event,value) => suggestionSelected(value)}
   //groupBy={(option) => option.firstLetter}
   getOptionLabel={(option) => option.label}
-  style={{ width: 300 }}
+  style={{ width: 300}}
   renderInput={(params) => <TextField {...params} value={text} onChange={onTextChanged} label="With categories" variant="outlined" />}
 /></>);
 };
