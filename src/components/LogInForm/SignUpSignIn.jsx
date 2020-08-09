@@ -77,7 +77,7 @@ export default function SignUpSignIn() {
         <input onChange={handleChange} class="signUp input" type="text" name="lastName" placeholder="Last Name" autoComplete="lname" required />
         <input onChange={handleChange} class="signUp input" type="text" name="email" placeholder="Email" autoComplete="email" required />
         <input onChange={handleChange} class="signUp input" type="password" name="password" placeholder="Password" autoComplete="off"  required />
-        <input onChange={handleChange} class="signUp input" type="password" name="password2" placeholder="Confirm Password" autoComplete="off" required />
+        <input onChange={handleChange} class="signUp input--signup" type="password" name="password2" placeholder="Confirm Password" autoComplete="off" required />
         <a className="btn btn--signUp" onClick={handleSubmitSignup}>Sign up</a>
 
         </form>

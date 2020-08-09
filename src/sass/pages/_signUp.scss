@@ -38,7 +38,6 @@
       width: 43%;
       position: absolute;
       top: 10%;
-      right: 0;
       left: 52%;
       background: transparent;
       display: flex;
@@ -72,17 +71,12 @@
       background: transparent;
 }
 
-.fields{
-      border: 0;
-      outline: 0;
-      background: transparent;
-      border-bottom: 1px solid black;
-}
 
 .input{
+      position: relative;
       top: -12%;
-      margin-bottom: 2vh;
       margin-left: 10%;
+      margin-top: 1vh;
       display:block;
       background: transparent;
       font-size: 1.8rem;
@@ -91,10 +85,15 @@
       padding-top: 1.5rem;
       border: none;
       border-bottom:1px solid $color-grey-dark;
+
        &--login{
              @extend .input;
               margin-top: 2vh;
               top: -5%;
+        }
+        &--signup{
+              @extend .input;
+              margin-bottom: -18%;
         }
     
       &::placeholder{
