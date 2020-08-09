@@ -5,6 +5,7 @@ import {
     CssBaseline, 
     MenuItem,
     Snackbar,
+    Dialog,
 } from '@material-ui/core';
 import  { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -16,7 +17,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import guy from '../../../assets/images/edit_profile.svg';
 import girl  from '../../../assets/images/freelancer_blue.svg';
-
+import Loader from 'react-loader-spinner';
 //Select options of class year
 // const years = [
 //     { value: '2019', label: '2019',},
@@ -37,6 +38,13 @@ const defaultMaterialTheme = createMuiTheme({
             message: {
                 transition: "ease 3s"
             }
+        },
+        MuiDialog: {
+            paper: {
+                boxShadow: "none",
+                backgroundColor: "transparent",
+                top: "-9rem",
+            }
         }
     }
 });
@@ -51,8 +59,9 @@ export default function EditProfile(props) {
     const uid = currentUser.uid;
     
     const [isEdited, setEdited] = useState(false);
-    const [isSubmit, setSubmit] = useState('');
+    const [isSubmitted, setSubmit] = useState('');
     const [emptyError, setEmptyError] = useState(false);
+    const [open, setOpen] = useState(false);
     
     const [input, setInput] = useState({
         firstName: user.firstName,
@@ -64,18 +73,32 @@ export default function EditProfile(props) {
         classYear: user.classYear,
         hub: user.hub
     });
-   
-    console.log("CURRENT USER", currentUser);
-    console.log("user",user);
-
+    const initValue = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        school: user.school,
+        email: user.email,
+        phone: user.phone,
+        major: user.major,
+        classYear: user.classYear,
+        hub: user.hub
+    }
+    function checkNoEdit(key, value) {
+        if(initValue[key] === value) {
+            setEdited(false);
+        } 
+        else {
+            setEdited(true);
+        }      
+    }    
     function handleEdit(event) {
         const { name, value } = event.target;
         setInput((input) => ({ ...input, [name]: value }));
-        setEdited(true);
+        checkNoEdit(name, value);
     };
     function handleClose() {
         setEmptyError(false);
-        setSubmit(false);
+        setSubmit('');
     };
     function checkEmptyInput() {
         if(input.firstName === ""
@@ -87,16 +110,15 @@ export default function EditProfile(props) {
             return true;
         }
     }
-
     function handleSubmit(e) {
         e.preventDefault();
         if (checkEmptyInput() === false) {
             setEmptyError(true);
         } else {
+            setOpen(true);
             submitProfile();
         }
     }
-    
     const submitProfile = async () => {
         try {
             await firestore
@@ -104,13 +126,17 @@ export default function EditProfile(props) {
                     .doc(uid)
                     .update({...input}
                 );
-            setSubmit("submit-success");    
+            setOpen(false);
+            setSubmit("submit-success"); 
+            setEdited(false);   
         }
         catch (error) {
             console.log("Update profile error", error);
+            setOpen("inactive");
             setSubmit("submit-error");
         }
     }
+    console.log(isSubmitted);
     return (
         <CssBaseline>
         <header className="account-page">
@@ -221,7 +247,20 @@ export default function EditProfile(props) {
                         </div>
                     </div>
                 </form>
-                <Snackbar open={isSubmit === "submit-success"}
+                <ThemeProvider theme={defaultMaterialTheme}>
+                    <Dialog open={open} disableBackdropClick="true" disableEscapeKeyDown="true">
+                        <div className="edit-profile__loader">
+                            <Loader
+                                type= "BallTriangle" //"ThreeDots"//
+                                color="#fff"
+                                height={160}
+                                width={160}
+                                visible={open === true}
+                            />
+                        </div>                 
+                    </Dialog>
+                </ThemeProvider>
+                <Snackbar open={isSubmitted === "submit-success"}
                             onClose={handleClose} 
                             autoHideDuration={6000}
                             anchorOrigin={{
@@ -248,7 +287,7 @@ export default function EditProfile(props) {
                             </Alert>
                         </ThemeProvider>
                 </Snackbar>
-                <Snackbar open={isSubmit === "submit-error"}
+                <Snackbar open={isSubmitted === "submit-error"}
                             autoHideDuration={4000}
                             onClose={handleClose}
                             anchorOrigin={{
@@ -257,7 +296,7 @@ export default function EditProfile(props) {
                             }}>
                         <ThemeProvider theme={defaultMaterialTheme}>
                             <Alert onClose={handleClose} severity="error">
-                                Error Updating Profile :( Try Again 
+                                Error updating profile! Try again 
                             </Alert>
                         </ThemeProvider>
                 </Snackbar>

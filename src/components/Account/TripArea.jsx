@@ -21,6 +21,13 @@ export default function TripArea(props){
     ]);
     const userTrips = useSelector((state) => state.firestore.ordered.userTrips); //takes out array of trips queried above and takes it out of firestore reducer   
 
+    // const titles = ["Console", "Upcoming", "Past", "Posted"];
+    // const list = titles.map((item,i=titles.indexOf(item)+1) => 
+    //     <li title={item}>
+    //         <label for={"tab" + i} role="button">
+    //             <span>{item}</span>
+    //         </label>
+    //     </li>);
     return (
         <div class="trip-tab">
             <h4>My Trips</h4>

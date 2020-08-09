@@ -7,13 +7,14 @@ $switchAT: 1.2s;
 
 $radio-button-color: #c4f3ff;
 
-$field-label-font-size: 1.6rem;
-$input-font-size: 1.4rem;
+$field-label-font-size: 1.4rem;
+$input-font-size: 1.6rem;
 $heading-font-size: 2.5rem;
-$back-btn-font-size: 1.8rem;
+$back-btn-font-size: 1.6rem;
+$card-title-font-size: 2rem;
 
 $inputW: 50rem;
-$btnH: 4rem;
+$btnH: 4.5rem;
 $diffRatio: ($contW - $imgW) / $contW;
 
 .post-trip {
@@ -66,12 +67,7 @@ $diffRatio: ($contW - $imgW) / $contW;
             outline: none;
             background: none;
             // font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-        }  
-        @mixin signUpActive {
-            .post-trip-cont.s--signup & {
-                @content;
-            }
-        }       
+        }     
         .post-trip-cont {
             overflow: hidden;
             position: relative;
@@ -96,20 +92,30 @@ $diffRatio: ($contW - $imgW) / $contW;
                 &__text {
                     font-family: "Lato", sans-serif;
                     visibility: visible;
-                    font-size: $back-btn-font-size;
+                    font-size: $card-title-font-size;
+                    font-weight: bold;
                     color: $color-white;
                     text-transform: uppercase;
                     animation-name: boxTitle-text;
-                    animation-duration: 0.8s;
+                    animation-duration: 1.1s;
                     animation-timing-function: ease;
                 }
+            }
+            &--front-content {
+                &[disabled] {
+                    transform: translate(0, -120%);
+                    animation: hideMeUp ease-in .8s;
+                }
+            }
+            @keyframes hideMeUp {
+                0% {transform: translate(0, -0%);}
+                100% {transform: translate(0, -120%);}
             }
             @keyframes postTripBoxTitle{
                 from {width: 0rem;}
                 to {width: 25rem;}
             }
-        }
-            
+        }   
         .post-trip-form {
             position: relative;
             width: 74rem;
@@ -128,10 +134,8 @@ $diffRatio: ($contW - $imgW) / $contW;
             background-color: $color-primary-light;
             transition: transform $switchAT ease-in-out;
             box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
-            @include signUpActive {
-                transform: translate3d($formW * -1,0,0);
-            }
-        }  
+        } 
+        
         .post-trip-confirm {
             overflow: hidden;
             position: absolute;
@@ -140,21 +144,25 @@ $diffRatio: ($contW - $imgW) / $contW;
             width: 106rem;
             height: 100%;
             background-color: $color-primary-light;
-            // transition: transform $switchAT ease-in-out;
+            transition: transform $switchAT ease-in-out;
             box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
             animation-name: postTripConfirm;
-            animation-duration: .6s;
-            animation-timing-function: ease-out;
+            animation-duration: .9s;
+            animation-timing-function: ease-in-out;
             &.center-illustration {
                 position: absolute;
                 margin-top: 11rem;
                 margin-left: -7rem;
                 text-align: center;
-                transition: transform 1.2s ease-in-out;
                 box-shadow: none;
+                animation: fadeIn ease 1s;
+                -webkit-animation: fadeIn ease 1s;
+                -moz-animation: fadeIn ease 1s;
+                -o-animation: fadeIn ease 1s;
+                -ms-animation: fadeIn ease 1s;
                 &.center-image {
                     display: inline-block;
-                    height: 22rem;
+                    height: 20rem;
                     width: auto;
                 }
             }
@@ -162,25 +170,125 @@ $diffRatio: ($contW - $imgW) / $contW;
                 color: $color-white;
                 text-align: center;
                 position: relative;
-                z-index: 3;
-                transition: transform 1.2s ease-in-out;
+                z-index: 4;
+                transition: transform  .6s ease-in-out;
+                animation: fadeIn ease 1s;
+                -webkit-animation: fadeIn ease 1s;
+                -moz-animation: fadeIn ease 1s;
+                -o-animation: fadeIn ease 1s;
+                -ms-animation: fadeIn ease 1s;
                 &--header {
                     text-transform: capitalize;
-                    font-size: 2.5rem;
+                    font-size: $heading-font-size;
                     margin-top: 14rem;
-                    z-index: 4;
                     font-weight: bold;
                 }
+                &--icon {
+                    font-size: 2.7rem;
+                    color: $color-white;
+                    margin-left: .5rem;
+                }
                 &--caption {
+                    animation: fadeIn ease 1s;
                     font-size: 1.6rem;
                     margin-top: 1rem;
                 }
             }
+            &__btnSet {
+                margin-left: 19.5rem;
+                text-align: -webkit-center;
+                margin-top: 25rem;
+                transition: transform  .6s ease-in-out;
+                &__btn {
+                    overflow: hidden;
+                    position: relative;
+                    z-index: 3;
+                    transition: ease .4s;
+                    text-transform: uppercase;
+                    cursor: pointer;
+                    font-size: 1.6rem;
+                    height: $btnH;
+                    border-radius: 3rem;
+                    padding: 1.2rem 2.5rem;
+                    width: 18rem;
+                    animation: fadeLonger ease 1.9s;
+                    -webkit-animation: fadeLonger ease 1.9s;
+                    -moz-animation: fadeLonger ease 1.9s;
+                    -o-animation: fadeLonger ease 1.9s;
+                    -ms-animation: fadeLonger ease 1.9s;
+                    &:hover {
+                        transform: translateY(-.3rem);
+                        box-shadow: 0 1rem 2rem rgba($color-black,.2);
+                        background: none;
+                        border: 2px solid $color-white;
+                        color: $color-white;
+                        height: 4.7rem;
+                    }
+                    &--postNew {
+                        color: $color-tertiary;
+                        background:  $color-white;
+                        text-align: -webkit-center;
+                    }
+                    &--home {
+                        color: $color-white;
+                        width: 18rem;
+                        margin-left: -11rem;
+                        text-align: -webkit-center;
+                        background: $color-tertiary;
+                    }
+                }
+            }
         }  
         @keyframes postTripConfirm{
-            from {margin-left: 110rem;}
-            to {margin-left: 0rem;}
-        }    
+            0% {height: 0%;}
+            100% {height: 100%;}//margin-left: 0rem;}
+        } 
+        @keyframes fadeIn {
+            0% {opacity:0;}
+            100% {opacity:1;}
+        }
+        @-moz-keyframes fadeIn {
+            0% {opacity:0;}
+            100% {opacity:1;}
+        }
+        @-webkit-keyframes fadeIn {
+            0% {opacity:0;}
+            100% {opacity:1;}
+        }
+        @-o-keyframes fadeIn {
+            0% {opacity:0;}
+            100% {opacity:1;}
+        }
+        @-ms-keyframes fadeIn {
+            0% {opacity:0;}
+            100% {opacity:1;}
+        }  
+        
+        @keyframes fadeLonger {
+            0%   {opacity: 0;} 
+            70%  {opacity: 0;}
+            100% {opacity: 1;}
+        }
+        @-moz-keyframes fadeLonger {
+            0%   {opacity: 0;} 
+            70%  {opacity: 0;}
+            100% {opacity: 1;}
+        }
+        @-webkit-keyframes fadeLonger {
+            0%   {opacity: 0;} 
+            70%  {opacity: 0;}
+            100% {opacity: 1;}
+        }
+        @-o-keyframes fadeLonger {
+            0%   {opacity: 0;} 
+            70%  {opacity: 0;}
+            100% {opacity: 1;}
+        }
+        @-ms-keyframes fadeLonger {
+            0%   {opacity: 0;} 
+            70%  {opacity: 0;}
+            100% {opacity: 1;}
+        } 
         .post-trip-img {
             overflow: hidden;
             z-index: 2;
@@ -190,7 +298,6 @@ $diffRatio: ($contW - $imgW) / $contW;
             width: $imgW;
             height: 100%;
             padding-top: 43rem;
-            
             &:before {
                 content: '';
                 position: absolute;
@@ -201,8 +308,7 @@ $diffRatio: ($contW - $imgW) / $contW;
                 background-color: $color-primary-light;
                 background-size: cover;
                 transition: transform $switchAT ease-in-out;
-            }
-            
+            } 
             &:after {
                 content: '';
                 position: absolute;
@@ -213,12 +319,6 @@ $diffRatio: ($contW - $imgW) / $contW;
                 background-color: $color-primary-light;
                 // background: rgba(0,0,0,0.6);
             }
-            @include signUpActive {
-                &:before {
-                    transform: translate3d($formW,0,0);
-                }
-            }
-            
             &__text {
                 z-index: 2;
                 position: absolute;
@@ -260,38 +360,23 @@ $diffRatio: ($contW - $imgW) / $contW;
                     margin-bottom: 1rem;
                     font-weight: bold;
                 }
-            
                 p {
                     color: $radio-button-color;
                     margin-top: 32rem;
                     font-size: $input-font-size;
                     line-height: 1.5;
                 }
-            
-                &.m--up {
-                    @include signUpActive {
-                      transform: translateX($imgW*2);
-                    }
-                }
-            
-                &.m--in {
-                    transform: translateX($imgW * -2);
-                    @include signUpActive {
-                      transform: translateX(0);
-                    }
-                }
             }
-            
             &__btn {
                 overflow: hidden;
                 z-index: 2;
                 position: relative;
-                width: 12rem;
+                width: 13rem;
                 height: $btnH;
                 margin: 0 auto;
                 color: $color-white;
                 text-transform: uppercase;
-                font-size: $field-label-font-size;
+                font-size: $input-font-size;
                 border-radius: 3rem;
                 cursor: pointer;
                 transition: ease .4s;
@@ -321,17 +406,8 @@ $diffRatio: ($contW - $imgW) / $contW;
                     width: 100%;
                     height: 100%;
                     transition: transform $switchAT;
-                    &.m--in {
-                        transform: translateY($btnH*-2);
-                        @include signUpActive {
-                            transform: translateY(0);
-                        }
-                    }
-                    &.m--up {
+                    &.submit-post-trip {
                         background: $color-tertiary;
-                        @include signUpActive {
-                            transform: translateY($btnH*2);
-                        }
                     }
                 }
             }
@@ -365,26 +441,11 @@ $diffRatio: ($contW - $imgW) / $contW;
         }
         .post-trip-front-page {
             transition-timing-function: ease-out;
-          
-            @include signUpActive {
-                transition-timing-function: ease-in-out;
-                transition-duration: $switchAT;
-                transform: translate3d($formW,0,0);
-            }
-        }   
-          
-        .post-trip-submit {
-            transform: translate3d($contW * -1,0,0);
-          
-            @include signUpActive {
-                transform: translate3d(0,0,0);
-            }
         }
         input[type=radio] {
             position: absolute;
             visibility: hidden;
-            display: none;
-            
+            display: none;  
         }
         .post-trip-radio-label {
             color: lighten($bg,40%);
@@ -392,17 +453,15 @@ $diffRatio: ($contW - $imgW) / $contW;
             cursor: pointer;
             width: 5rem;
             height: 5rem;
-            // transform: translate(-50%, -50%);
             background: $radio-button-color;
             border-radius: 45%;
             text-align: center;
             cursor: pointer;
             transition: ease .4s;
             margin-right: 1rem;
-            
             p {
                 margin-top: 1.4rem;
-                font-size: $field-label-font-size;
+                font-size: $input-font-size;
             }
         }
         input[type=radio]:checked + label{

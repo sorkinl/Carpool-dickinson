@@ -1,7 +1,7 @@
 import React from 'react';
 import Loader from 'react-loader-spinner';
 
-export default class App extends React.Component {
+export default class FancyApp extends React.Component {
  //other logic
    render() {
     return(
