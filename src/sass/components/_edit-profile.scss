@@ -22,7 +22,7 @@ $card-title-font-size: 2rem;
         // transition: width 2s, height 4s;
         .edit-profile-boxTitle {
             position: relative;
-            background-color: $color-primary-light;
+            background-image: linear-gradient(to right bottom,rgba($color-primary-light,1),rgba(#5797ff,1));
             padding: 1.5rem 6rem;
             box-shadow: .2rem .3rem .5rem rgba(0, 0, 0, 0.2);
             width: 32rem;

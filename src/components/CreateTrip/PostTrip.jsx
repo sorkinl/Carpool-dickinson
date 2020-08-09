@@ -125,14 +125,10 @@ export default function PostTrip(props) {
         }
     }
     function checkValidDateTime() {
-        console.log("date now: ", state.departDate);
-        console.log("time now: ", timeToPick);
-
         if(state.departDate == "Invalid Date" || timeToPick == "Invalid Date"){
             return false;
         }
         else {
-            console.log("if two");
             return true;
         }
     }
@@ -172,7 +168,7 @@ export default function PostTrip(props) {
             <header className="post-trip-page">
                 <div  className="post-trip">
                     <a href='/dashboard' className="post-trip-btn post-trip-btn--back">
-                            <span><FontAwesomeIcon className="post-trip-icon" icon={faChevronLeft}></FontAwesomeIcon></span>
+                        <span><FontAwesomeIcon className="post-trip-icon" icon={faChevronLeft}></FontAwesomeIcon></span>
                             Back to dashboard
                     </a>
                     <div className="post-trip-main">
@@ -189,7 +185,7 @@ export default function PostTrip(props) {
                                         </label>
                                         <label htmlFor="dest-field">
                                             <span>Destination*</span>
-                                        <AutoDestination onSuggestionSelect={handleLocationChange}/>
+                                            <AutoDestination onSuggestionSelect={handleLocationChange}/>
                                         </label>
                                         <label htmlFor="date-field">
                                             <span>Date*</span>

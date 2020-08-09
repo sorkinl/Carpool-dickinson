@@ -5,6 +5,11 @@ import {
 } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import {Link } from 'react-router-dom';
+import {
+    faCameraRetro,
+    faCamera,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 /* Display the profile basic info */
 export default function Profile(props){
@@ -19,7 +24,10 @@ export default function Profile(props){
                     <p className="section-name">Profile</p>
                     <img className ="profile-card front__face-photo"
                         src={user.photoUrl}
-                        alt={unnamed}/>
+                        alt={unnamed}
+                    /><span className="profile-card front__photo-button">
+                         <FontAwesomeIcon className="photo-button-icon" icon={ faCamera}></FontAwesomeIcon>
+                    </span>
                     <div className="profile-card front__text">
                         <h3 className="profile-card front__text-header">{user.firstName} {user.lastName}</h3>
                         <p className="profile-card front__text-para">{user.school} | {user.classYear}</p>

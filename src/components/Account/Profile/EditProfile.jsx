@@ -170,7 +170,7 @@ export default function EditProfile(props) {
                                 </Grid>
                                 {/* School */}
                                 <Grid item xs={12} className="basic-sub-box">
-                                    <label for="basic-school" className="basic-info-label">School*</label>
+                                    <label for="basic-school" className="basic-info-label">School name*</label>
                                     <input id="basic-school" required type="text"  name="school" value={input.school}
                                         placeholder="Your school" onChange={handleEdit} /> 
                                 </Grid>
@@ -262,7 +262,7 @@ export default function EditProfile(props) {
                 </ThemeProvider>
                 <Snackbar open={isSubmitted === "submit-success"}
                             onClose={handleClose} 
-                            autoHideDuration={6000}
+                            autoHideDuration={4000}
                             anchorOrigin={{
                                 vertical: 'top',
                                 horizontal: 'center',
@@ -275,7 +275,7 @@ export default function EditProfile(props) {
                 </Snackbar>
 
                 <Snackbar open={emptyError}
-                              autoHideDuration={6000}
+                              autoHideDuration={4000}
                               onClose={handleClose}
                               anchorOrigin={{
                                   vertical: 'top',
