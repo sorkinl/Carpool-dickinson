@@ -1,5 +1,5 @@
 import { LOGIN, REGISTER } from "../constants/auth-types";
-import { GET_TRIPS, MAKE_TRIP, GET_TRIPS_USER, DELETE_TRIP } from "../constants/trip-types";
+import { GET_TRIPS, MAKE_TRIP, GET_TRIPS_USER, DELETE_TRIP ,GET_TRIPS_BY_RADIUS} from "../constants/trip-types";
 
 const initialState = {
     trips:[]
@@ -19,6 +19,11 @@ const initialState = {
           trips: [
             ...state.trips.filter(trip => trip !== action.payload)
           ]
+        }
+      case GET_TRIPS_BY_RADIUS:
+        return {
+          ...state,
+          trips: action.payload
         }
 
       default:
