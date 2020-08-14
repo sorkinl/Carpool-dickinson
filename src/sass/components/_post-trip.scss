@@ -220,8 +220,7 @@ $diffRatio: ($contW - $imgW) / $contW;
                     -ms-animation: fadeLonger ease 1.9s;
                     &:hover {
                         transform: translateY(-.3rem);
-                        box-shadow: 0 1rem 2rem rgba($color-black,.2), 
-                                    inset 0 0 1rem $color-tertiary-light;
+                        box-shadow: 0 1rem 2rem rgba($color-black,.2);
                         background: none;
                         border: 2px solid $color-white;
                         color: $color-white;

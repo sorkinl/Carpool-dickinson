@@ -1,8 +1,7 @@
-$standard: 10px;
-$card-height: 480px;
-$card-width: 300px;
+$standard: 1rem;
+$card-height: 48rem;
+$card-width: 30rem;
 .profile-card {
-    
     .outer-div,
     .inner-div {
         height: $card-height;
@@ -11,12 +10,10 @@ $card-width: 300px;
         position: relative; 
         border-radius: 50%;
     }
-
     .outer-div {
         perspective: 900px;
         perspective-origin: 50% calc(50% - 18em);
     }
-
     .inner-div {
         margin: $standard * 5 auto;
         font-weight: 400;
@@ -25,14 +22,12 @@ $card-width: 300px;
         transition: all 0.6s cubic-bezier(0.8, -0.4, 0.2, 1.7);
         transform-style: preserve-3d;
     }
-
     .front {
         position: relative;
         top: 0;
         left: 0;
         backface-visibility: hidden;
     }
-
     .front {
         height: 105%;
         width: $card-width;
@@ -72,13 +67,13 @@ $card-width: 300px;
         color: grey;
         text-transform: uppercase;
         font-family:  "Lato", sans-serif;
-        font-size: 15px;
+        font-size: 1.5rem;
         top: 3.5rem;
     }
 
     .front__bkg-photo {
         position: relative;
-        height: 150px;
+        height: 15rem;
         width: $card-width;
         background: #ffd968;
         background-size: cover;
@@ -90,27 +85,34 @@ $card-width: 300px;
     }
 
     .front__face-photo {
-        position: relative;
-        top: 6rem;
-        height: 130px;
-        width: 130px;
+        height: 13rem;
+        width: 13rem;
         margin: 0 auto;
         border-radius: 50%;
-        /* border: 5px solid #fff; */
         background-size: contain;
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
         overflow: hidden;
         transition: all 0.6s cubic-bezier(0.8, -0.4, 0.2, 1.7);
         z-index: 3;
-    
+        &--none {
+            position: relative;
+            top: 6rem;
+            &[disabled] {
+                display:none
+            }
+        }
+        &--existing {
+            position: relative;
+            top: 6rem;
+        }
     }
     .front__text {
         position: relative;
         top: 8rem;
         margin: 0 auto;
         font-family: "Lato", sans-serif;
-        font-size: 20px;
+        font-size: 2rem;
         backface-visibility: hidden;
         h3, p {
             color: #4B5F92;
@@ -119,7 +121,7 @@ $card-width: 300px;
             font-weight: 700;
         }
         .record-line {
-            border-left: 1px solid gainsboro;
+            border-left: .1rem solid gainsboro;
             height: 5rem;
             position: relative;
             margin: 0 1.3rem 0 1.3rem;
@@ -129,46 +131,46 @@ $card-width: 300px;
         }
         .record-main {
             position: relative;
-            font-size: 20px;
-            letter-spacing: 0.4px;
+            font-size: 2rem;
+            letter-spacing: .004rem;
             font-weight: 400;
         }
         .record-sub {
             color: #758abe;
             position: relative;
-            font-size: 13px;
-            letter-spacing: 0.4px;
+            font-size: 1.3rem;
+            letter-spacing: .004rem;
             font-weight: 400;
         }
         .front__text-para {
             color: #1AC3F2;
             position: relative;
-            top: 2px;
-            font-size: 16px;
-            letter-spacing: 0.4px;
+            top: .2rem;
+            font-size: 1.6rem;
+            letter-spacing: .004rem;
             font-weight: 620;
         }
         .front__text-sub {
             position: relative;
             top: 2rem;
-            font-size: 15px;
-            letter-spacing: 0.4px;
+            font-size: 1.5rem;
+            letter-spacing: .004rem;
             font-weight: 400;
         }
         
         .front__text-sub-2 {
             position: relative;
             top: 3rem;
-            font-size: 15px;
-            letter-spacing: 0.4px;
+            font-size: 1.5rem;
+            letter-spacing: .004rem;
             font-weight: 400;
         }
 
         .front-icons {
             position: relative;
             top: 0;
-            font-size: 16px;
-            margin-right: 6px;
+            font-size: 1.6rem;
+            margin-right: 1.6rem;
             color: gray;
         }
     }

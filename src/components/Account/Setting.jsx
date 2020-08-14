@@ -16,69 +16,69 @@ import {
 
 export default function Setting(props) {
     return (
-        <div class="setting">
+        <div className="setting">
             <p className="setting-section-title">Setting</p>
             <div id="aspect-content">
-                <div class="aspect-tab">
-                    <input id="item-18" type="checkbox" class="aspect-input" name="aspect"></input>
-                    <label for="item-18" class="aspect-label"></label>
-                    <div class="aspect-content">
-                        <div class="aspect-info">
+                <div className="aspect-tab">
+                    <input id="item-18" type="checkbox" className="aspect-input" name="aspect"></input>
+                    <label htmlFor="item-18" className="aspect-label"></label>
+                    <div className="aspect-content">
+                        <div className="aspect-info">
                         {/* <div class="chart-pie negative over50">
                             </div>  */}
                            <FontAwesomeIcon className="aspect-tab-icon" icon={faBell}></FontAwesomeIcon>
-                            <span class="aspect-name">Notifications</span>
+                            <span className="aspect-name">Notifications</span>
                         </div>
 
                     </div>
-                    <div class="aspect-tab-content">
-                        <div class="sentiment-wrapper">
+                    <div className="aspect-tab-content">
+                        <div className="sentiment-wrapper">
                         </div>
                     </div>
                 </div>
 
-                <div class="aspect-tab">
-                    <input id="item-14" type="checkbox" class="aspect-input" name="aspect"></input>
-                    <label for="item-14" class="aspect-label"></label>
-                    <div class="aspect-content">
-                        <div class="aspect-info">
+                <div className="aspect-tab">
+                    <input id="item-14" type="checkbox" className="aspect-input" name="aspect"></input>
+                    <label htmlFor="item-14" className="aspect-label"></label>
+                    <div className="aspect-content">
+                        <div className="aspect-info">
                 {/* <div class="chart-pie positive over50">
                             </div>  */}
                             <FontAwesomeIcon className="aspect-tab-icon" icon={faCreditCard}></FontAwesomeIcon>
-                            <span class="aspect-name">Payment method</span>
+                            <span className="aspect-name">Payment method</span>
                         </div>
                     </div>
-                    <div class="aspect-tab-content">
-                        <div class="sentiment-wrapper">
+                    <div className="aspect-tab-content">
+                        <div className="sentiment-wrapper">
                         </div>
                     </div>
                 </div>
-                <div class="aspect-tab">
-                    <input id="item-2" type="checkbox" class="aspect-input" name="aspect"></input>
-                    <label for="item-2" class="aspect-label"></label>
-                    <div class="aspect-content">
-                        <div class="aspect-info">
+                <div className="aspect-tab">
+                    <input id="item-2" type="checkbox" className="aspect-input" name="aspect"></input>
+                    <label htmlFor="item-2" className="aspect-label"></label>
+                    <div className="aspect-content">
+                        <div className="aspect-info">
                             <FontAwesomeIcon className="aspect-tab-icon" icon={faWrench}></FontAwesomeIcon> 
-                            <span class="aspect-name">Preferences</span>
+                            <span className="aspect-name">Preferences</span>
                         </div>
                     </div>
-                    <div class="aspect-tab-content">
-                        <div class="sentiment-wrapper">
+                    <div className="aspect-tab-content">
+                        <div className="sentiment-wrapper">
                         </div>
                     </div>
                 </div>
-                <div class="aspect-tab">
-                    <input id="item-210" type="checkbox" class="aspect-input" name="aspect"></input>
-                    <label for="item-210" class="aspect-label"></label>
-                    <div class="aspect-content">
-                        <div class="aspect-info">
+                <div className="aspect-tab">
+                    <input id="item-210" type="checkbox" className="aspect-input" name="aspect"></input>
+                    <label htmlFor="item-210" className="aspect-label"></label>
+                    <div className="aspect-content">
+                        <div className="aspect-info">
                             <FontAwesomeIcon className="aspect-tab-icon" icon={faShieldAlt}></FontAwesomeIcon>
-                            <span class="aspect-name">Privacy & Security
+                            <span className="aspect-name">Privacy & Security
                             </span>
                         </div>
                     </div>
-                    <div class="aspect-tab-content ">
-                        <div class="sentiment-wrapper">
+                    <div className="aspect-tab-content ">
+                        <div className="sentiment-wrapper">
                         </div>
                     </div>
                 </div>

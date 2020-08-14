@@ -23,8 +23,6 @@ import SearchResult from "./components/SearchResults/SearchResult"
 import Dashboard from "./pages/Dashboard/Dashboard";
 import EditProfile from "./components/Account/Profile/EditProfile";
 import PostTrip from "./components/CreateTrip/PostTrip";
-import FancyLoader from "./components/CreateTrip/FancyLoader";
-
 
 const Routes = withRouter(({location})=>{ 
   return (
@@ -46,7 +44,6 @@ const Routes = withRouter(({location})=>{
             <PrivateRoute path = "/postTrip" component = {PostTrip}/>
             <Route path = "/frontPageTrial" component = {FrontPageFigma}/>
             <Route path = "/searchResult" component = {SearchResult}/>
-            <Route path = "/fancy" component = {FancyLoader}/>
             <PrivateRoute path = "/dashboard" component = {Dashboard}/>
           </Switch>
         </div>

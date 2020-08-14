@@ -18,6 +18,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import guy from '../../../assets/images/edit_profile.svg';
 import girl  from '../../../assets/images/freelancer_blue.svg';
 import Loader from 'react-loader-spinner';
+
+//To be improved:
+// iterate class year values through the array below instead of doing by hand
+
 //Select options of class year
 // const years = [
 //     { value: '2019', label: '2019',},
@@ -211,7 +215,6 @@ export default function EditProfile(props) {
                                                 {option.label}
                                             </MenuItem>
                                         ))} */}
-                                    
                                 </Grid>
                                 {/* Class Year */}
                                 <Grid item xs={12} sm={4}>

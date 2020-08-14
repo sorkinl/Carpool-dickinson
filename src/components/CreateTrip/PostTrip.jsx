@@ -26,6 +26,9 @@ import world from "../../assets/images/world.svg";
 import AutoOrigin from "./AutoOrigin";
 import AutoDestination from "./AutoDestination";
 
+//To be improved:
+// make "Post new trip" button on confirmation page work
+
 const defaultMaterialTheme = createMuiTheme({
     palette: {
       primary: pink,
@@ -39,6 +42,34 @@ const defaultMaterialTheme = createMuiTheme({
             message: {
                 transition: "ease 3s"
             }
+        },
+        MuiButton: {
+            label: {
+                fontSize: "1.5rem",
+            }
+        },
+        MuiTypography: {
+            colorInherit: {
+                fontSize: "1.4rem",
+            },
+            body1: {
+                fontWeight: "400",
+                fontSize: "1.5rem",
+            },
+            subtitle1: {
+                fontSize: '1.5rem'
+            }
+        },
+        MuiPickersCalendarHeader: {
+            dayLabel: {
+                fontSize: "1.4rem",
+            }
+        },
+        MuiPickersModal: {
+            dialogRoot: {
+                borderRadius: '2rem',
+                minWidth: "32rem",
+            } 
         }
     }
 });
@@ -278,33 +309,34 @@ export default function PostTrip(props) {
                                         </label>
                                     </form>
                                 </div> 
-                                <div className="post-trip-sub-cont">
-                                    <div className="post-trip-img">
-                                        <div className="post-trip-img__text side-illustration">
-                                            <img src={adventure} alt="" className="post-trip-img__text side-illustration side-image"/>
-                                        </div>
-                                        <div className="post-trip-img__text">
-                                            <p>Ready to share your ride?</p>
-                                        </div>
-                                        { (isSubmitted === "listening" || isSubmitted ==="submit-error") ? 
-                                            <a href="/postTrip/confirm">
-                                                <div className="post-trip-img__btn" onClick={handleSubmit}>
-                                                    <span className="submit-post-trip">Submit</span>
-                                                </div>
-                                            </a>
-                                        :   <div className="post-trip-img__text m--up mini-loader">
-                                                <Loader
-                                                    type= "BallTriangle" //"ThreeDots"//
-                                                    color="#fff"
-                                                    height={100}
-                                                    width={100}
-                                                    visible={showSpinner === true}
-                                                />
-                                            </div>
-                                        } 
+                            </div>
+                            <div className="post-trip-sub-cont">
+                                <div className="post-trip-img">
+                                    <div className="post-trip-img__text side-illustration">
+                                        <img src={adventure} alt="" className="post-trip-img__text side-illustration side-image"/>
                                     </div>
+                                    <div className="post-trip-img__text">
+                                        <p>Ready to share your ride?</p>
+                                    </div>
+                                    { (isSubmitted === "listening" || isSubmitted ==="submit-error") ? 
+                                        <a href="/postTrip/confirm">
+                                            <div className="post-trip-img__btn" onClick={handleSubmit}>
+                                                <span className="submit-post-trip">Submit</span>
+                                            </div>
+                                        </a>
+                                    :   <div className="post-trip-img__text m--up mini-loader">
+                                            <Loader
+                                                type= "BallTriangle" //"ThreeDots"//
+                                                color="#fff"
+                                                height={100}
+                                                width={100}
+                                                visible={showSpinner === true}
+                                            />
+                                        </div>
+                                    } 
                                 </div>
                             </div>
+                            
                             { showSpinner === false ? 
                             <div className="post-trip-confirm">
                                 <p className="post-trip-confirm__text post-trip-confirm__text--header">Your trip has been posted
