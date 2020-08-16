@@ -21,11 +21,11 @@ export default function StyleTrip (props) {
     const trip = props.trip;
     //get trip id from trip object that is coming from TripList
     const tripId = props.trip.id;
-
     //connect with firestore and retrieve the data directly from the firestore
     useFirestoreConnect([
         { collection: 'trips' }
     ]);
+
     //get trip object that has qeuried tripId
     const tripToEdit = useSelector((state) => state.firestore.data.userTrips[tripId]);
 

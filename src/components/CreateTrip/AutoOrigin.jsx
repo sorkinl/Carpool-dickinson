@@ -13,13 +13,13 @@ import  { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/st
 //Questions
 // + why need locationID?
 
-const theme = createMuiTheme({
-    overrides: {
-        MuiAutoComplete: {
-          padding: "1.3rem 0",
-        }
-    }
-});
+// const theme = createMuiTheme({
+//     overrides: {
+//         MuiAutoComplete: {
+//           padding: "1.3rem 0",
+//         }
+//     }
+// });
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -129,7 +129,6 @@ const AutoOrigin = (props) => {
     }
   }
   return (<>{/* <div><TextField type="text" value={text} onChange={onTextChanged} variant={props.variant}/></div> <div>{renderSuggestions()}</div> */}
-  {/* <ThemeProvider theme={theme}> */}
     <Autocomplete
       options={suggestions}
       onChange={(event,value) => suggestionSelected(value)}
@@ -146,16 +145,6 @@ const AutoOrigin = (props) => {
               required
               placeholder="From"   
           />
-        // <input {...params} 
-        //       type="text" 
-        //       value={text} 
-        //       //id="origin-field" 
-        //       onChange={onTextChanged} 
-        //       required 
-        //       placeholder="From"
-        //       name="originTitle"
-        //       //ref={textInput}
-        // />
       }
     renderOption={(option) => {
         return (
@@ -177,10 +166,8 @@ const AutoOrigin = (props) => {
         );
     }}
     />
-  {/* </ThemeProvider> */}
   </>);
 };
 
-ReactDOM.render(<AutoOrigin />, document.getElementById("root"));
-// export default withStyles(styles)(NavigationBar);
+// ReactDOM.render(<AutoOrigin />, document.getElementById("root"));
 export default AutoOrigin;

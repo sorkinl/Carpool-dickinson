@@ -17,16 +17,14 @@ import EditForm from "./components/Account/Trip-new/editform";
 import EmailVerify from "./components/LogInForm/EmailVerify";
 import SearchPage from "./pages/SearchPage/SearchPage"
 import Loading from './components/Loading'
-import PostRideField from "./components/CreateTrip/PostRideField";
-import ConfirmField from "./components/CreateTrip/ConfirmField";
 import { withRouter } from 'react-router-dom';
 import MainPage from "./pages/FrontPage/MainPage";
 import SearchResult from "./components/SearchResults/SearchResult"
 import Dashboard from "./pages/Dashboard/Dashboard";
 import EditProfile from "./components/Account/Profile/EditProfile";
 import PostTrip from "./components/CreateTrip/PostTrip";
+import FancyLoader from "./components/CreateTrip/FancyLoader (not in use)"
 import Profile from "./components/Account/Profile/Profile";
-
 
 const Routes = withRouter(({location})=>{ 
   return (
@@ -47,11 +45,10 @@ const Routes = withRouter(({location})=>{
             <PrivateRoute path="/edit/:tripId" component={EditForm} />
             <Route path="/verifyEmail" component={EmailVerify}/>
             <Route path="/registrationForm" component={ProfileCreate} />
-            <PrivateRoute path = "/postRide" component = {PostRideField}/>
             <PrivateRoute path = "/postTrip" component = {PostTrip}/>
-            <PrivateRoute path = "/postRide/confirm" component = {ConfirmField}/>
             <Route path = "/frontPageTrial" component = {FrontPageFigma}/>
             <Route path = "/searchResult" component = {SearchResult}/>
+            <Route path = "/fancy" component = {FancyLoader}/>
             <PrivateRoute path = "/dashboard" component = {Dashboard}/>
             <PrivateRoute path = "/users/:userId" component = {Profile}/>
           </Switch>
