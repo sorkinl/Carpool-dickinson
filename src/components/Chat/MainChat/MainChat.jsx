@@ -1,16 +1,18 @@
 import React, {useEffect} from 'react';
 import DashboardNavbar from '../../Dashboard/DashboardNavbar';
-import {Link, useParams} from 'react-router-dom';
+import {Link, useParams, useHistory} from 'react-router-dom';
 import avatar from "../../../static/img/avatar.png"
 import { useFirestoreConnect, isLoaded } from 'react-redux-firebase';
 import firebase from '../../../firebase/firebaseConfig';
 import { useSelector } from 'react-redux';
 import ChatWindow from './ChatWindow/ChatWindow';
+import { useState } from 'react';
 
 
 const MainChat = (props) => {
   //exporting styles from outside file
-  
+  const history = useHistory();
+  const [firstChat, setFirstChat] = useState(false);
   useFirestoreConnect([{
     collection: 'chatRooms',
     where: [
@@ -21,8 +23,17 @@ const MainChat = (props) => {
 
   console.log(firebase.auth().currentUser.uid)
   const params = useParams();
-  
   const chatRooms = useSelector(state => state.firestore.ordered.chatRooms);
+
+  useEffect(()=>{
+    if(isLoaded(chatRooms) && !firstChat){
+      history.push("/chat/"+ chatRooms[0].id)
+      setFirstChat(true);
+    }
+  },[firstChat]);
+  
+ 
+  
     return (
       <div className="container-dashboard">
       <DashboardNavbar/>

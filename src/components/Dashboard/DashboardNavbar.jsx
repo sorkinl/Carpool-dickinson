@@ -3,6 +3,7 @@ import logo from "../../assets/images/logo.png";
 import icon from "../../assets/sprite.svg";
 import avatar from "../../static/img/avatar.png";
 import { Link } from 'react-router-dom';
+import firebase from '../../firebase/firebaseConfig';
 
 const DashboardNavbar = () => {
     return (
@@ -38,10 +39,12 @@ const DashboardNavbar = () => {
               <span className="user-nav__notification">7</span>
             </div>
             </Link>
+            <Link to={`/users/${firebase.auth().currentUser.uid}`}>
             <div className="user-nav__user">
               <img src={avatar} alt="" className="user-nav__user-photo" />
               <span className="user-nav__user-name">Leonid</span>
             </div>
+            </Link>
           </nav>
         </header>
     )

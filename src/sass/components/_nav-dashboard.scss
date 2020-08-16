@@ -108,6 +108,8 @@
     }
 
     &__user{
+        display: flex;
+        align-items: center;
         &:hover{
             & > * {
                 color: $color-grey-dark-1;
