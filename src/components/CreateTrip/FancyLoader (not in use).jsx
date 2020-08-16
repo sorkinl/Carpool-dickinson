@@ -1,9 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Loader from 'react-loader-spinner';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSignInAlt,
+  faUserPlus,
+  faHome,
+  faBars,
+} from "@fortawesome/free-solid-svg-icons";
 
-export default class FancyApp extends React.Component {
- //other logic
-   render() {
+export default function FancyLoader(props) {
+  const [active, setActive] = useState(false);
     return(
      <Loader
         type="ThreeDots" //TailSpin
@@ -13,5 +19,4 @@ export default class FancyApp extends React.Component {
       //   timeout={10000} //3 secs
      />
     );
-   }
 }

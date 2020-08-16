@@ -135,7 +135,7 @@ export default function EditProfile(props) {
             setEdited(false);   
         }
         catch (error) {
-            console.log("Update profile error", error);
+            console.log("Error updating profile in submitProfile(): ", error);
             setOpen("inactive");
             setSubmit("submit-error");
         }

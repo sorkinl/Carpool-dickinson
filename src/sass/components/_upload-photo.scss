@@ -1,6 +1,7 @@
 $photo-upload-title-font-size: 2rem;
 $photo-upload-btn-font-size: 1.5rem;
 $photo-note-font-size: 1.3rem;
+$photo-delete-font-size: 1.7rem;
 $color-primary-more-light: #dff9ff;
 .upload-photo {
     * {
@@ -8,14 +9,14 @@ $color-primary-more-light: #dff9ff;
     }
     &__loader {
         background: #30a9fc;
-        opacity: 0.8;
+        opacity: 0.75;
         padding: 1rem;
         margin-left: -2.8rem;
         margin-top: -3rem;
         height: 12rem;
-        /* transform: scale(0.7); */
+        transform: rotate(45deg);
         width: 12rem;
-        border-radius: 10rem;
+        border-radius: 4rem;
         position: inherit;
         z-index: 4;
         transition: transform .1s ease-in-out;
@@ -38,6 +39,7 @@ $color-primary-more-light: #dff9ff;
         overflow: hidden;
         transition: all .2s;
         font-size: $photo-upload-btn-font-size;
+        font-weight: 600;
         padding: .4rem 0rem .4rem 37rem;
         text-align: center;
         vertical-align: middle;
@@ -160,5 +162,13 @@ $color-primary-more-light: #dff9ff;
         margin-left: -12rem;
         font-size: $photo-note-font-size;
         color:$color-grey-dark-3;
+    }
+    &__delete-photo {
+        height: 4rem;
+        padding: 0.2rem 0.5rem;    
+        &--prompt-text {
+            font-size: $photo-delete-font-size;
+            color: $color-grey-dark-1;
+        }
     }
 }

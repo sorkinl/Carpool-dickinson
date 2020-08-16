@@ -174,7 +174,7 @@ export default function PostTrip(props) {
         }
         else {
             departTime = timeToPick.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            console.log({...state}, "success");
+            console.log({...state}, "pre-submit success");
             submitTrip();
         }
     };
@@ -186,12 +186,12 @@ export default function PostTrip(props) {
             setSpinner(false);
         }
         catch (error) {
-            console.log("Create Trip error", error);
+            console.log("Error creating trip in submitTrip(): ", error);
             setSubmit("submit-error");
             setSpinner("not active");
         }
         finally {
-            console.log("End of write");
+            console.log("End of submitTrip()");
         }
     }
     return (
