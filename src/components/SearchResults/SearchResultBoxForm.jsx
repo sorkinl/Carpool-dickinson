@@ -4,10 +4,12 @@ import "./SearchResultBoxForm.scss"
 import {Button,FormControl,InputLabel,OutlinedInput} from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import { Link, useRouteMatch, Switch, Route} from 'react-router-dom';
-import { createTrip, getTrips } from '../../redux/actions/tripsActions';
+import { getTripByRadius } from '../../redux/actions/tripsActions';
 import {MuiPickersUtilsProvider, DatePicker} from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchResult from "./SearchResult"
+import AutoOrigin from "../CreateTrip/AutoOrigin"
+import AutoDestination from "../CreateTrip/AutoDestination"
 
 const useStyles = makeStyles((theme) => ({
     muiPicker:{
@@ -37,17 +39,21 @@ const SearchResultBox = ()=>{
 
     const [searchInput, setSearchInput] = useState({
         originTitle:'',
+        originCoord: {lat:'', long:''},
         destTitle:'',
+        destCoord: {lat:'', long:''},
         departDate: new Date()
     })
     const dispatch = useDispatch();
 
     // change the state when the search input is typed
-    const handleChange = (e) => {
-        setSearchInput({
-            ...searchInput,
-            [e.target.name]: e.target.value
-        });
+    const handleChange = (value, name) => {
+        if(name === "origin"){
+            setSearchInput({...searchInput, originTitle: value.label})
+        } else {
+            console.log(value)
+            setSearchInput({...searchInput, destTitle: value.label, destCoord: {lat: value.lat, long:value.lng}})
+        }
     }
 
     //change the state when the date input is typed
@@ -61,58 +67,24 @@ const SearchResultBox = ()=>{
     //handles submit feature when the event is called.
     //after the submission, the state is reset
     const handleSubmit = (e) => {
-        // e.preventDefault();    
-        // dispatch(createTrip({pickup:searchInput.pickup}))
         console.log(searchInput)
         console.log("submitted")
      
-
-        // onCreate({...searchInput, departDate: searchInput.departDate.toISOString()});
-        dispatch(getTrips(searchInput))
-        // setState({
-        //     pickup:'',
-        //     destination:'',
-        //     startDate: new Date()
-        // })
+        dispatch(getTripByRadius(searchInput))
     }
     return(
         <form noValidate>
             <div id ='SearchResultBoxForm'> 
                 <div id = "SearchResultBoxForm__destination" className = "SearchResultBoxForm__element">
-                    <FormControl  id = "destination__formControl" variant="outlined">
-                        <InputLabel htmlFor="component-outlined">
-                                Destination?
-                            </InputLabel>
-                        <OutlinedInput
-                            type='text'
-                            value={searchInput.destTitle}
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="destTitle"
-                            onChange={handleChange}
-                            name="destTitle"
-                        />
-                    </FormControl>
+                   
+                    <AutoDestination onSuggestionSelect={handleChange}/>
+                    
                 </div>
                 <div id ="SearchResultBoxForm__pickup__date" className = "SearchResultBoxForm__element">
                     <div id = "pickup">
-                        <FormControl  variant="outlined" id = "pickupForm">
-                            <InputLabel htmlFor="component-outlined">
-                                Pickup?
-                            </InputLabel>
-                            <OutlinedInput
-                                type='text'
-                                value={searchInput.originTitle}
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="originTitle"
-                                onChange={handleChange}
-                                name="originTitle"
-                            />
-                        </FormControl>
+                       
+                        <AutoOrigin onSuggestionSelect={handleChange}/>
+
                     </div>
                     <div id = "date">
                         <MuiPickersUtilsProvider utils={DateFnsUtils} className = {classes.muiPicker}>

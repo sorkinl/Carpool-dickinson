@@ -24,6 +24,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import EditProfile from "./components/Account/Profile/EditProfile";
 import PostTrip from "./components/CreateTrip/PostTrip";
 import FancyLoader from "./components/CreateTrip/FancyLoader (not in use)"
+import Profile from "./components/Account/Profile/Profile";
 
 const Routes = withRouter(({location})=>{ 
   return (
@@ -31,10 +32,12 @@ const Routes = withRouter(({location})=>{
           { /* location.pathname!=="/frontpagetrial" &&    <NavBar />  */}
           <Switch>
             <Route path="/" exact component={MainPage} />
-            <Route path="/search" component={SearchPage} />
+            <Route path="/search" component={SearchPage}/>
             <PrivateRoute path="/account" component={Account} />
             <PrivateRoute path="/edit-profile" component={EditProfile}/>
-            <PrivateRoute path="/chat" component={MainChat} />
+            {/* <PrivateRoute path="/chat" component={MainChat} /> */}
+            <PrivateRoute exact path="/chat" component={MainChat}/>
+            <PrivateRoute path="/chat/:chatId" component={MainChat}/>
             <Route path="/loading" component={Loading} />
             <Route path="/logIn" component={LogIn} />
             <Route path="/signUp" component={SignUp} />
@@ -47,6 +50,7 @@ const Routes = withRouter(({location})=>{
             <Route path = "/searchResult" component = {SearchResult}/>
             <Route path = "/fancy" component = {FancyLoader}/>
             <PrivateRoute path = "/dashboard" component = {Dashboard}/>
+            <PrivateRoute path = "/users/:userId" component = {Profile}/>
           </Switch>
         </div>
   )

@@ -1,62 +1,49 @@
-import React from 'react';
-import Drawer from '@material-ui/core/Drawer'
-import ChatWindow from '../ChatWindow/ChatWindow';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import PersonInChat from '../PersonInChat/PersonInChat';
-import {useStyles} from './mainChatStyles';
+import React, {useEffect} from 'react';
 import DashboardNavbar from '../../Dashboard/DashboardNavbar';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import avatar from "../../../static/img/avatar.png"
+import { useFirestoreConnect, isLoaded } from 'react-redux-firebase';
+import firebase from '../../../firebase/firebaseConfig';
+import { useSelector } from 'react-redux';
+import ChatWindow from './ChatWindow/ChatWindow';
 
 
-
-const MainChat = () => {
+const MainChat = (props) => {
   //exporting styles from outside file
-  const classes = useStyles();
   
+  useFirestoreConnect([{
+    collection: 'chatRooms',
+    where: [
+      ["memberIds", "array-contains", firebase.auth().currentUser.uid]
+  ],
+  }]);
+
+
+  console.log(firebase.auth().currentUser.uid)
+  const params = useParams();
+  
+  const chatRooms = useSelector(state => state.firestore.ordered.chatRooms);
     return (
       <div className="container-dashboard">
       <DashboardNavbar/>
         <div className="chat-container">
           <div className="chat-sidebar">
             
-            <Link >
+            <Link to="/dashboard">
               <button className="chat-sidebar__link">
               Return to Dashboard
               </button>
             </Link>
+            
             <ul className="chat-sidebar__list">
-                <Link>
-                <li className="chat-sidebar__list-element">Dixie Normus</li>
+              {isLoaded(chatRooms) ? chatRooms.map((room) => (
+                <Link to={`/chat/${room.id}`} key={room.id}>
+                <li className="chat-sidebar__list-element">{room.trip.destTitle} Driver: {room.trip.uid === firebase.auth().currentUser.uid?"you":room.trip.firstName}</li>
                 </Link>
-                <Link>
-                <li className="chat-sidebar__list-element">Jenny Talia</li>
-                </Link>
-                <Link>
-                <li className="chat-sidebar__list-element">Leo</li>
-                </Link>
-                <Link>
-                <li className="chat-sidebar__list-element">Yuri Tarted</li>
-                </Link>
+              )):"null"}
             </ul>
           </div>
-          <div className="chat-window">
-            <div className="chat-window__top">
-
-              <p className="chat-window__message--out"><span className="chat-window__message">Hi</span></p>
-              <p className="chat-window__message--in"><span className="chat-window__message">How are you?</span> </p>
-              
-            </div>
-            <div className="chat-window__bottom">
-                <input type="text" className="chat-window__bottom--input"/>
-                <button className="chat-window__bottom--button">Send</button>
-            </div>
-          </div>
+          <ChatWindow chat={isLoaded(chatRooms)?chatRooms.find((room) => room.id === params.chatId):null}/>
 
         
         <div className="chat-rightbar">

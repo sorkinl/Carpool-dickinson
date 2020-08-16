@@ -10,7 +10,6 @@ const DashboardMain = () => {
   
   useFirestoreConnect([{
     collection: 'trips',
-    limit: 5,
     storeAs: 'recentTrips'
   }])
 
@@ -54,6 +53,7 @@ const DashboardMain = () => {
                 originTitle={trip.originTitle}
                 departDate={trip.departDate}
                 departTime={trip.departTime}
+                uid={trip.uid}
                 />
               )): <Loading/>}
               
@@ -69,6 +69,7 @@ const DashboardMain = () => {
                 originTitle={trip.originTitle}
                 departDate={trip.departDate}
                 departTime={trip.departTime}
+                uid={trip.uid}
                 />
               ): <Loading/>}
               

@@ -7,8 +7,9 @@ import { Link } from 'react-router-dom';
 const DashboardNavbar = () => {
     return (
         <header className="header-dashboard">
+          <Link to="/dashboard">
           <img src={logo} alt="logo" className="logo-dashboard" />
-
+          </Link>
           <form action="#" className="search-dashboard">
             <input
               type="text"
@@ -29,14 +30,14 @@ const DashboardNavbar = () => {
               </svg>
               <span className="user-nav__notification">7</span>
             </div>
+            <Link to="/chat">
             <div className="user-nav__icon-box">
-              <Link to="/chat">
               <svg className="user-nav__icon">
                 <use xlinkHref={`${icon}#icon-chat`}></use>
               </svg>
-              </Link>
               <span className="user-nav__notification">7</span>
             </div>
+            </Link>
             <div className="user-nav__user">
               <img src={avatar} alt="" className="user-nav__user-photo" />
               <span className="user-nav__user-name">Leonid</span>
