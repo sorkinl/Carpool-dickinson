@@ -1,8 +1,7 @@
 import * as React from 'react';
 
 export const HereMap = (props) => {
-  
-  console.log(props.trips)
+  console.log(props)
 
   // Create a reference to the HTML element we want to put the map on
   const mapRef = React.useRef(null);
@@ -30,7 +29,7 @@ export const HereMap = (props) => {
 
     //generate markers
     var icon = new H.map.Icon('https://cdn0.iconfinder.com/data/icons/daily-boxes/150/phone-box-32.png');
-    props.trips.trips.map(
+    props.trips.map(
       x=>{
         console.log("doing")
         var marker = new H.map.Marker({ lat: x.destination.latitude, lng: x.destination.longitude }, { icon: icon });
@@ -44,7 +43,7 @@ export const HereMap = (props) => {
     return () => {
       hMap.dispose();
     };
-  }, [mapRef, props.trips.trips]); // This will run this hook every time this ref is updated
+  }, [mapRef, props.trips]); // This will run this hook every time this ref is updated
 
   return <div className="map" ref={mapRef} style={{ height: "100vh" }} />;
 };
