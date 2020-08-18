@@ -5,7 +5,9 @@ import {
     CssBaseline, 
     MenuItem,
     Snackbar,
+    Dialog,
 } from '@material-ui/core';
+import  { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import MuiAlert from '@material-ui/lab/Alert';
 import {useFirestore} from "react-redux-firebase";
 import {
@@ -15,6 +17,10 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import guy from '../../../assets/images/edit_profile.svg';
 import girl  from '../../../assets/images/freelancer_blue.svg';
+import Loader from 'react-loader-spinner';
+
+//To be improved:
+// iterate class year values through the array below instead of doing by hand
 
 //Select options of class year
 // const years = [
@@ -26,6 +32,26 @@ import girl  from '../../../assets/images/freelancer_blue.svg';
 //     { value: '2024', label: '2024',},
 //     { value: '2025', label: '2025',},
 // ];
+const defaultMaterialTheme = createMuiTheme({
+    overrides: {
+        MuiAlert: {
+            root: {
+                fontFamily: "Lato, sans-serif",
+                fontSize: "1.6rem",
+            },
+            message: {
+                transition: "ease 3s"
+            }
+        },
+        MuiDialog: {
+            paper: {
+                boxShadow: "none",
+                backgroundColor: "transparent",
+                top: "-9rem",
+            }
+        }
+    }
+});
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -36,8 +62,10 @@ export default function EditProfile(props) {
     const currentUser = useSelector((state) => state.firebase.auth);
     const uid = currentUser.uid;
     
-    const [isEdit, setEdit] = useState(false);
-    const [isSubmit, setSubmit] = useState(false);
+    const [isEdited, setEdited] = useState(false);
+    const [isSubmitted, setSubmit] = useState('');
+    const [emptyError, setEmptyError] = useState(false);
+    const [open, setOpen] = useState(false);
     
     const [input, setInput] = useState({
         firstName: user.firstName,
@@ -49,30 +77,70 @@ export default function EditProfile(props) {
         classYear: user.classYear,
         hub: user.hub
     });
-   
-    console.log("CURRENT USER", currentUser);
-    console.log("user",user);
-
+    const initValue = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        school: user.school,
+        email: user.email,
+        phone: user.phone,
+        major: user.major,
+        classYear: user.classYear,
+        hub: user.hub
+    }
+    function checkNoEdit(key, value) {
+        if(initValue[key] === value) {
+            setEdited(false);
+        } 
+        else {
+            setEdited(true);
+        }      
+    }    
     function handleEdit(event) {
         const { name, value } = event.target;
         setInput((input) => ({ ...input, [name]: value }));
-        setEdit(true);
+        checkNoEdit(name, value);
     };
-    
+    function handleClose() {
+        setEmptyError(false);
+        setSubmit('');
+    };
+    function checkEmptyInput() {
+        if(input.firstName === ""
+            || input.lastName === ""
+            || input.email === ""
+            || input.school === "") {
+            return false;
+        } else {
+            return true;
+        }
+    }
     function handleSubmit(e) {
         e.preventDefault();
-        if (isEdit === false) {
-            console.log("No fields updated");
+        if (checkEmptyInput() === false) {
+            setEmptyError(true);
         } else {
-            firestore
-                .collection("users")
-                .doc(uid)
-                .update({...input}
-                );
+            setOpen(true);
+            submitProfile();
         }
-        setSubmit(true);
     }
-    console.log("input",input);
+    const submitProfile = async () => {
+        try {
+            await firestore
+                    .collection("users")
+                    .doc(uid)
+                    .update({...input}
+                );
+            setOpen(false);
+            setSubmit("submit-success"); 
+            setEdited(false);   
+        }
+        catch (error) {
+            console.log("Error updating profile in submitProfile(): ", error);
+            setOpen("inactive");
+            setSubmit("submit-error");
+        }
+    }
+    console.log(isSubmitted);
     return (
         <CssBaseline>
         <header className="account-page">
@@ -106,7 +174,7 @@ export default function EditProfile(props) {
                                 </Grid>
                                 {/* School */}
                                 <Grid item xs={12} className="basic-sub-box">
-                                    <label for="basic-school" className="basic-info-label">School*</label>
+                                    <label for="basic-school" className="basic-info-label">School name*</label>
                                     <input id="basic-school" required type="text"  name="school" value={input.school}
                                         placeholder="Your school" onChange={handleEdit} /> 
                                 </Grid>
@@ -147,7 +215,6 @@ export default function EditProfile(props) {
                                                 {option.label}
                                             </MenuItem>
                                         ))} */}
-                                    
                                 </Grid>
                                 {/* Class Year */}
                                 <Grid item xs={12} sm={4}>
@@ -177,21 +244,64 @@ export default function EditProfile(props) {
                                     <a href="/account" className="edit-profile-btn edit-profile-btn--cancel">Cancel</a>
                                 </Grid>
                                 <Grid item xs sm={6}>  
-                                    <div type="submit" onClick={handleSubmit} className="edit-profile-btn edit-profile-btn--save">Save</div>
+                                    <div disabled={isEdited === false} type="submit" onClick={handleSubmit} className="edit-profile-btn edit-profile-btn--save">Save</div>
                                 </Grid>
                             </Grid>
                         </div>
                     </div>
                 </form>
-                <Snackbar open={isSubmit}
-                            autoHideDuration={6000}
+                <ThemeProvider theme={defaultMaterialTheme}>
+                    <Dialog open={open} disableBackdropClick="true" disableEscapeKeyDown="true">
+                        <div className="edit-profile__loader">
+                            <Loader
+                                type= "BallTriangle" //"ThreeDots"//
+                                color="#fff"
+                                height={160}
+                                width={160}
+                                visible={open === true}
+                            />
+                        </div>                 
+                    </Dialog>
+                </ThemeProvider>
+                <Snackbar open={isSubmitted === "submit-success"}
+                            onClose={handleClose} 
+                            autoHideDuration={4000}
                             anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'center',
+                                vertical: 'top',
+                                horizontal: 'center',
                 }}>
-                        <Alert severity="success">
-                            Profile updated successfully!
+                    <ThemeProvider theme={defaultMaterialTheme}>
+                        <Alert onClose={handleClose} severity="success">
+                            Profile Updated Successfully!
                         </Alert>
+                    </ThemeProvider>
+                </Snackbar>
+
+                <Snackbar open={emptyError}
+                              autoHideDuration={4000}
+                              onClose={handleClose}
+                              anchorOrigin={{
+                                  vertical: 'top',
+                                  horizontal: 'center',
+                              }}>
+                        <ThemeProvider theme={defaultMaterialTheme}>
+                            <Alert onClose={handleClose} severity="error">
+                                Required Fields Missing!
+                            </Alert>
+                        </ThemeProvider>
+                </Snackbar>
+                <Snackbar open={isSubmitted === "submit-error"}
+                            autoHideDuration={4000}
+                            onClose={handleClose}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'center',
+                            }}>
+                        <ThemeProvider theme={defaultMaterialTheme}>
+                            <Alert onClose={handleClose} severity="error">
+                                Error updating profile! Try again 
+                            </Alert>
+                        </ThemeProvider>
                 </Snackbar>
             </div>
        </header>

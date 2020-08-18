@@ -42,6 +42,17 @@
         color: $color-white;
         position: relative;
         margin-top: 1rem;
+        box-shadow: inset 0 0 1rem $color-tertiary-light;
+        &:hover {
+            transform: translateY(-.3rem);
+            box-shadow: 0 1rem 2rem rgba($color-black,.2);
+            opacity: 0.8;
+            cursor: pointer;
+            &::after{
+                transform: scaleX(1.2) scaleY(1.4);
+                opacity: 0;
+            }
+        }
     }
 
     &--white {

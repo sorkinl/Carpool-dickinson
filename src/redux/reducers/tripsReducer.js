@@ -1,5 +1,5 @@
 import { LOGIN, REGISTER } from "../constants/auth-types";
-import { GET_TRIPS, MAKE_TRIP, GET_TRIPS_USER, DELETE_TRIP ,GET_TRIPS_BY_RADIUS} from "../constants/trip-types";
+import { GET_TRIPS, MAKE_TRIP, GET_TRIPS_USER, DELETE_TRIP ,GET_TRIPS_BY_RADIUS, SEARCH_PROPS} from "../constants/trip-types";
 
 const initialState = {
     trips:[]
@@ -24,6 +24,11 @@ const initialState = {
         return {
           ...state,
           trips: action.payload
+        }
+      case SEARCH_PROPS:
+        return{
+          ...state,
+          searchProps:action.payload
         }
 
       default:

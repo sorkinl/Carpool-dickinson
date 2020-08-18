@@ -1,0 +1,174 @@
+$photo-upload-title-font-size: 2rem;
+$photo-upload-btn-font-size: 1.5rem;
+$photo-note-font-size: 1.3rem;
+$photo-delete-font-size: 1.7rem;
+$color-primary-more-light: #dff9ff;
+.upload-photo {
+    * {
+        font-family: "Lato", sans-serif;
+    }
+    &__loader {
+        background: #30a9fc;
+        opacity: 0.75;
+        padding: 1rem;
+        margin-left: -2.8rem;
+        margin-top: -3rem;
+        height: 12rem;
+        transform: rotate(45deg);
+        width: 12rem;
+        border-radius: 4rem;
+        position: inherit;
+        z-index: 4;
+        transition: transform .1s ease-in-out;
+        box-shadow: 1px 0rem 4px 0rem rgba(0,0,0,0.2), 0px 1rem 8px 0px rgba(0,0,0,0.14), 0px 0.1rem 11px 0px rgba(0,0,0,0.12);
+    }
+    &__wrapper {
+        height: 32rem;
+        padding: 0 17rem;
+        display: flex;
+    }
+    &__title {
+        font-size: $photo-upload-title-font-size;
+        font-weight: 600;
+    }
+    &__buttons {
+        position: relative;
+        text-transform: uppercase;
+        width: 12rem;
+        border-radius: 10rem;
+        overflow: hidden;
+        transition: all .2s;
+        font-size: $photo-upload-btn-font-size;
+        font-weight: 600;
+        padding: .4rem 0rem .4rem 37rem;
+        text-align: center;
+        vertical-align: middle;
+        &--cancel {
+            color: $color-primary-dark-2;
+            padding: 1rem;
+            cursor: pointer; 
+            &:hover {
+                background-color: $color-primary-more-light;
+                box-shadow: inset 0 0 1rem #cff5ff;
+            }
+            &[disabled] {
+                color: $color-grey-light-4;
+                pointer-events: none;
+            }
+        }
+        &--save {
+            color: $color-white;
+            background-color: $color-primary;
+            padding: 1rem;
+            box-shadow: inset 0 0 1rem $color-primary-light;
+            cursor: pointer;
+            &:hover {
+                background-color: $color-primary-dark;
+            }
+            &[disabled] {
+                background-color: $color-grey-dark-3;
+                color: $color-grey-light-2;
+                box-shadow: none;
+                cursor: auto;
+                pointer-events: none;
+            }
+        }
+    }
+    &__preview-container {
+        margin-left: 1.9rem;
+    }
+    &__upload-btn {
+        cursor: pointer;
+        margin-left: 2.3rem;
+        background-color: $color-grey-light-3;
+        font-size: 1.5rem;
+        position: relative;
+        padding: 1rem;
+        width: 18rem;
+        text-align: center;
+        text-align: center;
+        border-radius: 3rem;
+        text-transform: uppercase;
+        overflow: hidden;
+        margin-top: .1rem;
+        &:hover {
+            background: rgb(184, 184, 184);
+        }
+    }
+    &__photo-container {
+        min-width: 22.6rem;
+        border: 0.3rem solid #65c3d6;
+        display: flex;
+        background: #000;
+        box-sizing: border-box;
+        min-height: 22rem;
+        margin-top: 1.5rem;
+        text-align: center;
+        z-index: 2;
+        position: relative;
+        &__active-photo {
+            margin-top: 0rem;
+            min-width: 22rem;
+            min-height: 22rem;
+            max-height: 22rem;
+            max-width: 22rem;
+            z-index: 2;
+        }
+        &__remove-btn {       
+            z-index: 3;
+            font-size: 2.2rem;
+            position: absolute;
+            margin-top: 9rem;
+            margin-left: 24rem;
+            margin-bottom: 2rem;
+            border-radius: 5rem;
+            background: #e0f3f5;
+            width: 4.6rem;
+            padding: .6rem;
+            height: 4.6rem;
+            color: #66c3d6;
+            cursor: pointer;
+            &:hover {
+                background: $color-primary-dark-1; 
+                color: $color-white;
+            }
+            &[disabled] {
+                display: none;
+            }
+        }
+    }
+    &__skeleton {
+        position: absolute;
+        width: 20rem;
+        border: 0.3rem dashed rgb(207, 207, 207);
+        display: flex;
+        box-sizing: border-box;
+        height: 20rem;
+        margin-top: 3rem;
+        margin-left: 1.1rem;
+        text-align: center;
+        padding: 6.7rem;
+    } 
+    &__icon {
+        font-size: 6rem;
+        color: rgb(207, 207, 207);
+    } 
+    &__security-note {
+        font-style: italic;
+        position: absolute;
+        margin-top: 15.5rem;
+        margin-bottom: 1rem;
+        width: 30rem;
+        margin-left: -12rem;
+        font-size: $photo-note-font-size;
+        color:$color-grey-dark-3;
+    }
+    &__delete-photo {
+        height: 4rem;
+        padding: 0.2rem 0.5rem;    
+        &--prompt-text {
+            font-size: $photo-delete-font-size;
+            color: $color-grey-dark-1;
+        }
+    }
+}
