@@ -32,7 +32,7 @@ const Routes = withRouter(({location})=>{
           { /* location.pathname!=="/frontpagetrial" &&    <NavBar />  */}
           <Switch>
             <Route path="/" exact component={MainPage} />
-            <Route path="/search" component={SearchPage}/>
+            <Route path="/search" exact component={SearchPage}/>
             <PrivateRoute path="/account" component={Account} />
             <PrivateRoute path="/edit-profile" component={EditProfile}/>
             {/* <PrivateRoute path="/chat" component={MainChat} /> */}
@@ -47,7 +47,7 @@ const Routes = withRouter(({location})=>{
             <Route path="/registrationForm" component={ProfileCreate} />
             <PrivateRoute path = "/postTrip" component = {PostTrip}/>
             <Route path = "/frontPageTrial" component = {FrontPageFigma}/>
-            <Route path = "/searchResult" component = {SearchResult}/>
+            <Route path = "/searchResult" exact component = {SearchResult}/>
             <Route path = "/fancy" component = {FancyLoader}/>
             <PrivateRoute path = "/dashboard" component = {Dashboard}/>
             <PrivateRoute path = "/users/:userId" component = {Profile}/>

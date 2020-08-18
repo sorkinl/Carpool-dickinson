@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import "./SearchResultBoxForm.scss"
 import {Button,FormControl,InputLabel,OutlinedInput} from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
-import { Link, useRouteMatch, Switch, Route} from 'react-router-dom';
-import { getTripByRadius } from '../../redux/actions/tripsActions';
+import { Link, useRouteMatch, BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { getTripByRadius, searchProps } from '../../redux/actions/tripsActions';
 import {MuiPickersUtilsProvider, DatePicker} from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchResult from "./SearchResult"
@@ -71,6 +71,7 @@ const SearchResultBox = ()=>{
         console.log("submitted")
      
         dispatch(getTripByRadius(searchInput))
+        dispatch(searchProps(searchInput))
     }
     return(
         <form noValidate>
@@ -109,26 +110,33 @@ const SearchResultBox = ()=>{
                     </div>
                 </div>
                 <div id = "SearchResultBoxForm__searchButton" className = "SearchResultBoxForm__element">
-                    {/* <Link to={`${match.url}/results/?originTitle=${searchInput.originTitle}&destTitle=${searchInput.destTitle}`} onClick = {handleSubmit}> */}
-                        <Link to={`searchResult`} onClick = {handleSubmit}> 
-                        <Button
-                            className = {classes.button}
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            // onClick={handleSubmit}
-                
-                        >   
-                            Get Started!
-                        </Button>
-                     </Link>
-                    <Switch>
-                        <Route path={`searchResult`} render = {(props) =>(
-                            <SearchResult {...props}/>
-                        )}
-                        />
-                
-                    </Switch>
+             
+                           {/* <Link to={`${match.url}/results/?originTitle=${searchInput.originTitle}&destTitle=${searchInput.destTitle}`} onClick = {handleSubmit}> */}
+                        <Link to="/searchResult" 
+                        onClick = {handleSubmit}> 
+                            <Button
+                                className = {classes.button}
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                // onClick={handleSubmit}
+                    
+                            >   
+                                 Get Started!
+                             </Button>
+                        
+                        </Link>
+                        <Switch>
+                            <Route exact path="/searchResult"
+                            render = {(props) =>(
+                                <SearchResult {...props}  {...searchInput}/>
+                            )}
+                            // component={() => <SearchResult title={true} />}
+                            />
+                        
+                    
+                        </Switch>
+          
                 </div>
             </div>
         </form>

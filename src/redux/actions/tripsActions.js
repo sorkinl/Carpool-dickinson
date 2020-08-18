@@ -1,6 +1,6 @@
 import firebase from "../../firebase/firebaseConfig";
-import { GET_TRIPS, MAKE_TRIP, DELETE_TRIP, GET_TRIPS_BY_RADIUS } from "../constants/trip-types";
-import {getMaxAndMinLat, getMaxAndMinLong} from "../../Utils/Distance"
+import { GET_TRIPS, MAKE_TRIP, DELETE_TRIP, GET_TRIPS_BY_RADIUS, SEARCH_PROPS } from "../constants/trip-types";
+import {getMaxAndMinLat} from "../../Utils/Distance"
 const firestore = firebase.firestore();
 
 export function getTrips(payload){
@@ -70,17 +70,14 @@ export function getTripByRadius(payload){
     var trips = firestore.collection("trips")
 
     const lat = getMaxAndMinLat(50, payload.destCoord.lat)
-    const long = getMaxAndMinLong(50, payload.destCoord.long, payload.destCoord.lat)
     
     console.log(lat)
-    console.log(long)
     return async (dispatch, getState) => {
 
         const getTrips =  await trips
             .where('destination.latitude', '>=', lat.minLat)
             .where('destination.latitude', '<=', lat.maxLat)
-            // .where('destination.longitude', '>=', long.minLong)
-            // .where('destination.longitude', '<=', long.maxLong)
+            
             .get()
             .catch((e)=>{console.log(e)});
 
@@ -90,6 +87,14 @@ export function getTripByRadius(payload){
         dispatch({type: GET_TRIPS_BY_RADIUS, payload: returnTrips})
         
 
+    }
+}
+
+export function searchProps(payload){
+    console.log(payload)
+    return async(dispatch)=>{
+
+        dispatch({type: SEARCH_PROPS, payload: payload})
     }
 }
 
