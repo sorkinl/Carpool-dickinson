@@ -33,7 +33,7 @@ const DashboardSideBar = () => {
           <svg className="side-nav-dash__icon">
             <use xlinkHref={`${icon}#icon-user`}></use>
           </svg>
-          <span>Profile</span>
+          <span>Account</span>
         </Link>
       </li>
     </ul>

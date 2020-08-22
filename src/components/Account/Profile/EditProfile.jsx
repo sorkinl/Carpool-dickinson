@@ -143,7 +143,7 @@ export default function EditProfile(props) {
     console.log(isSubmitted);
     return (
         <CssBaseline>
-        <header className="account-page">
+        <header className="edit-profile-page">
                 <div className="edit-profile__top-illustration">
                     <img src={guy} alt="" className="edit-profile__top-illustration--image"/>
                 </div>

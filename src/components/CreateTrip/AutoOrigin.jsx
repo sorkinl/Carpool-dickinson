@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import ReactDOM from "react-dom";
 import {
     Grid,
     TextField,
@@ -8,7 +7,7 @@ import {
 import axios from "axios";
 import {Autocomplete} from '@material-ui/lab'
 import LocationOnIcon from "@material-ui/icons/LocationOn";
-import  { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import  {makeStyles} from '@material-ui/core/styles';
 
 //Questions
 // + why need locationID?
