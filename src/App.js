@@ -24,7 +24,8 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import EditProfile from "./components/Account/Profile/EditProfile";
 import PostTrip from "./components/CreateTrip/PostTrip";
 import FancyLoader from "./components/CreateTrip/FancyLoader (not in use)"
-import Profile from "./components/Account/Profile/Profile";
+import PublicProfile from "./components/PublicProfile/PublicProfile";
+
 
 const Routes = withRouter(({location})=>{ 
   return (
@@ -50,7 +51,8 @@ const Routes = withRouter(({location})=>{
             <Route path = "/searchResult" exact component = {SearchResult}/>
             <Route path = "/fancy" component = {FancyLoader}/>
             <PrivateRoute path = "/dashboard" component = {Dashboard}/>
-            <PrivateRoute path = "/users/:userId" component = {Profile}/>
+            <Route path = "/users/:userId" component = {PublicProfile} exact/>
+            {/* render={(props) => <PublicProfile {...props} />} */}
           </Switch>
         </div>
   )
@@ -58,11 +60,11 @@ const Routes = withRouter(({location})=>{
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Routes/>
-      </Router>
+        <Router>
+            <Routes/>
+        </Router>
+      
     </div>
   );
 }
-
 export default App;

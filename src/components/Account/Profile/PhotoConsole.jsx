@@ -55,12 +55,11 @@ export default function PhotoConsole(props) {
     const user = useSelector(state => state.firebase.profile);
     const currentUser = useSelector((state) => state.firebase.auth);
     const uid = currentUser.uid;
+    let userDefaultPhoto = "https://www.psi.org.kh/wp-content/uploads/2019/01/profile-icon-300x300.png";
 
     //Dialog + error states
     const [showDialog, setDialog] = useState(false);
     const [showDelete, setDelete] = useState(false);
-    const [uploadError, setUploadError] = useState(false);
-    const [deleteError, setDeleteError] = useState(false);
 
      //Dialog action states
      const [isSaved, setSave] = useState(false);
@@ -84,15 +83,11 @@ export default function PhotoConsole(props) {
         setDialog(false);
         setDelete(false);
     }
-    function handleErrorClose() {
-        setUploadError(false);
-        setDeleteError(false)
-    };
     //Get files from upload
     function handleImageAsFile(imageList) {
         if (imageList[0]) {
             if(imageList[0].file){
-                setSave(true)
+                setSave(true);
                 console.log(imageList[0].file);
                 const file = imageList[0].file;
                 setImageAsFile(imageFile => (file));
@@ -123,8 +118,8 @@ export default function PhotoConsole(props) {
                 }, (error) => {
                     switch (error.code) {
                         case 'storage/unknown': //unknown error
-                            console.log(error)
-                            setUploadError(true);
+                            console.log(error);
+                            props.onUploadError(true);
                             break;
                         }
                 }, () => {
@@ -136,35 +131,38 @@ export default function PhotoConsole(props) {
                             setImageAsUrl(prevObject => ({
                                 ...prevObject, imgUrl: downloadURL
                             }))
-                            const prevImageName = firebase.storage().refFromURL(user.photoUrl)
-                                                        .location
-                                                        .path_;
+                            if(user.photoUrl !== userDefaultPhoto) {
+                                const prevImageName = firebase.storage().refFromURL(user.photoUrl)
+                                                                        .location
+                                                                        .path_;
+                                console.log('path of prev photo', prevImageName);
+                                deletePrevPhoto(prevImageName); //remove the previous photo if not default
+                            }
                             firestore.collection("users").doc(uid).set({
                                 photoUrl: downloadURL,
                             }, { merge: true })
-                            props.onUrlExists(downloadURL);
+                            // props.onUrlExists(downloadURL);
                             setSpinner(false);
                             handleDialogClose();
-                            deletePrevPhoto(prevImageName);//remove the previous photo as well
                         });
                 })
         }
     }
     const deletePhoto = async () => {
         try {
+            setDelete(false);
             const photoName = firebase.storage()
                                 .refFromURL(user.photoUrl)
                                 .location
                                 .path_; //extract image's name from downloadUrl
             await firestore.collection("users")
                             .doc(uid)
-                            .update({photoUrl: ""}); //delete from firestore
+                            .update({photoUrl: userDefaultPhoto}); //delete from firestore
             await firebaseHook.deleteFile(photoName); //delete from storage
-            props.onUrlExists("");
         } 
         catch(error) {
             console.log("Error deleting current photo in deletePhoto(): ", error);
-            setDeleteError(true);
+            props.onDeleteError(true);
         }
     }
     const deletePrevPhoto = async (prevImageName) => {
@@ -184,7 +182,7 @@ export default function PhotoConsole(props) {
         catch(error) {
             console.log("Error uploading photo in savePhotoUpdate(): ", error);
             setSpinner(false);
-            setUploadError(true);
+            props.onUploadError(true);
         }
     }
     return (
@@ -199,7 +197,7 @@ export default function PhotoConsole(props) {
                         <FontAwesomeIcon className="photo-menu-item-icon" icon={faCamera}
                         />
                     </div>
-                    <div disabled={props.urlExists === ""} 
+                    <div disabled={user.photoUrl === userDefaultPhoto} 
                         className="photo-menu-item" 
                         onClick={showDeleteDialog}> 
                         <FontAwesomeIcon className="photo-menu-item-icon" icon={faTrashAlt}
@@ -294,32 +292,6 @@ export default function PhotoConsole(props) {
                     </DialogActions>                 
                 </Dialog>
             </ThemeProvider>
-            <Snackbar open={uploadError === true}
-                        autoHideDuration={4000}
-                        onClose={handleErrorClose}
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'center',
-                        }}>
-                    <ThemeProvider theme={defaultMaterialTheme}>
-                        <Alert onClose={handleErrorClose} severity="error">
-                            Failed to upload photo! Try again 
-                        </Alert>
-                    </ThemeProvider>
-            </Snackbar>
-            <Snackbar open={deleteError === true}
-                        autoHideDuration={4000}
-                        onClose={handleErrorClose}
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'center',
-                        }}>
-                    <ThemeProvider theme={defaultMaterialTheme}>
-                        <Alert onClose={handleErrorClose} severity="error">
-                            Failed to delete photo! Try again
-                        </Alert>
-                    </ThemeProvider>
-            </Snackbar>
         </div>
     );
 }

@@ -1,6 +1,5 @@
 $field-label-font-size: 1.6rem;
 $heading-font-size: 2rem;
-$back-btn-font-size: 1.6rem;
 $card-title-font-size: 2rem;
 
 .edit-profile {
@@ -91,7 +90,7 @@ $card-title-font-size: 2rem;
             #basic-hub {
                 max-width: 27rem;
             }
-            #basic-email, #basic-phone, #basic-school {
+            #basic-email, #basic-phone, #basic-school, #basic-bio {
                 width: 100%;
                 max-width: none;
             }

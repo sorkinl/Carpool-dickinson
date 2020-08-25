@@ -7,6 +7,7 @@ import {
   CssBaseline, 
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import DashboardSideBar from '../Dashboard/DashboardSideBar';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -20,12 +21,13 @@ export default function Account(props) {
   const classes = useStyles();
     return(
         <CssBaseline>
+          {/* <div className="content-dashboard">
+          <DashboardSideBar/> */}
            <header className="account-page">
             <Grid container spacing={1}>
               <Grid item xs={4}>
                 <Profile/>
               </Grid>
-            
               <Grid item xs>
                   <Grid container direction="column" spacing={1}>
                       {/* <Grid container spacing={1} className={classes.container}>
@@ -41,6 +43,7 @@ export default function Account(props) {
               </Grid>
             </Grid>
           </header>
+          {/* </div> */}
         </CssBaseline>
       );
 }

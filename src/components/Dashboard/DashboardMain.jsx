@@ -23,10 +23,8 @@ const DashboardMain = () => {
     ],
     storeAs: 'bookmarkedTrips'
   }])
-
   const recentTrips = useSelector(state => state.firestore.ordered.recentTrips)
   const bookmarkedTrips = useSelector(state => state.firestore.ordered.bookmarkedTrips)
-  
     
     return(
         <main className="main-dash">
@@ -45,15 +43,16 @@ const DashboardMain = () => {
               Bookmarked
               {isLoaded(bookmarkedTrips) ? bookmarkedTrips.map(trip => (
                 <TripCard
-                key={trip.id}
-                tripId={trip.id}
-                firstName={trip.firstName}
-                lastName={trip.lastName}
-                destTitle={trip.destTitle}
-                originTitle={trip.originTitle}
-                departDate={trip.departDate}
-                departTime={trip.departTime}
-                uid={trip.uid}
+                  key={trip.id}
+                  tripId={trip.id}
+                  firstName={trip.firstName}
+                  lastName={trip.lastName}
+                  destTitle={trip.destTitle}
+                  originTitle={trip.originTitle}
+                  departDate={trip.departDate}
+                  departTime={trip.departTime}
+                  photoUrl={trip.photoUrl}
+                  uid={trip.uid}
                 />
               )): <Loading/>}
               
@@ -61,15 +60,16 @@ const DashboardMain = () => {
             <div className="main-dash__trip-section">
               {isLoaded(recentTrips) ? recentTrips.map((trip) => 
                 <TripCard
-                key={trip.id}
-                tripId={trip.id}
-                firstName={trip.firstName}
-                lastName={trip.lastName}
-                destTitle={trip.destTitle}
-                originTitle={trip.originTitle}
-                departDate={trip.departDate}
-                departTime={trip.departTime}
-                uid={trip.uid}
+                  key={trip.id}
+                  tripId={trip.id}
+                  firstName={trip.firstName}
+                  lastName={trip.lastName}
+                  destTitle={trip.destTitle}
+                  originTitle={trip.originTitle}
+                  departDate={trip.departDate}
+                  departTime={trip.departTime}
+                  photoUrl={trip.photoUrl}
+                  uid={trip.uid}
                 />
               ): <Loading/>}
               
@@ -77,6 +77,5 @@ const DashboardMain = () => {
           </main>
     )
 }
-
 
 export default DashboardMain;

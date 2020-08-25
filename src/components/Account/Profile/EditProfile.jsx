@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import  { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import MuiAlert from '@material-ui/lab/Alert';
-import {useFirestore} from "react-redux-firebase";
+import {useFirestore, isLoaded} from "react-redux-firebase";
 import {
     faChevronLeft,
     faUnlock
@@ -18,6 +18,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import guy from '../../../assets/images/edit_profile.svg';
 import girl  from '../../../assets/images/freelancer_blue.svg';
 import Loader from 'react-loader-spinner';
+import Loading from "../../Loading";
 
 //To be improved:
 // iterate class year values through the array below instead of doing by hand
@@ -75,7 +76,8 @@ export default function EditProfile(props) {
         phone: user.phone,
         major: user.major,
         classYear: user.classYear,
-        hub: user.hub
+        hub: user.hub,
+        bio: user.bio,
     });
     const initValue = {
         firstName: user.firstName,
@@ -85,7 +87,8 @@ export default function EditProfile(props) {
         phone: user.phone,
         major: user.major,
         classYear: user.classYear,
-        hub: user.hub
+        hub: user.hub,
+        bio: user.bio
     }
     function checkNoEdit(key, value) {
         if(initValue[key] === value) {
@@ -140,9 +143,9 @@ export default function EditProfile(props) {
             setSubmit("submit-error");
         }
     }
-    console.log(isSubmitted);
     return (
         <CssBaseline>
+        {isLoaded(user) ? 
         <header className="edit-profile-page">
                 <div className="edit-profile__top-illustration">
                     <img src={guy} alt="" className="edit-profile__top-illustration--image"/>
@@ -171,6 +174,12 @@ export default function EditProfile(props) {
                                 <label for="basic-last-name" className="basic-info-label">Last name*</label>  
                                     <input id="basic-last-name" required type="text" name="lastName" value={input.lastName}
                                         placeholder="Your last name" onChange={handleEdit} /> 
+                                </Grid>
+                                {/* Bio */}
+                                <Grid item xs={12} className="basic-sub-box">
+                                    <label for="basic-bio" className="basic-info-label">Bio</label>
+                                    <input id="basic-bio" required type="text"  name="bio" value={input.bio}
+                                        placeholder="Add a bio" onChange={handleEdit} /> 
                                 </Grid>
                                 {/* School */}
                                 <Grid item xs={12} className="basic-sub-box">
@@ -305,6 +314,7 @@ export default function EditProfile(props) {
                 </Snackbar>
             </div>
        </header>
+       : <Loading/>}
      </CssBaseline>
     )
 }

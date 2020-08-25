@@ -10,7 +10,6 @@ import Loader from 'react-loader-spinner'
 import {
     CssBaseline,
     Snackbar,
-    Link,
     Grid,
 } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -95,6 +94,16 @@ export default function PostTrip(props) {
     let departTime ='';
     currentDate.setUTCHours(0,0,0,0);
 
+    // const userProfile = { //Make this a separate object since storing user.<field> as states caused errors 
+    //     firstName: user.firstName,
+    //     lastName: user.lastName,
+    //     photoUrl: user.photoUrl,
+        
+    // }
+    const firstName = user.firstName;
+    const lastName = user.lastName;
+    const photoUrl = user.photoUrl;
+
     const [state, setState] = useState({
         originTitle: '',
         origin: {
@@ -109,12 +118,9 @@ export default function PostTrip(props) {
         departDate: currentDate,
         emptySeat: '',
         description: '',
-        uid: firebase.auth().currentUser.uid,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        photoUrl: user.photoUrl,
+        uid: firebase.auth().currentUser.uid
     });
-
+    
     function handleChange(e) {  
         const { name, value } = e.target;
         if (name === "selector") {
@@ -174,7 +180,7 @@ export default function PostTrip(props) {
         }
         else {
             departTime = timeToPick.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            console.log({...state}, "pre-submit success");
+            console.log({...state},departTime, "pre-submit success");
             submitTrip();
         }
     };
@@ -182,7 +188,7 @@ export default function PostTrip(props) {
         try {
             setSubmit("pending");
             setSpinner(true);
-            await firestore.collection("trips").add({...state, departTime});
+            await firestore.collection("trips").add({...state, departTime, firstName, lastName, photoUrl});
             setSpinner(false);
         }
         catch (error) {

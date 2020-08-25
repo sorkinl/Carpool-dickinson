@@ -1,12 +1,12 @@
-.edit-profile-page {
-    height: 152vh;
-    overflow: hidden;
+.public-profile-page {
+    height: 160vh;
     background-color: #e6eeff;
     background-size: contain;
     background-position: center;
     position: absolute;
     width: 100%;
-    z-index:0;
+    overflow: hidden;
+    z-index:100;
     margin: -4rem auto;
     padding-top: 3%;
     padding-right: 2%;

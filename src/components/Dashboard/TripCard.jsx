@@ -71,6 +71,7 @@ const TripCard = (props) => {
       .collection("chatRooms")
       .doc(props.tripId)
       .get();
+    console.log(docRef);
     if (docRef.exists) {
       firestore.update(
         {
@@ -79,9 +80,10 @@ const TripCard = (props) => {
         },
         {
           requests: {
-            [firebase.auth().currentUser.uid] : {firstName: currentUser.firstName,
-            lastName: currentUser.lastName,
-            photoUrl: currentUser.photoUrl,
+            [firebase.auth().currentUser.uid] : {
+                firstName: currentUser.firstName,
+                lastName: currentUser.lastName,
+                photoUrl: currentUser.photoUrl,
             }
           },
           memberIds: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid)
@@ -107,12 +109,13 @@ const TripCard = (props) => {
       );
     }
   };
-
+  console.log(props.photoUrl);
   return (
     <div className="trip-card-dash">
       <div className="trip-card-dash__heading">
-        <Link to={`users/${props.uid}`}>
-        <img src={avatar} alt="" className="trip-card-dash__image" />
+        <Link to={`users/${props.uid}`}> 
+        {/* {props.firstName} {props.lastName} */}
+          <img src={props.photoUrl} alt="" className="trip-card-dash__image"/>
         </Link>
         <h3 className="trip-card-dash__heading--text">
           {props.firstName} {props.lastName}

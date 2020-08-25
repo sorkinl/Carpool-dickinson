@@ -49,8 +49,10 @@ export default function ProfileCreate() {
     hub: "",
     gender: "",
     phone: "",
-    photoUrl:""
+    photoUrl: process.env.USER_DEFAULT_PHOTO,
+    bio: "",
   });
+
   const currentUser = useSelector((state) => state.firebase.auth);
   const userProfile = useSelector((state) => state.firebase.profile);
   const firestore = useFirestore();
@@ -95,6 +97,17 @@ export default function ProfileCreate() {
         {/* main form */}
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
+          <Grid item xs={12} sm={4}>
+              <TextField
+                variant="outlined"
+                fullWidth
+                id=""
+                label="Bio"
+                name="bio"
+                autoComplete="lname"
+                onChange={handleChange}
+              />
+            </Grid>
             <Grid item xs={12} sm={4}>
               <TextField
                 variant="outlined"
@@ -178,6 +191,7 @@ export default function ProfileCreate() {
                 onChange={handleChange}
               />
             </Grid>
+            
           {/* profilepic upload */}
             <Grid item xs={12} sm={4}>
               
