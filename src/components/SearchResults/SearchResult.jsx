@@ -1,75 +1,58 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, {useState, useEffect} from "react";
 import EachResult from "./EachResult/EachResult";
-import { Paper } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 import { HereMap } from "../HereMap/HereMap";
-import "./SearchResult.css";
+import "./SearchResult.scss";
 import { useSelector } from "react-redux";
-import { useFirestoreConnect, isLoaded } from "react-redux-firebase";
-import Loading from "../Loading";
+import {getMaxAndMinLong} from "../../Utils/Distance"
+const SearchResult = (props, title) =>{
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    paddingLeft: 50,
-  },
-  result: {
-    width: "50%",
-  },
-  text: {
-    textAlign: "left",
-    marginTop: "3em",
-    marginBottom: "1em",
-  },
-  imgDiv: {
-    height: "100vh",
-    width: "35%",
-  },
-}));
+  const trips =  useSelector(state=>state.tripsReducer)
 
-function SearchResult() {
-  const classes = useStyles();
-  useFirestoreConnect(["trips"]);
-  const trips = useSelector((state) => state.firestore.ordered.trips);
+  const filteredTrips = []
+  
+  const long = getMaxAndMinLong(50, trips.searchProps.destCoord.long, trips.searchProps.destCoord.lat)
+ 
 
-  const tripList = isLoaded(trips) ? (
-    trips.map((trip) => (
-      <EachResult
-        comment={"Leaving between 2pm-4pm"}
-        starting={trip.origin_title}
-        destination={trip.destination_title}
-      />
-    ))
-  ) : (
-    <Loading />
-  );
+  console.log(long)
+
+  const tripList = trips.trips.map((trip)=>{
+    console.log(trip)
+    if(trip.destination.longitude >= long.minLong && trip.destination.longitude <= long.maxLong){
+      filteredTrips.push(trip)
+      return(  <EachResult {...trip} />)
+    }else{
+      return <div></div>
+    }
+    
+  })
 
   return (
-    <Paper classes={{ root: classes.paper }}>
-      {/* Search Form */}
-      <Grid container>
-        <div id="searchResultRoot">
-          <Grid item className={classes.result}>
-            {/* Text Space */}
-            <Grid item classes={{ root: classes.text }}>
-              <Typography variant="body2" color="textSecondary">
-                3 results
-              </Typography>
-              <Typography variant="h3">Trip to...</Typography>
-            </Grid>
-            {tripList}
-          </Grid>
-          {/* Map */}
-          <div id="dasdas">
-            <div id="mapDiv">
-              <HereMap />
-            </div>
+
+    <div id = "searchresult__main">
+      <div id = "searchresult__left">
+        <div id = "searchresult__heading">
+          <div id = "searchresult__triplength">
+           {filteredTrips.length} results
+          </div>
+          <div id = "searchresult__tripname">
+            Trips to {trips.searchProps.destTitle}
           </div>
         </div>
-      </Grid>
-    </Paper>
-  );
+        <hr className = "searchresult__hr"/>
+        <div id = "searchresult__trips">
+       
+          {tripList}
+        </div>
+      </div>
+      <div id = "searchresult__right">
+        <div id = "searchresult__heremap">
+          {console.log(filteredTrips)}
+        <HereMap trips = {filteredTrips} />
+        </div>
+      </div>
+
+    </div>
+  )
 }
 
 export default SearchResult;

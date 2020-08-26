@@ -1,70 +1,64 @@
 import React, {useState} from 'react';
-
-import avatar from "../../../static/img/avatar.png"
-import EditButton from './EditButton';
-import EditField from './EditField';
-import { withStyles } from '@material-ui/core/styles';
-import {makeStyles, CssBaseline, Button, Avatar, Card, CardHeader, CardMedia, CardContent, CardActions, Typography, Box, Grid, Collapse} from '@material-ui/core';
-import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
+import unnamed from '../../../assets/images/unnamed.jpg';
 import { useSelector } from 'react-redux';
+import {
+    Grid,
+} from '@material-ui/core';
+import {Link } from 'react-router-dom';
+import PhotoConsole from "./PhotoConsole";
 
-const useStyles = makeStyles((theme)=>({
-  root: {
-    maxWidth: '100%',
-    padding: theme.spacing(3),
-  },
-  avatarSize: {
-    width: theme.spacing(19),
-    height: theme.spacing(19),
-    padding: theme.spacing(0),
-  },
-  title: {
-    fontSize: theme.typography.pxToRem(29),
-    flexBasis: '19%',
-    flexShrink: 0,
-    color: theme.palette.inherit,
-  },
-  subHeader: {
-    fontSize: theme.typography.pxToRem(15),
-    flexBasis: '19%',
-    flexShrink: 0,
-  },
-}));
+//To be improved:
+// + Image preview should be scalable, but not compressed
+
 /* Display the profile basic info */
-export default function Profile(props){
-    const [isClicked, setClick] = useState(false);
-
-    const classes = useStyles();
+export default function Profile(props) {
     const user = useSelector(state => state.firebase.profile);
-      return(
-        <div className={classes.root}>
-          {/* Display user's Name, Email, and Location */}
-          <Grid item>
-              <Card className={classes.root}>
-                <CardHeader
-                    title={
-                    <Typography className={classes.title} variant="h5">{user.firstName} {user.lastName}</Typography>
-                    }
-                    align='left'
-                    subheader={
-                    <>Carlisle, PA<br/>{user.email}</>
-                    }
-                    avatar={
-                      <Avatar src={avatar} aria-label="name" className={classes.avatarSize}>K</Avatar>
-                    }
-                />
-                {/*Display the EditField if EditButton is clicked*/}
-                <CardActions>
-                  <EditButton onClick={()=>{setClick(!isClicked)}} status={isClicked}/>
-                </CardActions>
-                {/* Expand Profile card and display EditField component*/}
-                <Collapse in={isClicked} timeout="auto" unmountOnExit>
-                  <CardContent>
-                      <EditField user={user}/>
-                  </CardContent>
-                </Collapse>
-              </Card>
-          </Grid>
-        </div>
-      );
+    const [urlExists, setUrlExists] = useState(user.photoUrl);
+
+    function updatePhotoUrl(url) {
+        setUrlExists(url);
+    }
+    return (
+        <div>
+            <div className="profile-card outer-div">
+                <div className="profile-card inner-div">
+                    <div className="profile-card front">
+                        {/* <div className="profile-card front__bkg-photo"></div> */}
+                        <p className="section-name">Profile</p>
+                        <img disabled={urlExists !== ""} className="profile-card front__face-photo front__face-photo--none" src={unnamed} alt=""/>
+                        <img className="profile-card front__face-photo front__face-photo--existing"
+                            src={user.photoUrl}
+                            alt=""
+                        />
+                        <span className="profile-card front__photo-console">
+                            <PhotoConsole onUrlExists={updatePhotoUrl} urlExists={urlExists}/> 
+                        </span>
+                        <div className="profile-card front__text">
+                                <h3 className="profile-card front__text-header">{user.firstName} {user.lastName}</h3>
+                                <p className="profile-card front__text-para">{user.school} | {user.classYear}</p>
+                                <Grid container className="record-profile">
+                                    <Grid item xs={3}>
+                                        <p className="record-main">7</p>
+                                        <p className="record-sub">offers</p>
+                                    </Grid>
+                                    <div className="record-line"></div>
+                                    <Grid item xs={3}>
+                                        <p className="record-main">10</p>
+                                        <p className="record-sub">rides</p>
+                                    </Grid>
+                                    <div className="record-line"></div>
+                                    <Grid item xs={3}>
+                                        <p className="record-main">20</p>
+                                        <p className="record-sub">reviews</p>
+                                    </Grid>
+                                </Grid>
+                                <Link to="/edit-profile" className="btn btn--editProfile">
+                                    Edit profile
+                                </Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    )
 }

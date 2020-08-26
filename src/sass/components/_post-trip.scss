@@ -1,0 +1,488 @@
+$bg: #332f35;
+$fg: lighten($bg,20%);
+$contW: 90rem;
+$imgW: 31rem;
+$formW: 75rem;
+$switchAT: 1.2s;
+
+$radio-button-color: #c4f3ff;
+
+$field-label-font-size: 1.4rem;
+$input-font-size: 1.6rem;
+$heading-font-size: 2.5rem;
+$back-btn-font-size: 1.6rem;
+$card-title-font-size: 2rem;
+
+$inputW: 50rem;
+$btnH: 4.5rem;
+$diffRatio: ($contW - $imgW) / $contW;
+
+.post-trip {
+    margin: 1rem 14rem;
+    position: relative;
+    padding-top:1rem;
+    font-family: "Lato", sans-serif;
+    * {
+        box-sizing: border-box;
+    }
+    .post-trip-icon {
+        font-size: $field-label-font-size;
+        color: $color-primary;
+        text-align: left;
+        margin-right: 1rem;
+    }
+    .post-trip-btn {
+        position: relative;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-radius: 10rem;
+        display: inline-block;
+        font-size: $back-btn-font-size;
+        transition: all .1s;
+        padding: 1.5rem 3rem;
+        text-align: center;
+        &--back {
+            background-color: none;
+            color: $color-primary;
+            margin-bottom: 1rem;
+        }
+        &:hover {
+            opacity: 0.7;
+            cursor: pointer;
+        }
+    }
+    .post-trip-main {
+        h2 {
+            margin-left: 30rem;
+            color: $color-primary-light;
+            font-size: $heading-font-size;
+        }
+        *, *:before, *:after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        input {
+            border: none;
+            outline: none;
+            background: none;
+            // font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+        }     
+        .post-trip-cont {
+            overflow: hidden;
+            position: relative;
+            width: 97%;
+            min-height: fit-content;
+            height: 66rem;
+            background: $color-white;
+            border-radius: 2rem;
+            box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+            padding-top: 4.5rem;
+            &__boxTitle {
+                position: relative;
+                background-image: linear-gradient(to right bottom,rgba($color-primary-light,1),rgba(#5797ff,1));
+                padding: 1.5rem 6rem;
+                box-shadow: .2rem .3rem .5rem rgba(0, 0, 0, 0.2);
+                width: 25rem;
+                height: 5.5rem;
+                margin-bottom: .5rem;
+                animation-name: postTripBoxTitle;
+                animation-duration: 1s;
+                animation-timing-function: ease-out;
+                &__text {
+                    font-family: "Lato", sans-serif;
+                    visibility: visible;
+                    font-size: $card-title-font-size;
+                    font-weight: bold;
+                    color: $color-white;
+                    text-transform: uppercase;
+                    animation-name: boxTitle-text;
+                    animation-duration: 1.1s;
+                    animation-timing-function: ease;
+                }
+            }
+            &--front-content {
+                &[disabled] {
+                    transform: translate(0, -120%);
+                    animation: hideMeUp ease-in .8s;
+                }
+            }
+            @keyframes hideMeUp {
+                0% {transform: translate(0, -0%);}
+                100% {transform: translate(0, -120%);}
+            }
+            @keyframes postTripBoxTitle{
+                from {width: 0rem;}
+                to {width: 25rem;}
+            }
+        }   
+        .post-trip-form {
+            position: relative;
+            width: 74rem;
+            height: 100%;
+            transition: transform $switchAT ease-in-out;
+            padding: .5rem 5rem;
+        }
+            
+        .post-trip-sub-cont {
+            overflow: hidden;
+            position: absolute;
+            margin-left: $formW;
+            top: 0;
+            width: $contW;
+            height: 100%;
+            background-image: linear-gradient(to right bottom,rgba($color-primary-light,1),rgba($color-primary-dark,1));
+            // background-color: $color-primary-light;
+            transition: transform $switchAT ease-in-out;
+            box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+        } 
+        
+        .post-trip-confirm {
+            overflow: hidden;
+            position: absolute;
+            z-index: 3;
+            top: 0;
+            width: 106rem;
+            height: 100%;
+            background-image: linear-gradient(to right bottom,rgba($color-primary-light,1),rgba(#3884ff,1));
+            transition: transform $switchAT ease-in-out;
+            box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+            animation-name: postTripConfirm;
+            animation-duration: .9s;
+            animation-timing-function: ease-in-out;
+            &.center-illustration {
+                background: transparent;
+                position: absolute;
+                margin-top: 11rem;
+                margin-left: -7rem;
+                text-align: center;
+                box-shadow: none;
+                animation: fadeIn ease 1s;
+                -webkit-animation: fadeIn ease 1s;
+                -moz-animation: fadeIn ease 1s;
+                -o-animation: fadeIn ease 1s;
+                -ms-animation: fadeIn ease 1s;
+                &.center-image {
+                    display: inline-block;
+                    height: 20rem;
+                    width: auto;
+                }
+            }
+            &__text {
+                color: $color-white;
+                text-align: center;
+                position: relative;
+                z-index: 4;
+                transition: transform  .6s ease-in-out;
+                animation: fadeIn ease 1s;
+                -webkit-animation: fadeIn ease 1s;
+                -moz-animation: fadeIn ease 1s;
+                -o-animation: fadeIn ease 1s;
+                -ms-animation: fadeIn ease 1s;
+                &--header {
+                    text-transform: capitalize;
+                    font-size: $heading-font-size;
+                    margin-top: 14rem;
+                    font-weight: bold;
+                }
+                &--icon {
+                    font-size: 2.7rem;
+                    color: $color-white;
+                    margin-left: .5rem;
+                }
+                &--caption {
+                    animation: fadeIn ease 1s;
+                    font-size: 1.6rem;
+                    margin-top: 1rem;
+                }
+            }
+            &__btnSet {
+                margin-left: 19.5rem;
+                text-align: -webkit-center;
+                margin-top: 25rem;
+                transition: transform  .6s ease-in-out;
+                &__btn {
+                    overflow: hidden;
+                    position: relative;
+                    z-index: 3;
+                    transition: ease .4s;
+                    text-transform: uppercase;
+                    cursor: pointer;
+                    font-size: 1.6rem;
+                    height: $btnH;
+                    border-radius: 3rem;
+                    padding: 1.2rem 2.5rem;
+                    width: 18rem;
+                    animation: fadeLonger ease 1.9s;
+                    -webkit-animation: fadeLonger ease 1.9s;
+                    -moz-animation: fadeLonger ease 1.9s;
+                    -o-animation: fadeLonger ease 1.9s;
+                    -ms-animation: fadeLonger ease 1.9s;
+                    &:hover {
+                        transform: translateY(-.3rem);
+                        box-shadow: 0 1rem 2rem rgba($color-black,.2);
+                        background: none;
+                        border: 2px solid $color-white;
+                        color: $color-white;
+                        height: 4.7rem;
+                    }
+                    &--postNew {
+                        color: $color-tertiary;
+                        background:  $color-white;
+                        text-align: -webkit-center;
+                        box-shadow: inset 0 0 1rem $color-grey-light-4;
+                    }
+                    &--home {
+                        color: $color-white;
+                        width: 18rem;
+                        margin-left: -11rem;
+                        text-align: -webkit-center;
+                        background: $color-tertiary;
+                        box-shadow: inset 0 0 1rem $color-tertiary-light;
+                    }
+                }
+            }
+        }  
+        @keyframes postTripConfirm{
+            0% {height: 0%;}
+            100% {height: 100%;}//margin-left: 0rem;}
+        } 
+        @keyframes fadeIn {
+            0% {opacity:0;}
+            100% {opacity:1;}
+        }
+        @-moz-keyframes fadeIn {
+            0% {opacity:0;}
+            100% {opacity:1;}
+        }
+        @-webkit-keyframes fadeIn {
+            0% {opacity:0;}
+            100% {opacity:1;}
+        }
+        @-o-keyframes fadeIn {
+            0% {opacity:0;}
+            100% {opacity:1;}
+        }
+        @-ms-keyframes fadeIn {
+            0% {opacity:0;}
+            100% {opacity:1;}
+        }  
+        
+        @keyframes fadeLonger {
+            0%   {opacity: 0;} 
+            70%  {opacity: 0;}
+            100% {opacity: 1;}
+        }
+        @-moz-keyframes fadeLonger {
+            0%   {opacity: 0;} 
+            70%  {opacity: 0;}
+            100% {opacity: 1;}
+        }
+    
+        @-webkit-keyframes fadeLonger {
+            0%   {opacity: 0;} 
+            70%  {opacity: 0;}
+            100% {opacity: 1;}
+        }
+        @-o-keyframes fadeLonger {
+            0%   {opacity: 0;} 
+            70%  {opacity: 0;}
+            100% {opacity: 1;}
+        }
+        @-ms-keyframes fadeLonger {
+            0%   {opacity: 0;} 
+            70%  {opacity: 0;}
+            100% {opacity: 1;}
+        } 
+        .post-trip-img {
+            overflow: hidden;
+            z-index: 2;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: $imgW;
+            height: 100%;
+            padding-top: 43rem;
+            &:before {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: $contW;
+                height: 100%;
+                background-size: cover;
+                transition: transform $switchAT ease-in-out;
+            } 
+            &:after {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-image: linear-gradient(to right bottom,rgba($color-primary-light,1),rgba(#3884ff,1));
+                // background-color: $color-primary-light;
+                // background: rgba(0,0,0,0.6);
+            }
+            &__text {
+                z-index: 2;
+                position: absolute;
+                left: 0;
+                top: 6.7rem;
+                width: 100%;
+                padding: 0 2rem;
+                text-align: center;
+                color: $color-white;
+                transition: transform $switchAT ease-in-out;
+                
+                &.mini-loader {
+                    overflow: hidden;
+                    position: relative;
+                    margin-top: -8rem;
+                    padding: 0 4rem;
+                    transition: transform 1.2s ease-in-out;
+                }
+                &.side-illustration {
+                    position: absolute;
+                    z-index: 2;
+                    margin-top: 4rem;
+                    margin-left: 0rem;
+                    left: 0;
+                    top: 6.7rem;
+                    padding: 0 4rem;
+                    transition: transform $switchAT ease-in-out;
+                    &.side-image {
+                        display: inline-block;
+                        height: 17rem;//16rem //19rem //14
+                        width: auto;
+                        margin: 0 0rem;
+                    }
+                }
+                h2 {
+                    color: $color-white;
+                    margin-left: 0;
+                    font-size: $heading-font-size;
+                    margin-bottom: 1rem;
+                    font-weight: bold;
+                }
+                p {
+                    color: $radio-button-color;
+                    margin-top: 32rem;
+                    font-size: $input-font-size;
+                    line-height: 1.5;
+                }
+            }
+            &__btn {
+                overflow: hidden;
+                z-index: 2;
+                position: relative;
+                width: 13rem;
+                height: $btnH;
+                margin: 0 auto;
+                color: $color-white;
+                text-transform: uppercase;
+                font-size: $input-font-size;
+                border-radius: 3rem;
+                cursor: pointer;
+                transition: ease .4s;
+                &:hover {
+                    transform: translateY(-.3rem);
+                    box-shadow: 0 1rem 2rem rgba($color-black,.2),
+                                inset 0 0 1rem $color-tertiary-light;
+                }
+                
+                &:after {
+                    content: '';
+                    z-index: 2;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+            
+                span {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
+                    transition: transform $switchAT;
+                    &.submit-post-trip {
+                        box-shadow: inset 0 0 1rem $color-tertiary-light;
+                        background: $color-tertiary;
+                    }
+                }
+            }
+        }
+          
+        label {
+            display: block;
+            width: $inputW;
+            margin: 1.4rem auto 0;
+          
+            span {
+                font-size: $field-label-font-size;
+                color: $color-primary-light;
+                text-transform: capitalize;
+            }
+            textarea {
+                margin-top: .6rem;
+                resize: none;
+                &:focus {
+                    outline: none !important;
+                    border: .15rem solid $color-tertiary;
+                }
+            }
+        }
+        input {
+            display: block;
+            width: 100%;
+            font-size: $input-font-size;
+            margin: .8rem 0 .3rem 0;
+            // border-bottom: .1rem solid rgba(0,0,0,0.4);
+        }
+        .post-trip-front-page {
+            transition-timing-function: ease-out;
+        }
+        input[type=radio] {
+            position: absolute;
+            visibility: hidden;
+            display: none;  
+        }
+        .post-trip-radio-label {
+            color: lighten($bg,40%);
+            display: inline-block;
+            cursor: pointer;
+            width: 5rem;
+            height: 5rem;
+            background: $radio-button-color;
+            border-radius: 45%;
+            text-align: center;
+            cursor: pointer;
+            transition: ease .4s;
+            margin-right: 1rem;
+            p {
+                margin-top: 1.4rem;
+                font-size: $input-font-size;
+            }
+        }
+        input[type=radio]:checked + label{
+            color: $color-white;
+            background:  $color-primary-dark;
+        }
+        input[type=radio]:hover + label{
+            color: $color-white;
+            background: $color-primary-dark;
+        }
+        .post-trip-seat-radio-group {
+            padding: 0 5.5rem;
+            display: inline-block;
+            overflow: hidden;
+            width: 60rem;
+        }
+    }
+}

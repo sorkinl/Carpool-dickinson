@@ -1,0 +1,23 @@
+.Future-trip-list {
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+  margin: 0.1rem 20%;
+  padding-top: 10px;
+  flex: 0 3 auto;
+}
+.Past-trip-list {
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+  margin: 0.1rem 20%;
+  padding-top: 10px;
+  flex:  0 3 auto;
+}
+
+#upcoming-trip-panel {
+  border-radius: 20px 20px 0px 0px;
+}
+#past-trip-panel {
+  border-radius: 0px 0px 20px 20px;
+}

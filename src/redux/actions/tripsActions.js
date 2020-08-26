@@ -1,81 +1,111 @@
 import firebase from "../../firebase/firebaseConfig";
-import { GET_TRIPS, MAKE_TRIP, DELETE_TRIP } from "../constants/trip-types";
-import axios from "axios";
-
+import { GET_TRIPS, MAKE_TRIP, DELETE_TRIP, GET_TRIPS_BY_RADIUS, SEARCH_PROPS } from "../constants/trip-types";
+import {getMaxAndMinLat} from "../../Utils/Distance"
 const firestore = firebase.firestore();
-export function getTrips() {
-  //TODO retrieve trips from the database
-  var trips = firestore.collection("trips");
-  return async (dispatch, getState) => {
-    const getTrips = await trips.where("destination.longitude", "<=", 14).get();
-    dispatch({
-      type: GET_TRIPS,
-      payload: getTrips.docs.map((doc) => doc.data()),
-    });
-  };
+
+export function getTrips(payload){
+    var trips = firestore.collection("trips")
+    return async (dispatch, getState) => {
+        if(payload.originTitle === '' && payload.destTitle !== ''){
+           
+            const text = payload.destTitle;
+            const end = text.replace(/.$/, c => String.fromCharCode(c.charCodeAt(0) + 1));
+         
+            const getTrips =  await trips
+                .where('destTitle', '>=', text)
+                .where('destTitle', '<', end)
+                .get()
+                .catch((e)=>{console.log(e)});
+
+            const returnTrips = []
+            getTrips.docs.map(doc => returnTrips.push(doc.data()))
+
+            dispatch({type: GET_TRIPS, payload: returnTrips})
+        }
+        else if(payload.originTitle !== '' && payload.destTitle === ''){
+
+            const text = payload.originTitle;
+            const end = text.replace(/.$/, c => String.fromCharCode(c.charCodeAt(0) + 1));
+         
+            const getTrips =  await trips
+                .where('originTitle', '>=', text)
+                .where('originTitle', '<', end)
+                .get()
+                .catch((e)=>{console.log(e)});
+
+            const returnTrips = []
+            getTrips.docs.map(doc => returnTrips.push(doc.data()))
+
+            dispatch({type: GET_TRIPS, payload: returnTrips})
+        }
+        else if(payload.originTitle !== '' && payload.destTitle !== ''){
+
+            const text1 = payload.destTitle;
+            const end1 = text1.replace(/.$/, c => String.fromCharCode(c.charCodeAt(0) + 1));
+
+            const text2= payload.originTitle;
+            const end2 = text2.replace(/.$/, c => String.fromCharCode(c.charCodeAt(0) + 1));
+
+            const getTrips =  await trips
+                .where('destTitle', '==', text1)
+                // .where('destTitle', '<', end1)
+                .where('originTitle', '==', text2)
+                // .where('originTitle', '<', end2)
+                
+                .get()
+                .catch((e)=>{console.log(e)});
+
+            const returnTrips = []
+            getTrips.docs.map(doc => returnTrips.push(doc.data()))
+
+            dispatch({type: GET_TRIPS, payload: returnTrips})
+
+        }
+
+
+    }
 }
 
-export const createTrip = (payload) => {
-  //TODO put trip into the database
+export function getTripByRadius(payload){
+    var trips = firestore.collection("trips")
 
-  return async (dispatch) => {
-    const search = encodeURIComponent(payload.pickup);
-    const response = await axios.get(
-      `https://geocode.search.hereapi.com/v1/geocode?q=${search}&apiKey=${process.env.REACT_APP_HERE_KEY}`
-    );
-    console.log(response);
-    const data = await firestore.collection("trips").add({
-      uid: firebase.auth().currentUser.uid,
-      destTitle: response.data.items[0].title,
-      destination: new firebase.firestore.GeoPoint(
-        response.data.items[0].position.lat,
-        response.data.items[0].position.lng
-      ),
-      departTime: new firebase.firestore.Timestamp.now(),
-    });
-    dispatch({ type: MAKE_TRIP, payload: data });
-  };
-};
+    const lat = getMaxAndMinLat(50, payload.destCoord.lat)
+    
+    console.log(lat)
+    return async (dispatch, getState) => {
 
-//payload.uid
-//https://stackoverflow.com/questions/49682327/how-to-update-a-single-firebase-firestore-document
-export const editTrip = (payload, id) => {
-  //TODO edit trip in the database based on id
-  var trips = firestore.collection("trips");
-  console.log(trips.doc('NZ07glQhOvTZ9tkn7XZI'));
-  console.log(id);
-  return async (dispatch) => {
-    trips.doc(id).update({
-      ...payload
-    });
+        const getTrips =  await trips
+            .where('destination.latitude', '>=', lat.minLat)
+            .where('destination.latitude', '<=', lat.maxLat)
+            
+            .get()
+            .catch((e)=>{console.log(e)});
 
-    //const data = trips.doc(tripId);
-    // const data = trips.doc('rcHJgOZl9jToAVUPLRzD');
-    // await data.update({
-    //   departTime: payload.departTime,
-    //   destTitle: payload.destTitle,
-    //   pickupTitle: payload.pickupTitle, 
-    //  // destination: payload.destination,
+        const returnTrips = []
+        getTrips.docs.map(doc => returnTrips.push(doc.data()))
 
-    // })
-    // .then(doc => {
-    //   if(doc){
-    //     console.log(doc.data());
-    //   }
-    //   console.log(payload);
-    // });
-   // dispatch({type: EDIT_TRIP, payload: data});
-  };
+        dispatch({type: GET_TRIPS_BY_RADIUS, payload: returnTrips})
+        
+
+    }
+}
+
+export function searchProps(payload){
+    console.log(payload)
+    return async(dispatch)=>{
+
+        dispatch({type: SEARCH_PROPS, payload: payload})
+    }
 }
 
 export const deleteTrip = (tripId) => {
-  var trips = firestore.collection("trips");
-  return async (dispatch) => {
-    try {
-      const deleteTrip = trips.doc(tripId).delete();
-    } catch (err) {
-      console.error("Error removing document: ", err);
-    }
-  };
+    var trips = firestore.collection("trips");
+    return async (dispatch) => {
+        try {
+            const deleteTrip = trips.doc(tripId).delete();
+        } catch (err) {
+            console.error("Error removing document: ", err);
+        }
+    };
 };
 

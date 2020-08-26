@@ -49,6 +49,7 @@ export default function ProfileCreate() {
     hub: "",
     gender: "",
     phone: "",
+    photoUrl:""
   });
   const currentUser = useSelector((state) => state.firebase.auth);
   const userProfile = useSelector((state) => state.firebase.profile);
@@ -82,8 +83,8 @@ export default function ProfileCreate() {
     }
   }
 
-  return userProfile.status === 2 || isEmpty(currentUser) ? (
-    <Redirect to="/" />
+  return userProfile.status === 2 ? (
+    <Redirect to="/dashboard" />
   ) : (
     <Container component="main" maxWidth="md">
       <CssBaseline />
@@ -177,7 +178,16 @@ export default function ProfileCreate() {
                 onChange={handleChange}
               />
             </Grid>
+          {/* profilepic upload */}
+            <Grid item xs={12} sm={4}>
+              
+              <Button variant="contained" color="primary" component="span">
+                  Upload profile photo (not implemented)
+              </Button>
+            </Grid>
           </Grid>
+
+
           <Button
             type="submit"
             fullWidth

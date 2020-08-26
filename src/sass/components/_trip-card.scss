@@ -1,0 +1,118 @@
+.trip-card {
+    margin: auto;
+    padding: 10px;
+    background: #5dd7df;
+    width: 30%;
+    max-width: 30%;
+    height: 39rem;
+    border-radius: 2rem;
+    // position: relative;
+    &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 1rem 2rem rgba($color-black,.2);
+    } 
+    .inner-box {
+        margin: 0.1rem 0.5rem;
+        padding: 12px 10px;
+        background: rgb(241, 241, 241);
+        width: 94%;
+        border-radius: 2rem;
+        height: 24rem;
+        display: inline-block;
+    }
+    .trip_face-photo {
+        position: relative;
+        margin: 0.5rem;
+        margin-left: 1.5rem;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+    }
+    h5 {
+        color: #fff;
+        font-size: 18px;
+        margin-top: 0.4rem;
+    }
+    p {
+        font-size: 15px;
+        margin-top: 2px;
+        color: #fff;
+    }
+
+    .icon-circle {
+        position: relative;
+        border-radius: 50%;
+        display: inline-block;
+        width: 2.4rem;
+        height: 2.4rem;
+        margin-right: 0.5rem;
+        background-color:  #f1ca3d45;
+        .trip-icon {
+            position: relative;
+            font-size: 1.3rem;
+            color: #eebe31;
+            &--origin {
+                top: 0.15rem;
+                margin-left: 0.8rem;
+            }
+            &--destination {
+                top: 0.15rem;
+                margin-left: 0.7rem;
+            }
+            &--date {
+                top: 0rem;
+                margin-left: 0.6rem;
+            }
+            &--time {
+                top: 0.09rem;
+                margin-left: 0.6rem;
+            }
+            &--seats {
+                top: 0rem;
+                margin-left: 0.4rem;
+            }
+            &--note {
+                top: 0.1rem;
+                margin-left: 0.65rem;
+            }
+        }
+    }
+
+    .sub-text {
+        position: relative;
+        font-family: "Lato", "sans-serif";
+        color: #2799f7;
+        margin-left: 1rem;
+        margin-top: 0.2rem;
+        margin-bottom: 0.5rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* number of lines to show */
+        -webkit-box-orient: vertical;
+    }
+    div.trip-card-btn {
+        background-color: #428BFF;
+        color: #fff;
+        position: relative;
+        margin: 1.2rem 0.5rem;
+        border-radius: 3rem;
+        text-transform: uppercase;
+        padding: 1.2rem 2rem;
+        font-size: 15px;
+        font-weight: 500;
+        max-width: fit-content;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1; /* number of lines to show */
+        -webkit-box-orient: vertical;
+        &:hover {
+            cursor: pointer;
+            opacity: 0.6;
+        }
+    }
+    .grid-trip {
+        max-width: fit-content
+    }
+}
