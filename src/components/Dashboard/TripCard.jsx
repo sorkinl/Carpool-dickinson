@@ -12,6 +12,7 @@ const TripCard = (props) => {
   const bookmarkedTrips = useSelector(
     (state) => state.firestore.ordered.bookmarkedTrips
   );
+  //Converts date into string of understandable characters
   const convertDate = (date) => {
     const dateTimeFormat = new Intl.DateTimeFormat("en", {
       year: "numeric",
@@ -28,7 +29,7 @@ const TripCard = (props) => {
 
     return `${month} ${day}`;
   };
-
+  //Toggle bookmarks
   const editBookmarks = () => {
     if (bookmarkedTrips.every((trip) => trip.id !== props.tripId)) {
       firestore.set(
@@ -64,7 +65,7 @@ const TripCard = (props) => {
       });
     }
   };
-
+//Adds user to chatRoom's requests array or creates a new chatRoom via cloud function
   const requestTrip = async () => {
     var docRef = await firebase
       .firestore()

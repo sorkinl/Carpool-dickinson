@@ -7,6 +7,10 @@ import _ from "lodash";
 const ChatWindow = (props) => {
   const [message, setMessage] = useState("");
   const firestore = useFirestore();
+
+  /**
+   * if chat exists creates a message object
+   */
   const sendMessage = () => {
     if (props.chat) {
       firestore.update(

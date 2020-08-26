@@ -11,8 +11,9 @@ import Loading from '../../Loading';
 
 
 const MainChat = (props) => {
-  //exporting styles from outside file
+  // History object for handling url
   const history = useHistory();
+  // Condition for redirecting to first chat on load
   const [firstChat, setFirstChat] = useState(false);
   useFirestoreConnect([{
     collection: 'chatRooms',
@@ -20,9 +21,10 @@ const MainChat = (props) => {
       ["memberIds", "array-contains", firebase.auth().currentUser.uid]
   ],
   }]);
+  // params are url parameters
   const params = useParams();
   const chatRooms = useSelector(state => state.firestore.ordered.chatRooms);
-
+  //Check if chatRooms are loaded
   if(isLoaded(chatRooms)){
     if(!firstChat){
     history.push("/chat/"+ chatRooms[0].id)

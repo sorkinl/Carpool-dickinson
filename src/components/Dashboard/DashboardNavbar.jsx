@@ -8,17 +8,38 @@ import 'react-responsive-modal/styles.css';
 import {Modal} from 'react-responsive-modal';
 const DashboardNavbar = () => {
   const [date, setDate] = useState(new Date);
-  const [modal, setModal] = useState(true)
+  const [modal, setModal] = useState(false)
     return (
       <>
-      {/* <Modal open={modal} center>
-        Hi
-      </Modal> */}
+      <Modal open={modal} onClose={() => setModal(false)} center>
+      <form action="#" className="modal-search">
+            <input
+              type="text"
+              className="modal-search__input"
+              placeholder="To..."
+            />
+            <input
+              type="text"
+              className="modal-search__input"
+              placeholder="From..."
+            />
+            <input
+              type="date"
+              className="modal-search__input"
+              value={new Date().toLocaleDateString('en-Ca')}
+            />
+            <Link to="/search" className="modal-search__button">
+              <svg className="modal-search__icon">
+                <use xlinkHref={`${icon}#icon-magnifying-glass`}></use>
+              </svg>
+              </Link>
+          </form>
+      </Modal>
         <header className="header-dashboard">
           <Link to="/dashboard">
           <img src={logo} alt="logo" className="logo-dashboard" />
           </Link>
-          <form action="#" className="search-dashboard">
+          <form action="#" className="search-dashboard" onClick={() => setModal(true)}>
             <input
               type="text"
               className="search-dashboard__input"
