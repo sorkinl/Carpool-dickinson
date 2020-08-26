@@ -3,6 +3,10 @@ import {useFirestore} from 'react-redux-firebase'
 
 const RequestHandler = (props) => {
     const firestore = useFirestore();
+
+    /**
+     * Updates data in chat room to accept user request
+     */
     const acceptRequest = () => {
         //var chatRequest = props.chat.requests[]
         var chatMember = props.request;
@@ -18,6 +22,10 @@ const RequestHandler = (props) => {
             }
         })
     }
+
+    /**
+     * Updates data in chat room to deny user request
+     */
     const denyRequest = () => {
         //var chatRequest = props.chat.requests[]
         var chatMember = props.request;
