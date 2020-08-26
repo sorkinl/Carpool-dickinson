@@ -7,6 +7,7 @@ import firebase from '../../../firebase/firebaseConfig';
 import { useSelector } from 'react-redux';
 import ChatWindow from './ChatWindow/ChatWindow';
 import { useState } from 'react';
+import Loading from '../../Loading';
 
 
 const MainChat = (props) => {
@@ -19,53 +20,49 @@ const MainChat = (props) => {
       ["memberIds", "array-contains", firebase.auth().currentUser.uid]
   ],
   }]);
-
-
-  console.log(firebase.auth().currentUser.uid)
   const params = useParams();
   const chatRooms = useSelector(state => state.firestore.ordered.chatRooms);
 
-  useEffect(()=>{
-    if(isLoaded(chatRooms) && !firstChat){
-      history.push("/chat/"+ chatRooms[0].id)
-      setFirstChat(true);
+  if(isLoaded(chatRooms)){
+    if(!firstChat){
+    history.push("/chat/"+ chatRooms[0].id)
+    setFirstChat(true)
     }
-  },[firstChat]);
+    return (<div className="container-dashboard">
+    <DashboardNavbar/>
+      <div className="chat-container">
+        <div className="chat-sidebar">
+          
+          <Link to="/dashboard">
+            <button className="chat-sidebar__link">
+            Return to Dashboard
+            </button>
+          </Link>
+          
+          <ul className="chat-sidebar__list">
+            {isLoaded(chatRooms) ? chatRooms.map((room) => (
+              <Link to={`/chat/${room.id}`} key={room.id}>
+              <li className="chat-sidebar__list-element">{room.trip.destTitle} Driver: {room.trip.uid === firebase.auth().currentUser.uid?"you":room.trip.firstName}</li>
+              </Link>
+            )):"null"}
+          </ul>
+        </div>
+        <ChatWindow chat={isLoaded(chatRooms)?chatRooms.find((room) => room.id === params.chatId):null}/>
+
+      
+      <div className="chat-rightbar">
+        <img src={avatar} className="chat-rightbar__image">
+        </img>
+        <div className="chat-rightbar__name">Leo Sorkin</div>
+        <div className="chat-rightbar__major">Computer Science  &middot; Class 2022</div>
+      </div>
+      </div>
+      </div>)
+  } else {
+    return (<Loading/>)
+  }
   
  
-  
-    return (
-      <div className="container-dashboard">
-      <DashboardNavbar/>
-        <div className="chat-container">
-          <div className="chat-sidebar">
-            
-            <Link to="/dashboard">
-              <button className="chat-sidebar__link">
-              Return to Dashboard
-              </button>
-            </Link>
-            
-            <ul className="chat-sidebar__list">
-              {isLoaded(chatRooms) ? chatRooms.map((room) => (
-                <Link to={`/chat/${room.id}`} key={room.id}>
-                <li className="chat-sidebar__list-element">{room.trip.destTitle} Driver: {room.trip.uid === firebase.auth().currentUser.uid?"you":room.trip.firstName}</li>
-                </Link>
-              )):"null"}
-            </ul>
-          </div>
-          <ChatWindow chat={isLoaded(chatRooms)?chatRooms.find((room) => room.id === params.chatId):null}/>
-
-        
-        <div className="chat-rightbar">
-          <img src={avatar} className="chat-rightbar__image">
-          </img>
-          <div className="chat-rightbar__name">Leo Sorkin</div>
-          <div className="chat-rightbar__major">Computer Science  &middot; Class 2022</div>
-        </div>
-        </div>
-        </div>
-        )
 }
 
 export default MainChat;

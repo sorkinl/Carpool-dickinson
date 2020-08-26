@@ -1,12 +1,19 @@
-import React from 'react'
+import React, {useState} from 'react'
 import logo from "../../assets/images/logo.png";
 import icon from "../../assets/sprite.svg";
 import avatar from "../../static/img/avatar.png";
 import { Link } from 'react-router-dom';
 import firebase from '../../firebase/firebaseConfig';
-
+import 'react-responsive-modal/styles.css';
+import {Modal} from 'react-responsive-modal';
 const DashboardNavbar = () => {
+  const [date, setDate] = useState(new Date);
+  const [modal, setModal] = useState(true)
     return (
+      <>
+      {/* <Modal open={modal} center>
+        Hi
+      </Modal> */}
         <header className="header-dashboard">
           <Link to="/dashboard">
           <img src={logo} alt="logo" className="logo-dashboard" />
@@ -15,13 +22,23 @@ const DashboardNavbar = () => {
             <input
               type="text"
               className="search-dashboard__input"
-              placeholder="Search by destination"
+              placeholder="To..."
             />
-            <button className="search-dashboard__button">
+            <input
+              type="text"
+              className="search-dashboard__input"
+              placeholder="From..."
+            />
+            <input
+              type="date"
+              className="search-dashboard__input"
+              value={new Date().toLocaleDateString('en-Ca')}
+            />
+            <Link to="/search" className="search-dashboard__button">
               <svg className="search-dashboard__icon">
                 <use xlinkHref={`${icon}#icon-magnifying-glass`}></use>
               </svg>
-            </button>
+              </Link>
           </form>
 
           <nav className="user-nav">
@@ -47,6 +64,7 @@ const DashboardNavbar = () => {
             </Link>
           </nav>
         </header>
+        </>
     )
 }
 

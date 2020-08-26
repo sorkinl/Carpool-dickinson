@@ -15,7 +15,7 @@ import ProfileCreate from "./components/LogInForm/ProfileCreate";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import EditForm from "./components/Account/Trip-new/editform";
 import EmailVerify from "./components/LogInForm/EmailVerify";
-import SearchPage from "./pages/SearchPage/SearchPage"
+import SearchPage from "./pages/Search/SearchPage"
 import Loading from './components/Loading'
 import { withRouter } from 'react-router-dom';
 import MainPage from "./pages/FrontPage/MainPage";

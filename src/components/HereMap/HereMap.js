@@ -28,14 +28,16 @@ export const HereMap = (props) => {
     const ui = H.ui.UI.createDefault(hMap, defaultLayers);
 
     //generate markers
-    var icon = new H.map.Icon('https://cdn0.iconfinder.com/data/icons/daily-boxes/150/phone-box-32.png');
+    /* var icon = new H.map.Icon('https://cdn0.iconfinder.com/data/icons/daily-boxes/150/phone-box-32.png'); */
+    if(props.trips){
     props.trips.map(
       x=>{
         console.log("doing")
-        var marker = new H.map.Marker({ lat: x.destination.latitude, lng: x.destination.longitude }, { icon: icon });
+        var marker = new H.map.Marker({ lat: x.destination.latitude, lng: x.destination.longitude }/* , { icon: icon } */);
         hMap.addObject(marker);
       }
     )
+    }
     
 
     // This will act as a cleanup to run once this hook runs again.
@@ -45,5 +47,5 @@ export const HereMap = (props) => {
     };
   }, [mapRef, props.trips]); // This will run this hook every time this ref is updated
 
-  return <div className="map" ref={mapRef} style={{ height: "100vh" }} />;
+  return <div className="map" ref={mapRef}  />;
 };

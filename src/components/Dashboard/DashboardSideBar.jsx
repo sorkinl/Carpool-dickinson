@@ -13,20 +13,20 @@ const DashboardSideBar = () => {
         </a>
       </li>
       <li className="side-nav-dash__item">
-        <a href="#" className="side-nav-dash__link">
+      <Link to="/search" className="side-nav-dash__link">
           <svg className="side-nav-dash__icon">
             <use xlinkHref={`${icon}#icon-location`}></use>
           </svg>
-          <span>My trips</span>
-        </a>
+          <span>Find rides</span>
+      </Link>
       </li>
       <li className="side-nav-dash__item">
-        <a href="#" className="side-nav-dash__link">
+      <Link to="/chat" className="side-nav-dash__link">
           <svg className="side-nav-dash__icon">
             <use xlinkHref={`${icon}#icon-message`}></use>
           </svg>
           <span>Messages</span>
-        </a>
+          </Link>
       </li>
       <li className="side-nav-dash__item">
         <Link to="/account" className="side-nav-dash__link">
