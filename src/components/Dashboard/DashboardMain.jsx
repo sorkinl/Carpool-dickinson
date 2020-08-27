@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import icon from "../../assets/sprite.svg";
 import avatar from "../../static/img/avatar.png";
 import TripCard from './TripCard';
@@ -6,6 +6,7 @@ import { useFirestoreConnect, isLoaded } from 'react-redux-firebase';
 import firebase from '../../firebase/firebaseConfig';
 import { useSelector } from 'react-redux';
 import Loading from '../Loading';
+import ChatWindow from "../Chat/MainChat/ChatWindow/ChatWindow";
 const DashboardMain = () => {
   
   useFirestoreConnect([{
@@ -24,9 +25,14 @@ const DashboardMain = () => {
     storeAs: 'bookmarkedTrips'
   }])
 
+  const handleClick = ()=>{
+    setChatModal(true)
+  }
+
   const recentTrips = useSelector(state => state.firestore.ordered.recentTrips)
   const bookmarkedTrips = useSelector(state => state.firestore.ordered.bookmarkedTrips)
   
+  const [chatModal, setChatModal] = useState(false);
     
     return(
         <main className="main-dash">
@@ -70,10 +76,14 @@ const DashboardMain = () => {
                 departDate={trip.departDate}
                 departTime={trip.departTime}
                 uid={trip.uid}
+            
+                chatModal = {chatModal}
+                onClick= {handleClick}
                 />
               ): <Loading/>}
-              
+              {chatModal && ChatWindow}
             </div>
+            
           </main>
     )
 }

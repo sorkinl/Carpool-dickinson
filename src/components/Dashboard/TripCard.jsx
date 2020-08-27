@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import icon from "../../assets/sprite.svg";
 import avatar from "../../static/img/avatar.png";
 import { useFirestore, isLoaded } from "react-redux-firebase";
@@ -6,7 +6,11 @@ import { useSelector } from "react-redux";
 import firebase from "../../firebase/firebaseConfig";
 import {Link} from 'react-router-dom';
 
+
 const TripCard = (props) => {
+
+
+
   const firestore = useFirestore();
   const currentUser = useSelector((state) => state.firebase.profile);
   const bookmarkedTrips = useSelector(
@@ -73,6 +77,10 @@ const TripCard = (props) => {
       .doc(props.tripId)
       .get();
     if (docRef.exists) {
+
+      props.onClick(true)
+    
+
       firestore.update(
         {
           collection: "chatRooms",
@@ -107,6 +115,7 @@ const TripCard = (props) => {
         }
       );
     }
+
   };
 
   return (
