@@ -3,14 +3,21 @@ import { Redirect, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { isLoaded } from "react-redux-firebase";
 import Loading from "../Loading";
+import HeaderBar from "../Dashboard/HeaderBar";
+import SideBar from "../Dashboard/SideBar";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const user = useSelector((state) => state.firebase);
 
   return (
-    <Route
+    <>  
+      <HeaderBar/>
+        {/* <div className="container-dashboard"> </div> */}
+      <SideBar/>
+      <Route
       {...rest}
       render={(props) => {
+
           if (user.auth.isEmpty) {
             return (
               <Redirect
@@ -40,12 +47,17 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                 />
               );
             } else {
-              return <Component />;
+              return (
+                  <div className="page-layout">
+                    <Component />
+                  </div>
+                );
             }
           }
         } 
       }
     />
+    </>
   );
 };
 

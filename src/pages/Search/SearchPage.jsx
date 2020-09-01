@@ -1,5 +1,5 @@
 import React from "react";
-import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
+import HeaderBar from "../../components/Dashboard/HeaderBar";
 import { HereMap } from "../../components/HereMap/HereMap";
 import { Link } from "react-router-dom";
 import icon from "../../assets/sprite.svg";
@@ -7,7 +7,7 @@ import avatar from "../../static/img/avatar.png"
 const SearchPage = (props) => {
   return (
     <>
-      <DashboardNavbar />
+      <HeaderBar />
       <div className="search-container">
         <div className="search-trip-list">
           <Link to="/dashboard" className="search-trip-list__back">

@@ -21,10 +21,14 @@ import { withRouter } from 'react-router-dom';
 import MainPage from "./pages/FrontPage/MainPage";
 import SearchResult from "./components/SearchResults/SearchResult"
 import Dashboard from "./pages/Dashboard/Dashboard";
+import DashboardMain from "./components/Dashboard/DashboardMain";
+
 import EditProfile from "./components/Account/Profile/EditProfile";
 import PostTrip from "./components/CreateTrip/PostTrip";
 import FancyLoader from "./components/CreateTrip/FancyLoader (not in use)"
 import PublicProfile from "./components/PublicProfile/PublicProfile";
+import HeaderBar from './components/Dashboard/HeaderBar';
+import SideBar from './components/Dashboard/SideBar';
 
 
 const Routes = withRouter(({location})=>{ 
@@ -50,8 +54,8 @@ const Routes = withRouter(({location})=>{
             <Route path = "/frontPageTrial" component = {FrontPageFigma}/>
             <Route path = "/searchResult" exact component = {SearchResult}/>
             <Route path = "/fancy" component = {FancyLoader}/>
-            <PrivateRoute path = "/dashboard" component = {Dashboard}/>
-            <Route path = "/users/:userId" component = {PublicProfile} exact/>
+            <PrivateRoute path = "/dashboard" component = {DashboardMain}/>
+            <PrivateRoute path = "/users/:userId" component = {PublicProfile} />
             {/* render={(props) => <PublicProfile {...props} />} */}
           </Switch>
         </div>
@@ -61,6 +65,8 @@ function App() {
   return (
     <div className="App">
         <Router>
+           {/* <HeaderBar/>
+           <SideBar/> */}
             <Routes/>
         </Router>
       

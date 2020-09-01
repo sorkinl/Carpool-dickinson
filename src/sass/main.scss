@@ -23,20 +23,13 @@
 @import "components/loader";
 @import "components/post-trip";
 @import "components/upload-photo";
-<<<<<<< HEAD
 @import "components/public-profile";
-
-=======
-@import "components/ex";
 @import "components/map";
->>>>>>> 53ebcebb5ac451a85c677923fb1c480e292d4571
+
 @import "layout/header";
 @import "layout/dashboard-layout";
 @import "layout/navigation";
 @import "layout/grid";
-@import "layout/account";
 @import "layout/chat-layout";
 @import "layout/search-layout";
-@import "layout/post-trip-page";
-@import "layout/edit-profile-page";
-@import "layout/public-profile-page";
+@import "layout/page-layout";

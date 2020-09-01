@@ -147,10 +147,10 @@ export default function EditProfile(props) {
     return (
         <CssBaseline>
         {isLoaded(user) ? 
-        <header className="edit-profile-page">
-                <div className="edit-profile__top-illustration">
+        <header className="page-layout edit-profile-page">
+                {/* <div className="edit-profile__top-illustration">
                     <img src={guy} alt="" className="edit-profile__top-illustration--image"/>
-                </div>
+                </div> */}
                 <div  className="edit-profile">
                 <a href='/account' className="edit-profile-btn edit-profile-btn--back">
                     <span><FontAwesomeIcon className="edit-profile-icon" icon={faChevronLeft}></FontAwesomeIcon></span>

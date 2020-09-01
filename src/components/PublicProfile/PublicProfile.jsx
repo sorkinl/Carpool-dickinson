@@ -41,7 +41,7 @@ const defaultMaterialTheme = createMuiTheme({
 /* Display the public user profile */
 export default function PublicProfile (props) {
    
-    const userId = props.match.params.userId;
+    const userId = "CmAXVX9VpHQNMvJgDZ2SDfXghFs2";//props.match.params.userId;
     useFirestoreConnect([{
         collection: 'users',
         doc: userId,
@@ -51,10 +51,12 @@ export default function PublicProfile (props) {
     function handleClick() {
         //to copy
     }
+    let userDefaultPhoto = "https://www.psi.org.kh/wp-content/uploads/2019/01/profile-icon-300x300.png";
+
     return (
         <div >
             {isLoaded(publicUser) ? 
-            <div className="public-profile-page">
+            <div className="page-layout public-profile-page">
                 <div  className="public-profile--public-back-box">
                     <a href='/dashboard' className="public-profile--public-back-box__btn">
                             <span><FontAwesomeIcon className="public-profile--public-back-box__icon" icon={faChevronLeft}></FontAwesomeIcon></span>
@@ -67,12 +69,14 @@ export default function PublicProfile (props) {
                             <p className="public-section-name">Profile</p>
                             {/* <img disabled={urlExists !== ""} className="profile-card front__face-photo front__face-photo--none" src={unnamed} alt=""/> */}
                             <img className="public-profile public-front__face-photo public-front__face-photo--existing"
-                                src={publicUser[0].photoUrl}
+                                src={userDefaultPhoto}//{publicUser[0].photoUrl}
                                 alt=""
                             />
                             <div className="public-profile public-front__text">
-                                    <h3 className="public-profile public-front__text-header">{publicUser[0].firstName} {publicUser[0].lastName}</h3>
-                                    <p className="public-profile public-front__text-para">{publicUser[0].school} | {publicUser[0].classYear}</p>
+                                    <h3 className="public-profile public-front__text-header">Katie Le</h3>
+                                    {/* </div>{publicUser[0].firstName} {publicUser[0].lastName}</h3> */}
+                                    <p className="public-profile public-front__text-para">Dickinson College | 2023</p>
+                                        {/* {publicUser[0].school} | {publicUser[0].classYear}</p> */}
                                     <Grid container className="public-record-profile">
                                         <Grid item xs={3}>
                                             <p className="public-record-main">7</p>
@@ -97,7 +101,7 @@ export default function PublicProfile (props) {
                                         <h1>Bio</h1>
                                     </Grid>
                                     <Grid item xs sm={6}>
-                                        <p>I'm very quiet I'm very quiet I'm very quiet I'm very quiet I'm very quiet I'm very quietI'm very quiet</p>
+                                        {/* {publicUser[0].bio != "" ? <p>{publicUser[0].bio}</p> : <p>No bio, yet</p>} */}
                                     </Grid>
                                 </Grid>
                                 {/* --------------- VERIFICATION ------------*/}
@@ -126,7 +130,7 @@ export default function PublicProfile (props) {
                                             <Grid container className="review-card--grid">
                                                 <Grid item xs sm={2}>
                                                     <img className="review-card--avatar"
-                                                        src={publicUser[0].photoUrl}
+                                                        src={userDefaultPhoto}//{publicUser[0].photoUrl}
                                                         alt=""
                                                     />   
                                                 </Grid>
@@ -156,7 +160,7 @@ export default function PublicProfile (props) {
                                             <Grid container className="review-card--grid">
                                                 <Grid item xs sm={2}>
                                                     <img className="review-card--avatar"
-                                                        src={publicUser[0].photoUrl}
+                                                        src={userDefaultPhoto}//{publicUser[0].photoUrl}
                                                         alt=""
                                                     />   
                                                 </Grid>
@@ -202,10 +206,12 @@ export default function PublicProfile (props) {
                                     <Grid item xs sm={6}>
                                         <ThemeProvider theme={defaultMaterialTheme}>
                                             <Chip icon={<FontAwesomeIcon className="public-info-wrapper__icon--contact" size="2x" icon={faEnvelope}/>} 
-                                                label={publicUser[0].email} variant="outlined" color="primary" onClick={handleClick}/>
+                                                //label={publicUser[0].email} 
+                                                variant="outlined" color="primary" onClick={handleClick}/>
                                             <span className="break"></span>
                                             <Chip icon={<FontAwesomeIcon className="public-info-wrapper__icon--contact" size="2x" icon={faPhoneAlt}/>} 
-                                                label={publicUser[0].phone} variant="outlined" color="primary" onClick={handleClick}/>
+                                                //label={publicUser[0].phone} 
+                                                variant="outlined" color="primary" onClick={handleClick}/>
                                         </ThemeProvider>
                                     </Grid>
                                 </Grid>

@@ -6,13 +6,13 @@ import { Link } from 'react-router-dom';
 import firebase from '../../firebase/firebaseConfig';
 import 'react-responsive-modal/styles.css';
 import {Modal} from 'react-responsive-modal';
-const DashboardNavbar = () => {
+const HeaderBar = () => {
   const [date, setDate] = useState(new Date);
   const [modal, setModal] = useState(false)
     return (
       <>
       <Modal open={modal} onClose={() => setModal(false)} center>
-      <form action="#" className="modal-search">
+        <form action="#" className="modal-search">
             <input
               type="text"
               className="modal-search__input"
@@ -89,4 +89,4 @@ const DashboardNavbar = () => {
     )
 }
 
-export default DashboardNavbar
+export default HeaderBar

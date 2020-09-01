@@ -10,7 +10,9 @@ import {
   CssBaseline, 
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import DashboardSideBar from '../Dashboard/DashboardSideBar';
+import SideBar from '../Dashboard/SideBar';
+// import HeaderBar from '../Dashboard/HeaderBar';
+
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -28,9 +30,11 @@ export default function Account(props) {
       <div>
           {isLoaded(user) ?
           <CssBaseline>
+            {/* <SideBar/> */}
+            {/* <HeaderBar /> */}
             {/* <div className="content-dashboard">
             <DashboardSideBar/> */}
-            <header className="account-page">
+            <header className="page-layout account-page">
               <Grid container spacing={1}>
                 <Grid item xs={4}>
                   <Profile/>

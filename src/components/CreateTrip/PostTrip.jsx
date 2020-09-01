@@ -202,7 +202,7 @@ export default function PostTrip(props) {
     }
     return (
         <CssBaseline>
-            <header className="post-trip-page">
+            <header className="page-layout post-trip-page">
                 <div  className="post-trip">
                     <a href='/dashboard' className="post-trip-btn post-trip-btn--back">
                         <span><FontAwesomeIcon className="post-trip-icon" icon={faChevronLeft}></FontAwesomeIcon></span>

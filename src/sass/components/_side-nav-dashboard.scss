@@ -1,12 +1,16 @@
 .side-nav-dash{
-    font-size: 1.4rem;
+    * {
+        font-family: "Lato", "sans-serif";
+    }
+    font-size: 1rem;
+    font-weight: 600;
     list-style: none;
-    margin-top: 3.5rem;
+    margin-top: 5rem;
     &__item {
         position: relative;
 
         &:not(:last-child){
-            margin-bottom: .5rem;
+            margin-bottom: 0.2rem;
         }
     }
     
@@ -17,11 +21,11 @@
         left: 0;
         height: 100%;
         width: 3px;
-        background-color: $color-secondary;
+        background-color: $color-primary-dark-0;
         transform: scaleY(0);
         transition: 
             transform .2s, 
-            width .4s cubic-bezier(1,0,0,1) .2s,
+            width .2s cubic-bezier(1,0,0,1) .2s,
             background-color .1s;
         
     }
@@ -33,15 +37,16 @@
         color: $color-grey-dark-1;
     }
     &__item--active{
-        background-color: $color-secondary;
+        background-color: $color-primary-dark-0;//$color-secondary;
     }
     &__link:link, &__link:visited {
         color: $color-grey-light-1;
         text-decoration: none;
         text-transform: uppercase;
-        display: block;
-        padding: 1.5rem 3rem;
+        padding: 2rem 2rem;
+        height: 10rem;
         display: flex;
+        flex-direction: column;
         align-items: center;
         position: relative;
         z-index: 10;
@@ -51,8 +56,10 @@
     &__link--active{
         text-decoration: none;
         text-transform: uppercase;
+        flex-direction: column;
         display: block;
-        padding: 1.5rem 3rem;
+        padding: 2rem 2rem;
+        height: 10rem;
         display: flex;
         align-items: center;
         position: relative;
@@ -63,12 +70,11 @@
     }
     &__link:hover{
         color: $color-grey-dark-1;
-        transition: color .4s cubic-bezier(1,0,0,1) .2s;
+        transition: color .2s cubic-bezier(1,0,0,1) .2s;
     }
     &__icon{
-        width: 1.75rem;
-        height: 1.75rem;
-        margin-right: 2rem;
+        font-size: 3rem;
+        margin-bottom: 1rem;
         fill: currentColor;
     }
 }

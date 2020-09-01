@@ -17,10 +17,10 @@ $record-sub-font-size: 1.3rem;
         font-family: "Lato", sans-serif;
     }
     &--public-back-box {
-        margin: 4.5rem 27rem 2rem;
+        margin: 0rem 20rem 2rem;
         position: relative;
         &__icon {
-            font-size: $history-font-size;
+            font-size: $back-icon-font-size;//1.4
             color: $color-primary;
             text-align: left;
             margin-right: 1rem;
@@ -30,9 +30,8 @@ $record-sub-font-size: 1.3rem;
             text-transform: uppercase;
             text-decoration: none;
             display: inline-block;
-            font-size: $back-btn-font-size;
+            font-size: $back-btn-font-size;//1.6
             transition: all .1s;
-            // padding: 1.5rem 3rem;
             text-align: center;
             background-color: none;
             color: $color-primary;
@@ -185,7 +184,6 @@ $record-sub-font-size: 1.3rem;
                     font-size: 2.1rem;
                     top: -.2rem;
                     color: #ffb400;
-                    margin-right: .2em;
                 }
                 &--verified {
                     font-size: $info-section-font-size;
@@ -259,30 +257,16 @@ $record-sub-font-size: 1.3rem;
         }
     }
     &__bottom-illustration-left {
-        margin-top: -22rem;
+        margin-top: -13rem;
         position: relative;
-        margin-left: -4.3rem;
+        margin-left: -4rem;
         z-index: -1;
     
         &--image {
             display: inline-block;
             height: 29rem;
             width: auto;
-            margin-right: -5rem;
-            margin-top: 2rem;
-        }
-    } 
-    &__bottom-illustration-left {
-        margin-top: -22rem;
-        position: relative;
-        margin-left: -4.3rem;
-        z-index: -1;
-    
-        &--image {
-            display: inline-block;
-            height: 29rem;
-            width: auto;
-            margin-right: -5rem;
+            margin-right: -7rem;
             margin-top: 2rem;
         }
     } 
@@ -290,12 +274,12 @@ $record-sub-font-size: 1.3rem;
         margin-top: -31rem;
         position: relative;
         z-index: -1;
-        margin-right: -3rem;
+        margin-right: -4rem;
         transform: scale(-1,1);
     
         &--image {
             display: inline-block;
-            height: 34.5rem;
+            height: 29rem;
             width: auto;
             margin-right: -5rem;
             margin-top: 2rem;
