@@ -48,7 +48,8 @@ const defaultMaterialTheme = createMuiTheme({
             paper: {
                 boxShadow: "none",
                 backgroundColor: "transparent",
-                top: "-9rem",
+                top: "-3rem",
+                left: "15%",
             }
         }
     }

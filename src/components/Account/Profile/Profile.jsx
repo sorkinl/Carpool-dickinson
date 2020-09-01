@@ -51,10 +51,12 @@ export default function Profile(props) {
                     <div className="profile-card front">
                         {/* <div className="profile-card front__bkg-photo"></div> */}
                         <p className="section-name">Profile</p>
-                        <img className="profile-card front__face-photo front__face-photo--existing"
-                            src={user.photoUrl}
-                            alt="profile photo"
-                        />
+                        {/* {isLoaded(user.photoUrl) ? */}
+                            <img className="profile-card front__face-photo front__face-photo--existing"
+                                src={user.photoUrl}
+                                alt="profile photo"
+                            />
+                         {/* : <div className="profile-card front__face-photo front__face-photo--none"></div>  */}
                         <span className="profile-card front__photo-console">
                             <PhotoConsole onUploadError={setUploadError} onDeleteError={setDeleteError}/>
                         </span>

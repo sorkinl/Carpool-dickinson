@@ -117,7 +117,7 @@ export default function PublicProfile (props) {
                                         <h1>Reviews (20)</h1>
                                     </Grid>
                                     <Grid item xs sm={2} className="review-card--user-rating">
-                                    <h2>4.6<span className="public-info-wrapper__icon public-info-wrapper__icon--star"><FontAwesomeIcon icon={faStar}/></span></h2>
+                                    <h2><span className="public-info-wrapper__icon public-info-wrapper__icon--star"><FontAwesomeIcon icon={faStar}/></span>4.6</h2>
                                     </Grid>
                                 </Grid>
                                 <Grid container className="public-info-wrapper">
