@@ -1,0 +1,114 @@
+.search-container{
+    width: 100vw;
+    height: 92vh;
+    display: flex;
+}
+.list-none{
+    list-style: none;
+}
+.search-trip-list {
+    height: 100%;
+    flex: 90% 0 0;
+    max-width: 60rem; //sad
+    overflow-y: scroll;
+    &__back{
+        display: inline-block;
+        margin:1rem 2rem;
+        font-size: 1.5rem;
+        color: $color-primary-light;
+    }
+    &__heading{
+        margin-left: 2rem;
+        font-weight: 900;
+        font-size: 1.6rem;
+    }
+    &__sub-heading{
+        margin-left: 2rem;
+        font-weight: 300;
+        font-size: 1.4rem;
+    }
+    &__card{
+        transition: all .2s;
+        display: flex;
+        align-items: center;
+        height: 17rem;
+        width: 95%;
+        border: 2px solid $color-primary-light;
+        border-radius: 3rem;
+        margin: 2rem auto;
+
+        &--left{
+            width: 30%;
+            padding: 1rem;
+            display: flex;
+            text-align: center;
+            flex-direction: column;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 300;
+            padding-right:0;
+            &--bottom{
+                display: flex;
+                align-items: center;
+            }
+        }
+        
+            
+        &--avatar{
+            border-radius: 500rem;
+            height: 7rem;
+        }
+        &--middle{
+            height: 100%;
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            margin:1rem;
+            font-size: 1.5rem;
+            font-weight: 300;
+            padding: 2rem;
+            margin-left:0;
+            &--bottom{
+                display: flex;
+                margin-top: 2rem;
+                justify-content: space-between;
+                
+            }
+        }
+        &--right{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        &--star{
+            height: 1.4rem;
+            width: 1.4rem;
+            margin: 5px;
+            margin-bottom: 6px;
+            fill: $color-tertiary;
+        }
+        &--icon{
+            height: 3rem;
+            width: 3rem;
+            transition: all .2s;
+            &:hover{
+                cursor: pointer;
+                fill: $color-tertiary;
+            }
+        }
+        &:hover{
+            box-shadow: $shadow-dark;
+            transform: translateY(-5px)
+        }
+    }
+}
+
+.search-map {
+    height: 100%;
+    flex: 100% 0 0;
+ /*    position: fixed;
+    top:8vh;
+    left:36%;
+    right: 0; */
+}
