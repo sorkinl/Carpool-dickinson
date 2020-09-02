@@ -3,11 +3,17 @@ import { Redirect, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { isLoaded } from "react-redux-firebase";
 import Loading from "../Loading";
+import DashboardNavbar from '../Dashboard/DashboardNavbar';
+import DashboardSideBar from '../Dashboard/DashboardSideBar';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const user = useSelector((state) => state.firebase);
 
   return (
+    <div className="container-dashboard">
+    <DashboardNavbar/>
+    <div className="content-dashboard">
+    <DashboardSideBar/>
     <Route
       {...rest}
       render={(props) => {
@@ -46,6 +52,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         } 
       }
     />
+    </div>
+    </div>
   );
 };
 

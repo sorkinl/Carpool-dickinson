@@ -19,6 +19,7 @@
 }
 
 .sidebar-dashboard {
+    z-index: 1;
     background-color: $color-primary-light;
     flex: 0 0 15%;
     height: 93vh;
@@ -27,9 +28,6 @@
     justify-content: space-between;
 }
 
-.search-dashboard{
-    
-}
 
 .main-dash {
     background-color: #fff;

@@ -4,15 +4,17 @@ import icon from "../../assets/sprite.svg";
 import avatar from "../../static/img/avatar.png";
 import { Link } from 'react-router-dom';
 import firebase from '../../firebase/firebaseConfig';
-import 'react-responsive-modal/styles.css';
-import {Modal} from 'react-responsive-modal';
+import AutoInput from '../HOC/AutoSuggest';
 const DashboardNavbar = () => {
   const [date, setDate] = useState(new Date);
   const [modal, setModal] = useState(false)
     return (
       <>
-      <Modal open={modal} onClose={() => setModal(false)} center>
-      <form action="#" className="modal-search">
+      {/* <Modal open={modal} onClose={() => setModal(false)} center classNames={{
+        modal: "modal-search"
+      }}>
+        <h1>Where do you want to go?</h1>
+      <form action="#" className="modal-search__form">
             <input
               type="text"
               className="modal-search__input"
@@ -29,37 +31,30 @@ const DashboardNavbar = () => {
               value={new Date().toLocaleDateString('en-Ca')}
             />
             <Link to="/search" className="modal-search__button">
-              <svg className="modal-search__icon">
+              {/* <svg className="modal-search__icon">
                 <use xlinkHref={`${icon}#icon-magnifying-glass`}></use>
-              </svg>
+              </svg> }
+              Search
               </Link>
           </form>
-      </Modal>
+      </Modal> */}
         <header className="header-dashboard">
+          
           <Link to="/dashboard">
           <img src={logo} alt="logo" className="logo-dashboard" />
           </Link>
-          <form action="#" className="search-dashboard" onClick={() => setModal(true)}>
-            <input
-              type="text"
-              className="search-dashboard__input"
-              placeholder="To..."
-            />
-            <input
-              type="text"
-              className="search-dashboard__input"
-              placeholder="From..."
-            />
-            <input
-              type="date"
-              className="search-dashboard__input"
-              value={new Date().toLocaleDateString('en-Ca')}
-            />
-            <Link to="/search" className="search-dashboard__button">
+          <form action="#" className="search-dashboard">
+          <Link to="/search" className="search-dashboard__button-icon">
               <svg className="search-dashboard__icon">
                 <use xlinkHref={`${icon}#icon-magnifying-glass`}></use>
               </svg>
               </Link>
+          <AutoInput/>
+          <div className="verticalLine"></div>
+            <AutoInput/>
+              <Link className="search-dashboard__button">
+                Find
+            </Link>
           </form>
 
           <nav className="user-nav">

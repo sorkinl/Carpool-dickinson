@@ -8,11 +8,16 @@
 
 .search-dashboard{
     flex: 0 0 40%;
-
+    height: 4.5rem;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     transition: all .2s;
+    background-color: $color-white;
+    border: 2px solid #CAF3FF;
+    box-sizing: border-box;
+    border-radius: 5.6rem;
+    padding: 0.5rem 0 0.5rem 0.5rem;
     &__input{
         font-family: inherit;
         font-size: inherit;
@@ -37,9 +42,11 @@
         }
     }
 
-    &__button{
+    &__button-icon{
         border: none;
-        background-color: $color-grey-light-2;
+        background-color: $color-white;
+        display: flex;
+        align-items: center;
 
         &:focus{
             outline: none;
@@ -49,13 +56,30 @@
     &__icon{
         height: 2rem;
         width: 2rem;
-        fill: $color-grey-dark-3;
+        fill: $color-tertiary;
     }
-    &__input:focus + &__button {
+    &__input:focus + &__button-icon {
         background-color:$color-grey-light-3 ;
     }
+    &__button{
+        background-color: $color-tertiary-light-1;
+        color: $color-white;
+        text-transform: uppercase;
+        font-weight: 300;
+        height: 4.4rem;
+        width: 8rem;
+        border-radius: 0 10000rem 10000rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
 }
 
+.verticalLine{
+    height: 3rem;
+    border-left: 1px solid $color-grey-light-4;
+}
 
 
 .user-nav{

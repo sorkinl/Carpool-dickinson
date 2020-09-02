@@ -6,9 +6,7 @@ import {Autocomplete} from '@material-ui/lab'
 const AutocompleteHERE = (props) => {
     console.log(props)
 
-  const { AutocompleteState: [stateFromProp, setStateFromProp]  } = {
-    ...(props.state || {})
-  };
+  
 
   const [state, setState] = useState({
     suggestions: [],
@@ -83,9 +81,7 @@ const AutocompleteHERE = (props) => {
 
   const suggestionSelected = item => {
     //gets and sets props passed from the parent component
-      setStateFromProp({...stateFromProp, 
-        [props.state.field]:item.label
-      })
+     
       
       setText(item.label);
       setLocationId(item.locationId)
@@ -98,7 +94,8 @@ const AutocompleteHERE = (props) => {
   //groupBy={(option) => option.firstLetter}
   getOptionLabel={(option) => option.label}
   style={{ width: 300 }}
-  renderInput={(params) => <TextField {...params} value={text} onChange={onTextChanged} label="With categories" variant="outlined" />}
+  renderInput={(params) => <TextField {...params} value={text} onChange={onTextChanged} label="With categories" variant="outlined" />
+  }
 /></>);
 };
 
