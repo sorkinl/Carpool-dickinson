@@ -76,11 +76,11 @@ const TripCard = (props) => {
       .collection("chatRooms")
       .doc(props.tripId)
       .get();
+      console.log(props.tripId)
+
     if (docRef.exists) {
-
-      props.onClick(true)
-    
-
+      props.onClick(docRef.data())
+      
       firestore.update(
         {
           collection: "chatRooms",
@@ -96,6 +96,7 @@ const TripCard = (props) => {
           memberIds: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid)
         }
       );
+      
     } else {
       console.log(props)
       await fetch(
