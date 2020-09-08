@@ -6,7 +6,7 @@
 .header-dashboard {
     position: fixed;
     font-size: 1.4rem;
-    height: 8vh;
+    height: 7vh;
     width: 100vw;
     background-image: linear-gradient(to right bottom,rgba($color-primary-light,1),rgba($color-primary,1));
     border-bottom: $color-grey-light-2;
@@ -19,9 +19,9 @@
 .sidebar-dashboard {
     background-color: $color-primary-dark-2;
     flex: 0 0 15%;
-    height: 92vh;
-    width: 12rem;
-    top: 8vh;
+    height: 100vh;
+    width: 11rem;
+    top: 0;
     display: flex;
     z-index: 2000;
     position: fixed;

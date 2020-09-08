@@ -22,6 +22,8 @@ import  { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import byRoad from '../../assets/images/bytheroad.svg';
 import tree from '../../assets/images/trees.svg';
 
+// ISSUE
+// Cannot read url in privateRoute
 
 const defaultMaterialTheme = createMuiTheme({
     overrides: {
@@ -67,16 +69,17 @@ export default function PublicProfile (props) {
                     <div className="public-profile public-inner-div">
                         <div className="public-profile public-front">
                             <p className="public-section-name">Profile</p>
-                            {/* <img disabled={urlExists !== ""} className="profile-card front__face-photo front__face-photo--none" src={unnamed} alt=""/> */}
                             <img className="public-profile public-front__face-photo public-front__face-photo--existing"
-                                src={userDefaultPhoto}//{publicUser[0].photoUrl}
+                                src={publicUser[0].photoUrl}
                                 alt=""
                             />
                             <div className="public-profile public-front__text">
-                                    <h3 className="public-profile public-front__text-header">Katie Le</h3>
-                                    {/* </div>{publicUser[0].firstName} {publicUser[0].lastName}</h3> */}
-                                    <p className="public-profile public-front__text-para">Dickinson College | 2023</p>
-                                        {/* {publicUser[0].school} | {publicUser[0].classYear}</p> */}
+                                    <h3 className="public-profile public-front__text-header">
+                                        {publicUser[0].firstName} {publicUser[0].lastName}
+                                    </h3>
+                                    <p className="public-profile public-front__text-para">
+                                        {publicUser[0].school} | {publicUser[0].classYear}
+                                    </p>
                                     <Grid container className="public-record-profile">
                                         <Grid item xs={3}>
                                             <p className="public-record-main">7</p>
@@ -130,7 +133,7 @@ export default function PublicProfile (props) {
                                             <Grid container className="review-card--grid">
                                                 <Grid item xs sm={2}>
                                                     <img className="review-card--avatar"
-                                                        src={userDefaultPhoto}//{publicUser[0].photoUrl}
+                                                        src={publicUser[0].photoUrl}
                                                         alt=""
                                                     />   
                                                 </Grid>
@@ -160,7 +163,7 @@ export default function PublicProfile (props) {
                                             <Grid container className="review-card--grid">
                                                 <Grid item xs sm={2}>
                                                     <img className="review-card--avatar"
-                                                        src={userDefaultPhoto}//{publicUser[0].photoUrl}
+                                                        src={publicUser[0].photoUrl}
                                                         alt=""
                                                     />   
                                                 </Grid>
@@ -206,11 +209,11 @@ export default function PublicProfile (props) {
                                     <Grid item xs sm={6}>
                                         <ThemeProvider theme={defaultMaterialTheme}>
                                             <Chip icon={<FontAwesomeIcon className="public-info-wrapper__icon--contact" size="2x" icon={faEnvelope}/>} 
-                                                //label={publicUser[0].email} 
+                                                label={publicUser[0].email} 
                                                 variant="outlined" color="primary" onClick={handleClick}/>
                                             <span className="break"></span>
                                             <Chip icon={<FontAwesomeIcon className="public-info-wrapper__icon--contact" size="2x" icon={faPhoneAlt}/>} 
-                                                //label={publicUser[0].phone} 
+                                                label={publicUser[0].phone} 
                                                 variant="outlined" color="primary" onClick={handleClick}/>
                                         </ThemeProvider>
                                     </Grid>

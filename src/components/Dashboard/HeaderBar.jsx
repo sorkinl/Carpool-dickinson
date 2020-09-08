@@ -36,9 +36,9 @@ const HeaderBar = () => {
           </form>
       </Modal>
         <header className="header-dashboard">
-          <Link to="/dashboard">
+          {/* <Link to="/dashboard">
           <img src={logo} alt="logo" className="logo-dashboard" />
-          </Link>
+          </Link> */}
           <form action="#" className="search-dashboard" onClick={() => setModal(true)}>
             <input
               type="text"

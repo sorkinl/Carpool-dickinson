@@ -141,7 +141,6 @@ export default function PhotoConsole(props) {
                             firestore.collection("users").doc(uid).set({
                                 photoUrl: downloadURL,
                             }, { merge: true })
-                            // props.onUrlExists(downloadURL);
                             setSpinner(false);
                             handleDialogClose();
                         });

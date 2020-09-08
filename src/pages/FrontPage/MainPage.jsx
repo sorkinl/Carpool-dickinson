@@ -11,9 +11,9 @@ const MainPage = () => {
   const myRef = useRef(null);
   const executeScroll = () => scrollToRef(myRef);
   var page;
-  if (firebase.auth().currentUser) {
-    page = <Redirect to="/dashboard" />;
-  } else {
+  // if (firebase.auth().currentUser) {
+  //   page = <Redirect to="/dashboard" />;
+  // } else {
     page = (
       <>
         <Navbar />
@@ -21,7 +21,7 @@ const MainPage = () => {
         <Features refProp={myRef} />
       </>
     );
-  }
+  // }
   return page;
 };
 

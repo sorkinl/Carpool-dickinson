@@ -7,7 +7,7 @@ import avatar from "../../static/img/avatar.png"
 const SearchPage = (props) => {
   return (
     <>
-      <HeaderBar />
+      {/* <HeaderBar /> */}
       <div className="search-container">
         <div className="search-trip-list">
           <Link to="/dashboard" className="search-trip-list__back">

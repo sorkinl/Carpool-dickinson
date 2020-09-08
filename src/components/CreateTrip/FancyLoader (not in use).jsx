@@ -11,12 +11,26 @@ import {
 export default function FancyLoader(props) {
   const [active, setActive] = useState(false);
     return(
-     <Loader
-        type="ThreeDots" //TailSpin
-        color="#00BFFF"
-        height={100}
-        width={100}
+      <div className="multi-ride-button">
+        {/* <div className="toggle-button-cover">
+          <div className="button-cover"> */}
+            <div className="button r" id="button-9">
+              <input type="checkbox" className="checkbox"/>
+              <div className="knobs">
+                <span></span>
+              </div>
+              <div className="layer"></div>
+            </div>
+          {/* </div>
+        </div> */}
+    </div>
+    //  <Loader
+    //     type="ThreeDots" //TailSpin
+    //     color="#00BFFF"
+    //     height={100}
+    //     width={100}
       //   timeout={10000} //3 secs
-     />
+    //  />
     );
+    
 }

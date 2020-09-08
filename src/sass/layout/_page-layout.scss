@@ -10,26 +10,26 @@
     display: flex;
     padding-top: 3.5%;
     padding-right: 3%;
-    padding-left: 8%;
+    padding-left: 7%;
     &.account-page {
         padding-left: 6%;
         width: 92%;
         height: 110vh;
     }
     &.edit-profile-page {
-        width: 92%;
+        width: 93%;
         min-height: 145vh;
         padding-left: 3%;
         overflow: hidden;
         height: 145vh;
     }
     &.post-trip-page {
-        width: 92%;
+        width: 93%;
         height: 110vh;
-        padding-left: 1.5%;
+        padding-left: 1%;
     }
     &.public-profile-page {
-        width: 92%;
+        width: 93%;
         padding-left: 3%;
         overflow: hidden;
         min-height: 160vh;

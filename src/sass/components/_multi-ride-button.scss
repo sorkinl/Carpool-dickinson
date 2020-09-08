@@ -1,0 +1,116 @@
+.multi-ride-button {
+    margin-bottom: 3rem;
+    margin-top: 5rem;
+    margin-left: -4.5rem;
+  
+    .knobs-post {
+        background-color: #FA2368;
+        width: 7rem;
+        height: 11rem;
+        border-radius: 0 0 5rem 5rem;
+        position: relative;
+        margin-top: -4rem;
+        margin-left: 6.5rem;
+        text-align: center;
+        text-align: center;
+        color: #fff;
+        text-transform: uppercase;
+        padding: 1.5rem 0;
+        &:hover {
+            background-color: $color-tertiary-dark;
+        }
+    }
+    .layer
+    {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .button-multi-find
+    {
+        position: relative;
+        top: 50%;
+        width: 23rem;
+        height: 8rem;
+        margin: -1rem 0 0 -1.5rem;
+        overflow: hidden;
+        transform: rotate(90deg);
+    }
+    .button-multi-find.r, .button-multi-find.r .layer
+    {
+        border-radius: 10rem;
+    
+    }
+    .knobs-find, .knobs-post
+    {
+        z-index: 2;
+    }
+
+    .layer
+    {
+        width: 100%;
+        background-color: $color-primary-highlight;
+        transition: 0.3s ease all;
+        z-index: 1;
+    
+    }
+    #button-1 .knobs-find, #button-1 .knobs-find span
+    {
+        position: absolute;
+        z-index: 2;
+        top: .7rem;
+        width: 11rem;
+        height: 7rem;
+        line-height: 1;
+        padding: .9rem .4rem;
+        border-radius: 4rem;
+        transition: 0.4s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+        transform: rotate(-180deg);
+
+    }
+    .knobs-find-p {
+        text-transform: uppercase;
+        // transform: rotate(90deg);
+        transform: rotate(-90deg);
+        margin-left: 4rem;
+        margin-top: -2rem;
+    }
+    #button-1 .knobs-find
+    {
+        text-transform: uppercase;
+        left: 5rem;
+        color: #fff;
+    }
+
+    #button-1 .knobs-find span
+    {
+        left: 4.5rem;
+        cursor: pointer;
+        font-size: $side-bar-font-size;
+        font-weight: bold;
+        text-align: center;
+        background-color: $color-primary-light-1;
+        z-index: 5;
+        top: 0.2rem;
+        border-radius: 5rem 0 0 5rem;
+        transition: .5s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+        &:hover {
+            background-color: $color-primary-dark-3;
+        }
+    }
+    .multi-icon {
+        font-size: 3rem;
+        position: relative;
+        color: white;
+        margin-top: 1rem;
+        margin-left: -2rem;
+        z-index: 2;  
+        &--post {
+            margin-left: 0rem;
+            margin-bottom: .6rem;
+        }
+    }
+}
