@@ -32,7 +32,7 @@ const Routes = withRouter(({location})=>{
           { /* location.pathname!=="/frontpagetrial" &&    <NavBar />  */}
           <Switch>
             <Route path="/" exact component={MainPage} />
-            <PrivateRoute path="/search" exact component={SearchResult}/>
+            <PrivateRoute path="/search" exact component={SearchPage}/>
             <PrivateRoute path="/account" component={Account} />
             <PrivateRoute path="/edit-profile" component={EditProfile}/>
             {/* <PrivateRoute path="/chat" component={MainChat} /> */}

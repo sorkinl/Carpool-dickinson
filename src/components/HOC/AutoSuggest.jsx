@@ -19,9 +19,11 @@ const AutoInput = (props) => {
         .then((response) => response.data)
         .then((data) => {/* 
             console.log(data) */
+            console.log(data.items)
           var op = data.items.map((o) => ({
             label: o.address.label,
             locationId: o.id,
+            position: o.position
           }));
           
           setSuggestions(op);
@@ -38,7 +40,10 @@ const AutoInput = (props) => {
       // When suggestion is clicked, Autosuggest needs to populate the input
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
 // input value for every given suggestion.
-const getSuggestionValue = suggestion => suggestion.label;
+const getSuggestionValue = suggestion => {
+  props.onSuggestionSelected(suggestion);
+  return suggestion.label;
+}
 
 const renderSuggestion = suggestion => (
     <div>
@@ -63,7 +68,7 @@ const renderSuggestion = suggestion => (
 
 
   const inputProps = {
-    placeholder: 'From...',
+    placeholder: props.placeholder,
     value: text,
     onChange: onChange
   };

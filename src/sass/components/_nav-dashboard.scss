@@ -69,9 +69,13 @@
         height: 4.4rem;
         width: 8rem;
         border-radius: 0 10000rem 10000rem 0;
+        float: right;
         display: flex;
         align-items: center;
         justify-content: center;
+        border:none;
+        outline:none;
+        cursor: pointer;
     }
     
 }

@@ -9,6 +9,7 @@ import DashboardSideBar from '../Dashboard/DashboardSideBar';
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const user = useSelector((state) => state.firebase);
 
+
   return (
     <div className="container-dashboard">
     <DashboardNavbar/>
@@ -46,7 +47,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                 />
               );
             } else {
-              return <Component />;
+              return <Component 
+              />;
             }
           }
         } 
