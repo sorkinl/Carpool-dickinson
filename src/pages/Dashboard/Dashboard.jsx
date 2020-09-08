@@ -1,27 +1,12 @@
 import React from "react";
-import HeaderBar from "../../components/Dashboard/HeaderBar";
-import SideBar from "../../components/Dashboard/SideBar";
-// import DashboardMain from "../../components/Dashboard/DashboardMain";
-import Account from "../../components/Account/Account";
-import PostTrip from "../../components/CreateTrip/PostTrip";
-import EditProfile from "../../components/Account/Profile/EditProfile";
-import PublicProfile from "../../components/PublicProfile/PublicProfile";
+import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
+import DashboardSideBar from "../../components/Dashboard/DashboardSideBar";
+import DashboardMain from "../../components/Dashboard/DashboardMain";
+import Profile from "../../components/Account/Profile/Profile";
+import Setting from "../../components/Account/Setting";
 
 const Dashboard = () => {
-  return (
-      <div className="container-dashboard">
-        <HeaderBar/>
-        <SideBar/>
-        {/* <div className="page-layout"> */}
-              {/* <Account/> */}
-              {/* <EditProfile/> */}
-              {/* <PublicProfile/> */}
-              {/* <PostTrip/> */}
-              {/* <DashboardMain/> */}
-        {/* </div> */}
-      </div>
-  );
+  return <DashboardMain />;
 };
 
 export default Dashboard;
-

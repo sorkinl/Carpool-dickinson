@@ -4,30 +4,32 @@ import { HereMap } from "../HereMap/HereMap";
 import "./SearchResult.scss";
 import { useSelector } from "react-redux";
 import {getMaxAndMinLong} from "../../Utils/Distance"
+import DashboardNavbar from "../Dashboard/DashboardNavbar";
 const SearchResult = (props, title) =>{
 
   const trips =  useSelector(state=>state.tripsReducer)
 
   const filteredTrips = []
   
-  const long = getMaxAndMinLong(50, trips.searchProps.destCoord.long, trips.searchProps.destCoord.lat)
+  //const long = getMaxAndMinLong(50, trips.searchProps.destCoord.long, trips.searchProps.destCoord.lat)
  
-
-  console.log(long)
+/* 
+  console.log(long) */
 
   const tripList = trips.trips.map((trip)=>{
     console.log(trip)
-    if(trip.destination.longitude >= long.minLong && trip.destination.longitude <= long.maxLong){
+   /*  if(trip.destination.longitude >= long.minLong && trip.destination.longitude <= long.maxLong){ */
       filteredTrips.push(trip)
       return(  <EachResult {...trip} />)
-    }else{
+    /* }else{
       return <div></div>
-    }
+    } */
     
   })
 
   return (
-
+    <>
+    <DashboardNavbar/>
     <div id = "searchresult__main">
       <div id = "searchresult__left">
         <div id = "searchresult__heading">
@@ -35,7 +37,7 @@ const SearchResult = (props, title) =>{
            {filteredTrips.length} results
           </div>
           <div id = "searchresult__tripname">
-            Trips to {trips.searchProps.destTitle}
+            Trips to {/* trips.searchProps.destTitle */}
           </div>
         </div>
         <hr className = "searchresult__hr"/>
@@ -52,6 +54,7 @@ const SearchResult = (props, title) =>{
       </div>
 
     </div>
+    </>
   )
 }
 

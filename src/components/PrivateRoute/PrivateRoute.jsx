@@ -9,6 +9,7 @@ import SideBar from "../Dashboard/SideBar";
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const user = useSelector((state) => state.firebase);
 
+
   return (
     <>  
       <HeaderBar/>
