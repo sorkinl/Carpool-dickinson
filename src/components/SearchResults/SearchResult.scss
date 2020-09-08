@@ -18,22 +18,26 @@
  */
 
  #searchresult__main{
-     display:flex;
+     /* display:flex;
      flex-direction: row;
      background-image: url("../../static/img/boat.jpg");
      background-size: cover;
      background-size: 100% 100%;
      height:100vh;
-     width:100vw;
+     width:100vw; */
+     width: 100vw;
+    height: 92vh;
+    display: flex;
     .searchresult__hr{
         width:100%;
         border-top:1px solid black;
         margin:30px 0px;
     }
     #searchresult__left{
-        overflow: scroll;
-        padding: 2em 5em;
-        width:60%;
+        height: 100%;
+    flex: 90% 0 0;
+    max-width: 60rem; //sad
+    overflow-y: scroll;
         #searchresult__heading{
             width:100%;
             // background-color: green;
@@ -56,7 +60,8 @@
         
     }
     #searchresult__right{
-        width:40%;
-        background-color: red;
+        height: 100%;
+    flex: 100% 0 0;
      }
  }
+
