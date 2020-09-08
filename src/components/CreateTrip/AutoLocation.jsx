@@ -4,27 +4,18 @@ import {
     TextField,
     Typography
 } from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 import axios from "axios";
 import {Autocomplete} from '@material-ui/lab'
 import LocationOnIcon from "@material-ui/icons/LocationOn";
-import  {makeStyles} from '@material-ui/core/styles';
 
 //Questions
 // + why need locationID?
-
-// const theme = createMuiTheme({
-//     overrides: {
-//         MuiAutoComplete: {
-//           padding: "1.3rem 0",
-//         }
-//     }
-// });
+// + renderSuggestions ?
 
 const useStyles = makeStyles((theme) => ({
   textField: {
     width: "50rem",
-    paddingBottom: "1.3rem",
-    border: "none",
   },
   icon: {
     color: theme.palette.text.secondary,
@@ -32,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AutoOrigin = (props) => {
+const AutoLocation = (props) => {
   const classes = useStyles();
   const [state, setState] = useState({
     suggestions: [],
@@ -119,7 +110,7 @@ const AutoOrigin = (props) => {
           locationId: item.locationId,
           suggestions: []
       }) */
-      props.onSuggestionSelect(item, "origin");
+      props.onSuggestionSelect(item);
       setText(item.label);
       setLocationId(item.locationId);
       // console.log("Location ID: ", locationId);  --> locationId cannot be seen?
@@ -128,45 +119,36 @@ const AutoOrigin = (props) => {
     }
   }
   return (<>{/* <div><TextField type="text" value={text} onChange={onTextChanged} variant={props.variant}/></div> <div>{renderSuggestions()}</div> */}
-    <Autocomplete
+  <Autocomplete
       options={suggestions}
       onChange={(event,value) => suggestionSelected(value)}
       //groupBy={(option) => option.firstLetter}
       getOptionLabel={(option) => option.label}
       style={{ width: 300 }}
       renderInput={(params) =>
-      
           <TextField {...params}
-              value={text}
-              onChange={onTextChanged}
-              className={classes.textField}
-              name="originTitle"
-              required
-              placeholder="From"   
-          />
-      }
-    renderOption={(option) => {
-        return (
-            <Grid container alignItems="center">
-              <Grid item>
-                <LocationOnIcon className={classes.icon}/>
-              </Grid>
-              <Grid item xs>
-                {/*{parts.map((part, index) => (*/}
-                {/*    <span key={index} style={{fontWeight: part.highlight ? 700 : 400}}>*/}
-                {/*          {part.text}*/}
-                {/*        </span>*/}
-                {/*))}*/}
-                <Typography variant="h5" color="textSecondary">
-                  {option.label}
-                </Typography>
-              </Grid>
+                    value={text}
+                    onChange={onTextChanged}
+                      className={classes.textField}
+                      name="destTitle"
+                      required
+                      placeholder={props.placeholder}
+            />}
+      renderOption={(option) => {
+      return (
+          <Grid container alignItems="center">
+            <Grid item>
+              <LocationOnIcon className={classes.icon}/>
             </Grid>
-        );
-    }}
-    />
-  </>);
+            <Grid item xs>
+              <Typography variant="h5" color="textSecondary">
+                {option.label}
+              </Typography>
+            </Grid>
+          </Grid>
+      );
+  }}
+  /></>);
 };
 
-// ReactDOM.render(<AutoOrigin />, document.getElementById("root"));
-export default AutoOrigin;
+export default AutoLocation;

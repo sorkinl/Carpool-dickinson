@@ -64,9 +64,6 @@ const renderSuggestion = suggestion => (
   const shouldRenderSuggestions = (value) => {
       return value.length < 5? false: true;
   }
-
-
-
   const inputProps = {
     placeholder: props.placeholder,
     value: text,

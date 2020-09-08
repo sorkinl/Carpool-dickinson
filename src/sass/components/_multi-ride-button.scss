@@ -4,7 +4,7 @@
     margin-left: -4.5rem;
   
     .knobs-post {
-        background-color: #FA2368;
+        background-color: $color-tertiary-post-btn;
         width: 7rem;
         height: 11rem;
         border-radius: 0 0 5rem 5rem;
@@ -16,17 +16,21 @@
         color: #fff;
         text-transform: uppercase;
         padding: 1.5rem 0;
+        border: .25rem solid;
+        border-color: $color-tertiary-post-btn;
+        transition: .5s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
         &:hover {
-            background-color: $color-tertiary-dark;
+            // border-color: #fff;
+            border-color: $color-white;
         }
     }
     .layer
     {
         position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
+        margin-left: .3rem;
+        top: .2rem;
+        bottom: .2rem;
+        left: -.1rem;
     }
 
     .button-multi-find
@@ -51,10 +55,11 @@
 
     .layer
     {
-        width: 100%;
+        width: 98%;
         background-color: $color-primary-highlight;
         transition: 0.3s ease all;
         z-index: 1;
+        display: none
     
     }
     #button-1 .knobs-find, #button-1 .knobs-find span
@@ -82,7 +87,7 @@
     {
         text-transform: uppercase;
         left: 5rem;
-        color: #fff;
+        color: $color-white;
     }
 
     #button-1 .knobs-find span
@@ -92,19 +97,21 @@
         font-size: $side-bar-font-size;
         font-weight: bold;
         text-align: center;
-        background-color: $color-primary-light-1;
+        background-color: $color-primary-dark-4;//$color-primary-dark-3;
         z-index: 5;
         top: 0.2rem;
         border-radius: 5rem 0 0 5rem;
+        border: .2rem solid ;
+        border-color: $color-primary-dark-4;
         transition: .5s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
         &:hover {
-            background-color: $color-primary-dark-3;
+            border-color: $color-white;
         }
     }
     .multi-icon {
         font-size: 3rem;
         position: relative;
-        color: white;
+        color: $color-white;
         margin-top: 1rem;
         margin-left: -2rem;
         z-index: 2;  

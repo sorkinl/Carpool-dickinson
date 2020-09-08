@@ -1,22 +1,26 @@
 import React, { useState } from "react";
-import logo from "../../assets/images/logo.png";
+import { useSelector } from 'react-redux';
+import logo from "../../assets/images/DPool_logo.png";
 import icon from "../../assets/sprite.svg";
 import avatar from "../../static/img/avatar.png";
 import { Link, useLocation, withRouter } from "react-router-dom";
 import firebase from "../../firebase/firebaseConfig";
 import AutoInput from "../HOC/AutoSuggest";
+import Popup from 'reactjs-popup';
+// import 'reactjs-popup/dist/index.css';
 
 const HeaderBar = (props) => {
+
+  const user = useSelector(state => state.firebase.profile);
   const [originData, setOriginData] = useState(null);
   const [destinationData, setDestinationData] = useState(null);
   const onDestinationSuggestionSelected = (data) => {
     setDestinationData(data);
   };
-
+  
   const onOriginSuggestionSelected = (data) => {
     setOriginData(data);
   };
-
   const handleFind = (e) => {
     if (originData != null && destinationData != null) {
       e.preventDefault();
@@ -65,12 +69,17 @@ const HeaderBar = (props) => {
               <span className="user-nav__notification">7</span>
             </div>
           </Link>
-          <Link to={`/users/${firebase.auth().currentUser.uid}`}>
+          {/* <Link to={`/users/${firebase.auth().currentUser.uid}`}> */}
+          <Popup trigger={
             <div className="user-nav__user">
               <img src={avatar} alt="" className="user-nav__user-photo" />
-              <span className="user-nav__user-name">Leonid</span>
-            </div>
-          </Link>
+              <span className="user-nav__user-name">{user.firstName}</span>
+            </div>} 
+            position="right center">
+            <div>Popup content here !!</div>
+          </Popup>
+            
+          {/* </Link> */}
         </nav>
       </header>
     </>

@@ -215,7 +215,8 @@ export default function PhotoConsole(props) {
                                 <ImageUploading  onChange={handleImageAsFile}>
                                     {({ imageList, onImageUpload }) => (
                                         <div className="upload-photo__preview-container">
-                                            <div onClick={onImageUpload} 
+                                            <div disabled={showSpinner === true} 
+                                                onClick={onImageUpload} 
                                                 className="upload-photo__upload-btn">Upload photo</div>
                                             <div className="upload-photo__skeleton">
                                                 <span>

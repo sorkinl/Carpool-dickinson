@@ -94,6 +94,11 @@ $color-primary-more-light: #dff9ff;
         &:hover {
             background: rgb(184, 184, 184);
         }
+        &[disabled] {
+            color: rgb(184, 184, 184);
+            cursor: auto;
+            pointer-events: none;
+        }
     }
     &__photo-container {
         min-width: 22.6rem;
@@ -113,6 +118,7 @@ $color-primary-more-light: #dff9ff;
             max-height: 22rem;
             max-width: 22rem;
             z-index: 2;
+            object-fit: cover;
         }
         &__remove-btn {       
             z-index: 3;

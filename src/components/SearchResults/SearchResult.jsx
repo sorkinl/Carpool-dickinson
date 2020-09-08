@@ -4,7 +4,7 @@ import { HereMap } from "../HereMap/HereMap";
 import "./SearchResult.scss";
 import { useSelector } from "react-redux";
 import {getMaxAndMinLong} from "../../Utils/Distance"
-import DashboardNavbar from "../Dashboard/DashboardNavbar";
+import HeaderBar from "../Dashboard/HeaderBar";
 const SearchResult = (props, title) =>{
 
   const trips =  useSelector(state=>state.tripsReducer)
@@ -29,7 +29,7 @@ const SearchResult = (props, title) =>{
 
   return (
     <>
-    <DashboardNavbar/>
+    <HeaderBar/>
     <div id = "searchresult__main">
       <div id = "searchresult__left">
         <div id = "searchresult__heading">

@@ -40,7 +40,7 @@
         background-color: $color-primary-dark-0;
     }
     &__link:link, &__link:visited {
-        color: $color-primary-highlight;
+        color: $color-white;//$color-primary-highlight;
         text-decoration: none;
         text-transform: uppercase;
         padding: 2rem 2rem;
@@ -65,7 +65,7 @@
         position: relative;
         z-index: 10;
         transition: color .2s;
-        color: $color-white;
+        color: rgb(18, 58, 73);//$color-white;
         width: 100%;
     }
     &__link:hover{

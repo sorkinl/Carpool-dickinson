@@ -9,7 +9,7 @@ import {MuiPickersUtilsProvider, DatePicker} from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchResult from "./SearchResult"
 import AutoOrigin from "../CreateTrip/AutoOrigin"
-import AutoDestination from "../CreateTrip/AutoDestination"
+import AutoDestination from "../CreateTrip/AutoLocation"
 
 const useStyles = makeStyles((theme) => ({
     muiPicker:{
@@ -120,7 +120,6 @@ const SearchResultBox = ()=>{
                                 fullWidth
                                 variant="contained"
                                 // onClick={handleSubmit}
-                    
                             >   
                                  Get Started!
                              </Button>
@@ -133,8 +132,6 @@ const SearchResultBox = ()=>{
                             )}
                             // component={() => <SearchResult title={true} />}
                             />
-                        
-                    
                         </Switch>
           
                 </div>

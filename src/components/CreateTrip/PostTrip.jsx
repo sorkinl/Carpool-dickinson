@@ -22,8 +22,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import adventure from "../../assets/images/adventure.svg";
 import world from "../../assets/images/world.svg";
-import AutoOrigin from "./AutoOrigin";
-import AutoDestination from "./AutoDestination";
+import AutoLocation from "./AutoLocation";
 
 //To be improved:
 // make "Post new trip" button on confirmation page work
@@ -137,15 +136,17 @@ export default function PostTrip(props) {
     function handleTimeChange(timeToPick) {
         setTimePick(timeToPick);
     }
-    function handleLocationChange(value, name) {
-        if(name === "origin"){
-            setState({...state, originTitle: value.label})
-        } else {
-            setState({...state, destTitle: value.label})
-        }
+    function handleOriginChange(value) {
+        setState({...state, originTitle: value.label});
         const newValues = {...state};
-        newValues[name]["latitude"] = value.lat;
-        newValues[name]["longitude"] = value.lng;
+        newValues.origin.latitude = value.lat;
+        newValues.origin.longitude = value.lng;
+    }
+    function handleDestinationChange(value) {
+        setState({...state, destTitle: value.label});
+        const newValues = {...state};
+        newValues.destination.latitude = value.lat;
+        newValues.destination.longitude = value.lng;
     }
     function handleClose() {
         setEmptyError(false);
@@ -218,11 +219,11 @@ export default function PostTrip(props) {
                                     <form>
                                         <label htmlFor="origin-field">
                                             <span>Origin*</span>
-                                            <AutoOrigin id="origin-field" onSuggestionSelect={handleLocationChange}/>
+                                            <AutoLocation id="origin-field" onSuggestionSelect={handleOriginChange} placeholder={"From"}/>
                                         </label>
                                         <label htmlFor="dest-field">
                                             <span>Destination*</span>
-                                            <AutoDestination onSuggestionSelect={handleLocationChange}/>
+                                            <AutoLocation onSuggestionSelect={handleDestinationChange}  placeholder={"To"}/>
                                         </label>
                                         <label htmlFor="date-field">
                                             <span>Date*</span>

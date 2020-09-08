@@ -9,8 +9,7 @@ import {
   faPlusCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useLocation } from 'react-router-dom'
-
+import { useLocation } from 'react-router-dom';
 
 const SideBar = () => {
     const [pathname, setPath] = useState("");
@@ -35,7 +34,7 @@ const SideBar = () => {
                     <div className="knobs-find">
                       <span>
                         <FontAwesomeIcon className="multi-icon" icon={faSearch}/>
-                        <p className="knobs-find-p">find</p>
+                        <p className="knobs-find-p">Find</p>
                       </span>
                     </div>
                     <div className="layer"></div>
@@ -45,7 +44,7 @@ const SideBar = () => {
               <div className="knobs-post">
                     <span>
                       <FontAwesomeIcon className="multi-icon multi-icon--post" icon={faPlusCircle}/>
-                      <p>post</p>
+                      <p>Post</p>
                     </span>
               </div>
               </Link>
