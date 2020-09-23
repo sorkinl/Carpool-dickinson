@@ -103,6 +103,7 @@ $record-sub-font-size: 1.3rem;
         &--existing {
             position: relative;
             top: 6rem;
+            object-fit: cover;
         }
     }
     .public-front__text {

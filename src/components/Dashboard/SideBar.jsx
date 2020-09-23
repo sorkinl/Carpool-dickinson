@@ -4,7 +4,6 @@ import {
   faHome,
   faMapMarkerAlt,
   faCommentDots,
-  faUser,
   faSearch,
   faPlusCircle,
 } from "@fortawesome/free-solid-svg-icons";
@@ -17,14 +16,15 @@ const SideBar = () => {
     let location = useLocation();
     let path = location.pathname.toLocaleLowerCase();
     useEffect(() => {
-      if (path.includes('search')) { setPath("search");}
-      else if (path.includes('posttrip')) { setPath("posttrip");}
-      else if (path.includes('dashboard')) { setPath("dashboard");}
-      else if (path.includes('chat')) { setPath("chat");}
-      else if (path.includes('mytrips')) { setPath("mytrips");}
+        if (path.includes('search')) { setPath("search");}
+        else if (path.includes('posttrip')) { setPath("posttrip");}
+        else if (path.includes('dashboard')) { setPath("dashboard");}
+        else if (path.includes('chat')) { setPath("chat");}
+        else if (path.includes('mytrips')) { setPath("mytrips");}
     });
     console.log(pathname);
-    return (<nav className="sidebar-dashboard">
+    return (
+    <nav className="sidebar-dashboard">
     <ul className="side-nav-dash">
       <li>
           <div className="multi-ride-button">
@@ -68,14 +68,7 @@ const SideBar = () => {
           <span>My trips</span>
           </Link>
       </li>
-      <li className="side-nav-dash__item">
-        <Link to="/account" className="side-nav-dash__link">
-          <FontAwesomeIcon className="side-nav-dash__icon" icon={faUser}></FontAwesomeIcon>
-          <span>Account</span>
-        </Link>
-      </li>
-    </ul>
-    
+    </ul> 
     <li className="side-nav-dash__item">
       <a href="#" className="side-nav-dash__link">
         <span>Logout</span>

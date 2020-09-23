@@ -223,6 +223,7 @@ $card-width: 36.5rem;
         &--existing {
             position: relative;
             top: 6rem;
+            object-fit: cover;
         }
         &--none {
             position: relative;

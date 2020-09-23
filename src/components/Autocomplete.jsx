@@ -6,8 +6,6 @@ import {Autocomplete} from '@material-ui/lab'
 const AutocompleteHERE = (props) => {
     console.log(props)
 
-  
-
   const [state, setState] = useState({
     suggestions: [],
     text: "",

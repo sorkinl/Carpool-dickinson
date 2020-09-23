@@ -6,14 +6,20 @@ import avatar from "../../static/img/avatar.png";
 import { Link, useLocation, withRouter } from "react-router-dom";
 import firebase from "../../firebase/firebaseConfig";
 import AutoInput from "../HOC/AutoSuggest";
-import Popup from 'reactjs-popup';
-// import 'reactjs-popup/dist/index.css';
+// import Popup from 'reactjs-popup';
+import {
+  Popover,
+  Menu,
+  MenuItem,
+} from "@material-ui/core";
+import ProfilePopper from "./ProfilePopper";
 
 const HeaderBar = (props) => {
 
   const user = useSelector(state => state.firebase.profile);
   const [originData, setOriginData] = useState(null);
   const [destinationData, setDestinationData] = useState(null);
+
   const onDestinationSuggestionSelected = (data) => {
     setDestinationData(data);
   };
@@ -28,7 +34,8 @@ const HeaderBar = (props) => {
         `/search?originLat=${originData.position.lat}&originLong=${originData.position.lng}&destinationLat=${destinationData.position.lat}&destinationLong=${destinationData.position.lng}&originTitle=${originData.label}&destinationTitle=${destinationData.label}`
       );
     }
-  };
+  }
+
   return (
     <>
       <header className="header-dashboard">
@@ -69,17 +76,7 @@ const HeaderBar = (props) => {
               <span className="user-nav__notification">7</span>
             </div>
           </Link>
-          {/* <Link to={`/users/${firebase.auth().currentUser.uid}`}> */}
-          <Popup trigger={
-            <div className="user-nav__user">
-              <img src={avatar} alt="" className="user-nav__user-photo" />
-              <span className="user-nav__user-name">{user.firstName}</span>
-            </div>} 
-            position="right center">
-            <div>Popup content here !!</div>
-          </Popup>
-            
-          {/* </Link> */}
+          <ProfilePopper/>
         </nav>
       </header>
     </>
