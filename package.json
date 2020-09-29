@@ -26,6 +26,7 @@
     "firebase": "^7.14.5",
     "font-awesome": "^4.7.0",
     "fullpage.js": "^3.0.8",
+    "google-map-react": "^2.1.6",
     "http-proxy-middleware": "^1.0.3",
     "lodash": "^4.17.19",
     "mapbox-gl": "^1.10.1",
