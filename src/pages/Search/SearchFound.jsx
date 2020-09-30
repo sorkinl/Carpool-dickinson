@@ -18,6 +18,8 @@ const SearchFound = ({
   long,
   destinationLat,
   destinationLong,
+  originLat,
+  originLong,
   originTitle,
   destinationTitle,
 }) => {
@@ -65,7 +67,13 @@ const SearchFound = ({
             : null}
         </div>
         <div className="search-map">
-          <HereMap trips={filteredTrips} />
+          <HereMap
+            trips={filteredTrips}
+            originLat={originLat}
+            originLong={originLong}
+            destinationLat={destinationLat}
+            destinationLong={destinationLong}
+          />
         </div>
       </div>
     </>

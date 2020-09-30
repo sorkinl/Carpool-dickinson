@@ -36,6 +36,8 @@ const SearchPage = (props) => {
       long={long}
       destinationLat={query.get("destinationLat")}
       destinationLong={query.get("destinationLong")}
+      originLat={query.get("originLat")}
+      originLong={query.get("originLong")}
       originTitle={query.get("originTitle")}
       destinationTitle={query.get("destinationTitle")}
     />
