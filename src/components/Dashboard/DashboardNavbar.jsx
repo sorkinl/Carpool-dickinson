@@ -32,11 +32,6 @@ const DashboardNavbar = (props) => {
           <img src={logo} alt="logo" className="logo-dashboard" />
         </Link>
         <form className="search-dashboard">
-          <Link to="/search" className="search-dashboard__button-icon">
-            <svg className="search-dashboard__icon">
-              <use xlinkHref={`${icon}#icon-magnifying-glass`}></use>
-            </svg>
-          </Link>
           <AutoInput
             onSuggestionSelected={onOriginSuggestionSelected}
             placeholder={"From..."}

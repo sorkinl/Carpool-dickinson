@@ -93,7 +93,7 @@ export const HereMap = (props) => {
     return () => {
       hMap.dispose();
     };
-  }, [mapRef, props.trips]); // This will run this hook every time this ref is updated
+  }, [mapRef /*  props.trips */]); // This will run this hook every time this ref is updated
 
   return <div className="map" ref={mapRef} />;
 };

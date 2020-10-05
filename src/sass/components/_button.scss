@@ -112,3 +112,17 @@
     animation-fill-mode: backwards;
   }
 }
+.btn-tertiary {
+  background-color: $color-tertiary;
+  color: $color-white;
+  height: 4rem;
+  width: 15rem;
+  outline: none;
+  border: none;
+  transition: all 0.1s;
+  &:hover {
+    background-color: $color-tertiary-dark;
+    box-shadow: 0, 1rem, 0.5rem, 0.5rem, rgba($color-black, 0.5);
+    cursor: pointer;
+  }
+}
