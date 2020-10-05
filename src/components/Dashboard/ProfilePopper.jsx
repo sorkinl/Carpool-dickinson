@@ -44,13 +44,13 @@ const ProfilePopper = (props) => {
   };
   return (
     <div>
-          <div  className="user-nav__user" onClick={handleClick}>
-                <img src={avatar} alt="" className="user-nav__user-photo" />
-                <span className="user-nav__user-name">{user.firstName}</span>
-          </div>
+          <Link to="/account">
+            <div  className="user-nav__user">
+                  <img src={avatar} alt="" className="user-nav__user-photo" />
+                  <span className="user-nav__user-name">{user.firstName}</span>
+            </div>
           {/* <div className={classes.root}> */}
-            <div anchorEl={anchorEl}>
-
+            {/* <div anchorEl={anchorEl}>
             </div>
             <Menu
                     id="simple-menu"
@@ -63,8 +63,9 @@ const ProfilePopper = (props) => {
                         <Link to="/account">My account</Link>
                     </MenuItem>
                     <MenuItem onClick={handleClose}><Link to="/account">My account</Link></MenuItem>
-                </Menu>
+                </Menu> */}
             {/* </div> */}
+            </Link>
     </div>
   );
 };

@@ -343,7 +343,6 @@ export default function PostTrip(props) {
                                     } 
                                 </div>
                             </div>
-                            
                             { showSpinner === false ? 
                             <div className="post-trip-confirm">
                                 <p className="post-trip-confirm__text post-trip-confirm__text--header">Your trip has been posted
