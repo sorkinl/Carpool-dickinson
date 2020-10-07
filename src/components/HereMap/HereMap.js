@@ -24,7 +24,7 @@ export const HereMap = (props) => {
       zoom: 7,
       pixelRatio: window.devicePixelRatio || 1,
     });
-
+    console.log(props);
     var routingParameters = {
       routingMode: "fast",
       transportMode: "car",

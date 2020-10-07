@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
-import { HereMap } from "../../components/HereMap/HereMap";
+
 import { Link, useLocation } from "react-router-dom";
-import icon from "../../assets/sprite.svg";
-import avatar from "../../static/img/avatar.png";
+
 import { useFirestoreConnect, isLoaded } from "react-redux-firebase";
 import {
   getMaxAndMinLat,
@@ -13,6 +12,8 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { getTripByRadius } from "../../redux/actions/tripsActions";
 import TripCardSearch from "../../components/Search/TripCardSearch";
+import SearchLeft from "./SearchLeft";
+import Loading from "../../components/Loading";
 const SearchFound = ({
   lat,
   long,
@@ -34,9 +35,10 @@ const SearchFound = ({
     },
   ]);
   const [selectedTrip, setSelectedTrip] = useState(null);
+
   const trips = useSelector((state) => state.firestore.ordered.searchedTrips);
 
-  var filteredTrips;
+  var filteredTrips = [];
   if (isLoaded(trips)) {
     console.log(long.maxLong, long.minLong);
     filteredTrips = trips.filter((trip) => {
@@ -51,10 +53,11 @@ const SearchFound = ({
     });
   }
   useEffect(() => {
-    if (isLoaded(trips)) {
+    if (isLoaded(trips) && filteredTrips.length !== 0) {
+      console.log(filteredTrips[0]);
       setSelectedTrip(filteredTrips[0]);
     }
-  }, [trips]);
+  }, [trips, filteredTrips]);
   const selectTrip = (e, trip) => {
     e.preventDefault();
     setSelectedTrip(trip);
@@ -76,38 +79,17 @@ const SearchFound = ({
               ))
             : null}
         </div>
-        <div className="search-map">
-          <HereMap
-            trips={filteredTrips}
-            originLat={originLat}
-            originLong={originLong}
-            destinationLat={destinationLat}
-            destinationLong={destinationLong}
+
+        {isLoaded(trips) &&
+        filteredTrips.length !== 0 &&
+        selectedTrip !== null ? (
+          <SearchLeft
+            selectedTrip={selectedTrip}
+            filteredTrips={filteredTrips}
           />
-          <div className="selected-trip">
-            {selectedTrip ? (
-              <>
-                <div className="selected-trip__left">
-                  <img src={avatar} alt="" className="selected-trip__avatar" />
-                  <p>{selectedTrip.firstName} '22</p>
-                  <p>Computer Science</p>
-                  <div className="selected-trip__review">
-                    <svg className="selected-trip__review--icon">
-                      <use xlinkHref={`${icon}#icon-star`}></use>
-                    </svg>
-                    <span>2.55</span>
-                  </div>
-                </div>
-                <div className="selected-trip__right">
-                  <button className="btn-tertiary">Send trip request</button>
-                  <button className="btn-tertiary">Bookmark</button>
-                </div>
-              </>
-            ) : (
-              <div>No trip</div>
-            )}
-          </div>
-        </div>
+        ) : (
+          <Loading />
+        )}
       </div>
     </>
   );
