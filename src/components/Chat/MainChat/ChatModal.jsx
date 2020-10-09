@@ -3,10 +3,14 @@ import { useFirestore } from "react-redux-firebase";
 import Modal from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import firebase from "../../../firebase/firebaseConfig";
-const ChatModal = ({ open, setOpen, tripId }) => {
+import { useSelector } from "react-redux";
+const ChatModal = ({ open, setOpen, tripId, ownerId }) => {
   const [message, setMessage] = useState("");
   const firestore = useFirestore();
   const currentUser = firebase.auth().currentUser;
+  const { firstName, lastName } = useSelector(
+    (state) => state.firebase.profile
+  );
   const sendMessage = () => {
     /* firestore
       .collection("trips")
@@ -24,7 +28,7 @@ const ChatModal = ({ open, setOpen, tripId }) => {
         doc: tripId,
       },
       {
-        members: firebase.firestore.FieldValue.arrayUnion(currentUser.uid),
+        requests: firebase.firestore.FieldValue.arrayUnion(currentUser.uid),
       }
     );
     firestore.add(
@@ -42,6 +46,9 @@ const ChatModal = ({ open, setOpen, tripId }) => {
         message: [message],
         email: currentUser.email,
         uid: currentUser.uid,
+        ownerId: ownerId,
+        firstName: firstName,
+        lastName: lastName,
       }
     );
     setOpen(false);

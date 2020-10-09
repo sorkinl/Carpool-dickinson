@@ -1,7 +1,8 @@
-const functions = require('firebase-functions');
-const admin = require('firebase-admin');
+const functions = require("firebase-functions");
+const admin = require("firebase-admin");
 admin.initializeApp();
-const createChatRoom = require('./createChatRoom');
+const createChatRoom = require("./createChatRoom");
+const onRequestTrip = require("./onRequestTrip");
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
@@ -9,5 +10,5 @@ const createChatRoom = require('./createChatRoom');
 //  response.send("Hello from Firebase!");
 // });
 
-exports.createChatRoom = createChatRoom.createChatRoom; 
-
+exports.createChatRoom = createChatRoom.createChatRoom;
+exports.onRequestTrip = onRequestTrip.onRequestTrip;

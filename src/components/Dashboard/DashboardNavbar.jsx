@@ -46,12 +46,14 @@ const DashboardNavbar = (props) => {
           </button>
         </form>
         <nav className="user-nav">
-          <div className="user-nav__icon-box">
-            <svg className="user-nav__icon">
-              <use xlinkHref={`${icon}#icon-bookmark`}></use>
-            </svg>
-            <span className="user-nav__notification">7</span>
-          </div>
+          <Link to="/bookmarks">
+            <div className="user-nav__icon-box">
+              <svg className="user-nav__icon">
+                <use xlinkHref={`${icon}#icon-bookmark`}></use>
+              </svg>
+              <span className="user-nav__notification">7</span>
+            </div>
+          </Link>
           <Link to="/chat">
             <div className="user-nav__icon-box">
               <svg className="user-nav__icon">
