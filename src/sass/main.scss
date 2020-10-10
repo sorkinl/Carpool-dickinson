@@ -26,13 +26,16 @@
 @import "components/loader";
 @import "components/post-trip";
 @import "components/upload-photo";
-@import "components/ex";
+@import "components/public-profile";
 @import "components/map";
+@import "components/multi-ride-button";
+@import "components/react-popup";
+
+
 @import "layout/header";
 @import "layout/dashboard-layout";
 @import "layout/navigation";
 @import "layout/grid";
-@import "layout/account";
 @import "layout/chat-layout";
 @import "layout/search-layout";
-@import "layout/post-trip-page";
+@import "layout/page-layout";

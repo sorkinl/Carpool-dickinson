@@ -1,7 +1,8 @@
 .logo-dashboard {
-  height: 3.25rem;
+  height: 2.25rem;
   margin-left: 2rem;
   margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
 .search-dashboard {
@@ -93,18 +94,65 @@
     height: 100%;
     display: flex;
     align-items: center;
-    transition: all 0.2s;
-  }
+    align-self: stretch;
 
-  & > *:hover {
-    background-color: $color-secondary;
-  }
-  &__icon-box {
-    position: relative;
-    &:hover {
-      & > * {
-        fill: $color-grey-dark-1;
+    & > * {
+      padding: 0 2rem;
+      cursor: pointer;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    & > *:hover {
+      background-color: $color-secondary;
+    }
+    &__icon-box {
+      position: relative;
+      &:hover {
+        & > * {
+          fill: $color-grey-dark-1;
+        }
       }
+    }
+
+    &__icon {
+      height: 2.25rem;
+      width: 2.25rem;
+      fill: $color-white;
+    }
+
+    &__notification {
+      font-size: 0.8rem;
+      height: 1.75rem;
+      width: 1.75rem;
+      border-radius: 1000rem;
+      background-color: $color-tertiary;
+      color: #fff;
+      position: absolute;
+      top: 1.5rem;
+      right: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__user {
+      display: flex;
+      align-items: center;
+      &:hover {
+        & > * {
+          color: $color-grey-dark-1;
+        }
+      }
+    }
+
+    &__user-photo {
+      height: 3.75rem;
+      width: 3.75rem;
+      border-radius: 50%;
+      object-fit: cover;
     }
   }
 

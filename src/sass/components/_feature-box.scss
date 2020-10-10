@@ -6,6 +6,35 @@
     border-radius: 3px;
     min-height: 25rem;
     transition: transform .3s;
+    margin-left: 4rem;
+    &__header {
+        font-size: 4rem;
+        color: $color-black-light;
+        margin-top: 5rem;
+        font-weight: 700;
+        margin-left: 43%;
+        position: relative;
+        &--indicator {
+            width: 11rem;
+            height: .5rem;
+            background-color: $color-primary-neutral;
+            /* margin-left: 69rem; */
+            margin-left: 47%;
+            position: relative;
+        }
+    }
+    &__title {
+        font-size: 3rem;
+        text-transform: uppercase;
+        font-weight: 300;
+        display: inline-block;
+        background-image: linear-gradient(to right, #09C6F9, #045DE9);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: $color-primary-light;
+        letter-spacing: 2px;
+        margin-bottom: 1.5rem;;
+    }
     &__icon {
         font-size: 6rem;
         margin-bottom: .5rem;
@@ -20,16 +49,21 @@
         font-size: 2rem;
     }
     &__number{
-        margin: 0 5rem;
         position: relative;
         text-align: center;
         display: inline-block;
         font-size: 10rem;
          height: 15rem;
         width: 15rem; 
-        border: solid 1px $color-primary-dark;
+        border: solid .5rem $color-primary-light;
         border-radius: 1000rem;
         top: 5rem;
+        &--one {
+            margin: .9rem 14rem;
+        }
+        &--two {
+            margin:-0.4rem 3rem;
+        }
         &--text{
             position: absolute;
             top: 50%;

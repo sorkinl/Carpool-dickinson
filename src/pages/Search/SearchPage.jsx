@@ -1,5 +1,5 @@
 import React from "react";
-import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
+import HeaderBar from "../../components/Dashboard/HeaderBar";
 import { HereMap } from "../../components/HereMap/HereMap";
 import { Link, useLocation } from "react-router-dom";
 import icon from "../../assets/sprite.svg";

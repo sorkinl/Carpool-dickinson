@@ -4,7 +4,7 @@
   &__tab-list {
     text-align: center;
     //border-bottom: 1px solid #aaa;
-    margin: 5rem auto;
+    margin: 5rem 0 5rem 7rem;
     padding: 0;
   }
 
@@ -24,7 +24,7 @@
       background: #fff;
       //border-color: #aaa;
       color: $color-white;
-      background-color: $color-primary-dark;
+      background-color: $color-primary-neutral;
       border-radius: 5px;
     }
 
@@ -55,6 +55,10 @@
     &--selected {
       animation: TabPanelAnimate ease .7s;
       display: block;
+      animation: TabPanelAnimate ease .7s;
+      display: block;
+      padding-bottom: 4rem;
+      padding-top: 0.3rem;
     }
   }
 }

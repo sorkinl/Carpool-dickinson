@@ -1,5 +1,6 @@
 import React from "react";
-import logo from "../../assets/images/logo.png";
+// import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/D-Pool.png";
 import svg from "../../assets/images/lightBlue_car.svg";
 import DoubleArrow from "@material-ui/icons/DoubleArrow";
 const Header = ({executeScroll}) => {
@@ -7,7 +8,8 @@ const Header = ({executeScroll}) => {
     <header className="header">
       <div>
         <div className="header__logo-box">
-          <img src={logo} alt="Logo" className="header__logo" />
+           <img src={logo} alt="Logo" className="header__logo" />
+          {/* <p>DPool</p> */}
         </div>
         <div className="header__text-box">
           <h1 className="heading-primary">
@@ -15,7 +17,7 @@ const Header = ({executeScroll}) => {
             {/*  <span class="heading-primary--sub">is where life happens</span> */}
           </h1>
           <a href="#" className="btn btn--yellow btn--animated">
-            Discover our tours
+            Discover our trips
           </a>
         </div>
         <div className="header__illustration">

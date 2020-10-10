@@ -1,0 +1,123 @@
+.multi-ride-button {
+    margin-bottom: 3rem;
+    margin-top: 5rem;
+    margin-left: -4.5rem;
+  
+    .knobs-post {
+        background-color: $color-tertiary-post-btn;
+        width: 7rem;
+        height: 11rem;
+        border-radius: 0 0 5rem 5rem;
+        position: relative;
+        margin-top: -4rem;
+        margin-left: 6.5rem;
+        text-align: center;
+        text-align: center;
+        color: #fff;
+        text-transform: uppercase;
+        padding: 1.5rem 0;
+        border: .25rem solid;
+        border-color: $color-tertiary-post-btn;
+        transition: .5s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+        &:hover {
+            // border-color: #fff;
+            border-color: $color-white;
+        }
+    }
+    .layer
+    {
+        position: absolute;
+        margin-left: .3rem;
+        top: .2rem;
+        bottom: .2rem;
+        left: -.1rem;
+    }
+
+    .button-multi-find
+    {
+        position: relative;
+        top: 50%;
+        width: 23rem;
+        height: 8rem;
+        margin: -1rem 0 0 -1.5rem;
+        overflow: hidden;
+        transform: rotate(90deg);
+    }
+    .button-multi-find.r, .button-multi-find.r .layer
+    {
+        border-radius: 10rem;
+    
+    }
+    .knobs-find, .knobs-post
+    {
+        z-index: 2;
+    }
+
+    .layer
+    {
+        width: 98%;
+        background-color: $color-primary-highlight;
+        transition: 0.3s ease all;
+        z-index: 1;
+        display: none
+    
+    }
+    #button-1 .knobs-find, #button-1 .knobs-find span
+    {
+        position: absolute;
+        z-index: 2;
+        top: .7rem;
+        width: 11rem;
+        height: 7rem;
+        line-height: 1;
+        padding: .9rem .4rem;
+        border-radius: 4rem;
+        transition: 0.4s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+        transform: rotate(-180deg);
+
+    }
+    .knobs-find-p {
+        text-transform: uppercase;
+        // transform: rotate(90deg);
+        transform: rotate(-90deg);
+        margin-left: 4rem;
+        margin-top: -2rem;
+    }
+    #button-1 .knobs-find
+    {
+        text-transform: uppercase;
+        left: 5rem;
+        color: $color-white;
+    }
+
+    #button-1 .knobs-find span
+    {
+        left: 4.5rem;
+        cursor: pointer;
+        font-size: $side-bar-font-size;
+        font-weight: bold;
+        text-align: center;
+        background-color: $color-primary-dark-4;//$color-primary-dark-3;
+        z-index: 5;
+        top: 0.2rem;
+        border-radius: 5rem 0 0 5rem;
+        border: .2rem solid ;
+        border-color: $color-primary-dark-4;
+        transition: .5s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+        &:hover {
+            border-color: $color-white;
+        }
+    }
+    .multi-icon {
+        font-size: 3rem;
+        position: relative;
+        color: $color-white;
+        margin-top: 1rem;
+        margin-left: -2rem;
+        z-index: 2;  
+        &--post {
+            margin-left: 0rem;
+            margin-bottom: .6rem;
+        }
+    }
+}

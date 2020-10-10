@@ -15,9 +15,14 @@ import Loading from "./components/Loading";
 import { withRouter } from "react-router-dom";
 import MainPage from "./pages/FrontPage/MainPage";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import DashboardMain from "./components/Dashboard/DashboardMain";
+
 import EditProfile from "./components/Account/Profile/EditProfile";
 import PostTrip from "./components/CreateTrip/PostTrip";
 import FancyLoader from "./components/CreateTrip/FancyLoader (not in use)";
+import PublicProfile from "./components/PublicProfile/PublicProfile";
+import TripArea from "./components/Account/TripArea";
+
 import Profile from "./components/Account/Profile/Profile";
 import TripsContainer from "./pages/Trips/TripsContainer";
 import BookmarksContainer from "./pages/Bookmarks/BookmarksContainer";
@@ -29,9 +34,9 @@ const Routes = withRouter(({ location }) => {
       <Switch>
         <Route path="/" exact component={MainPage} />
         <PrivateRoute path="/search" exact component={SearchPage} />
+        <PrivateRoute path="/account" component={Account} />
         <PrivateRoute path="/trips" component={TripsContainer} />
         <PrivateRoute path="/bookmarks" component={BookmarksContainer} />
-        <PrivateRoute path="/account" component={Account} />
         <PrivateRoute path="/edit-profile" component={EditProfile} />
         {/* <PrivateRoute path="/chat" component={MainChat} /> */}
         <PrivateRoute exact path="/chat" component={MainChat} />
@@ -44,9 +49,11 @@ const Routes = withRouter(({ location }) => {
         <Route path="/verifyEmail" component={EmailVerify} />
         <Route path="/registrationForm" component={ProfileCreate} />
         <PrivateRoute path="/postTrip" component={PostTrip} />
+        <PrivateRoute path="/myTrips" component={TripArea} />
         <Route path="/fancy" component={FancyLoader} />
-        <PrivateRoute path="/dashboard" component={Dashboard} />
-        <PrivateRoute path="/users/:userId" component={Profile} />
+        <PrivateRoute path="/dashboard" component={DashboardMain} />
+        <PrivateRoute path="/users/:userId" component={PublicProfile} />
+        {/* render={(props) => <PublicProfile {...props} />} */}
       </Switch>
     </div>
   );
@@ -60,5 +67,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

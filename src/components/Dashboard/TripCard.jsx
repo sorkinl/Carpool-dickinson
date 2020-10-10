@@ -76,6 +76,7 @@ const TripCard = (props) => {
       .collection("chatRooms")
       .doc(props.tripId)
       .get();
+    console.log(docRef);
     if (docRef.exists) {
       firestore.update(
         {
@@ -84,11 +85,11 @@ const TripCard = (props) => {
         },
         {
           requests: {
-            [firebase.auth().currentUser.uid]: {
-              firstName: currentUser.firstName,
-              lastName: currentUser.lastName,
-              photoUrl: currentUser.photoUrl,
-            },
+            [firebase.auth().currentUser.uid] : {
+                firstName: currentUser.firstName,
+                lastName: currentUser.lastName,
+                photoUrl: currentUser.photoUrl,
+            }
           },
           memberIds: firebase.firestore.FieldValue.arrayUnion(
             firebase.auth().currentUser.uid
@@ -114,17 +115,32 @@ const TripCard = (props) => {
       );
     } */
   };
-
+  console.log(props.photoUrl);
   return (
-    <>
-      <div className="trip-card-dash">
-        <div className="trip-card-dash__heading">
-          <Link to={`users/${props.uid}`}>
-            <img src={avatar} alt="" className="trip-card-dash__image" />
-          </Link>
-          <h3 className="trip-card-dash__heading--text">
-            {props.firstName} {props.lastName}
-          </h3>
+    <div className="trip-card-dash">
+      <div className="trip-card-dash__heading">
+        <Link to={`users/${props.uid}`}>
+          {/* {props.firstName} {props.lastName} */}
+          <img src={props.photoUrl} alt="" className="trip-card-dash__image" />
+        </Link>
+        <h3 className="trip-card-dash__heading--text">
+          {props.firstName} {props.lastName}
+        </h3>
+      </div>
+      <div className="trip-card-dash__middle">
+        <span className="trip-card-dash__middle--text">
+          {props.originTitle}
+        </span>
+        <span className="trip-card-dash__middle--text">{props.destTitle}</span>
+      </div>
+      <div className="trip-card-dash__bottom">
+        <div className="trip-card-dash__bottom--align">
+          <svg className="trip-card-dash__icon">
+            <use xlinkHref={`${icon}#icon-calendar`}></use>
+          </svg>
+          <span className="trip-card-dash__bottom--text">
+            {convertDate(props.departDate)}
+          </span>
         </div>
         <div className="trip-card-dash__middle">
           <span className="trip-card-dash__middle--text">
@@ -186,7 +202,7 @@ const TripCard = (props) => {
         setOpen={setChatModal}
         tripId={props.tripId}
       />
-    </>
+    </div>
   );
 };
 

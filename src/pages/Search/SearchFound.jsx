@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
+import DashboardNavbar from "../../components/Dashboard/HeaderBar";
 
 import { Link, useLocation } from "react-router-dom";
 

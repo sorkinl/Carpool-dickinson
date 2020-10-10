@@ -3,12 +3,16 @@
 /* $color-primary-light: #6fe7dd;
 $color-primary-dark: #3490de; */
 $color-primary: #38a1fd;
+$color-primary-neutral: #068AF0;
 $color-primary-light: #09C6F9;
 $color-primary-light-1: #09B2E0;
+$color-primary-highlight: #CAF3FF;
 $color-primary-dark: #045DE9;
 $color-primary-dark-1: #0793BA;
-$color-primary-dark-2: #05617A;
+$color-primary-dark-2: #1F80A0;//#05617A;
 $color-primary-dark-3:#022E3B;
+$color-primary-dark-4: rgb(18, 58, 73);
+$color-primary-dark-0: #65BFD8;
 
 $color-secondary: #FAE923;
 $color-secondary-light: #FBEF6E;
@@ -22,12 +26,14 @@ $color-tertiary-dark: #E01F5D;
 $color-tertiary-dark-1: #BA1A4D;
 $color-tertiary-dark-2: #7A1132;
 $color-tertiary-light-1: #D74873;
+$color-tertiary-post-btn: #ff4681;
 
 //$color-secondary: #6639a6;
 //$color-secondary-dark: #521262;
 
 $color-white: #fff;
 $color-black: #000;
+$color-black-light: #272727;
 
 $color-grey-light-1: #faf9f9;
 $color-grey-light-2: #f4f2f2;
@@ -50,9 +56,12 @@ $shadow-dark: 0 2rem 6rem rgba(0,0,0,.3);
 
 //GRID
 $grid-width: 114rem;
-$gutter-vertical: 4rem;
+$gutter-vertical: 1rem;
 $gutter-horizontal:6rem;
-
+$back-btn-font-size: 1.6rem;
+$back-icon-font-size: 1.4rem;
+$side-bar-font-size: 1rem;
+$side-bar-icon-font-size: 2.5rem;
 
 //FONT-SIZES
 $default-font-size: 1.6rem;

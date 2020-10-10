@@ -8,7 +8,7 @@
     /* clip-path: polygon(100% 0, 100% 75vh, 50vw 100%, 0 75vh, 0 0); */
     &__logo-box{
         position: absolute;
-        top: 4rem;
+        top: 2rem;
         left: 4rem;
     }
     &__logo{
@@ -36,13 +36,18 @@
     }
 
     &__arrow {
-    
         position: absolute;
         cursor: pointer;
-        top:95%;
-        left:50%;
+        top: 93%;
+        background: none;
+        border-radius: 50%;
+        height: 8rem;
+        width: 8rem;
+        padding: 0 .5rem;
+        left: 50%;
         transform: translate(-40%, -50%);
         &--icon{
+            margin-top: -.9rem;
             font-size: 7rem;
             display: inline-block;
             background-image: linear-gradient(134deg, $color-primary-light, $color-secondary);
@@ -51,6 +56,10 @@
             background-clip: text;
             color: transparent;
             animation: backgroundMove 4s ease-in-out infinite;
+        }
+        &:hover {
+            transition: ease-in .2s;
+            background: #249ff7;
         }
     }
 }

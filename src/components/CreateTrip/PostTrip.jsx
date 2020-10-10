@@ -10,7 +10,6 @@ import Loader from 'react-loader-spinner'
 import {
     CssBaseline,
     Snackbar,
-    Link,
     Grid,
 } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -23,8 +22,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import adventure from "../../assets/images/adventure.svg";
 import world from "../../assets/images/world.svg";
-import AutoOrigin from "./AutoOrigin";
-import AutoDestination from "./AutoDestination";
+import AutoLocation from "./AutoLocation";
 
 //To be improved:
 // make "Post new trip" button on confirmation page work
@@ -95,6 +93,16 @@ export default function PostTrip(props) {
     let departTime ='';
     currentDate.setUTCHours(0,0,0,0);
 
+    // const userProfile = { //Make this a separate object since storing user.<field> as states caused errors 
+    //     firstName: user.firstName,
+    //     lastName: user.lastName,
+    //     photoUrl: user.photoUrl,
+        
+    // }
+    const firstName = user.firstName;
+    const lastName = user.lastName;
+    const photoUrl = user.photoUrl;
+
     const [state, setState] = useState({
         originTitle: '',
         origin: {
@@ -109,12 +117,9 @@ export default function PostTrip(props) {
         departDate: currentDate,
         emptySeat: '',
         description: '',
-        uid: firebase.auth().currentUser.uid,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        photoUrl: user.photoUrl,
+        uid: firebase.auth().currentUser.uid
     });
-
+    
     function handleChange(e) {  
         const { name, value } = e.target;
         if (name === "selector") {
@@ -131,15 +136,17 @@ export default function PostTrip(props) {
     function handleTimeChange(timeToPick) {
         setTimePick(timeToPick);
     }
-    function handleLocationChange(value, name) {
-        if(name === "origin"){
-            setState({...state, originTitle: value.label})
-        } else {
-            setState({...state, destTitle: value.label})
-        }
+    function handleOriginChange(value) {
+        setState({...state, originTitle: value.label});
         const newValues = {...state};
-        newValues[name]["latitude"] = value.lat;
-        newValues[name]["longitude"] = value.lng;
+        newValues.origin.latitude = value.lat;
+        newValues.origin.longitude = value.lng;
+    }
+    function handleDestinationChange(value) {
+        setState({...state, destTitle: value.label});
+        const newValues = {...state};
+        newValues.destination.latitude = value.lat;
+        newValues.destination.longitude = value.lng;
     }
     function handleClose() {
         setEmptyError(false);
@@ -174,7 +181,7 @@ export default function PostTrip(props) {
         }
         else {
             departTime = timeToPick.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            console.log({...state}, "pre-submit success");
+            console.log({...state},departTime, "pre-submit success");
             submitTrip();
         }
     };
@@ -182,7 +189,7 @@ export default function PostTrip(props) {
         try {
             setSubmit("pending");
             setSpinner(true);
-            await firestore.collection("trips").add({...state, departTime});
+            await firestore.collection("trips").add({...state, departTime, firstName, lastName, photoUrl});
             setSpinner(false);
         }
         catch (error) {
@@ -196,7 +203,7 @@ export default function PostTrip(props) {
     }
     return (
         <CssBaseline>
-            <header className="post-trip-page">
+            <header className="page-layout post-trip-page">
                 <div  className="post-trip">
                     <a href='/dashboard' className="post-trip-btn post-trip-btn--back">
                         <span><FontAwesomeIcon className="post-trip-icon" icon={faChevronLeft}></FontAwesomeIcon></span>
@@ -212,11 +219,11 @@ export default function PostTrip(props) {
                                     <form>
                                         <label htmlFor="origin-field">
                                             <span>Origin*</span>
-                                            <AutoOrigin id="origin-field" onSuggestionSelect={handleLocationChange}/>
+                                            <AutoLocation id="origin-field" onSuggestionSelect={handleOriginChange} placeholder={"From"}/>
                                         </label>
                                         <label htmlFor="dest-field">
                                             <span>Destination*</span>
-                                            <AutoDestination onSuggestionSelect={handleLocationChange}/>
+                                            <AutoLocation onSuggestionSelect={handleDestinationChange}  placeholder={"To"}/>
                                         </label>
                                         <label htmlFor="date-field">
                                             <span>Date*</span>
@@ -336,7 +343,6 @@ export default function PostTrip(props) {
                                     } 
                                 </div>
                             </div>
-                            
                             { showSpinner === false ? 
                             <div className="post-trip-confirm">
                                 <p className="post-trip-confirm__text post-trip-confirm__text--header">Your trip has been posted

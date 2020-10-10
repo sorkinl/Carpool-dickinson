@@ -1,0 +1,40 @@
+.page-layout {
+  // min-height: 2vh;
+  background-color: #e6eeff;
+  background-size: contain;
+  background-position: center;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  margin: 0 auto;
+  display: flex;
+  padding-top: 7vh;
+  padding-left: 11rem;
+  &.account-page {
+    padding-left: 6%;
+    width: 93%;
+    height: 110vh;
+  }
+  &.edit-profile-page {
+    width: 93%;
+    min-height: 145vh;
+    padding-left: 3%;
+    overflow: hidden;
+    height: 145vh;
+  }
+  &.post-trip-page {
+    background-color: #124758;
+    width: 93%;
+    height: 116vh;
+    padding-left: 1%;
+  }
+  &.public-profile-page {
+    width: 93%;
+    padding-left: 3%;
+    overflow: hidden;
+    min-height: 160vh;
+    height: 160vh;
+    position: absolute;
+    display: block;
+  }
+}

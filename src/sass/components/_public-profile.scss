@@ -1,0 +1,291 @@
+$standard: 1rem;
+$card-height: 105rem;
+$card-width: 84rem;
+
+$name-color: #4B5F92;
+
+$school-font-size: 1.6rem;
+$profile-header-font-size: 1.5rem;
+$name-font-size: 2.5rem;
+$info-section-font-size: 1.7rem;
+$record-main-font-size: 2rem;
+$history-font-size: 1.4rem;
+$record-sub-font-size: 1.3rem;
+
+.public-profile {
+    * {
+        font-family: "Lato", sans-serif;
+    }
+    &--public-back-box {
+        margin: 0rem 20rem 2rem;
+        position: relative;
+        &__icon {
+            font-size: $back-icon-font-size;//1.4
+            color: $color-primary;
+            text-align: left;
+            margin-right: 1rem;
+        }
+        &__btn {
+            position: relative;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            font-size: $back-btn-font-size;//1.6
+            transition: all .1s;
+            text-align: center;
+            background-color: none;
+            color: $color-primary;
+            margin-bottom: 0rem;
+            &:hover {
+                opacity: 0.7;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .public-outer-div,
+    .public-inner-div {
+        height: $card-height;
+        max-width: $card-width;
+        margin: 0 auto;
+        position: relative; 
+        border-radius: 50%;
+    }
+    .public-outer-div {
+        perspective: 900px;
+        perspective-origin: 50% calc(50% - 18em);
+    }
+    .public-inner-div {
+        margin: 0 auto;
+        font-weight: 400;
+        font-size: 1rem;
+        text-align: center;
+        transition: all 0.6s cubic-bezier(0.8, -0.4, 0.2, 1.7);
+        transform-style: preserve-3d;
+    }
+    .public-front {
+        position: relative;
+        top: 0;
+        left: 0;
+        backface-visibility: hidden;
+    }
+    .public-front {
+        height: 105%;
+        width: $card-width;
+        background: $color-white;
+        backface-visibility: hidden;
+        border-radius: 2rem;
+        // box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .public-section-name {
+        position: inherit;
+        color: grey;
+        text-transform: uppercase;
+        font-family:  "Lato", sans-serif;
+        font-size: $profile-header-font-size;
+        top: 3.5rem;
+    }
+    .public-front__face-photo {
+        height: 15rem;
+        width: 15rem;
+        margin: 0 auto;
+        border-radius: 50%;
+        background-size: contain;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        overflow: hidden;
+        border: .2rem solid $color-grey-light-4;
+        transition: all 0.6s cubic-bezier(0.8, -0.4, 0.2, 1.7);
+        z-index: 3;
+        // }
+        &--existing {
+            position: relative;
+            top: 6rem;
+            object-fit: cover;
+        }
+    }
+    .public-front__text {
+        position: relative;
+        top: 8rem;
+        margin: -1rem auto;
+        font-family: "Lato", sans-serif;
+        font-size: $name-font-size;
+        backface-visibility: hidden;
+        h3, p {
+            color: $name-color;
+        }
+        .public-front__text-header {
+            font-weight: 700;
+        }
+        .public-record-line {
+            border-left: .1rem solid gainsboro;
+            height: 5rem;
+            position: relative;
+            margin: 0 1.3rem 0 1.3rem;
+        }
+        .public-record-profile {
+            padding-top: 2rem;
+            justify-content: center;
+        }
+        .public-record-main {
+            position: relative;
+            font-size: $record-main-font-size;
+            letter-spacing: .004rem;
+            font-weight: 400;
+        }
+        .public-record-sub {
+            color: #758abe;
+            position: relative;
+            font-size: $record-sub-font-size;
+            letter-spacing: .004rem;
+            font-weight: 400;
+        }
+        .public-front__text-para {
+            color: #1AC3F2;
+            position: relative;
+            top: .2rem;
+            font-size: $school-font-size;
+            letter-spacing: .004rem;
+            font-weight: 620;
+        }
+        .public-front__text-sub {
+            position: relative;
+            top: 2rem;
+            font-size: $school-font-size;
+            letter-spacing: .004rem;
+            font-weight: 400;
+        }
+        .public-front-icons {
+            position: relative;
+            top: 0;
+            font-size: $school-font-size;
+            margin-right: 1.6rem;
+            color: gray;
+        }
+    }
+    .public-front__info {
+        margin: 0 auto;
+        position: relative;
+        top: 12rem;
+        text-align: start;
+        .public-review-wrapper {
+            justify-content: center;
+            margin: 2rem 0; 
+        }
+        .public-info-wrapper {
+            justify-content: center;
+            margin: 2.2rem 0; 
+            &__icon {
+                font-size: $info-section-font-size;
+                padding-left: .5rem;
+                position: relative;
+                &--star {
+                    font-size: 2.1rem;
+                    top: -.2rem;
+                    color: #ffb400;
+                }
+                &--verified {
+                    font-size: $info-section-font-size;
+                    color: #00e08a;
+                }
+                &--unverified { 
+                    color: #7e7e7e;
+                }
+                &--contact {
+                    margin-left: 1rem;
+                }
+            }
+            p {
+                font-size: $info-section-font-size;
+                margin: 0;
+            }
+            h2 {
+                font-size: 2.5rem;
+                color: #000;
+            }
+            h1 {
+                text-transform: capitalize;
+                font-size: $info-section-font-size;
+            }
+            &__rating {
+                position: relative;
+                margin-top: -2.4rem;
+                margin-left: 3.3rem;
+            }
+            &__view-all {
+                font-size: $school-font-size;
+                color: $color-primary-neutral;
+                margin-left: 1rem;
+                text-decoration: underline;
+                text-decoration-color: $color-primary-neutral;
+            }
+            .break{
+                margin: .5rem;
+            }
+            .review-card {
+                &--name{
+                    color: $name-color;
+                    font-weight: 600;
+                }
+                &--history {
+                    font-size: $history-font-size;
+                    margin-top: -.3rem;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1; /* number of lines to show */
+                    -webkit-box-orient: vertical;
+                }
+                &--content {
+                    font-size: 1.6rem;
+                    color: $color-black;
+                }
+                &--avatar {
+                    height: 5.5rem;
+                    width: 5.5rem;
+                    margin-top: inherit;
+                    border-radius: 50%;
+                    border: 0.1rem solid $color-grey-light-4;
+                    z-index: 3;
+                }               
+                &--user-rating {
+                    text-align: end;
+                }
+            }
+            
+        }
+    }
+    &__bottom-illustration-left {
+        margin-top: -13rem;
+        position: relative;
+        margin-left: -4rem;
+        z-index: -1;
+    
+        &--image {
+            display: inline-block;
+            height: 29rem;
+            width: auto;
+            margin-right: -7rem;
+            margin-top: 2rem;
+        }
+    } 
+    &__bottom-illustration-right {
+        margin-top: -31rem;
+        position: relative;
+        z-index: -1;
+        margin-right: -4rem;
+        transform: scale(-1,1);
+    
+        &--image {
+            display: inline-block;
+            height: 29rem;
+            width: auto;
+            margin-right: -5rem;
+            margin-top: 2rem;
+        }
+    }    
+}
+
+

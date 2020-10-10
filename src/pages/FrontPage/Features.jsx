@@ -3,35 +3,37 @@ import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 
 const Features = (props) => {
   return (
-    <>
-      
+    <> 
+      {/* <div>
+        <h2 className="feature-box__header">How it works</h2>
+        <div className="feature-box__header--indicator"></div>
+      </div> */}
       <Tabs >
+      <div>
+        <h2 className="feature-box__header">How it works</h2>
+        <div className="feature-box__header--indicator"></div>
+      </div>
       <TabList>
-        
-              <Tab>First Tab</Tab>
-              <Tab>Second Tab</Tab>
+              <Tab>Drivers</Tab>
+              <Tab>Riders</Tab>
               <div ref={props.refProp}></div>
             </TabList>
         <section class="section-features" >
           <TabPanel>
             <div class="row">
               <div class="col-1-of-3">
-                <div className="feature-box__number">
+                <div className="feature-box__number feature-box__number--one">
                   <span className="feature-box__number--text">1</span>
                 </div>
               </div>
               <div class="col-2-of-3">
                 <div class="feature-box">
                   <i class="feature-box__icon icon-basic-signs"></i>
-                  <h3 class="heading-feature u-margin-bottom-small">
+                  <h3 class="feature-box__title">
                     Post a ride
                   </h3>
                   <p class="feature-box__text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Modi impedit aspernatur adipisci illum placeat dolorem
-                    corrupti eaque reprehenderit asperiores, deleniti ut!
-                    Pariatur tenetur itaque ex non. Dolorum quidem consequuntur
-                    architecto.
+                    Enter your origin, destination, date of departure, available seats, and publish your trip!
                   </p>
                 </div>
               </div>
@@ -40,19 +42,16 @@ const Features = (props) => {
               <div class="col-2-of-3">
                 <div class="feature-box">
                   <i class="feature-box__icon icon-basic-signs"></i>
-                  <h3 class="heading-feature u-margin-bottom-small">
-                    Accept people in
+                  <h3 class="feature-box__title">
+                      Accept people in
                   </h3>
                   <p class="feature-box__text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Reiciendis, eaque. Dolor deserunt ullam alias neque atque?
-                    Quis sint ipsam natus aspernatur dolorem debitis vero
-                    pariatur inventore magnam! Adipisci, suscipit doloribus?
+                      Chat with your passengers to confirm or deny their requests for your trip
                   </p>
                 </div>
               </div>
               <div class="col-1-of-3">
-                <div className="feature-box__number">
+                <div className="feature-box__number feature-box__number--two">
                   <span className="feature-box__number--text">2</span>
                 </div>
               </div>
@@ -61,22 +60,18 @@ const Features = (props) => {
           <TabPanel>
           <div class="row">
               <div class="col-1-of-3">
-                <div className="feature-box__number">
+                <div className="feature-box__number feature-box__number--one">
                   <span className="feature-box__number--text">1</span>
                 </div>
               </div>
               <div class="col-2-of-3">
                 <div class="feature-box">
                   <i class="feature-box__icon icon-basic-signs"></i>
-                  <h3 class="heading-feature u-margin-bottom-small">
+                  <h3 class="feature-box__title">
                     Plan ahead
                   </h3>
                   <p class="feature-box__text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Modi impedit aspernatur adipisci illum placeat dolorem
-                    corrupti eaque reprehenderit asperiores, deleniti ut!
-                    Pariatur tenetur itaque ex non. Dolorum quidem consequuntur
-                    architecto.
+                    Decide where you want to go and mind your budget!
                   </p>
                 </div>
               </div>
@@ -85,19 +80,17 @@ const Features = (props) => {
               <div class="col-2-of-3">
                 <div class="feature-box">
                   <i class="feature-box__icon icon-basic-signs"></i>
-                  <h3 class="heading-feature u-margin-bottom-small">
+                  <h3 class="feature-box__title">
                     Find a ride
                   </h3>
                   <p class="feature-box__text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Reiciendis, eaque. Dolor deserunt ullam alias neque atque?
-                    Quis sint ipsam natus aspernatur dolorem debitis vero
-                    pariatur inventore magnam! Adipisci, suscipit doloribus?
+                    Pick your destination, send your trip's driver a request message, and
+                    get notified of their response through chat.
                   </p>
                 </div>
               </div>
               <div class="col-1-of-3">
-                <div className="feature-box__number">
+                <div className="feature-box__number feature-box__number--two">
                   <span className="feature-box__number--text">2</span>
                 </div>
               </div>
