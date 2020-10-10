@@ -1,0 +1,18 @@
+.chat-modal {
+  &__textarea {
+    max-width: 80rem;
+    width: 40rem;
+    height: 15rem;
+  }
+  &__p {
+    font-size: 1.4rem;
+  }
+  &__btn-group {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.react-responsive-modal-modal {
+  margin: auto auto;
+}

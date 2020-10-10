@@ -43,11 +43,6 @@ const HeaderBar = (props) => {
           <img src={logo} alt="logo" className="logo-dashboard" />
         </Link>
         <form className="search-dashboard">
-          <Link to="/search" className="search-dashboard__button-icon">
-            <svg className="search-dashboard__icon">
-              <use xlinkHref={`${icon}#icon-magnifying-glass`}></use>
-            </svg>
-          </Link>
           <AutoInput
             onSuggestionSelected={onOriginSuggestionSelected}
             placeholder={"From..."}
@@ -62,12 +57,14 @@ const HeaderBar = (props) => {
           </button>
         </form>
         <nav className="user-nav">
-          <div className="user-nav__icon-box">
-            <svg className="user-nav__icon">
-              <use xlinkHref={`${icon}#icon-bookmark`}></use>
-            </svg>
-            <span className="user-nav__notification">7</span>
-          </div>
+          <Link to="/bookmarks">
+            <div className="user-nav__icon-box">
+              <svg className="user-nav__icon">
+                <use xlinkHref={`${icon}#icon-bookmark`}></use>
+              </svg>
+              <span className="user-nav__notification">7</span>
+            </div>
+          </Link>
           <Link to="/chat">
             <div className="user-nav__icon-box">
               <svg className="user-nav__icon">

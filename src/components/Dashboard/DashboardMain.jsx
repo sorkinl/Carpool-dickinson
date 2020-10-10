@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import icon from "../../assets/sprite.svg";
 import avatar from "../../static/img/avatar.png";
 import TripCard from "./TripCard";
@@ -6,7 +6,8 @@ import { useFirestoreConnect, isLoaded } from "react-redux-firebase";
 import firebase from "../../firebase/firebaseConfig";
 import { useSelector } from "react-redux";
 import Loading from "../Loading";
-const DashboardMain = () => {
+import AutoInput from "../HOC/AutoSuggest";
+const DashboardMain = (props) => {
   useFirestoreConnect([
     {
       collection: "trips",
@@ -26,6 +27,7 @@ const DashboardMain = () => {
       storeAs: "bookmarkedTrips",
     },
   ]);
+
   const recentTrips = useSelector(
     (state) => state.firestore.ordered.recentTrips
   );
@@ -33,20 +35,62 @@ const DashboardMain = () => {
     (state) => state.firestore.ordered.bookmarkedTrips
   );
 
+  const [originData, setOriginData] = useState(null);
+  const [destinationData, setDestinationData] = useState(null);
+  const onDestinationSuggestionSelected = (data) => {
+    setDestinationData(data);
+  };
+
+  const onOriginSuggestionSelected = (data) => {
+    setOriginData(data);
+  };
+
+  const handleFind = (e) => {
+    if (originData != null && destinationData != null) {
+      e.preventDefault();
+      props.history.push(
+        `/search?originLat=${originData.position.lat}&originLong=${originData.position.lng}&destinationLat=${destinationData.position.lat}&destinationLong=${destinationData.position.lng}&originTitle=${originData.label}&destinationTitle=${destinationData.label}`
+      );
+    }
+  };
+
   return (
     <main className="main-dash">
       <div className="main-dash__trip-header">
-        <h1 className="main-dash__trip-heading">Most recent trips</h1>
-        <div className="main-dash__arrows">
+        <div className="main-dash__trip-header--container">
+          <div className="main-dash__trip-header--subcontainer">
+            <div>
+              <h1 className="main-dash__trip-heading">Good morning, Katie</h1>
+              <h2 className="main-dash__trip-subheading">
+                Let's find a great deal for your trip...
+              </h2>
+            </div>
+            <form className="search-dashboard">
+              <AutoInput
+                onSuggestionSelected={onOriginSuggestionSelected}
+                placeholder={"Origin..."}
+              />
+              <div className="verticalLine"></div>
+              <AutoInput
+                onSuggestionSelected={onDestinationSuggestionSelected}
+                placeholder={"Destination..."}
+              />
+              <button onClick={handleFind} className="search-dashboard__button">
+                Find
+              </button>
+            </form>
+            {/* <div className="main-dash__arrows">
           <svg className="main-dash__arrow-icon">
             <use xlinkHref={`${icon}#icon-chevron-thin-left`}></use>
           </svg>
           <svg className="main-dash__arrow-icon">
             <use xlinkHref={`${icon}#icon-chevron-thin-right`}></use>
           </svg>
+        </div> */}
+          </div>
         </div>
       </div>
-      <div style={{ display: "flex" }}>
+      {/* <div style={{ display: "flex" }}>
         Bookmarked
         {isLoaded(bookmarkedTrips) ? (
           bookmarkedTrips.map((trip) => (
@@ -59,16 +103,15 @@ const DashboardMain = () => {
               originTitle={trip.originTitle}
               departDate={trip.departDate}
               departTime={trip.departTime}
-              photoUrl={trip.photoUrl}
               uid={trip.uid}
             />
           ))
         ) : (
           <Loading />
         )}
-      </div>
+      </div> */}
       <div className="main-dash__trip-section">
-        {isLoaded(recentTrips) ? (
+        {/* {isLoaded(recentTrips) ? (
           recentTrips.map((trip) => (
             <TripCard
               key={trip.id}
@@ -79,13 +122,13 @@ const DashboardMain = () => {
               originTitle={trip.originTitle}
               departDate={trip.departDate}
               departTime={trip.departTime}
-              photoUrl={trip.photoUrl}
               uid={trip.uid}
+              members={trip.members}
             />
           ))
         ) : (
           <Loading />
-        )}
+        )} */}
       </div>
     </main>
   );

@@ -125,3 +125,9 @@
 [0826/233219.849:ERROR:process_reader_win.cc(155)] SuspendThread: Access is denied. (0x5)
 [0826/233219.849:ERROR:process_reader_win.cc(127)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
 [0826/233219.849:ERROR:exception_snapshot_win.cc(99)] thread ID 15864 not found in process
+[1010/123957.421:ERROR:settings.cc(430)] Settings version is not 5
+[1010/124957.438:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\lanki\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\2f0830dd-3572-4480-8580-b7e2451e358d: The system cannot find the path specified. (0x3)
+[1010/124957.442:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\lanki\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\3c9b8974-077d-4bb8-8dcd-e8398951f168: The system cannot find the path specified. (0x3)
+[1010/124957.467:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\lanki\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\9d255e3a-1840-40d7-b357-fda66d30458f: The system cannot find the path specified. (0x3)
+[1010/124957.502:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\lanki\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\fe600cf6-434c-484a-8f29-fbb420182cbd: The system cannot find the path specified. (0x3)
+[1010/124957.502:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
