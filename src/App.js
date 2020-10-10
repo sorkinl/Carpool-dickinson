@@ -1,13 +1,8 @@
 import React from "react";
 import "./App.css";
-import NavBar from "./components/NavBar/NavBar";
-import Footer from "./components/Footer/Footer";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
-import Searchbar from "./components/SearchResults/Searchbar";
 import Account from "./components/Account/Account";
 import MainChat from "./components/Chat/MainChat/MainChat";
-import FrontPage from "./pages/frontpage";
-import FrontPageFigma from "./pages/frontpageFigma";
 import LogIn from "./components/LogInForm/LogIn";
 import SignUp from "./components/LogInForm/SignUp";
 import LandingPage from "./components/LogInForm/LandingPage";
@@ -19,7 +14,6 @@ import SearchPage from "./pages/Search/SearchPage";
 import Loading from "./components/Loading";
 import { withRouter } from "react-router-dom";
 import MainPage from "./pages/FrontPage/MainPage";
-import SearchResult from "./components/SearchResults/SearchResult";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import EditProfile from "./components/Account/Profile/EditProfile";
 import PostTrip from "./components/CreateTrip/PostTrip";
@@ -50,8 +44,6 @@ const Routes = withRouter(({ location }) => {
         <Route path="/verifyEmail" component={EmailVerify} />
         <Route path="/registrationForm" component={ProfileCreate} />
         <PrivateRoute path="/postTrip" component={PostTrip} />
-        <Route path="/frontPageTrial" component={FrontPageFigma} />
-        <Route path="/searchResult" exact component={SearchResult} />
         <Route path="/fancy" component={FancyLoader} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
         <PrivateRoute path="/users/:userId" component={Profile} />

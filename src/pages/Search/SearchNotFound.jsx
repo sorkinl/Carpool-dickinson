@@ -1,19 +1,32 @@
-import React from "react";
-import DashboardNavbar from "../../components/Dashboard/DashboardNavbar";
-import { HereMap } from "../../components/HereMap/HereMap";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import icon from "../../assets/sprite.svg";
-import avatar from "../../static/img/avatar.png";
 import { useFirestoreConnect, isLoaded } from "react-redux-firebase";
-import {
-  getMaxAndMinLat,
-  getMaxAndMinLong,
-  distance,
-} from "../../Utils/Distance";
-import { useSelector, useDispatch } from "react-redux";
-import { getTripByRadius } from "../../redux/actions/tripsActions";
+import { useSelector } from "react-redux";
 import TripCardSearch from "../../components/Search/TripCardSearch";
+import Loading from "../../components/Loading";
+import SearchLeft from "./SearchLeft";
 const SearchNotFound = () => {
+  useFirestoreConnect([
+    {
+      collection: "trips",
+      orderBy: ["departDate", "desc"],
+      storeAs: "searchedTrips",
+    },
+  ]);
+
+  const [selectedTrip, setSelectedTrip] = useState(null);
+
+  const trips = useSelector((state) => state.firestore.ordered.searchedTrips);
+
+  useEffect(() => {
+    if (isLoaded(trips) && trips.length !== 0) {
+      setSelectedTrip(trips[0]);
+    }
+  }, [trips]);
+  const selectTrip = (e, trip) => {
+    e.preventDefault();
+    setSelectedTrip(trip);
+  };
   return (
     <>
       <div className="search-container">
@@ -21,11 +34,19 @@ const SearchNotFound = () => {
           <Link to="/dashboard" className="search-trip-list__back">
             Back to dashboard
           </Link>
-          <h2 className="search-trip-list__heading">No trips</h2>
+          <h2 className="search-trip-list__heading">Most Recent</h2>
+          <h3 className="search-trip-list__sub-heading">On September 8th</h3>
+          {trips
+            ? trips.map((trip) => (
+                <TripCardSearch {...trip} selectTrip={selectTrip} />
+              ))
+            : null}
         </div>
-        <div className="search-map">
-          <HereMap />
-        </div>
+        {isLoaded(trips) && trips.length !== 0 && selectedTrip !== null ? (
+          <SearchLeft selectedTrip={selectedTrip} filteredTrips={trips} />
+        ) : (
+          <Loading />
+        )}
       </div>
     </>
   );

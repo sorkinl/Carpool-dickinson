@@ -43,7 +43,7 @@ const ChatModal = ({ open, setOpen, tripId, ownerId }) => {
       },
       {
         type: "requested",
-        message: [message],
+        message: message,
         email: currentUser.email,
         uid: currentUser.uid,
         ownerId: ownerId,

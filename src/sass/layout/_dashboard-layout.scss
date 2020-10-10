@@ -37,22 +37,43 @@
 .main-dash {
   background-color: #fff;
   flex: 1;
-  height: 150vh;
+  height: 100vh;
   overflow: hidden;
   &__trip-header {
-    height: 6rem;
-    display: flex;
+    height: 17rem;
     align-items: center;
     justify-content: space-between;
     border-bottom: solid $color-grey-light-4 1px;
+    background-color: #175e75;
+
+    &--container {
+      display: flex;
+      justify-content: space-evenly;
+      height: 100%;
+    }
+    &--subcontainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+
+      min-width: 60rem;
+      height: 100%;
+    }
   }
 
   &__trip-heading {
-    text-transform: uppercase;
-    font-weight: 300;
-    font-size: 2.5rem;
+    line-height: 30px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.8rem;
     margin-left: 3rem;
-    color: $color-grey-dark-1;
+    color: #a7e5ff;
+  }
+  &__trip-subheading {
+    color: #ffffff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-left: 3rem;
   }
   &__arrows {
     margin-right: 3rem;

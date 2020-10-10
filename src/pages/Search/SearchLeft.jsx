@@ -4,8 +4,27 @@ import icon from "../../assets/sprite.svg";
 import avatar from "../../static/img/avatar.png";
 import { HereMap } from "../../components/HereMap/HereMap";
 import { auth } from "firebase";
+import { useFirestore } from "react-redux-firebase";
 const SearchLeft = ({ selectedTrip, filteredTrips }) => {
   const [chatModal, setChatModal] = useState(false);
+
+  const firestore = useFirestore();
+  const bookmarkTrip = () => {
+    delete selectedTrip.selectTrip;
+    firestore.set(
+      {
+        collection: "users",
+        doc: auth().currentUser.uid,
+        subcollections: [
+          {
+            collection: "bookmarks",
+            doc: selectedTrip.id,
+          },
+        ],
+      },
+      selectedTrip
+    );
+  };
   return (
     <div className="search-map">
       <HereMap
@@ -39,7 +58,9 @@ const SearchLeft = ({ selectedTrip, filteredTrips }) => {
                     Send trip request
                   </button>
                 )}
-              <button className="btn-tertiary">Bookmark</button>
+              <button className="btn-tertiary" onClick={bookmarkTrip}>
+                Bookmark
+              </button>
             </div>
           </>
         ) : (
