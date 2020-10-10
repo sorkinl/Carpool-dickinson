@@ -9,16 +9,14 @@ import SideBar from "../Dashboard/SideBar";
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const user = useSelector((state) => state.firebase);
 
-
   return (
-    <>  
-      <HeaderBar/>
-        {/* <div className="container-dashboard"> </div> */}
-      <SideBar/>
+    <>
+      <HeaderBar />
+      {/* <div className="container-dashboard"> </div> */}
+      <SideBar />
       <Route
-      {...rest}
-      render={(props) => {
-
+        {...rest}
+        render={(props) => {
           if (user.auth.isEmpty) {
             return (
               <Redirect
@@ -49,15 +47,14 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
               );
             } else {
               return (
-                  <div className="page-layout">
-                    <Component />
-                  </div>
-                );
+                <div className="page-layout">
+                  <Component />
+                </div>
+              );
             }
           }
-        } 
-      }
-    />
+        }}
+      />
     </>
   );
 };
