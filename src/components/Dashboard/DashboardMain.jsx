@@ -111,24 +111,28 @@ const DashboardMain = (props) => {
         )}
       </div> */}
       <div className="main-dash__trip-section">
-        {/* {isLoaded(recentTrips) ? (
-          recentTrips.map((trip) => (
-            <TripCard
-              key={trip.id}
-              tripId={trip.id}
-              firstName={trip.firstName}
-              lastName={trip.lastName}
-              destTitle={trip.destTitle}
-              originTitle={trip.originTitle}
-              departDate={trip.departDate}
-              departTime={trip.departTime}
-              uid={trip.uid}
-              members={trip.members}
-            />
-          ))
-        ) : (
-          <Loading />
-        )} */}
+        <h1>Most recent trips</h1>
+        <div className="main-dash__trip-section--container">
+          <div className="main-dash__trip-card">
+            <div className="main-dash__trip-card--left">
+              <img
+                src={avatar}
+                alt=""
+                className="main-dash__trip-card--left-image"
+              />
+
+              <span>Katie</span>
+              <div className="">
+                <svg className="main-dash__star-icon">
+                  <use xlinkHref={`${icon}#icon-star`}></use>
+                </svg>
+              </div>
+              <span>3.6</span>
+            </div>
+            <div className="main-dash__trip-card--middle"></div>
+            <div className="main-dash__trip-card-right"></div>
+          </div>
+        </div>
       </div>
     </main>
   );

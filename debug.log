@@ -131,3 +131,4 @@
 [1010/124957.467:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\lanki\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\9d255e3a-1840-40d7-b357-fda66d30458f: The system cannot find the path specified. (0x3)
 [1010/124957.502:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\lanki\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\fe600cf6-434c-484a-8f29-fbb420182cbd: The system cannot find the path specified. (0x3)
 [1010/124957.502:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1014/131249.904:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

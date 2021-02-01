@@ -110,4 +110,23 @@
       background: transparent;
     }
   }
+
+  &__trip-card {
+    width: 32rem;
+    height: 16rem;
+    box-shadow: 0px 1px 14px rgba(0, 0, 0, 0.15);
+    display: flex;
+
+    &--left {
+      flex: 0 0 auto;
+      width: 7rem;
+
+      &-image {
+        height: 4rem;
+        width: 4rem;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+  }
 }
