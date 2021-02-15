@@ -116,17 +116,71 @@
     height: 16rem;
     box-shadow: 0px 1px 14px rgba(0, 0, 0, 0.15);
     display: flex;
+    border-radius: 1rem;
 
     &--left {
       flex: 0 0 auto;
       width: 7rem;
-
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px dashed #dfdfdf;
       &-image {
         height: 4rem;
         width: 4rem;
         border-radius: 50%;
         object-fit: cover;
+        position: relative;
+        top: -2rem;
       }
+
+      &-text {
+        margin-top: 5px;
+        font-style: normal;
+        font-size: 1.3rem;
+        font-weight: bold;
+        position: relative;
+        top: -2rem;
+      }
+    }
+
+    &--middle {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem;
+      &-faded {
+        color: #acacac;
+        font-size: 1.4rem;
+      }
+      &-trip {
+        color: #0cb6e7;
+        font-size: 1.4rem;
+      }
+      &-date {
+        color: #224f5b;
+        font-weight: 400;
+        font-size: 1.4rem;
+      }
+      &-bot {
+        display: flex;
+        justify-content: space-between;
+      }
+      &-price {
+        font-size: 1.5rem;
+        color: #caa41b;
+        font-weight: 400;
+      }
+      &-seats {
+        color: #224f5b;
+        font-size: 1.4rem;
+      }
+    }
+    &--right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
   }
 }
