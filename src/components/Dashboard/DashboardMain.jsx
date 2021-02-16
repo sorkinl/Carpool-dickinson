@@ -13,6 +13,8 @@ import {
   faBookmark,
   faCommentAlt,
 } from "@fortawesome/free-regular-svg-icons";
+import DashboardCard from "./DashboardCard";
+import { Col, Container, Row } from "react-bootstrap";
 const DashboardMain = (props) => {
   useFirestoreConnect([
     {
@@ -118,59 +120,32 @@ const DashboardMain = (props) => {
       </div> */}
       <div className="main-dash__trip-section">
         <h1>Most recent trips</h1>
-        <div className="main-dash__trip-section--container">
-          <div className="main-dash__trip-card">
-            <div className="main-dash__trip-card--left">
-              <img
-                src={avatar}
-                alt=""
-                className="main-dash__trip-card--left-image"
-              />
-
-              <span className="main-dash__trip-card--left-text">Katie</span>
-              {/* <div className="">
-                <svg className="main-dash__star-icon">
-                  <use xlinkHref={`${icon}#icon-star`}></use>
-                </svg>
-              </div> */}
-              {/* <span>3.6</span> */}
-            </div>
-            <div className="main-dash__trip-card--middle">
-              <div className="main-dash__trip-card--middle-top">
-                <p>
-                  <span className="main-dash__trip-card--middle-faded">
-                    From
-                  </span>{" "}
-                  <span className="main-dash__trip-card--middle-trip">
-                    Dickinson College
-                  </span>
-                </p>
-                <p>
-                  <span className="main-dash__trip-card--middle-faded">To</span>{" "}
-                  <span className="main-dash__trip-card--middle-trip">
-                    Harrisburg Airport
-                  </span>
-                </p>
-                <div>
-                  <FontAwesomeIcon size="lg" icon={faClock} />
-                  <span className="main-dash__trip-card--middle-date">
-                    wednesday shit
-                  </span>
-                </div>
-              </div>
-              <div className="main-dash__trip-card--middle-bot">
-                <span className="main-dash__trip-card--middle-price">$44</span>
-                <span className="main-dash__trip-card--middle-seats">
-                  1 seat
-                </span>
-              </div>
-            </div>
-            <div className="main-dash__trip-card--right">
-              <FontAwesomeIcon icon={faBookmark} size="2x" />
-              <FontAwesomeIcon icon={faCommentAlt} size="2x" />
-            </div>
-          </div>
-        </div>
+        <Container className="main-dash__trip-section--container">
+          <Row>
+            <Col>
+              <DashboardCard />
+            </Col>
+            <Col>
+              <DashboardCard />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <DashboardCard />
+            </Col>
+            <Col>
+              <DashboardCard />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <DashboardCard />
+            </Col>
+            <Col>
+              <DashboardCard />
+            </Col>
+          </Row>
+        </Container>
       </div>
     </main>
   );

@@ -86,11 +86,10 @@
 
   &__trip-section {
     border: 1px solid $color-grey-light-4;
-    height: 25rem;
-    display: flex;
-    justify-content: space-between;
 
-    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     &::before,
     &::after {
       content: "";
@@ -109,10 +108,17 @@
     &::-webkit-scrollbar-track {
       background: transparent;
     }
+
+    &--container {
+      display: flex;
+      width: 90%;
+      padding: 1rem;
+      justify-content: center;
+    }
   }
 
   &__trip-card {
-    width: 32rem;
+    /* width: 32rem; */
     height: 16rem;
     box-shadow: 0px 1px 14px rgba(0, 0, 0, 0.15);
     display: flex;
@@ -148,6 +154,7 @@
     &--middle {
       display: flex;
       flex-direction: column;
+      width: 23rem;
       justify-content: space-between;
       padding: 1rem;
       &-faded {
@@ -165,7 +172,7 @@
       }
       &-bot {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
       }
       &-price {
         font-size: 1.5rem;
@@ -178,6 +185,7 @@
       }
     }
     &--right {
+      padding: 1rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
