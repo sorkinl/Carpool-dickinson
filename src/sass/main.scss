@@ -6,7 +6,7 @@
 @import "base/typography";
 @import "base/utilities";
 @import "pages/home";
-
+@import "~bootstrap/scss/bootstrap";
 @import "components/button";
 @import "components/chat-modal";
 @import "components/profile-card";
@@ -30,7 +30,6 @@
 @import "components/map";
 @import "components/multi-ride-button";
 @import "components/react-popup";
-
 
 @import "layout/header";
 @import "layout/dashboard-layout";

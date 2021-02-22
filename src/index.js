@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import './sass/main.scss';
+import "./sass/main.scss";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import * as serviceWorker from "./serviceWorker";
@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { createFirestoreInstance } from "redux-firestore";
 import { ReactReduxFirebaseProvider, isLoaded } from "react-redux-firebase";
 import Loading from "./components/Loading";
-import 'font-awesome/css/font-awesome.min.css';
+import "font-awesome/css/font-awesome.min.css";
 // import HeaderBar from './components/Dashboard/HeaderBar';
 
 const rrfConfig = {

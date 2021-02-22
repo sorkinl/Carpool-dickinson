@@ -8,7 +8,7 @@ import {
 import avatar from "../../static/img/avatar.png";
 const DashboardCard = (props) => {
   return (
-    <div className="main-dash__trip-card">
+    <div className="main-dash__trip-card m-4">
       <div className="main-dash__trip-card--left">
         <img src={avatar} alt="" className="main-dash__trip-card--left-image" />
 

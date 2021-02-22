@@ -14,7 +14,7 @@ import {
   faCommentAlt,
 } from "@fortawesome/free-regular-svg-icons";
 import DashboardCard from "./DashboardCard";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Pagination, Row } from "react-bootstrap";
 const DashboardMain = (props) => {
   useFirestoreConnect([
     {
@@ -119,7 +119,16 @@ const DashboardMain = (props) => {
         )}
       </div> */}
       <div className="main-dash__trip-section">
-        <h1>Most recent trips</h1>
+        <div className="main-dash__most-recent mb-4">
+          <h1>Most recent trips</h1>
+          <Pagination size="lg">
+            <Pagination.First />
+            <Pagination.Prev />
+            <Pagination.Next />
+            <Pagination.Last />
+          </Pagination>
+        </div>
+
         <Container className="main-dash__trip-section--container">
           <Row>
             <Col>

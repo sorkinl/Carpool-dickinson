@@ -34,7 +34,7 @@
 .main-dash {
   background-color: #fff;
   flex: 1;
-  height: 100vh;
+
   overflow: hidden;
   &__trip-header {
     height: 17rem;
@@ -84,9 +84,13 @@
     fill: $color-grey-dark-1;
   }
 
+  &__most-recent {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-top: 3rem;
+  }
   &__trip-section {
-    border: 1px solid $color-grey-light-4;
-
     display: flex;
     flex-direction: column;
     align-items: center;
